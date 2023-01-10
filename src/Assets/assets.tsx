@@ -5,7 +5,6 @@ import Clock from "./Clock.svg";
 import Close from "./close.svg";
 import Coin from "./Coin.svg";
 import Location from "./Location.svg";
-import Logo from "./Logo1.png";
 import Mail from "./Mail.svg";
 import Paper from "./Paper.svg";
 import Person from "./Person.svg";
@@ -15,8 +14,21 @@ import PlusIcon from "./PlusIcon.svg";
 import Rocket from "./Rocket.svg";
 import Tick from "./Tick.svg";
 import Wallets from "./Wallets.svg";
+import BackGround from "./TopRightBackground.svg";
+import Logo from "./Logo.png";
+import PlayButton from "./PlayButton.svg";
+import GraphScreen from "./GraphScreen.svg";
+import CircleOne from "./Circle1.svg";
+import CircleTwo from "./Circle2.svg";
+import CircleThree from "./Circle3.svg";
 
 export const assets = {
+  CircleOne,
+  CircleTwo,
+  CircleThree,
+  GraphScreen,
+  PlayButton,
+  BackGround,
   Award,
   Airplane,
   Bulb,

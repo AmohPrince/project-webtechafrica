@@ -9,7 +9,7 @@
     @apply font-extrabold text-[75px];
   }
   .h1 {
-    @apply font-extrabold text-[50px];
+    @apply font-extrabold text-[50px] leading-[110%];
   }
   .h2 {
     @apply font-bold text-[40px];
@@ -28,16 +28,37 @@
   }
 }
 
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+.show {
+  outline: 1px solid red;
+}
+
+.center-absolutely {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.1);
 }
