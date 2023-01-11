@@ -26,6 +26,12 @@
   .h6 {
     @apply font-bold text-lg;
   }
+  .large-paragraph {
+    @apply font-normal text-[25px] leading-[157.4%];
+  }
+  .default-paragraph {
+    @apply font-normal text-[20px] leading-[125.4%] text-secondaryFour;
+  }
 }
 
 *,

@@ -21,8 +21,14 @@ import GraphScreen from "./GraphScreen.svg";
 import CircleOne from "./Circle1.svg";
 import CircleTwo from "./Circle2.svg";
 import CircleThree from "./Circle3.svg";
+import SecurePlatform from "./SecurePlatform.svg";
+import PowerfulAutomation from "./PowerfulAutomation.svg";
+import AdvancedAnalytics from "./AdvancedAnalytics.svg";
 
 export const assets = {
+  PowerfulAutomation,
+  AdvancedAnalytics,
+  SecurePlatform,
   CircleOne,
   CircleTwo,
   CircleThree,
