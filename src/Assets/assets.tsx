@@ -24,8 +24,10 @@ import CircleThree from "./Circle3.svg";
 import SecurePlatform from "./SecurePlatform.svg";
 import PowerfulAutomation from "./PowerfulAutomation.svg";
 import AdvancedAnalytics from "./AdvancedAnalytics.svg";
+import Dashboard from "./Dashboard.svg";
 
 export const assets = {
+  Dashboard,
   PowerfulAutomation,
   AdvancedAnalytics,
   SecurePlatform,
