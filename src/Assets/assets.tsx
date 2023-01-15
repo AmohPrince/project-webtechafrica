@@ -25,8 +25,16 @@ import SecurePlatform from "./SecurePlatform.svg";
 import PowerfulAutomation from "./PowerfulAutomation.svg";
 import AdvancedAnalytics from "./AdvancedAnalytics.svg";
 import Dashboard from "./Dashboard.svg";
+import Accounts from "./Accounts.svg";
+import BlueCard from "./BlueCard.svg";
+import Magic from "./magic.svg";
+import FiveStar from "./FiveStar.svg";
 
 export const assets = {
+  FiveStar,
+  Magic,
+  BlueCard,
+  Accounts,
   Dashboard,
   PowerfulAutomation,
   AdvancedAnalytics,

@@ -34,6 +34,10 @@
   }
 }
 
+button.active {
+  @apply bg-primaryOne text-white transition-all;
+}
+
 *,
 *::after,
 *::before {
@@ -67,4 +71,8 @@ code {
 
 .navbar {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-title {
+  background: #6850ff;
 }
