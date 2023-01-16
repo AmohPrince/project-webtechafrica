@@ -29,8 +29,18 @@ import Accounts from "./Accounts.svg";
 import BlueCard from "./BlueCard.svg";
 import Magic from "./magic.svg";
 import FiveStar from "./FiveStar.svg";
+import PayPal from "./paypal.png";
+import Mpesa from "./mpesa.png";
+import Visa from "./visa.png";
+import FreeTrial from "./FreeTrial.svg";
+import Departments from "./Departments.svg";
 
 export const assets = {
+  Departments,
+  FreeTrial,
+  PayPal,
+  Mpesa,
+  Visa,
   FiveStar,
   Magic,
   BlueCard,

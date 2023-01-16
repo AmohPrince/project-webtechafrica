@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "./Assets/assets";
 import Background from "./Components/Background";
+import Billed from "./Components/Billed";
 import BlackIshButton from "./Components/BlackIshButton";
 import { GreyButton } from "./Components/GreyButton";
 
@@ -324,6 +325,137 @@ function App() {
             alt="circle"
             className="absolute -top-3/4 -left-1/2 rotate-[270deg]"
           />
+        </section>
+        <section className="flex justify-between mt-[97%] items-start">
+          <div className="w-[30%] text-left">
+            <GreyButton text="Pricing" className="mr-auto" />
+            <h3 className="h3 mt-7 mb-6">
+              Simple and <br />
+              flexible pricing
+            </h3>
+            <p className="default-paragraph">
+              Simplify your budgeting with our transparent and adaptable pricing
+              options.
+            </p>
+            <h4 className="h4 mt-3 mb-4">Accepted Payment Methods</h4>
+            <div className="bg-gray-50 flex justify-between py-1 px-2 rounded-md">
+              <img
+                src={assets.PayPal}
+                alt="Paypal"
+                className="w-1/3 object-cover h-[55px]"
+              />
+              <img
+                src={assets.Visa}
+                alt="Visa"
+                className="w-1/3 object-cover h-[55px]"
+              />
+              <img
+                src={assets.Mpesa}
+                alt="Mpesa"
+                className="w-1/3 object-cover h-[55px]"
+              />
+            </div>
+          </div>
+          <div className="py-12 px-8 bg-gray-100 rounded-lg w-1/3 text-center">
+            <div className="flex justify-between items-center">
+              <h3 className="text-4xl font-extrabold">Basic</h3>
+              <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
+                Save 30%
+              </p>
+            </div>
+            <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
+              <p className="font-extrabold text-4xl mb-4">
+                kes. 899 <span className="text-sm">/ month</span>
+              </p>
+              <Billed text="Billed as Ksh 9,699 per year" />
+            </div>
+            <div className="text-secondaryFour">
+              <p>
+                <span className="font-semibold text-black">Unlimited</span>{" "}
+                customer support
+              </p>
+              <p>Hosting</p>
+              <p>Custom domain name</p>
+              <p>
+                Complete{" "}
+                <span className="font-semibold text-black">
+                  website design and development
+                </span>
+              </p>
+            </div>
+            {/* <p>Social media management</p>
+            <p>Custom Ads management</p> */}
+            <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange hover:scale-105">
+              Get Started
+            </button>
+          </div>
+          <div className="py-12 px-8 bg-gray-100 rounded-lg w-1/3 text-center">
+            <div className="flex justify-between items-center">
+              <h3 className="text-4xl font-extrabold">Advanced</h3>
+              <p className="text-xs bg-gray-200 text-primaryOne py-2 px-3 rounded-full w-max font-bold">
+                Popular
+              </p>
+            </div>
+            <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
+              <p className="font-extrabold text-4xl mb-4">
+                kes. 1499 <span className="text-sm">/ month</span>
+              </p>
+              <Billed text="Billed as Ksh 15,599 per year" />
+            </div>
+            <div className="text-secondaryFour">
+              <p>
+                <span className="font-semibold text-primaryOne">Unlimited</span>{" "}
+                customer support
+              </p>
+              <p>Hosting</p>
+              <p>Custom domain name</p>
+              <p>
+                Complete{" "}
+                <span className="font-semibold text-primaryOne">
+                  website design and development
+                </span>
+              </p>
+              <p>Social media management</p>
+              <p>Custom Ads management</p>
+              <p>
+                <span className="font-semibold text-primaryOne"> Sell</span>{" "}
+                products online
+              </p>
+            </div>
+            <button className="py-3 px-7 rounded-full border mt-8 hover:bg-primaryTwoLight transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white">
+              Get Started
+            </button>
+          </div>
+        </section>
+        <section className="mt-[10%] relative text-white">
+          <img
+            src={assets.FreeTrial}
+            alt="free trial"
+            className="absolute top-0 left-0 right-0 z-0"
+          />
+          <div className="relative z-10 py-11 px-16 flex justify-between">
+            <div className="w-1/2">
+              <h2 className="h2">
+                Start your free trial <br />
+                today
+              </h2>
+              <p>
+                Unleash the true potential of your business with our one month
+                free trial, start today and see the difference!
+              </p>
+              <div className="flex mt-8 justify-between">
+                <input
+                  type="email"
+                  className="email-input py-3 px-8 focus:outline-none rounded-full placeholder:text-white"
+                  placeholder="your email here..."
+                />
+                <button className="text-xs bg-white px-7 text-primaryOne rounded-full font-bold">
+                  Get started
+                </button>
+              </div>
+            </div>
+            <img src={assets.Departments} alt="Departments" className="w-1/2" />
+          </div>
         </section>
       </div>
     </>
