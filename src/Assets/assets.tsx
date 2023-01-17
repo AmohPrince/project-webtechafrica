@@ -34,8 +34,18 @@ import Mpesa from "./mpesa.png";
 import Visa from "./visa.png";
 import FreeTrial from "./FreeTrial.svg";
 import Departments from "./Departments.svg";
+import BluePhone from "./BluePhone.svg";
+import facebook from "./Facebook.svg";
+import twitter from "./Twitter.svg";
+import linkedIn from "./LinkedIn.svg";
+import instagram from "./Instagram.svg";
 
 export const assets = {
+  twitter,
+  linkedIn,
+  instagram,
+  facebook,
+  BluePhone,
   Departments,
   FreeTrial,
   PayPal,
