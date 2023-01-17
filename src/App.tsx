@@ -4,7 +4,9 @@ import { assets } from "./Assets/assets";
 import Background from "./Components/Background";
 import Billed from "./Components/Billed";
 import BlackIshButton from "./Components/BlackIshButton";
+import BlogArticle from "./Components/BlogArticle";
 import { GreyButton } from "./Components/GreyButton";
+import Blogs from "./Json/Blogs.json";
 
 function App() {
   const [activeButton, setActiveButton] = useState<number>(1);
@@ -457,6 +459,18 @@ function App() {
             <img src={assets.Departments} alt="Departments" className="w-1/2" />
           </div>
         </section>
+        <section className="mt-[10%]">
+          <GreyButton text="Blog" />
+          <h3 className="h3">Most popular articles</h3>
+          <div className="flex justify-between">
+            {Blogs.slice(0, 2).map((article) => (
+              <BlogArticle article={article} />
+            ))}
+          </div>
+        </section>
+        <footer className="mt-[10%] border-t">
+          <p>Footer</p>
+        </footer>
       </div>
     </>
   );

@@ -7,12 +7,12 @@ export function GreyButton({
   className?: string;
 }) {
   return (
-    <p
+    <h1
       className={`text-xs bg-gray-200 text-primaryOne py-4 px-11 rounded-full w-max font-bold ${
         className ? className : "mx-auto"
       }`}
     >
       {text}
-    </p>
+    </h1>
   );
 }
