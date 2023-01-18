@@ -73,6 +73,10 @@ code {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.navbar-gray {
+  @apply bg-gray-50;
+}
+
 .testimonial-title {
   background: #6850ff;
 }
