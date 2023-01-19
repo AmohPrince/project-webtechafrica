@@ -15,7 +15,7 @@ const Navbar = () => {
           alt="Web vira"
           className="w-[60px] h-[40px] object-cover"
         />
-        <h3 className="h3">WebVira</h3>
+        <h3 className="h3">WebTech Africa</h3>
       </div>
       <div className="flex text-sm">
         <div

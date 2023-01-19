@@ -13,7 +13,7 @@ const Footer = () => {
               alt="Logo"
               className="mr-2 w-10 h-10 object-cover"
             />
-            <h4 className="h4">WebVira</h4>
+            <h4 className="h4">WebTech Africa</h4>
           </div>
           <p className="default-paragraph mt-6 my-9">
             Get your website or web application on the cheap today with Africa's
