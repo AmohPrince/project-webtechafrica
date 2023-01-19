@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
-import Background from "../Components/Background";
 import Billed from "../Components/Billed";
 import BlackIshButton from "../Components/BlackIshButton";
 import BlogArticle from "../Components/BlogArticle";
 import { GreyButton } from "../Components/GreyButton";
+import HomeBackground from "../Components/HomeBackground";
 import Blogs from "../Json/Blogs.json";
 
 export const Home = () => {
@@ -13,7 +13,7 @@ export const Home = () => {
 
   return (
     <>
-      <Background />
+      <HomeBackground />
       <section className="flex mt-[14%] justify-between relative">
         <div className="w-[50%]">
           <h1 className="h1">

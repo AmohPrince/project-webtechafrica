@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../Assets/assets";
 
-const Background = () => {
+const HomeBackground = () => {
   return (
     <div className="absolute top-0 right-0 w-screen h-screen">
       <img
@@ -28,4 +28,4 @@ const Background = () => {
   );
 };
 
-export default Background;
+export default HomeBackground;

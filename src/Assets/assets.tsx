@@ -39,8 +39,10 @@ import facebook from "./Facebook.svg";
 import twitter from "./Twitter.svg";
 import linkedIn from "./LinkedIn.svg";
 import instagram from "./Instagram.svg";
+import teamwork from "./TeamWork.svg";
 
 export const assets = {
+  teamwork,
   twitter,
   linkedIn,
   instagram,
