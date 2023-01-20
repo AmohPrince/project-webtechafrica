@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../Assets/assets";
 
-const AboutBackground = () => {
+export const CircleBackGround = () => {
   return (
     <div className="absolute top-0 right-0 w-screen h-screen z-0">
       <img
@@ -18,5 +18,3 @@ const AboutBackground = () => {
     </div>
   );
 };
-
-export default AboutBackground;

@@ -40,8 +40,12 @@ import twitter from "./Twitter.svg";
 import linkedIn from "./LinkedIn.svg";
 import instagram from "./Instagram.svg";
 import teamwork from "./TeamWork.svg";
+import allInOne from "./AllInOne.svg";
+import advancedCharts from "./AdvancedCharts.svg";
 
 export const assets = {
+  advancedCharts,
+  allInOne,
   teamwork,
   twitter,
   linkedIn,

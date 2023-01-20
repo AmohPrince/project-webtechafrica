@@ -1,12 +1,12 @@
 import React from "react";
 import { assets } from "../Assets/assets";
-import AboutBackground from "../Components/AboutBackground";
+import { CircleBackGround } from "../Components/CircleBackGround";
 import { GreyButton } from "../Components/GreyButton";
 
 const About = () => {
   return (
     <>
-      <AboutBackground />
+      <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center mt-[8%]">
           <h1 className="h2 mb-4">About our company</h1>

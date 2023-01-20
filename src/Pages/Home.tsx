@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
-import Billed from "../Components/Billed";
+import { AdvancedPricing } from "../Components/AdvancedPricing";
+import { BasicPricing } from "../Components/BasicPricing";
 import BlackIshButton from "../Components/BlackIshButton";
 import BlogArticle from "../Components/BlogArticle";
+import { FeaturesComponent } from "../Components/FeaturesComponent";
+import FreeTrial from "../Components/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
 import HomeBackground from "../Components/HomeBackground";
 import Blogs from "../Json/Blogs.json";
@@ -44,78 +46,7 @@ export const Home = () => {
           className="w-[50%] ml-11 object-cover absolute -right-12 -top-12"
         />
       </section>
-      <section className="mt-[12%]">
-        <GreyButton text="Features" />
-        <h1 className="h2 text-center my-5">
-          Powerful features to boost <br /> your productivity
-        </h1>
-        <div className="flex justify-between">
-          <div className="text-center w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
-            <img
-              src={assets.SecurePlatform}
-              alt="secure platform"
-              className="w-4/5 h-1/3"
-            />
-            <h3 className="h4 mt-3">Secure platform</h3>
-            <p className="default-paragraph my-6">
-              We offer a secure platform online that ensures the protection of
-              sensitive information and data transmitted through the platform.
-              {/* Advanced security protocols and encryption methods are employed
-          to safeguard against unauthorized access and ensure compliance
-          with industry standards. Regular security audits and updates are
-          also performed to maintain the integrity of the system and
-          provide peace of mind for users. Our platform provides a
-          reliable and safe environment for you to conduct online
-          transactions and exchange important information with us. */}
-            </p>
-            <Link to="/features" className="underline font-semibold">
-              Learn More
-            </Link>
-          </div>
-          <div className="text-center w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
-            <img
-              src={assets.AdvancedAnalytics}
-              alt="secure platform"
-              className="w-4/5 mx-auto h-1/3"
-            />
-            <h3 className="h4 mt-3">Advanced Analytics</h3>
-            <p className="default-paragraph my-6">
-              We offers advanced analytics to our customers, providing them with
-              insights and data-driven decision making capabilities.
-              {/* This includes tools to process and visualize large
-          data sets, and to perform statistical and machine learning
-          modeling. With this service, your customers are able to make
-          more informed business decisions based on data trends, user
-          behavior and many more. */}
-            </p>
-            <Link to="/features" className="underline font-semibold">
-              Learn More
-            </Link>
-          </div>
-          <div className="text-center w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
-            <img
-              src={assets.PowerfulAutomation}
-              alt="secure platform"
-              className="w-4/5 ml-auto h-1/3"
-            />
-            <h3 className="h4 mt-3">Powerful automation</h3>
-            <p className="default-paragraph my-6">
-              We provide powerful automation capabilities to streamline
-              processes, increase efficiency and improve productivity.
-              {/* This can include tools for automating repetitive
-          tasks, scheduling, workflow management, and integration with
-          other software and systems. The automation service can
-          significantly reduce human error, saving time and costs for your
-          customers. Additionally, Automation can provide your customers
-          with the ability to scale operations, and to focus on more
-          strategic and creative activities. */}
-            </p>
-            <Link to="/features" className="underline font-semibold">
-              Learn More
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FeaturesComponent />
       <section className="mt-[6%] relative items-stretch">
         <div className="w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-[50px]">
           <div className="w-3/5">
@@ -330,107 +261,10 @@ export const Home = () => {
             />
           </div>
         </div>
-        <div className="py-12 px-8 bg-gray-100 rounded-lg w-1/3 text-center">
-          <div className="flex justify-between items-center">
-            <h3 className="text-4xl font-extrabold">Basic</h3>
-            <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
-              Save 30%
-            </p>
-          </div>
-          <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
-            <p className="font-extrabold text-4xl mb-4">
-              kes. 899 <span className="text-sm">/ month</span>
-            </p>
-            <Billed text="Billed as Ksh 9,699 per year" />
-          </div>
-          <div className="text-secondaryFour">
-            <p>
-              <span className="font-semibold text-black">Unlimited</span>{" "}
-              customer support
-            </p>
-            <p>Hosting</p>
-            <p>Custom domain name</p>
-            <p>
-              Complete{" "}
-              <span className="font-semibold text-black">
-                website design and development
-              </span>
-            </p>
-          </div>
-          {/* <p>Social media management</p>
-      <p>Custom Ads management</p> */}
-          <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange hover:scale-105">
-            Get Started
-          </button>
-        </div>
-        <div className="py-12 px-8 bg-gray-100 rounded-lg w-1/3 text-center">
-          <div className="flex justify-between items-center">
-            <h3 className="text-4xl font-extrabold">Advanced</h3>
-            <p className="text-xs bg-gray-200 text-primaryOne py-2 px-3 rounded-full w-max font-bold">
-              Popular
-            </p>
-          </div>
-          <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
-            <p className="font-extrabold text-4xl mb-4">
-              kes. 1499 <span className="text-sm">/ month</span>
-            </p>
-            <Billed text="Billed as Ksh 15,599 per year" />
-          </div>
-          <div className="text-secondaryFour">
-            <p>
-              <span className="font-semibold text-primaryOne">Unlimited</span>{" "}
-              customer support
-            </p>
-            <p>Hosting</p>
-            <p>Custom domain name</p>
-            <p>
-              Complete{" "}
-              <span className="font-semibold text-primaryOne">
-                website design and development
-              </span>
-            </p>
-            <p>Social media management</p>
-            <p>Custom Ads management</p>
-            <p>
-              <span className="font-semibold text-primaryOne"> Sell</span>{" "}
-              products online
-            </p>
-          </div>
-          <button className="py-3 px-7 rounded-full border mt-8 hover:bg-primaryTwoLight transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white">
-            Get Started
-          </button>
-        </div>
+        <BasicPricing />
+        <AdvancedPricing />
       </section>
-      <section className="mt-[10%] relative text-white">
-        <img
-          src={assets.FreeTrial}
-          alt="free trial"
-          className="absolute top-0 left-0 right-0 z-0"
-        />
-        <div className="relative z-10 py-11 px-16 flex justify-between">
-          <div className="w-1/2">
-            <h2 className="h2">
-              Start your free trial <br />
-              today
-            </h2>
-            <p>
-              Unleash the true potential of your business with our one month
-              free trial, start today and see the difference!
-            </p>
-            <div className="flex mt-8 justify-between">
-              <input
-                type="email"
-                className="email-input py-3 px-8 focus:outline-none rounded-full placeholder:text-white"
-                placeholder="your email here..."
-              />
-              <button className="text-xs bg-white px-7 text-primaryOne rounded-full font-bold">
-                Get started
-              </button>
-            </div>
-          </div>
-          <img src={assets.Departments} alt="Departments" className="w-1/2" />
-        </div>
-      </section>
+      <FreeTrial />
       <section className="mt-[10%]">
         <GreyButton text="Blog" />
         <h3 className="h3">Most popular articles</h3>

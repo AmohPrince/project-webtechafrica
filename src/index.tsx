@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import About from "./Pages/About";
+import Features from "./Pages/Features";
+import Pricing from "./Pages/Pricing";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,6 +20,8 @@ root.render(
         <Route path="/" element={<App />}>
           <Route element={<Home />} index />
           <Route element={<About />} path="/about-us" />
+          <Route element={<Features />} path="/features" />
+          <Route element={<Pricing />} path="/pricing" />
         </Route>
       </Routes>
     </BrowserRouter>
