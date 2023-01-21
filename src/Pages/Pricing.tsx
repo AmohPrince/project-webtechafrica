@@ -1,7 +1,10 @@
 import React from "react";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
 import { BasicPricing } from "../Components/BasicPricing";
+import { BlankTableRow } from "../Components/BlankTableRow";
+import { Button } from "../Components/Button";
 import { CircleBackGround } from "../Components/CircleBackGround";
+import Row from "./Row";
 
 const Pricing = () => {
   return (
@@ -21,6 +24,41 @@ const Pricing = () => {
         <BasicPricing className="w-[47%]" />
         <AdvancedPricing className="w-[47%] bg-primaryOne text-white" />
       </div>
+      <section className="mt-[8%]">
+        <h4 className="h4 mb-12 text-center">Compare pricing packages</h4>
+        <div className="rounded-[30px] bg-secondaryOne pb-6">
+          <div className="flex border-b px-14 py-7 justify-between">
+            <h3 className="h3 w-1/3">Features</h3>
+            <div className="text-center w-1/4">
+              <h3 className="h3">Basic</h3>
+              <p className="font-semibold text-base">Ksh. 899 / month</p>
+            </div>
+            <div className="text-center w-1/4">
+              <h3 className="h3">Advanced</h3>
+              <p className="font-semibold text-base">Ksh. 1499 / month</p>
+            </div>
+          </div>
+          <BlankTableRow name="Web Development" />
+          <Row text="Unlimited customer support" basic advanced />
+          <Row text="Hosting" basic advanced />
+          <Row text="Custom domain name" basic advanced />
+          <Row text="Complete website design and development" basic advanced />
+          <BlankTableRow name="Social Media and Ads" />
+          <Row text="Custom Ads design and management" advanced />
+          <Row text="Social media management" advanced />
+          <BlankTableRow name="Online business" />
+          <Row text="Sell products online" advanced />
+          <div className="flex justify-between px-14">
+            <div className="w-1/3" />
+            <div className="w-1/4 flex justify-center">
+              <Button text="Get Started" />
+            </div>
+            <div className="w-1/4 flex justify-center">
+              <Button text="Get Started" className="bg-primaryTwo text-white" />
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
