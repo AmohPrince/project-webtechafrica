@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
 import { BasicPricing } from "../Components/BasicPricing";
 import { BlankTableRow } from "../Components/BlankTableRow";
@@ -50,12 +51,12 @@ const Pricing = () => {
           <Row text="Sell products online" advanced />
           <div className="flex justify-between px-14">
             <div className="w-1/3" />
-            <div className="w-1/4 flex justify-center">
+            <Link className="w-1/4 flex justify-center" to="/pricing/basic">
               <Button text="Get Started" />
-            </div>
-            <div className="w-1/4 flex justify-center">
+            </Link>
+            <Link className="w-1/4 flex justify-center" to="/pricing/advanced">
               <Button text="Get Started" className="bg-primaryTwo text-white" />
-            </div>
+            </Link>
           </div>
         </div>
       </section>

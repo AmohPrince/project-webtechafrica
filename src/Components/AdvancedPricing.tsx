@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Billed from "./Billed";
 
 export const AdvancedPricing = ({ className }: { className?: string }) => {
@@ -57,15 +58,17 @@ export const AdvancedPricing = ({ className }: { className?: string }) => {
           products online
         </p>
       </div>
-      <button
-        className={`py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 ${
-          !className
-            ? "bg-primaryTwo text-white hover:bg-primaryTwoLight"
-            : "bg-white text-black"
-        }`}
-      >
-        Get Started
-      </button>
+      <Link to="/pricing/advanced">
+        <button
+          className={`py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 ${
+            !className
+              ? "bg-primaryTwo text-white hover:bg-primaryTwoLight"
+              : "bg-white text-black"
+          }`}
+        >
+          Get Started
+        </button>
+      </Link>
     </div>
   );
 };

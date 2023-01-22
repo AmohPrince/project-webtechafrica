@@ -9,6 +9,9 @@ import { Home } from "./Pages/Home";
 import About from "./Pages/About";
 import Features from "./Pages/Features";
 import Pricing from "./Pages/Pricing";
+import BasicPricingPage from "./Pages/BasicPricingPage";
+import AdvancedPricingPage from "./Pages/AdvancedPricingPage";
+import Blog from "./Pages/Blog";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,9 +22,12 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route element={<Home />} index />
-          <Route element={<About />} path="/about-us" />
-          <Route element={<Features />} path="/features" />
-          <Route element={<Pricing />} path="/pricing" />
+          <Route element={<About />} path="about-us" />
+          <Route element={<Features />} path="features" />
+          <Route element={<Pricing />} path="pricing" />
+          <Route element={<BasicPricingPage />} path="pricing/basic" />
+          <Route element={<AdvancedPricingPage />} path="pricing/advanced" />
+          <Route element={<Blog />} path="blog" />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Billed from "./Billed";
 
 export const BasicPricing = ({ className }: { className?: string }) => {
@@ -34,9 +35,11 @@ export const BasicPricing = ({ className }: { className?: string }) => {
           </span>
         </p>
       </div>
-      <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange hover:scale-105">
-        Get Started
-      </button>
+      <Link to="/pricing/basic">
+        <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange hover:scale-105">
+          Get Started
+        </button>
+      </Link>
     </div>
   );
 };
