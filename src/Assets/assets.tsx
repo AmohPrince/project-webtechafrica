@@ -42,8 +42,12 @@ import instagram from "./Instagram.svg";
 import teamwork from "./TeamWork.svg";
 import allInOne from "./AllInOne.svg";
 import advancedCharts from "./AdvancedCharts.svg";
+import womanWritingCode from "./womanwritingcode.svg";
+import manSlidingImages from "./manslidingimages.svg";
 
 export const assets = {
+  manSlidingImages,
+  womanWritingCode,
   advancedCharts,
   allInOne,
   teamwork,

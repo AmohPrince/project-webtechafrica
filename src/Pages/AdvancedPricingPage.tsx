@@ -37,40 +37,47 @@ const AdvancedPricingPage = () => {
           <p className="font-bold text-5xl">
             Ksh 1499 <span className="text-base">/ month</span>
           </p>
-          <button className="rounded-full w-full text-xs text-white bg-primaryOne py-4 mt-5 hover:bg-orangeText transition-all hover:scale-110">
+          <button className="rounded-full w-full text-xs text-white bg-orangeText py-4 mt-5 hover:bg-primaryOne transition-all hover:scale-110">
             Add to cart 🚀
           </button>
         </div>
       </section>
-      <section className="mt-[8%] w-3/5">
-        <h2 className="h3">Is the basic plan a good choice for me ?</h2>
-        <p className="default-paragraph my-5">
-          Whilst it is always temptation to go for the advanced plan, it is
-          possible that you might not need the features it offers. Take a look
-          at the basic plan below
-        </p>
-        <div>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">01</span>. Unlimited
-            customer support
+      <section className="mt-[8%] flex justify-between">
+        <div className="w-3/5">
+          <h2 className="h3">Is the basic plan a good choice for me ?</h2>
+          <p className="default-paragraph my-5">
+            Whilst it is always temptation to go for the advanced plan, it is
+            possible that you might not need the features it offers. Take a look
+            at the basic plan below
           </p>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">02</span>. Hosting
-          </p>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">03</span>. Custom domain
-            name
-          </p>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">04</span>. Complete
-            website design and development
-          </p>
+          <div>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">01</span>. Unlimited
+              customer support
+            </p>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">02</span>. Hosting
+            </p>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">03</span>. Custom
+              domain name
+            </p>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">04</span>. Complete
+              website design and development
+            </p>
+          </div>
+          <Link to="/pricing/basic">
+            <button className="rounded-full text-xs px-6 text-white bg-primaryOne py-4 mt-5 hover:bg-orangeText transition-all">
+              Check out basic plan
+            </button>
+          </Link>
         </div>
-        <Link to="/pricing/basic">
-          <button className="rounded-full text-xs px-6 text-white bg-orangeText py-4 mt-5 hover:bg-primaryOneLight transition-all">
-            Check out basic plan
-          </button>
-        </Link>
+        <img
+          src={assets.manSlidingImages}
+          alt="man sliding images"
+          className="w-1/4"
+        />
       </section>
     </>
   );

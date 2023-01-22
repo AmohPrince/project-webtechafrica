@@ -48,31 +48,38 @@ const BasicPricingPage = () => {
           </button>
         </div>
       </section>
-      <section className="mt-[8%] w-3/5">
-        <h2 className="h3">Is the advanced plan a better choice for me ?</h2>
-        <p className="default-paragraph my-5">
-          The advanced plan package offers more, for example social media
-          management and the ability to sell products online. Sounds like you?
-        </p>
-        <div>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">01</span>. Social media
-            management
+      <section className="mt-[8%] flex justify-between">
+        <div className=" w-3/5">
+          <h2 className="h3">Is the advanced plan a better choice for me ?</h2>
+          <p className="default-paragraph my-5">
+            The advanced plan package offers more, for example social media
+            management and the ability to sell products online. Sounds like you?
           </p>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">02</span>. Custom Ads
-            management
-          </p>
-          <p className="default-paragraph mb-5">
-            <span className="text-black font-semibold">03</span>. Sell products
-            online
-          </p>
+          <div>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">01</span>. Social media
+              management
+            </p>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">02</span>. Custom Ads
+              management
+            </p>
+            <p className="default-paragraph mb-5">
+              <span className="text-black font-semibold">03</span>. Sell
+              products online
+            </p>
+          </div>
+          <Link to="/pricing/advanced">
+            <button className="rounded-full text-xs px-6 text-white bg-orangeText py-4 mt-5 hover:bg-primaryOneLight transition-all">
+              Check out advanced plan
+            </button>
+          </Link>
         </div>
-        <Link to="/pricing/advanced">
-          <button className="rounded-full text-xs px-6 text-white bg-orangeText py-4 mt-5 hover:bg-primaryOneLight transition-all">
-            Check out advanced plan
-          </button>
-        </Link>
+        <img
+          src={assets.womanWritingCode}
+          alt="Woman writing code"
+          className="w-1/4"
+        />
       </section>
     </>
   );
