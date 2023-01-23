@@ -12,6 +12,7 @@ import Pricing from "./Pages/Pricing";
 import BasicPricingPage from "./Pages/BasicPricingPage";
 import AdvancedPricingPage from "./Pages/AdvancedPricingPage";
 import Blog from "./Pages/Blog";
+import SingleBlog from "./Pages/SingleBlog";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -28,6 +29,7 @@ root.render(
           <Route element={<BasicPricingPage />} path="pricing/basic" />
           <Route element={<AdvancedPricingPage />} path="pricing/advanced" />
           <Route element={<Blog />} path="blog" />
+          <Route element={<SingleBlog />} path="blog/:title" />
         </Route>
       </Routes>
     </BrowserRouter>

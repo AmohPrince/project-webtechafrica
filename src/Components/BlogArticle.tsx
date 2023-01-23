@@ -1,13 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-type BlogArticleType = {
-  title: string;
-  date: string;
-  preText: string;
-  url: string;
-  img: string;
-};
+import { BlogArticleType } from "../Types/Global";
 
 const BlogArticle = ({ article }: { article: BlogArticleType }) => {
   return (
@@ -21,7 +14,7 @@ const BlogArticle = ({ article }: { article: BlogArticleType }) => {
       <h4 className="h4">{article.title}</h4>
       <p className="default-paragraph my-4">{article.preText}</p>
       <Link
-        to={article.url}
+        to={article.title}
         className="absolute bottom-4 text-primaryOne text-sm underline font-semibold"
       >
         Read More
