@@ -63,6 +63,14 @@ const Navbar = () => {
           >
             Blog
           </Link>
+          <Link
+            to="/contact"
+            className={`active:text-primaryOne ${
+              basePath === "/contact" && "text-primaryOne font-bold"
+            }`}
+          >
+            Contact
+          </Link>
         </div>
         <button
           className={`bg-white px-8 rounded-full ml-10 font-semibold ${

@@ -44,8 +44,12 @@ import allInOne from "./AllInOne.svg";
 import advancedCharts from "./AdvancedCharts.svg";
 import womanWritingCode from "./womanwritingcode.svg";
 import manSlidingImages from "./manslidingimages.svg";
+import contactBlob from "./ContactBlob.svg";
+import MailLarge from "./MailLarge.svg";
 
 export const assets = {
+  MailLarge,
+  contactBlob,
   manSlidingImages,
   womanWritingCode,
   advancedCharts,

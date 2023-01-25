@@ -6,7 +6,7 @@ import Navbar from "./Components/Navbar";
 function App() {
   return (
     <>
-      <div className="px-[14%] relative py-14">
+      <div className="px-[12%] relative py-14">
         <Navbar />
         <Outlet />
         <Footer />

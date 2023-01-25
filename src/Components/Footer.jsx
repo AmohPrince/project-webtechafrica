@@ -88,10 +88,16 @@ const Footer = () => {
               Learn
             </Link>
             <Link
-              to="#contact-us"
+              to="/contact"
               className="hover:text-primaryOne transition-all hover:font-semibold"
             >
               Contact us
+            </Link>
+            <Link
+              to="/contact#faqs"
+              className="hover:text-primaryOne transition-all hover:font-semibold"
+            >
+              FAQS
             </Link>
           </div>
         </div>

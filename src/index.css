@@ -32,6 +32,9 @@
   .default-paragraph {
     @apply font-normal text-[18px] leading-[125.4%] text-secondaryFour;
   }
+  .show {
+    @apply outline outline-red-600 outline-1;
+  }
 }
 
 button.active {
@@ -45,10 +48,6 @@ button.active {
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
-}
-
-.show {
-  outline: 1px solid red;
 }
 
 .center-absolutely {
@@ -83,4 +82,10 @@ code {
 
 .email-input {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.faqs {
+  width: inherit;
+  margin-left: -20%;
+  margin-right: -20%;
 }

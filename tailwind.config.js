@@ -17,6 +17,8 @@ module.exports = {
         border: "#D3D3D3",
         orange: "#FFEECC",
         orangeText: "#C68A15",
+        purple: "#FAD5E9",
+        purpleText: "#C1749E",
       },
     },
   },
