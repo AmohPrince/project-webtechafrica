@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
@@ -5,10 +6,11 @@ import { CircleBackGround } from "../Components/CircleBackGround";
 import { FeaturesComponent } from "../Components/FeaturesComponent";
 import FreeTrial from "../Components/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
+import { pageTransition } from "../FramerMotion/PageTransitions";
 
 const Features = () => {
   return (
-    <>
+    <motion.div variants={pageTransition}>
       <CircleBackGround />
       <section className="mt-[10%]">
         <h1 className="h1 text-center">Features</h1>
@@ -73,7 +75,7 @@ const Features = () => {
         </div>
       </section>
       <FreeTrial />
-    </>
+    </motion.div>
   );
 };
 

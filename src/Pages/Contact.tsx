@@ -1,8 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
 import Faq from "../Components/Faq";
 import Location from "../Components/Location";
+import { pageTransition } from "../FramerMotion/PageTransitions";
 import Faqs from "../Json/Faqs.json";
 
 const Contact = () => {
@@ -11,7 +13,7 @@ const Contact = () => {
     // console.log(e.target.value);
   };
   return (
-    <>
+    <motion.div variants={pageTransition}>
       <CircleBackGround />
       <img
         src={assets.contactBlob}
@@ -117,7 +119,7 @@ const Contact = () => {
           </div>
         </section>
       </div>
-    </>
+    </motion.div>
   );
 };
 

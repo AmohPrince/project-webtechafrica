@@ -14,27 +14,32 @@ import AdvancedPricingPage from "./Pages/AdvancedPricingPage";
 import Blog from "./Pages/Blog";
 import SingleBlog from "./Pages/SingleBlog";
 import Contact from "./Pages/Contact";
+import FourZeroFour from "./Pages/FourZeroFour";
+import { AnimatePresence } from "framer-motion";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route element={<Home />} index />
-          <Route element={<About />} path="about-us" />
-          <Route element={<Features />} path="features" />
-          <Route element={<Pricing />} path="pricing" />
-          <Route element={<BasicPricingPage />} path="pricing/basic" />
-          <Route element={<AdvancedPricingPage />} path="pricing/advanced" />
-          <Route element={<Blog />} path="blog" />
-          <Route element={<SingleBlog />} path="blog/:title" />
-          <Route element={<Contact />} path="contact" />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AnimatePresence>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route element={<Home />} index />
+            <Route element={<About />} path="about-us" />
+            <Route element={<Features />} path="features" />
+            <Route element={<Pricing />} path="pricing" />
+            <Route element={<BasicPricingPage />} path="pricing/basic" />
+            <Route element={<AdvancedPricingPage />} path="pricing/advanced" />
+            <Route element={<Blog />} path="blog" />
+            <Route element={<SingleBlog />} path="blog/:title" />
+            <Route element={<Contact />} path="contact" />
+            <Route path="*" element={<FourZeroFour />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AnimatePresence>
   </React.StrictMode>
 );
 

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
@@ -5,11 +6,12 @@ import { BasicPricing } from "../Components/BasicPricing";
 import { BlankTableRow } from "../Components/BlankTableRow";
 import { Button } from "../Components/Button";
 import { CircleBackGround } from "../Components/CircleBackGround";
+import { pageTransition } from "../FramerMotion/PageTransitions";
 import Row from "./Row";
 
 const Pricing = () => {
   return (
-    <>
+    <motion.div variants={pageTransition}>
       <CircleBackGround />
       <section className="mt-[8%]">
         <h1 className="h1 text-center">Pricing</h1>
@@ -60,7 +62,7 @@ const Pricing = () => {
           </div>
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

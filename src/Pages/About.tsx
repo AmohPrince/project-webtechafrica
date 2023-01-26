@@ -1,11 +1,13 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
 import { GreyButton } from "../Components/GreyButton";
+import { pageTransition } from "../FramerMotion/PageTransitions";
 
 const About = () => {
   return (
-    <>
+    <motion.div variants={pageTransition}>
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center mt-[8%]">
@@ -166,7 +168,7 @@ const About = () => {
           </div>
         </section>
       </div>
-    </>
+    </motion.div>
   );
 };
 

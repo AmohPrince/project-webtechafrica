@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { assets } from "../Assets/assets";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
@@ -8,24 +9,38 @@ import { FeaturesComponent } from "../Components/FeaturesComponent";
 import FreeTrial from "../Components/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
 import HomeBackground from "../Components/HomeBackground";
+import {
+  pageTransition,
+  stagger,
+  textTransition,
+} from "../FramerMotion/PageTransitions";
 import Blogs from "../Json/Blogs.json";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
 
   return (
-    <>
+    <motion.div variants={pageTransition}>
       <HomeBackground />
-      <section className="flex mt-[14%] justify-between relative">
+      <motion.section
+        className="flex mt-[14%] justify-between relative"
+        variants={stagger}
+        animate="animate"
+        initial="initial"
+        exit="exit"
+      >
         <div className="w-[50%]">
-          <h1 className="h1">
+          <motion.h1 className="h1" animate={textTransition}>
             Build your <br /> audience and grow <br /> your brand online
-          </h1>
-          <p className="text-gray-500 mt-4 mb-7">
+          </motion.h1>
+          <motion.p
+            className="text-gray-500 mt-4 mb-7"
+            animate={textTransition}
+          >
             Get your website or web application on the cheap today with Africa's{" "}
             <br />
             fastest growing tech corporation.{" "}
-          </p>
+          </motion.p>
           <div className="flex text-sm">
             <button className="bg-primaryOne text-white py-3 px-6 rounded-full">
               Get Started
@@ -40,12 +55,13 @@ export const Home = () => {
             </button>
           </div>
         </div>
-        <img
+        <motion.img
           src={assets.GraphScreen}
           alt="graph"
           className="w-[50%] ml-11 object-cover absolute -right-12 -top-12"
+          animate="animate"
         />
-      </section>
+      </motion.section>
       <FeaturesComponent />
       <section className="mt-[6%] relative items-stretch">
         <div className="w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-[50px]">
@@ -274,6 +290,6 @@ export const Home = () => {
           ))}
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
