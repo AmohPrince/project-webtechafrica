@@ -1,7 +1,9 @@
 import React from "react";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
+import Faq from "../Components/Faq";
 import Location from "../Components/Location";
+import Faqs from "../Json/Faqs.json";
 
 const Contact = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -104,10 +106,15 @@ const Contact = () => {
             </p>
           </div>
         </section>
-        <section className="bg-primaryOne mt-[10%] faqs">
-          <h3 className="h3 text-white text-center py-[7%]">
+        <section className="bg-primaryOne mt-[10%] faqs py-[10%]">
+          <h3 className="h3 text-white text-center mb-10">
             Frequently Asked Questions
           </h3>
+          <div className="w-1/2 mx-auto">
+            {Faqs.map((faq, i) => (
+              <Faq answer={faq.answer} question={faq.Question} key={i} />
+            ))}
+          </div>
         </section>
       </div>
     </>
