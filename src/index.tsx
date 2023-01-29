@@ -16,6 +16,8 @@ import SingleBlog from "./Pages/SingleBlog";
 import Contact from "./Pages/Contact";
 import FourZeroFour from "./Pages/FourZeroFour";
 import { AnimatePresence } from "framer-motion";
+import SignIn from "./Pages/SignIn";
+import { SignUp } from "./Pages/SignUp";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -37,6 +39,8 @@ root.render(
             <Route element={<Contact />} path="contact" />
             <Route path="*" element={<FourZeroFour />} />
           </Route>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </AnimatePresence>

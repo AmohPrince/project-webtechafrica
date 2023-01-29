@@ -46,8 +46,14 @@ import womanWritingCode from "./womanwritingcode.svg";
 import manSlidingImages from "./manslidingimages.svg";
 import contactBlob from "./ContactBlob.svg";
 import MailLarge from "./MailLarge.svg";
+import google from "./Google.svg";
+import logoSignIn from "./CrowSignIn.png";
+import logoSignUp from "./LogoSign-up.png";
 
 export const assets = {
+  logoSignUp,
+  logoSignIn,
+  google,
   MailLarge,
   contactBlob,
   manSlidingImages,

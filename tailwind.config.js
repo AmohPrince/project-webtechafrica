@@ -19,6 +19,8 @@ module.exports = {
         orangeText: "#C68A15",
         purple: "#FAD5E9",
         purpleText: "#C1749E",
+        bgSignupPage: "#005dbf",
+        bgSignInPage: "#7d6f20",
       },
     },
   },

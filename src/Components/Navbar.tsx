@@ -72,13 +72,14 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        <button
-          className={`bg-white px-8 rounded-full ml-10 font-semibold ${
+        <Link
+          className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
             basePath !== "/" && "bg-primaryOne text-white"
           }`}
+          to="/sign-in"
         >
           Sign in
-        </button>
+        </Link>
       </div>
     </section>
   );

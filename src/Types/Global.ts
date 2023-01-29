@@ -12,3 +12,8 @@ export type BlogArticleType = {
   blogBodyImage?: string;
   conclusions?: string[];
 };
+
+export type User = {
+  name: string;
+  email: string;
+};
