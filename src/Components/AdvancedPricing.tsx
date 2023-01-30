@@ -47,6 +47,28 @@ export const AdvancedPricing = ({ className }: { className?: string }) => {
         <p>Social media management</p>
         <p>Custom Ads management</p>
         <p>
+          Fully{" "}
+          <span
+            className={`font-semibold ${
+              !className ? "text-primaryOne" : "text-white"
+            }`}
+          >
+            {" "}
+            designed
+          </span>{" "}
+          and{" "}
+          <span
+            className={`font-semibold ${
+              !className ? "text-primaryOne" : "text-white"
+            }`}
+          >
+            {" "}
+            deployed
+          </span>{" "}
+          web shop
+        </p>
+        <p>Payments covered!</p>
+        <p>
           <span
             className={`font-semibold ${
               !className ? "text-primaryOne" : "text-white"

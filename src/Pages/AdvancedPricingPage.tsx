@@ -11,8 +11,12 @@ const AdvancedPricingPage = () => {
         <div className="border-b pb-5 w-1/2">
           <h1 className="h2">Advanced Plan</h1>
           <p className="default-paragraph mb-7">
-            The advanced package offers more options than the basic package. Do
-            you know what it offers?
+            Unleash your online potential with the advanced package! This
+            comprehensive plan goes above and beyond the basic option by
+            delivering a fully customized e-commerce platform for you to sell
+            all your goods. Your personal clients can easily access your site
+            via a unique link, and we've got you covered for payments. Ready for
+            the full rundown of all the advanced features?
           </p>
           <div className="flex items-center mb-5">
             <img src={assets.Tick} alt="tick" className="w-5 h-5 mr-5" />
@@ -25,6 +29,16 @@ const AdvancedPricingPage = () => {
           <div className="flex items-center mb-5">
             <img src={assets.Tick} alt="tick" className="w-5 h-5 mr-5" />
             <p className="default-paragraph">Sell products online</p>
+          </div>
+          <div className="flex items-center mb-5">
+            <img src={assets.Tick} alt="tick" className="w-5 h-5 mr-5" />
+            <p className="default-paragraph">
+              Fully designed and deployed web shop
+            </p>
+          </div>
+          <div className="flex items-center mb-5">
+            <img src={assets.Tick} alt="tick" className="w-5 h-5 mr-5" />
+            <p className="default-paragraph">Payments covered!</p>
           </div>
         </div>
         <div className="rounded-[30px] bg-secondaryOne px-10 py-9 w-[45%]">

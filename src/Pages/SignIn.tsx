@@ -21,7 +21,7 @@ const SignIn = () => {
     //here is where we might call a backend service;
 
     const user: User = {
-      name: "From sign in",
+      name: "Test User",
       email: emailRef.current!.value,
     };
 

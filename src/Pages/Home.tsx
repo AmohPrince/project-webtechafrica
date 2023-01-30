@@ -57,7 +57,7 @@ export const Home = () => {
           </div>
         </div>
         <motion.img
-          src={assets.GraphScreen}
+          src={assets.GraphScreenPng}
           alt="graph"
           className="w-[50%] ml-11 object-cover absolute -right-12 -top-12"
           animate="animate"

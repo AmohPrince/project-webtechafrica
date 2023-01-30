@@ -18,6 +18,8 @@ import FourZeroFour from "./Pages/FourZeroFour";
 import { AnimatePresence } from "framer-motion";
 import SignIn from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
+import DashBoard from "./Pages/DashBoard";
+import Shop from "./Pages/Shop";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -41,6 +43,9 @@ root.render(
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/dashboard/:name/adminshop" element={<Shop />} />
+          <Route path="/:name" element={<Shop />} />
         </Routes>
       </BrowserRouter>
     </AnimatePresence>

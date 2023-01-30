@@ -49,8 +49,10 @@ import MailLarge from "./MailLarge.svg";
 import google from "./Google.svg";
 import logoSignIn from "./CrowSignIn.png";
 import logoSignUp from "./LogoSign-up.png";
+import GraphScreenPng from "./GraphScreenPNG.png";
 
 export const assets = {
+  GraphScreenPng,
   logoSignUp,
   logoSignIn,
   google,

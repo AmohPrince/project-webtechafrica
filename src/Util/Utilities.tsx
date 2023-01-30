@@ -12,3 +12,7 @@ export const getBaseUrl = (pathname: string): string => {
 
   return pathname;
 };
+
+export const getNoSpaceLowerCaseString = (str: string): string => {
+  return str.replace(/\s/g, "").toLowerCase();
+};
