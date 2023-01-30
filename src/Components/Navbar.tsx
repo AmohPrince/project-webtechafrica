@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { assets } from "../Assets/assets";
+import { useAuth } from "../Hooks/UseAuth";
 import { getBaseUrl } from "../Util/Utilities";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const basePath = getBaseUrl(pathname);
+  const { user } = useAuth();
 
   return (
     <section className="flex justify-between items-center z-10 relative">
@@ -72,14 +74,25 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        <Link
-          className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
-            basePath !== "/" && "bg-primaryOne text-white"
-          }`}
-          to="/sign-in"
-        >
-          Sign in
-        </Link>
+        {!user ? (
+          <Link
+            className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
+              basePath !== "/" && "bg-primaryOne text-white"
+            }`}
+            to="/sign-in"
+          >
+            Sign in
+          </Link>
+        ) : (
+          <Link
+            className={`bg-white px-4 rounded-full ml-10 font-semibold flex items-center ${
+              basePath !== "/" && "bg-primaryOne text-white"
+            }`}
+            to="/dashboard"
+          >
+            My Dashboard 🚀
+          </Link>
+        )}
       </div>
     </section>
   );

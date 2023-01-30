@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
 
-function getDefaultValue<T>(key: string, initialValue: T): T {
+function getDefaultValue<T>(key: string, initialValue: T | null): T | null {
   const storedValue: string | null = localStorage.getItem(key);
+
   if (storedValue) {
     return JSON.parse(storedValue);
   }
   if (initialValue instanceof Function) {
-    initialValue();
+    return initialValue();
   }
+
   return initialValue;
 }
 
 export function useLocalStorage<T>(
-  initialValue: T,
+  initialValue: T | null,
   key: string
-): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [value, setValue] = useState<T>(getDefaultValue(key, initialValue));
+): [T | null, React.Dispatch<React.SetStateAction<T | null>>] {
+  const [value, setValue] = useState<T | null>(
+    getDefaultValue(key, initialValue)
+  );
+
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+    if (value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  }, [key, value]);
+
   return [value, setValue];
 }

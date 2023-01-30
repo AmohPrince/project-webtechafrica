@@ -1,22 +1,36 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import Logo from "../Components/Logo";
+import { SpinningDots } from "../Components/SpinningDots/SpinningDots";
 import { useAuth } from "../Hooks/UseAuth";
+import { User } from "../Types/Global";
 
 const SignIn = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const thirtyDaysCheckboxRef = useRef<HTMLInputElement>(null);
-
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuth();
 
   const handleLogin = () => {
     console.log(emailRef.current?.value);
     console.log(passwordRef.current?.value);
     console.log(thirtyDaysCheckboxRef.current?.checked);
+    //here is where we might call a backend service;
 
-    console.log(setUser);
+    const user: User = {
+      name: "From sign in",
+      email: emailRef.current!.value,
+    };
+
+    setIsLoading(true);
+    setUser(user);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/");
+    }, 3000);
   };
 
   return (
@@ -61,8 +75,9 @@ const SignIn = () => {
         <button
           className="text-sm font-semibold bg-bgSignupPage text-white w-full px-5 py-3 rounded-lg"
           onClick={handleLogin}
+          disabled={isLoading}
         >
-          Sign in
+          {isLoading ? <SpinningDots /> : "Sign in"}
         </button>
         <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
           <img src={assets.google} alt="google icon" className="w-5 h-5" />

@@ -6,7 +6,7 @@ const FourZeroFour = () => {
   return (
     <>
       <CircleBackGround />
-      <section className="flex flex-col items-center mt-[10%]">
+      <section className="flex flex-col items-center mt-[10%] relative z-10">
         <p className="text-primaryOne text-9xl font-bold">404</p>
         <h1 className="h1">Page Not Found</h1>
         <p className="default-paragraph my-4 w-3/4 mx-auto text-center">

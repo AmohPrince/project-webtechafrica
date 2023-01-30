@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
 import { BasicPricing } from "../Components/BasicPricing";
@@ -144,7 +145,9 @@ export const Home = () => {
                 also allows us better understand how users interact with their
                 sites, which can be used to improve the overall user experience.
               </p>
-              <BlackIshButton text="Get started" />
+              <Link to="/sign-in">
+                <BlackIshButton text="Get started" />
+              </Link>
             </div>
             <img src={assets.Accounts} alt="account" className="w-2/5" />
           </div>

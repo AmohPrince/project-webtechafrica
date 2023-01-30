@@ -3,15 +3,10 @@ import { User } from "../Types/Global";
 import { useLocalStorage } from "./UseLocalStorage";
 
 export function useAuth(): {
-  user: User;
-  setUser: React.SetStateAction<React.Dispatch<User>>;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 } {
-  const initialUser = {
-    name: "Sammy",
-    email: "Fred",
-  };
-
-  const [user, setUser] = useLocalStorage<User>(initialUser, "user-data");
+  const [user, setUser] = useLocalStorage<User>(null, "user-data");
 
   return {
     user,

@@ -11,11 +11,14 @@ export const SignUp = () => {
 
   const { setUser } = useAuth();
 
-  const handleSignIn = () => {
+  const handleSignUp = () => {
     console.log(fullNameRef.current?.value);
     console.log(emailRef.current?.value);
     console.log(passwordRef.current?.value);
-    console.log(setUser);
+    setUser({
+      email: emailRef.current!.value,
+      name: "From Sign Up",
+    });
   };
 
   return (
@@ -55,7 +58,7 @@ export const SignUp = () => {
         />
         <button
           className="text-sm font-semibold bg-bgSignInPage w-full px-5 py-3 rounded-lg mt-6"
-          onClick={handleSignIn}
+          onClick={handleSignUp}
         >
           Create account
         </button>
