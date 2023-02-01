@@ -2,23 +2,23 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import Logo from "../Components/Logo";
-import { useAuth } from "../Hooks/UseAuth";
+// import { useAuth } from "../Hooks/UseAuth";
 
 export const SignUp = () => {
   const fullNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const { setUser } = useAuth();
+  // const { setUser } = useAuth();
 
   const handleSignUp = () => {
     console.log(fullNameRef.current?.value);
     console.log(emailRef.current?.value);
     console.log(passwordRef.current?.value);
-    setUser({
-      email: emailRef.current!.value,
-      name: "From Sign Up",
-    });
+    // setUser({
+    //   email: emailRef.current!.value,
+    //   name: "From Sign Up",
+    // });
   };
 
   return (

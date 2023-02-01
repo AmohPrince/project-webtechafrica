@@ -16,4 +16,14 @@ export type BlogArticleType = {
 export type User = {
   name: string;
   email: string;
+  plan: string;
+  paymentMethodSelected: boolean;
+  activeWebsites: ActiveWebsiteType[];
+};
+
+export type ActiveWebsiteType = {
+  websiteUrl: string;
+  hasShop: true;
+  shopUrl?: string;
+  websiteScreenShot: string;
 };

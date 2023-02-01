@@ -57,6 +57,13 @@ button.active {
   transform: translate(-50%, -50%);
 }
 
+.center-sticky {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 body {
   margin: 0;
   width: 100vw;

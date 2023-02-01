@@ -8,6 +8,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const basePath = getBaseUrl(pathname);
   const { user } = useAuth();
+  console.log(user);
 
   return (
     <section className="flex justify-between items-center z-10 relative">
@@ -74,7 +75,7 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        {!user ? (
+        {user === null ? (
           <Link
             className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
               basePath !== "/" && "bg-primaryOne text-white"

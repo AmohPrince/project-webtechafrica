@@ -23,6 +23,17 @@ const SignIn = () => {
     const user: User = {
       name: "Test User",
       email: emailRef.current!.value,
+      plan: "Premium",
+      paymentMethodSelected: false,
+      activeWebsites: [
+        {
+          websiteUrl: "https://testuser.webtechafrica.com/",
+          hasShop: true,
+          shopUrl: "https://testuser.webtechafrica.com/shop",
+          websiteScreenShot:
+            "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
+        },
+      ],
     };
 
     setIsLoading(true);
