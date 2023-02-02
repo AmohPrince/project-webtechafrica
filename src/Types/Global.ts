@@ -19,11 +19,19 @@ export type User = {
   plan: string;
   paymentMethodSelected: boolean;
   activeWebsites: ActiveWebsiteType[];
+  devWebsites: DevWebsite[];
 };
 
 export type ActiveWebsiteType = {
   websiteUrl: string;
-  hasShop: true;
+  hasShop: boolean;
+  shopUrl?: string;
+  websiteScreenShot: string;
+};
+
+export type DevWebsite = {
+  previewUrl: string;
+  hasShop: boolean;
   shopUrl?: string;
   websiteScreenShot: string;
 };

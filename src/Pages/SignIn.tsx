@@ -34,8 +34,22 @@ const SignIn = () => {
             "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
         },
       ],
+      devWebsites: [
+        {
+          previewUrl: "https://testuser.webtechafrica.com/",
+          hasShop: true,
+          shopUrl: "https://testuser.webtechafrica.com/shop",
+          websiteScreenShot:
+            "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
+        },
+        {
+          previewUrl: "https://testuser.webtechafrica.com/",
+          hasShop: false,
+          websiteScreenShot:
+            "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
+        },
+      ],
     };
-
     setIsLoading(true);
     setUser(user);
     setTimeout(() => {
