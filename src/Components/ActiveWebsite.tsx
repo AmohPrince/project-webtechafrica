@@ -1,5 +1,6 @@
 import React from "react";
 import { ActiveWebsiteType } from "../Types/Global";
+import { extractHostname } from "../Util/Utilities";
 import { Button } from "./Button";
 
 const ActiveWebsite = ({ website }: { website: ActiveWebsiteType }) => {
@@ -22,9 +23,3 @@ const ActiveWebsite = ({ website }: { website: ActiveWebsiteType }) => {
 };
 
 export default ActiveWebsite;
-
-export function extractHostname(url: string): string {
-  const startIndex = url.indexOf("://") + 3;
-  const endIndex = url.indexOf("/", startIndex);
-  return url.substring(startIndex, endIndex);
-}

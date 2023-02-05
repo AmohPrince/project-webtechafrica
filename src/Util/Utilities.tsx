@@ -16,3 +16,9 @@ export const getBaseUrl = (pathname: string): string => {
 export const getNoSpaceLowerCaseString = (str: string): string => {
   return str.replace(/\s/g, "").toLowerCase();
 };
+
+export function extractHostname(url: string): string {
+  const startIndex = url.indexOf("://") + 3;
+  const endIndex = url.indexOf("/", startIndex);
+  return url.substring(startIndex, endIndex);
+}
