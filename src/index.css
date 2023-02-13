@@ -35,6 +35,9 @@
   .show {
     @apply outline outline-red-600 outline-1;
   }
+  .show-bg {
+    @apply outline outline-red-500 outline-1 bg-green-400;
+  }
 }
 
 button.active {

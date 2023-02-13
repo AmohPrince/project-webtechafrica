@@ -19,6 +19,10 @@ import { AnimatePresence } from "framer-motion";
 import SignIn from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import DashBoard from "./Pages/DashBoard";
+import ActiveWebsites from "./Pages/ActiveWebsites";
+import DevWebsites from "./Pages/DevWebsites";
+import MyPlan from "./Pages/MyPlan";
+import Payment from "./Pages/Payment";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -42,7 +46,16 @@ root.render(
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/dashboard" element={<DashBoard />}>
+            <Route element={<ActiveWebsites />} index />
+            <Route
+              element={<ActiveWebsites />}
+              path="/dashboard/active-websites"
+            />
+            <Route element={<DevWebsites />} path="dev-websites" />
+            <Route element={<MyPlan />} path="my-plan" />
+            <Route element={<Payment />} path="payment" />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AnimatePresence>

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
 import { BasicPricing } from "../Components/BasicPricing";
 import { BlankTableRow } from "../Components/BlankTableRow";
-import { Button } from "../Components/Button";
 import { CircleBackGround } from "../Components/CircleBackGround";
+import { SecondaryButton } from "../Components/SecondaryButton";
 import { pageTransition } from "../FramerMotion/PageTransitions";
 import Row from "./Row";
 
@@ -54,10 +54,10 @@ const Pricing = () => {
           <div className="flex justify-between px-14">
             <div className="w-1/3" />
             <Link className="w-1/4 flex justify-center" to="/pricing/basic">
-              <Button text="Get Started" />
+              <SecondaryButton text="Get Started" />
             </Link>
             <Link className="w-1/4 flex justify-center" to="/pricing/advanced">
-              <Button text="Get Started" className="bg-primaryTwo text-white" />
+              <SecondaryButton text="Get Started" />
             </Link>
           </div>
         </div>

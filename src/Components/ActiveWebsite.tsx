@@ -1,23 +1,30 @@
 import React from "react";
 import { ActiveWebsiteType } from "../Types/Global";
 import { extractHostname } from "../Util/Utilities";
-import { Button } from "./Button";
+import PrimaryButton from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
 const ActiveWebsite = ({ website }: { website: ActiveWebsiteType }) => {
   return (
-    <div>
+    <div className="bg-white mt-5 px-8 py-7 rounded-2xl">
       <div className="flex justify-between items-center">
-        <h3 className="h3">{extractHostname(website.websiteUrl)}</h3>
-        {website.hasShop && (
-          <a href={website.shopUrl}>
-            <Button text="View Shop" className="mt-0" />
+        <h4 className="h4">{extractHostname(website.websiteUrl)}</h4>
+        <div>
+          {website.hasShop && (
+            <a href={website.shopUrl} className="mr-3">
+              <SecondaryButton text="View Shop" />
+            </a>
+          )}
+          <a href={website.websiteUrl}>
+            <PrimaryButton text="View site" />
           </a>
-        )}
-        <a href={website.websiteUrl}>
-          <Button text="View site" className="mt-0" />
-        </a>
+        </div>
       </div>
-      <img src={website.websiteScreenShot} alt="test" className="w-1/2" />
+      <img
+        src={website.websiteScreenShot}
+        alt="test"
+        className="w-full h-[50vh] object-cover mt-6"
+      />
     </div>
   );
 };

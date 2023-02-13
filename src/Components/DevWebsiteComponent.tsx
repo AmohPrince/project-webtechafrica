@@ -1,7 +1,8 @@
 import React from "react";
 import { DevWebsite } from "../Types/Global";
 import { extractHostname } from "../Util/Utilities";
-import { Button } from "./Button";
+import PrimaryButton from "./PrimaryButton";
+import { SecondaryButton } from "./SecondaryButton";
 
 const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
   return (
@@ -9,11 +10,11 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
       <div className="flex justify-between">
         <div>
           <a href={website.previewUrl}>
-            <Button text="Preview site" />
+            <PrimaryButton text="Preview site" />
           </a>
           {website.hasShop && (
             <a href={website.shopUrl}>
-              <Button text="View shop" />
+              <SecondaryButton text="View shop" />
             </a>
           )}
         </div>

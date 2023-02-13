@@ -2,7 +2,7 @@ import React from "react";
 import { assets } from "../Assets/assets";
 
 const ActualLogo = ({ page }: { page: string }) => {
-  return page === "sign-in" ? (
+  return page === "sign-in" || page === "dashboard" ? (
     <img
       src={assets.logoSignIn}
       alt="logo"
