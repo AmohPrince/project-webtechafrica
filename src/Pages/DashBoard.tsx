@@ -88,7 +88,7 @@ const DashBoard = () => {
           />
         </div>
       </div>
-      <div className="flex-grow bg-gray-100 pt-7 px-7">
+      <div className="flex-grow bg-gray-100 pt-7 px-7 w-5/6">
         <div className="flex items-center">
           <PrimaryButton text="Get new website" />
           <p className="font-semibold ml-3 cursor-pointer">Log out</p>

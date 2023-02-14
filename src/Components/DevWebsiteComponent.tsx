@@ -6,22 +6,28 @@ import { SecondaryButton } from "./SecondaryButton";
 
 const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
   return (
-    <div className="px-[10%] border-t mt-5">
-      <div className="flex justify-between">
-        <div>
-          <a href={website.previewUrl}>
-            <PrimaryButton text="Preview site" />
-          </a>
-          {website.hasShop && (
-            <a href={website.shopUrl}>
-              <SecondaryButton text="View shop" />
-            </a>
-          )}
+    <div className="border-t w-[49%] bg-white p-6 rounded-2xl">
+      <div className="flex justify-between items-center">
+        <div className="w-1/3 mr-7">
+          <p className="font-semibold">{extractHostname(website.previewUrl)}</p>
+          <p className="text-gray-500 text-sm">
+            Expected Completion: 24th May 2023
+          </p>
         </div>
-        <img src={website.websiteScreenShot} alt="overdue" className="w-1/3" />
+        {website.hasShop && (
+          <a href={website.shopUrl}>
+            <SecondaryButton text="View shop" />
+          </a>
+        )}
+        <a href={website.previewUrl}>
+          <PrimaryButton text="Preview site" />
+        </a>
       </div>
-      <p>{extractHostname(website.previewUrl)}</p>
-      <p>Expected Completion: 24th May 2023</p>
+      <img
+        src={website.websiteScreenShot}
+        alt="overdue"
+        className="w-full object-cover h-[40vh] rounded-xl mt-5"
+      />
     </div>
   );
 };
