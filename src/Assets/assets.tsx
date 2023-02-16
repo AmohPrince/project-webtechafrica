@@ -50,8 +50,10 @@ import google from "./Google.svg";
 import logoSignIn from "./CrowSignIn.png";
 import logoSignUp from "./LogoSign-up.png";
 import GraphScreenPng from "./GraphScreenPNG.png";
+import Calendar from "./Calendar.svg";
 
 export const assets = {
+  Calendar,
   GraphScreenPng,
   logoSignUp,
   logoSignIn,

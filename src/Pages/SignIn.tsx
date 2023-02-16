@@ -23,7 +23,7 @@ const SignIn = () => {
     const user: User = {
       name: "Test User",
       email: emailRef.current!.value,
-      plan: "Premium",
+      plan: "Basic",
       paymentMethodSelected: false,
       activeWebsites: [
         {
