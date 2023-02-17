@@ -1,21 +1,20 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { assets } from "../Assets/assets";
+import { LogoColor } from "../Assets/assets";
 import { useAuth } from "../Hooks/UseAuth";
 import { getBaseUrl } from "../Util/Utilities";
+import { Logo } from "./Logo";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const basePath = getBaseUrl(pathname);
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <section className="flex justify-between items-center z-10 relative">
       <div className="flex">
-        <img
-          src={assets.Logo}
-          alt="Web vira"
+        <Logo
+          color={LogoColor.primary}
           className="w-[60px] h-[40px] object-cover"
         />
         <h3 className="h3">WebTech Africa</h3>

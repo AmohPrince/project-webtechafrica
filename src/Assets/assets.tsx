@@ -15,7 +15,6 @@ import Rocket from "./Rocket.svg";
 import Tick from "./Tick.svg";
 import Wallets from "./Wallets.svg";
 import BackGround from "./TopRightBackground.svg";
-import Logo from "./Logo.png";
 import PlayButton from "./PlayButton.svg";
 import GraphScreen from "./GraphScreen.svg";
 import CircleOne from "./Circle1.svg";
@@ -47,16 +46,20 @@ import manSlidingImages from "./manslidingimages.svg";
 import contactBlob from "./ContactBlob.svg";
 import MailLarge from "./MailLarge.svg";
 import google from "./Google.svg";
-import logoSignIn from "./CrowSignIn.png";
-import logoSignUp from "./LogoSign-up.png";
 import GraphScreenPng from "./GraphScreenPNG.png";
 import Calendar from "./Calendar.svg";
+import creditCard from "./CreditCard.svg";
+import payPalSm from "./paypalsm.svg";
+import mastercard from "./MasterCard.svg";
+import remote_design from "./remote_design.svg";
 
 export const assets = {
+  remote_design,
+  mastercard,
+  payPalSm,
+  creditCard,
   Calendar,
   GraphScreenPng,
-  logoSignUp,
-  logoSignIn,
   google,
   MailLarge,
   contactBlob,
@@ -96,7 +99,6 @@ export const assets = {
   Close,
   Coin,
   Location,
-  Logo,
   Mail,
   Paper,
   Person,
@@ -106,4 +108,10 @@ export const assets = {
   Rocket,
   Tick,
   Wallets,
+};
+
+export const LogoColor = {
+  primary: "#5236FF",
+  sign_up: "#005dbf",
+  sign_in: "#7d6f20",
 };

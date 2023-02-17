@@ -9,9 +9,7 @@ const PrimaryButton = ({
 }) => {
   return (
     <button
-      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight hover:scale-110 transition-all ${className?.split(
-        " "
-      )}`}
+      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight hover:scale-110 transition-all ${className}`}
     >
       <p>{text}</p>
     </button>

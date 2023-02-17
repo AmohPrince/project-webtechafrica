@@ -6,7 +6,7 @@ import { SecondaryButton } from "./SecondaryButton";
 
 const ActiveWebsite = ({ website }: { website: ActiveWebsiteType }) => {
   return (
-    <div className="bg-white mt-5 px-8 py-7 rounded-2xl">
+    <div className="bg-white mt-5 px-8 py-7 rounded-2xl w-2/3">
       <div className="flex justify-between items-center">
         <h4 className="h4">{extractHostname(website.websiteUrl)}</h4>
         <div>

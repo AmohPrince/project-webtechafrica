@@ -1,14 +1,4 @@
-import React from "react";
-
-export const Logo = ({
-  color,
-  className,
-}: {
-  color: string;
-  className?: string;
-}) => {
-  return (
-    <svg
+<svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 191.000000 172.000000"
@@ -17,7 +7,7 @@ export const Logo = ({
     >
       <g
         transform="translate(0.000000,172.000000) scale(0.100000,-0.100000)"
-        fill={color}
+        fill="#5236FF"
         stroke="none"
       >
         <path
@@ -50,5 +40,3 @@ export const Logo = ({
         />
       </g>
     </svg>
-  );
-};

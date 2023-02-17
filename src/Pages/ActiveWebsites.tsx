@@ -1,4 +1,5 @@
 import React from "react";
+import { assets } from "../Assets/assets";
 import ActiveWebsite from "../Components/ActiveWebsite";
 import { useAuth } from "../Hooks/UseAuth";
 
@@ -6,9 +7,16 @@ const ActiveWebsites = () => {
   const { user } = useAuth();
 
   return (
-    <div className="mt-7">
+    <div className="mt-7 flex flex-wrap">
       {user!.activeWebsites.map((website) => (
-        <ActiveWebsite website={website} />
+        <div className="flex items-end justify-between">
+          <ActiveWebsite website={website} />
+          <img
+            src={assets.remote_design}
+            alt="remote_design"
+            className="w-1/4"
+          />
+        </div>
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { assets } from "../Assets/assets";
-import Logo from "../Components/Logo";
+import { assets, LogoColor } from "../Assets/assets";
+import LogoTab from "../Components/LogoTab";
 // import { useAuth } from "../Hooks/UseAuth";
 
 export const SignUp = () => {
@@ -24,7 +24,7 @@ export const SignUp = () => {
   return (
     <div className="h-screen flex">
       <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
-        <Logo page="sign-up" />
+        <LogoTab logoColor={LogoColor.sign_up} />
         <p className="font-semibold text-3xl mt-[9%] dark:text-white">
           Create new account
         </p>

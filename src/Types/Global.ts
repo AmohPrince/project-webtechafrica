@@ -20,6 +20,13 @@ export type User = {
   paymentMethodSelected: boolean;
   activeWebsites: ActiveWebsiteType[];
   devWebsites: DevWebsite[];
+  cards?: Card[];
+};
+
+export type Card = {
+  type: string;
+  expiryDate: string;
+  endsIn: string;
 };
 
 export type ActiveWebsiteType = {

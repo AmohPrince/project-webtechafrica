@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { assets } from "../Assets/assets";
-import Logo from "../Components/Logo";
+import { assets, LogoColor } from "../Assets/assets";
+import LogoTab from "../Components/LogoTab";
 import { SpinningDots } from "../Components/SpinningDots/SpinningDots";
 import { useAuth } from "../Hooks/UseAuth";
 import { User } from "../Types/Global";
@@ -49,7 +49,15 @@ const SignIn = () => {
             "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
         },
       ],
+      cards: [
+        {
+          endsIn: "5353",
+          expiryDate: "04/2023",
+          type: "MasterCard",
+        },
+      ],
     };
+
     setIsLoading(true);
     setUser(user);
     setTimeout(() => {
@@ -61,7 +69,7 @@ const SignIn = () => {
   return (
     <div className="h-screen flex">
       <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
-        <Logo page="sign-in" />
+        <LogoTab logoColor={LogoColor.sign_in} />
         <p className="font-semibold text-3xl mt-[14%] dark:text-white">
           Welcome back
         </p>
