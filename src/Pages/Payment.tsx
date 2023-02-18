@@ -10,7 +10,7 @@ const Payment = () => {
     useState("credit-card");
   const { user } = useAuth();
   return (
-    <div className="mt-2 flex justify-between">
+    <div className="flex justify-between">
       <div className="w-2/3 bg-white rounded-xl">
         <p className="font-semibold py-4 px-3 border-b">Payment</p>
         <div className="p-5">

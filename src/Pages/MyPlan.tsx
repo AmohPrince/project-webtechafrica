@@ -7,7 +7,7 @@ import { useAuth } from "../Hooks/UseAuth";
 const MyPlan = () => {
   const { user } = useAuth();
   return (
-    <div className="bg-white rounded-2xl mt-7 shadow-sm">
+    <div className="bg-white rounded-2xl shadow-sm">
       <p className="font-bold text-lg border-b px-7 py-3">Plan & Pricing</p>
       <div className="flex py-8 px-7">
         <div className="shadow-md py-6 px-6 w-1/3 rounded-xl">

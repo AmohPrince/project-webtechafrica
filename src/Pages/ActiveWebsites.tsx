@@ -7,7 +7,7 @@ const ActiveWebsites = () => {
   const { user } = useAuth();
 
   return (
-    <div className="mt-7 flex flex-wrap">
+    <div className="flex flex-wrap">
       {user!.activeWebsites.map((website) => (
         <div className="flex items-end justify-between">
           <ActiveWebsite website={website} />

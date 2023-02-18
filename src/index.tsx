@@ -23,6 +23,7 @@ import ActiveWebsites from "./Pages/ActiveWebsites";
 import DevWebsites from "./Pages/DevWebsites";
 import MyPlan from "./Pages/MyPlan";
 import Payment from "./Pages/Payment";
+import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -55,6 +56,7 @@ root.render(
             <Route element={<DevWebsites />} path="dev-websites" />
             <Route element={<MyPlan />} path="my-plan" />
             <Route element={<Payment />} path="payment" />
+            <Route element={<WebsiteBuilderForm />} path="new-website" />
           </Route>
         </Routes>
       </BrowserRouter>

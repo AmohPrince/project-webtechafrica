@@ -42,3 +42,18 @@ export type DevWebsite = {
   shopUrl?: string;
   websiteScreenShot: string;
 };
+
+export type Theme = {
+  id: string;
+  name: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    text: string;
+    border: string;
+    background: string;
+    primaryOffset: string;
+    textOffset: string;
+    backgroundOffset: string;
+  };
+};
