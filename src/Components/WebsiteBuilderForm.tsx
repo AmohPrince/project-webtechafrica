@@ -3,6 +3,7 @@ import { ThemeBox } from "./ThemeBox";
 import themes from "../Util/themes.json";
 import ThemePreview from "./ThemePreview";
 import { Theme } from "../Types/Global";
+//TODO add some sort of topic for each dashboard page
 
 const WebsiteBuilderForm = () => {
   const [previewTheme, setPreviewTheme] = useState<Theme>(themes[0]);
