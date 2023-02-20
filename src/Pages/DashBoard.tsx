@@ -16,7 +16,7 @@ const DashBoard = () => {
 
   return (
     <div className="flex">
-      <div className="bg-gray-50 w-1/6 h-screen relative pl-6">
+      <div className="bg-gray-50 w-1/6 h-screen relative pl-6 overflow-x-hidden">
         <Link to="/" className="bg-gray-50 py-3">
           <LogoTab logoColor={LogoColor.primary} />
         </Link>
@@ -28,7 +28,7 @@ const DashBoard = () => {
           <DashboardOption name="new-website" />
         </div>
         <div
-          className="flex bottom-10 absolute items-center py-3 px-4 w-full cursor-pointer"
+          className="flex bottom-10 absolute items-center py-3 px-4 w-full cursor-pointer hover:bg-primaryOne transition-all hover:text-white rounded-l-lg"
           onClick={handleLogOut}
         >
           <FontAwesomeIcon icon={faArrowRightFromBracket} />
