@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { assets } from "../Assets/assets";
 import CreditCardInput from "../Components/CreditCardInput";
+import DashBoardTitle from "../Components/DashBoardTitle";
 import PayPalInput from "../Components/PayPalInput";
 import { useAuth } from "../Hooks/UseAuth";
 import { Card } from "../Types/Global";
@@ -10,43 +11,46 @@ const Payment = () => {
     useState("credit-card");
   const { user } = useAuth();
   return (
-    <div className="flex justify-between">
-      <div className="w-2/3 bg-white rounded-xl">
-        <p className="font-semibold py-4 px-3 border-b">Payment</p>
-        <div className="p-5">
-          <p className="text-sm font-semibold">Select payment method</p>
-          <div className="flex flex-wrap mt-3">
-            <div
-              className="border-primaryOne p-2 border rounded-sm flex items-center mr-3 cursor-pointer"
-              onClick={() => setSelectingPaymentMethod("credit-card")}
-            >
-              <img src={assets.creditCard} alt="Credit card" />
-              <p className="text-xs ml-2 font-medium">Credit/Debit Card</p>
-            </div>
-            <div
-              className="border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer"
-              onClick={() => setSelectingPaymentMethod("paypal")}
-            >
-              <img src={assets.payPalSm} alt="Credit card" />
-              <p className="text-xs ml-2 font-medium">Paypal</p>
+    <div className="mt-5">
+      <DashBoardTitle h1="Payments" sub="Your active and past payments" />
+      <div className="flex justify-between mt-7">
+        <div className="w-2/3 bg-white rounded-xl">
+          <p className="font-semibold py-4 px-3 border-b">Payment</p>
+          <div className="p-5">
+            <p className="text-sm font-semibold">Select payment method</p>
+            <div className="flex flex-wrap mt-3">
+              <div
+                className="border-primaryOne p-2 border rounded-sm flex items-center mr-3 cursor-pointer"
+                onClick={() => setSelectingPaymentMethod("credit-card")}
+              >
+                <img src={assets.creditCard} alt="Credit card" />
+                <p className="text-xs ml-2 font-medium">Credit/Debit Card</p>
+              </div>
+              <div
+                className="border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer"
+                onClick={() => setSelectingPaymentMethod("paypal")}
+              >
+                <img src={assets.payPalSm} alt="Credit card" />
+                <p className="text-xs ml-2 font-medium">Paypal</p>
+              </div>
             </div>
           </div>
+          {selectingPaymentMethod === "credit-card" ? (
+            <CreditCardInput />
+          ) : (
+            <PayPalInput />
+          )}
         </div>
-        {selectingPaymentMethod === "credit-card" ? (
-          <CreditCardInput />
-        ) : (
-          <PayPalInput />
-        )}
-      </div>
-      <div className="w-1/4 bg-white rounded-xl h-max">
-        <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
-        {user?.cards === undefined ? (
-          <p className="text-sm text-gray-500 text-center mx-4 my-4">
-            You’ve not added any payment method yet
-          </p>
-        ) : (
-          user.cards.map((card) => <CardInfo card={card} />)
-        )}
+        <div className="w-1/4 bg-white rounded-xl h-max">
+          <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
+          {user?.cards === undefined ? (
+            <p className="text-sm text-gray-500 text-center mx-4 my-4">
+              You’ve not added any payment method yet
+            </p>
+          ) : (
+            user.cards.map((card) => <CardInfo card={card} />)
+          )}
+        </div>
       </div>
     </div>
   );

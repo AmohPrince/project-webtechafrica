@@ -16,11 +16,11 @@ const DashBoard = () => {
 
   return (
     <div className="flex">
-      <div className="bg-gray-50 w-1/6 h-screen pt-7 pl-6 relative">
-        <Link className="flex items-center cursor-pointer" to="/">
+      <div className="bg-gray-50 w-1/6 h-screen relative pl-6">
+        <Link to="/" className="bg-gray-50 py-3">
           <LogoTab logoColor={LogoColor.primary} />
         </Link>
-        <div className="mt-7">
+        <div>
           <DashboardOption name="active-websites" />
           <DashboardOption name="dev-websites" />
           <DashboardOption name="my-plan" />
@@ -35,7 +35,7 @@ const DashBoard = () => {
           <p className="font-semibold ml-3">Log out</p>
         </div>
       </div>
-      <div className="flex-grow bg-gray-100 w-5/6">
+      <div className="flex-grow bg-gray-100 w-5/6 px-8">
         <Outlet />
       </div>
     </div>

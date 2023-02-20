@@ -3,13 +3,17 @@ import { ThemeBox } from "./ThemeBox";
 import themes from "../Util/themes.json";
 import ThemePreview from "./ThemePreview";
 import { Theme } from "../Types/Global";
+import DashBoardTitle from "./DashBoardTitle";
 //TODO add some sort of topic for each dashboard page
 
 const WebsiteBuilderForm = () => {
   const [previewTheme, setPreviewTheme] = useState<Theme>(themes[0]);
   return (
-    <div className="bg-white h-screen overflow-y-scroll px-6">
-      <p>Lets get you hooked up with a website!</p>
+    <div className="mt-5">
+      <DashBoardTitle
+        h1="New Website"
+        sub="Lets get you hooked up with a website!"
+      />
       <div className="text-sm mt-5">
         <p className="font-semibold mb-5">SELECT THEME</p>
         <div className="flex flex-wrap justify-center gap-3">
