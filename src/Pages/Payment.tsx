@@ -3,6 +3,7 @@ import { assets } from "../Assets/assets";
 import CreditCardInput from "../Components/CreditCardInput";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import PayPalInput from "../Components/PayPalInput";
+import PrimaryButton from "../Components/PrimaryButton";
 import { useAuth } from "../Hooks/UseAuth";
 import { Card } from "../Types/Global";
 
@@ -12,7 +13,10 @@ const Payment = () => {
   const { user } = useAuth();
   return (
     <div className="mt-5">
-      <DashBoardTitle h1="Payments" sub="Your active and past payments" />
+      <div className="flex items-center justify-between">
+        <DashBoardTitle h1="Payments" sub="Your active and past payments" />
+        <PrimaryButton text="Add Payment Method" className="hover:scale-100" />
+      </div>
       <div className="flex justify-between mt-7">
         <div className="w-2/3 bg-white rounded-xl">
           <p className="font-semibold py-4 px-3 border-b">Payment</p>
