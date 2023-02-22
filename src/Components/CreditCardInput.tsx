@@ -53,7 +53,10 @@ const CreditCardInput = () => {
           <span className="cursor-pointer text-sky-600">Privacy Policy</span>
         </p>
       </div>
-      <PrimaryButton text="Add Payment Method" className="w-full mt-6" />
+      <PrimaryButton
+        text="Add Payment Method"
+        className="w-full mt-6 hover:scale-100"
+      />
     </div>
   );
 };

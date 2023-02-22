@@ -1,3 +1,5 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { assets } from "../Assets/assets";
 import CreditCardInput from "../Components/CreditCardInput";
@@ -11,15 +13,41 @@ const Payment = () => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] =
     useState("credit-card");
   const { user } = useAuth();
+  const [showPaymentMethodsModal, setShowPaymentMethodsModal] =
+    useState<boolean>(false);
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between">
-        <DashBoardTitle h1="Payments" sub="Your active and past payments" />
-        <PrimaryButton text="Add Payment Method" className="hover:scale-100" />
+        <DashBoardTitle h1="Payments" sub="Your upcoming and past payments" />
+        <PrimaryButton
+          text="Add Payment Method"
+          className="hover:scale-100"
+          onClick={() => setShowPaymentMethodsModal(true)}
+        />
       </div>
       <div className="flex justify-between mt-7">
-        <div className="w-2/3 bg-white rounded-xl">
-          <p className="font-semibold py-4 px-3 border-b">Payment</p>
+        <div className="show w-2/3"></div>
+        <div className="w-1/4 bg-white rounded-xl">
+          <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
+          {user?.cards === undefined ? (
+            <p className="text-sm text-gray-500 text-center mx-4 my-4">
+              You’ve not added any payment method yet
+            </p>
+          ) : (
+            user.cards.map((card) => <CardInfo card={card} />)
+          )}
+        </div>
+      </div>
+      {showPaymentMethodsModal && (
+        <div className="w-1/2 bg-white rounded-xl absolute center-absolutely shadow-lg pb-7 transition-all">
+          <div className="py-4 px-5 border-b flex justify-between items-center">
+            <p className="font-semibold">Payment</p>
+            <FontAwesomeIcon
+              icon={faXmark}
+              onClick={() => setShowPaymentMethodsModal(false)}
+              className="cursor-pointer"
+            />
+          </div>
           <div className="p-5">
             <p className="text-sm font-semibold">Select payment method</p>
             <div className="flex flex-wrap mt-3">
@@ -45,17 +73,7 @@ const Payment = () => {
             <PayPalInput />
           )}
         </div>
-        <div className="w-1/4 bg-white rounded-xl h-max">
-          <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
-          {user?.cards === undefined ? (
-            <p className="text-sm text-gray-500 text-center mx-4 my-4">
-              You’ve not added any payment method yet
-            </p>
-          ) : (
-            user.cards.map((card) => <CardInfo card={card} />)
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -64,7 +82,7 @@ export default Payment;
 
 export const CardInfo = ({ card }: { card: Card }) => {
   return (
-    <div className="py-4 px-3 shadow-md mx-3 my-2 flex flex-col">
+    <div className="py-4 px-3 shadow-md mx-3 my-4 flex flex-col">
       <div className="flex items-start">
         <img src={getCardTypeIcon(card.type)} alt={`${card.type}'s logo `} />
         <div className="ml-3 text-sm">
