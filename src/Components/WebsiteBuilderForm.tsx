@@ -1,71 +1,94 @@
 import React, { useState } from "react";
-import { ThemeBox } from "./ThemeBox";
 import themes from "../Util/themes.json";
-import ThemePreview from "./ThemePreview";
 import { Theme } from "../Types/Global";
 import DashBoardTitle from "./DashBoardTitle";
+import website_types from "../Json/WebsiteTypes.json";
+import { SecondaryButton } from "./SecondaryButton";
+import SelectThemeSlide from "./SelectThemeSlide";
 
 const WebsiteBuilderForm = () => {
   const [previewTheme, setPreviewTheme] = useState<Theme>(themes[0]);
+  const [activeWebsiteTypeDescription, setActiveWebsiteTypeDescription] =
+    useState<string>(website_types[0].description);
+  const stages = [
+    {
+      stage: "Theme",
+      buttonText: "Pick website type ⚒",
+    },
+    {
+      stage: "Website Type",
+      buttonText: "Describe your website 🤝",
+    },
+    {
+      stage: "Website Description",
+      buttonText: "Got any content? 📑",
+    },
+    {
+      stage: "Got any content?",
+      buttonText: "Pick a plan ✈",
+    },
+    {
+      stage: "Plan",
+      buttonText: "Finish 🏁",
+    },
+  ];
+  const [stageIndex, setStageIndex] = useState<number>(0);
   return (
     <div className="mt-5">
-      <DashBoardTitle
-        h1="New Website"
-        sub="Lets get you hooked up with a website!"
-      />
-      <ThemePreview theme={previewTheme} />
-      <div className="text-sm my-5">
-        <p className="mb-5">Select Theme</p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {themes.map((theme) => (
-            <ThemeBox
-              theme={theme}
-              setPreviewTheme={setPreviewTheme}
-              activeThemeId={previewTheme.id}
-            />
-          ))}
-        </div>
-        <div className="mb-5">
+      <div className="flex items-center justify-between">
+        <DashBoardTitle
+          h1="New Website"
+          sub="Lets get you hooked up with a website!"
+        />
+        <SecondaryButton
+          text={stages[stageIndex].buttonText}
+          style={{
+            backgroundColor: previewTheme.colors.primary,
+            color: previewTheme.colors.text,
+          }}
+          className="outline-none hover:scale-100"
+          onClick={() =>
+            stages[stageIndex].stage === "Plan"
+              ? console.log("Last slide")
+              : setStageIndex((prev) => prev + 1)
+          }
+        />
+      </div>
+      {stageIndex === 0 && (
+        <SelectThemeSlide
+          activeTheme={previewTheme}
+          setPreviewTheme={setPreviewTheme}
+        />
+      )}
+      {stageIndex === 1 && (
+        <div className="my-5">
           <p>Website Type</p>
-          <select>
-            <option value="E-commerce websites">E-commerce websites</option>
-            <option value="Social media websites">Social media websites</option>
-            <option value="Blog and personal websites">
-              Blog and personal websites
-            </option>
-            <option value="Portfolio websites">Portfolio websites</option>
-            <option value="Corporate websites">Corporate websites</option>
-            <option value="Educational websites">Educational websites</option>
-            <option value="News websites">News websites</option>
-            <option value="Entertainment websites">
-              Entertainment websites
-            </option>
-            <option value="Government websites">Government websites</option>
-            <option value="Medical and healthcare websites">
-              Medical and healthcare websites
-            </option>
-            <option value="Travel websites">Travel websites</option>
-            <option value="Job search websites">Job search websites</option>
-            <option value="Review websites">Review websites</option>
-            <option value="Forum and community websites">
-              Forum and community websites
-            </option>
-            <option value="Auction websites">Auction websites</option>
-            <option value="Crowdfunding websites">Crowdfunding websites</option>
+          <select
+            onChange={(e) =>
+              setActiveWebsiteTypeDescription(
+                website_types.find((type) => type.type === e.target.value)!
+                  .description
+              )
+            }
+          >
+            {website_types.map((type) => (
+              <option value={type.type}>{type.type}</option>
+            ))}
           </select>
+          <p>{activeWebsiteTypeDescription}</p>
         </div>
-        <div className="mb-5">
-          <p>Pages</p>
-          <p>Choose the pages you might need to be included in your website</p>
-        </div>
+      )}
+      {stageIndex === 2 && (
         <div className="mb-5">
           <p>
             Describe the purpose and goals of the website? This will help us
             understand your specific niche and target audience to create a
             website that will be sure to fit your needs
           </p>
-          <input type="text" className="w-full" />
+          <textarea className="w-full h-[10vh] p-2" />
         </div>
+      )}
+      {stageIndex === 3 && (
         <div className="mb-5">
           <p>
             Do you have any content or would you like our AI to generate
@@ -79,17 +102,10 @@ const WebsiteBuilderForm = () => {
             <p>Find out what might seem right for me.</p>
           </div>
         </div>
-      </div>
+      )}
+      {stageIndex === 4 && <p>Plan</p>}
     </div>
   );
 };
 
 export default WebsiteBuilderForm;
-
-// Content: Find out if your client already has content available for the website or if they will need you to create the content. Also, ask them if they have any specific requirements for the tone, style, or voice of the content.
-
-// Functionality and features: Ask your client about the features and functionality they want on their website. For example, do they need a contact form, a blog, or an e-commerce store?
-
-// Technical requirements: Find out if your client has any specific technical requirements. For example, do they need the website to be optimized for search engines, or do they need the website to be accessible to users with disabilities?
-
-// Budget and timeline: Finally, ask your client about their budget and timeline for the project. This will help you determine the scope of the project and set realistic expectations for both parties.

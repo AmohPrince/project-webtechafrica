@@ -1,0 +1,62 @@
+[
+  {
+    "type": "E-commerce websites",
+    "description": "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy."
+  },
+  {
+    "type": "Social media websites",
+    "description": "Social media websites are online platforms that enable users to create and share content, as well as communicate and connect with others. These websites often allow users to create personal profiles, share photos and videos, post updates, and engage in conversations with other users through comments, likes, and shares."
+  },
+  {
+    "type": "Blog and personal websites",
+    "description": "Blog and personal websites are online platforms that enable individuals to share their thoughts, opinions, and experiences with a wider audience. These websites often feature regular updates in the form of blog posts or articles, where the author can express their views on various topics or share their personal stories."
+  },
+  {
+    "type": "Portfolio websites",
+    "description": "Portfolio websites are online platforms that showcase an individual's or a company's work, skills, and achievements. These websites often feature a collection of projects, case studies, or creative works, presented in a visually appealing and organized manner."
+  },
+  {
+    "type": "Educational websites",
+    "description": "Educational websites are online platforms that provide learning resources, materials, and tools for students, teachers, and lifelong learners. These websites can cover a wide range of topics and subjects, from academic courses and certifications to personal development and hobbies."
+  },
+  {
+    "type": "News websites",
+    "description": "News websites are online platforms that provide up-to-date information on local, national, and international news and events. These websites feature a variety of news stories, ranging from politics and business to entertainment and sports."
+  },
+  {
+    "type": "Entertainment websites",
+    "description": "Entertainment websites are online platforms that provide various forms of entertainment, such as music, movies, TV shows, games, and humor. These websites often feature a wide range of content, including news, reviews, interviews, and behind-the-scenes glimpses."
+  },
+  {
+    "type": "Government websites",
+    "description": "Government websites are online platforms that provide information and services related to the functioning of government agencies and their programs. These websites can range from local to national and international levels, and cover a wide range of topics such as taxation, healthcare, education, and public safety."
+  },
+  {
+    "type": "Medical and healthcare websites",
+    "description": "Medical and healthcare websites are online platforms that provide information and resources related to health, wellness, and medical care. These websites can be run by healthcare providers, government agencies, non-profit organizations, or private companies, and cover a wide range of topics such as disease prevention, diagnosis, treatment, and recovery."
+  },
+  {
+    "type": "Travel websites",
+    "description": "Travel websites are online platforms that provide information, resources, and booking services related to travel, accommodation, and tourism. These websites can range from general travel portals to niche platforms that focus on specific travel experiences or destinations."
+  },
+  {
+    "type": "Job search websites",
+    "description": "Job search websites are online platforms that provide job listings and resources for job seekers. These websites can range from general job search engines to niche platforms that focus on specific industries or job types. Job search websites often feature job listings from various employers, job boards, and recruiting agencies. They may offer tools for filtering job searches by location, industry, job level, and salary range, as well as resume builders and application tracking systems to streamline the job application process."
+  },
+  {
+    "type": "Review websites",
+    "description": "Review websites are online platforms that allow users to share their opinions, ratings, and experiences related to various products, services, and businesses. These websites can range from general review portals to niche platforms that focus on specific industries or products."
+  },
+  {
+    "type": "Forum and community websites",
+    "description": "Forum and community websites are online platforms that enable users to engage in discussions and share information related to specific topics or interests. These websites can range from general discussion forums to niche communities that focus on specific hobbies, professions, or lifestyles."
+  },
+  {
+    "type": "Auction websites",
+    "description": "Auction websites are online platforms that enable users to bid on and purchase products or services in real-time through an auction process. These websites can range from general auction sites to niche platforms that focus on specific products or industries."
+  },
+  {
+    "type": "Crowdfunding websites",
+    "description": "Crowdfunding websites are online platforms that enable individuals or organizations to raise funds for a specific project or cause from a large number of people, typically through small donations or investments. These websites can range from general crowdfunding sites to niche platforms that focus on specific types of projects or industries."
+  }
+]
