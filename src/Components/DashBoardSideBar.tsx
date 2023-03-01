@@ -15,15 +15,14 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="bg-gray-50 w-1/6 h-screen relative overflow-x-hidden pt-6 pl-6 sticky top-0 left-0">
+    <div className="bg-gray-50 w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0">
       <Link className="show mb-5" to="/">
         <LogoTab logoColor={LogoColor.primary} />
       </Link>
       <div className="mt-12">
         <DashboardOption name="active-websites" />
         <DashboardOption name="dev-websites" />
-        <DashboardOption name="my-plan" />
-        <DashboardOption name="payment" />
+        <DashboardOption name="payments" />
         <DashboardOption name="new-website" />
       </div>
       <div

@@ -21,13 +21,13 @@ import { SignUp } from "./Pages/SignUp";
 import DashBoard from "./Pages/DashBoard";
 import ActiveWebsites from "./Pages/ActiveWebsites";
 import DevWebsites from "./Pages/DevWebsites";
-import MyPlan from "./Pages/MyPlan";
-import Payment from "./Pages/Payment";
 import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
+import Payments from "./Pages/Payments";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <AnimatePresence>
@@ -54,8 +54,7 @@ root.render(
               path="/dashboard/active-websites"
             />
             <Route element={<DevWebsites />} path="dev-websites" />
-            <Route element={<MyPlan />} path="my-plan" />
-            <Route element={<Payment />} path="payment" />
+            <Route element={<Payments />} path="payments" />
             <Route element={<WebsiteBuilderForm />} path="new-website" />
           </Route>
         </Routes>

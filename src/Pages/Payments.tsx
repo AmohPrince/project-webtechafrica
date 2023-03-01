@@ -6,10 +6,11 @@ import CreditCardInput from "../Components/CreditCardInput";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import PayPalInput from "../Components/PayPalInput";
 import PrimaryButton from "../Components/PrimaryButton";
+import SinglePayment from "../Components/SinglePayment";
 import { useAuth } from "../Hooks/UseAuth";
 import { Card } from "../Types/Global";
 
-const Payment = () => {
+const Payments = () => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] =
     useState("credit-card");
   const { user } = useAuth();
@@ -25,16 +26,22 @@ const Payment = () => {
           onClick={() => setShowPaymentMethodsModal(true)}
         />
       </div>
-      <div className="flex justify-between mt-7">
-        <div className="show w-2/3"></div>
+      <div className="flex justify-between mt-7 items-start">
+        {user?.activeWebsites ? (
+          user?.activeWebsites.map((website) => (
+            <SinglePayment website={website} />
+          ))
+        ) : (
+          <p>No Payments yet 😁</p>
+        )}
         <div className="w-1/4 bg-white rounded-xl">
           <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
-          {user?.cards === undefined ? (
+          {user?.cards ? (
+            user.cards.map((card) => <CardInfo card={card} />)
+          ) : (
             <p className="text-sm text-gray-500 text-center mx-4 my-4">
               You’ve not added any payment method yet
             </p>
-          ) : (
-            user.cards.map((card) => <CardInfo card={card} />)
           )}
         </div>
       </div>
@@ -78,7 +85,7 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Payments;
 
 export const CardInfo = ({ card }: { card: Card }) => {
   return (

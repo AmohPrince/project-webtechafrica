@@ -5,6 +5,7 @@ import DashBoardTitle from "./DashBoardTitle";
 import website_types from "../Json/WebsiteTypes.json";
 import { SecondaryButton } from "./SecondaryButton";
 import SelectThemeSlide from "./SelectThemeSlide";
+import PlanSelector from "./PlanSelector";
 
 const WebsiteBuilderForm = () => {
   const [previewTheme, setPreviewTheme] = useState<Theme>(themes[0]);
@@ -103,7 +104,7 @@ const WebsiteBuilderForm = () => {
           </div>
         </div>
       )}
-      {stageIndex === 4 && <p>Plan</p>}
+      {stageIndex === 4 && <PlanSelector />}
     </div>
   );
 };

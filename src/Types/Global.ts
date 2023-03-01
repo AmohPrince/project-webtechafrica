@@ -18,8 +18,8 @@ export type User = {
   email: string;
   plan: string;
   paymentMethodSelected: boolean;
-  activeWebsites: ActiveWebsiteType[];
-  devWebsites: DevWebsite[];
+  activeWebsites?: ActiveWebsiteType[];
+  devWebsites?: DevWebsite[];
   cards?: Card[];
 };
 
@@ -34,6 +34,7 @@ export type ActiveWebsiteType = {
   hasShop: boolean;
   shopUrl?: string;
   websiteScreenShot: string;
+  plan: string;
 };
 
 export type DevWebsite = {
