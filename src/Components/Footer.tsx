@@ -1,20 +1,14 @@
 import React from "react";
-import { assets } from "../Assets/assets";
+import { assets, LogoColor } from "../Assets/assets";
 import { Link } from "react-router-dom";
+import LogoTab from "./LogoTab";
 
 const Footer = () => {
   return (
     <>
       <footer className="mt-[10%] border-y py-[9%] flex justify-between">
         <div className="w-1/3">
-          <div className="flex items-center">
-            <img
-              src={assets.Logo}
-              alt="Logo"
-              className="mr-2 w-10 h-10 object-cover"
-            />
-            <h4 className="h4">WebTech Africa</h4>
-          </div>
+          <LogoTab logoColor={LogoColor.primary} />
           <p className="default-paragraph mt-6 my-9">
             Get your website or web application on the cheap today with Africa's
             fastest growing tech corporation.
