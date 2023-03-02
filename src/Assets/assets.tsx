@@ -52,6 +52,7 @@ import creditCard from "./CreditCard.svg";
 import payPalSm from "./paypalsm.svg";
 import mastercard from "./MasterCard.svg";
 import remote_design from "./remote_design.svg";
+import profile from "./profile.png";
 
 export const assets = {
   remote_design,
@@ -108,6 +109,7 @@ export const assets = {
   Rocket,
   Tick,
   Wallets,
+  profile,
 };
 
 export const LogoColor = {

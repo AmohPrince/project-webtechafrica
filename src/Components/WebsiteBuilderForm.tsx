@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import themes from "../Util/themes.json";
 import { Theme } from "../Types/Global";
-import DashBoardTitle from "./DashBoardTitle";
 import website_types from "../Json/WebsiteTypes.json";
 import { SecondaryButton } from "./SecondaryButton";
 import SelectThemeSlide from "./SelectThemeSlide";
 import PlanSelector from "./PlanSelector";
+import { dashBoardTitleInfoFunction } from "../Pages/DashBoard";
 
 const WebsiteBuilderForm = () => {
   const [previewTheme, setPreviewTheme] = useState<Theme>(themes[0]);
@@ -34,20 +34,24 @@ const WebsiteBuilderForm = () => {
     },
   ];
   const [stageIndex, setStageIndex] = useState<number>(0);
+  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  useEffect(() => {
+    setDashBoardTitleInfo({
+      h1: "New Website",
+      sub: "Lets get you hooked up with a website!",
+    });
+  }, [setDashBoardTitleInfo]);
+
   return (
     <div className="mt-5">
-      <div className="flex items-center justify-between">
-        <DashBoardTitle
-          h1="New Website"
-          sub="Lets get you hooked up with a website!"
-        />
+      <div className="flex justify-end">
         <SecondaryButton
           text={stages[stageIndex].buttonText}
           style={{
             backgroundColor: previewTheme.colors.primary,
             color: previewTheme.colors.text,
           }}
-          className="outline-none hover:scale-100"
+          className="outline-none hover:scale-100 ml-auto"
           onClick={() =>
             stages[stageIndex].stage === "Plan"
               ? console.log("Last slide")

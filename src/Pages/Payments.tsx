@@ -1,14 +1,14 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../Assets/assets";
 import CreditCardInput from "../Components/CreditCardInput";
-import DashBoardTitle from "../Components/DashBoardTitle";
 import PayPalInput from "../Components/PayPalInput";
 import PrimaryButton from "../Components/PrimaryButton";
 import SinglePayment from "../Components/SinglePayment";
 import { useAuth } from "../Hooks/UseAuth";
 import { Card } from "../Types/Global";
+import { dashBoardTitleInfoFunction } from "./DashBoard";
 
 const Payments = () => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] =
@@ -16,24 +16,40 @@ const Payments = () => {
   const { user } = useAuth();
   const [showPaymentMethodsModal, setShowPaymentMethodsModal] =
     useState<boolean>(false);
+  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  useEffect(() => {
+    setDashBoardTitleInfo({
+      h1: "Payments",
+      sub: "Your upcoming and past payments",
+    });
+  }, [setDashBoardTitleInfo]);
+
   return (
     <div className="mt-5">
-      <div className="flex items-center justify-between">
-        <DashBoardTitle h1="Payments" sub="Your upcoming and past payments" />
+      <div className="flex justify-end">
         <PrimaryButton
           text="Add Payment Method"
-          className="hover:scale-100"
+          className="hover:scale-100 ml-auto"
           onClick={() => setShowPaymentMethodsModal(true)}
         />
       </div>
-      <div className="flex justify-between mt-7 items-start">
-        {user?.activeWebsites ? (
-          user?.activeWebsites.map((website) => (
-            <SinglePayment website={website} />
-          ))
-        ) : (
-          <p>No Payments yet 😁</p>
-        )}
+      <div className="flex justify-between mt-7 items-start gap-x-5">
+        <div className="flex-grow">
+          <div className="flex justify-between text-sm mt-2 text-gray-500">
+            <p className="w-1/4">Website url</p>
+            <p className="w-1/5">Payment Date</p>
+            <p className="w-1/5">Card used</p>
+            <p className="w-[10%]">Total</p>
+            <p className="w-1/5">Billing date</p>
+          </div>
+          {user?.activeWebsites ? (
+            user?.activeWebsites.map((website) => (
+              <SinglePayment website={website} />
+            ))
+          ) : (
+            <p>No Payments yet 😁</p>
+          )}
+        </div>
         <div className="w-1/4 bg-white rounded-xl">
           <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
           {user?.cards ? (

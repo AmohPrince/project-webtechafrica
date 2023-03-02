@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import DashBoardTitle from "../Components/DashBoardTitle";
 import DevWebsiteComponent from "../Components/DevWebsiteComponent";
 import { SecondaryButton } from "../Components/SecondaryButton";
 import { useAuth } from "../Hooks/UseAuth";
+import { dashBoardTitleInfoFunction } from "./DashBoard";
 
 const DevWebsites = () => {
   const { user } = useAuth();
+  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  useEffect(() => {
+    setDashBoardTitleInfo({
+      h1: "Development Websites",
+      sub: "Websites currently under development",
+    });
+  }, [setDashBoardTitleInfo]);
 
   return (
     <div className="mt-5">
-      <DashBoardTitle
-        h1="Development Websites"
-        sub="Websites currently under development"
-      />
       {user?.devWebsites ? (
         <div className="flex flex-wrap justify-between mt-7">
           {user?.devWebsites.map((website, index) => (
