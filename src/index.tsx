@@ -48,7 +48,6 @@ root.render(
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<DashBoard />}>
-            <Route element={<ActiveWebsites />} index />
             <Route
               element={<ActiveWebsites />}
               path="/dashboard/active-websites"

@@ -58,3 +58,8 @@ export type Theme = {
     backgroundOffset: string;
   };
 };
+
+export type WebsiteType = {
+  type: string;
+  description: string;
+};
