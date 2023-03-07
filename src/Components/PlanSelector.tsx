@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { WebsiteType } from "../Types/Global";
+import { NewWebsiteSelections, WebsiteType } from "../Types/Global";
 
 const PlanSelector = ({
-  setPlan,
   websiteType,
+  setSelections,
 }: {
-  setPlan: React.Dispatch<React.SetStateAction<string | null>>;
   websiteType: WebsiteType;
+  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
 }) => {
   const [selected, setSelected] = useState<null | string>(null);
   return (
@@ -35,7 +35,12 @@ const PlanSelector = ({
                   : ""
               }`}
               onClick={() => {
-                setPlan("Basic");
+                setSelections((prev) => {
+                  return {
+                    ...prev,
+                    plan: "Basic",
+                  };
+                });
                 setSelected("Basic");
               }}
             />
@@ -77,7 +82,12 @@ const PlanSelector = ({
                 : ""
             }`}
             onClick={() => {
-              setPlan("Premium");
+              setSelections((prev) => {
+                return {
+                  ...prev,
+                  plan: "Premium",
+                };
+              });
               setSelected("Premium");
             }}
           />

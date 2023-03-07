@@ -2,14 +2,14 @@ import React from "react";
 import { ThemeBox } from "./ThemeBox";
 import ThemePreview from "./ThemePreview";
 import themes from "../Util/themes.json";
-import { Theme } from "../Types/Global";
+import { NewWebsiteSelections } from "../Types/Global";
 
 const SelectThemeSlide = ({
-  activeTheme,
-  setPreviewTheme,
+  selections,
+  setSelections,
 }: {
-  activeTheme: Theme;
-  setPreviewTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  selections: NewWebsiteSelections;
+  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
 }) => {
   return (
     <>
@@ -19,13 +19,13 @@ const SelectThemeSlide = ({
           {themes.map((theme) => (
             <ThemeBox
               theme={theme}
-              setPreviewTheme={setPreviewTheme}
-              activeThemeId={activeTheme.id}
+              activeThemeId={selections.theme.id}
+              setSelections={setSelections}
             />
           ))}
         </div>
       </div>
-      <ThemePreview theme={activeTheme} />
+      <ThemePreview theme={selections.theme} />
     </>
   );
 };

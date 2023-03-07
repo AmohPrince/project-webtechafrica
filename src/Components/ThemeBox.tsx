@@ -1,14 +1,14 @@
 import React from "react";
-import { Theme } from "../Types/Global";
+import { NewWebsiteSelections, Theme } from "../Types/Global";
 
 export const ThemeBox = ({
   activeThemeId,
   theme,
-  setPreviewTheme,
+  setSelections,
 }: {
   activeThemeId: string;
   theme: Theme;
-  setPreviewTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
 }) => {
   return (
     <div
@@ -19,7 +19,14 @@ export const ThemeBox = ({
       className={`w-max py-3 px-2 rounded-md cursor-pointer shadow-md hover:scale-105 transition-all ${
         theme.id === activeThemeId ? "outline" : ""
       }`}
-      onClick={() => setPreviewTheme(theme)}
+      onClick={() => {
+        setSelections((prev) => {
+          return {
+            ...prev,
+            theme: theme,
+          };
+        });
+      }}
     >
       <p style={{ color: theme.colors.text }} className="text-center text-sm">
         {theme.name}

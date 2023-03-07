@@ -63,3 +63,11 @@ export type WebsiteType = {
   type: string;
   description: string;
 };
+
+export type NewWebsiteSelections = {
+  theme: Theme;
+  websiteType: WebsiteType;
+  websiteDescription: string | null;
+  userHasOwnContent: boolean | null;
+  plan: string | null;
+};
