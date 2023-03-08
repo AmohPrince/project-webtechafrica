@@ -1,4 +1,5 @@
 import {
+  faBars,
   faBell,
   faCaretDown,
   faMagnifyingGlass,
@@ -36,9 +37,13 @@ const DashBoard = () => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex sm:w-screen h-[100dvh] overflow-hidden">
+      <FontAwesomeIcon
+        icon={faBars}
+        className="sm:hidden block absolute top-5 left-5"
+      />
       <DashBoardSideBar />
-      <div className="flex-grow bg-white w-5/6 px-8 py-4">
+      <div className="flex-grow bg-white w-full sm:w-5/6 px-8 pt-12 pb-4 sm:py-4">
         <div className="flex justify-between items-center w-full">
           <DashBoardTitle
             h1={dashBoardTitleInfo.h1}
