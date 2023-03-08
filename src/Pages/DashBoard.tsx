@@ -32,7 +32,11 @@ const DashBoard = () => {
   });
 
   useEffect(() => {
-    redirect("/dashboard/active-websites");
+    if (user) {
+      redirect("/dashboard/active-websites");
+    } else {
+      redirect("/sign-in");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
