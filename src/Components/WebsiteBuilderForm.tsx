@@ -3,13 +3,14 @@ import themes from "../Util/themes.json";
 import { NewWebsiteSelections } from "../Types/Global";
 import { SecondaryButton } from "./SecondaryButton";
 import SelectThemeSlide from "./SelectThemeSlide";
-import PlanSelector from "./PlanSelector";
+import PlanSelector from "./NewWebsiteSlides/PlanSelector";
 import { dashBoardTitleInfoFunction } from "../Pages/DashBoard";
 import SelectWebsiteType from "./NewWebsiteSlides/SelectWebsiteType";
 import { UserWebsiteDescription } from "./NewWebsiteSlides/UserWebsiteDescription";
 import UserHasOwnContent from "./NewWebsiteSlides/UserHasOwnContent";
 import website_types from "../Json/WebsiteTypes.json";
 import NewWebsiteReview from "./NewWebsiteSlides/NewWebsiteReview";
+import DomainNamePicker from "./NewWebsiteSlides/DomainNamePicker";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
@@ -47,6 +48,10 @@ const WebsiteBuilderForm = () => {
     },
     {
       stage: "Got any content?",
+      buttonText: "Pick Domain",
+    },
+    {
+      stage: "Pick Domain",
       buttonText: "Pick a plan ✈",
     },
     {
@@ -60,7 +65,7 @@ const WebsiteBuilderForm = () => {
   ];
 
   const goToNextSlide = () => {
-    if (stageIndex === 5) {
+    if (stageIndex === stages.length - 1) {
       console.log(selections);
     } else {
       setStageIndex((prev) => prev + 1);
@@ -101,12 +106,21 @@ const WebsiteBuilderForm = () => {
         />
       )}
       {stageIndex === 4 && (
+        <DomainNamePicker
+          setSelections={setSelections}
+          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
+        />
+      )}
+      {stageIndex === 5 && (
         <PlanSelector
           websiteType={selections.websiteType}
           setSelections={setSelections}
+          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
         />
       )}
-      {stageIndex === 5 && <NewWebsiteReview />}
+      {stageIndex === stages.length - 1 && (
+        <NewWebsiteReview selections={selections} />
+      )}
     </div>
   );
 };

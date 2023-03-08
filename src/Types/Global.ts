@@ -20,6 +20,7 @@ export type User = {
   paymentMethodSelected: boolean;
   activeWebsites?: ActiveWebsiteType[];
   devWebsites?: DevWebsite[];
+  pendingVerificationWebsites?: PendingVerificationWebsite[];
   cards?: Card[];
 };
 
@@ -42,6 +43,11 @@ export type DevWebsite = {
   hasShop: boolean;
   shopUrl?: string;
   websiteScreenShot: string;
+};
+
+export type PendingVerificationWebsite = {
+  websiteUrl: string;
+  hasShop: boolean;
 };
 
 export type Theme = {

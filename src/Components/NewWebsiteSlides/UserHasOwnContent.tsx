@@ -10,16 +10,17 @@ const UserHasOwnContent = ({
 }) => {
   const userHasOwnContentRef = useRef<HTMLInputElement>(null);
   const automaticContentGenerationRef = useRef<HTMLInputElement>(null);
-  //TODO disable button when neither of the inputs are checked
 
   useEffect(() => {
-    console.log(automaticContentGenerationRef.current?.checked, "Auto");
-    console.log(userHasOwnContentRef.current?.checked, "Manual");
-    // setIsProgressButtonDisabled(
-    //   !isUserHasOwnContentChecked && !isAutomaticContentGenerationChecked
-    // );
+    setIsProgressButtonDisabled(
+      automaticContentGenerationRef.current?.checked === false &&
+        userHasOwnContentRef.current?.checked === false
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userHasOwnContentRef, automaticContentGenerationRef]);
+  }, [
+    userHasOwnContentRef.current?.checked,
+    automaticContentGenerationRef.current?.checked,
+  ]);
 
   return (
     <div className="mb-5">

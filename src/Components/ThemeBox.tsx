@@ -8,7 +8,7 @@ export const ThemeBox = ({
 }: {
   activeThemeId: string;
   theme: Theme;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
+  setSelections?: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
 }) => {
   return (
     <div
@@ -20,12 +20,13 @@ export const ThemeBox = ({
         theme.id === activeThemeId ? "outline" : ""
       }`}
       onClick={() => {
-        setSelections((prev) => {
-          return {
-            ...prev,
-            theme: theme,
-          };
-        });
+        if (setSelections)
+          setSelections((prev) => {
+            return {
+              ...prev,
+              theme: theme,
+            };
+          });
       }}
     >
       <p style={{ color: theme.colors.text }} className="text-center text-sm">

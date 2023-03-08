@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import PrimaryButton from "./PrimaryButton";
+import React, { useEffect, useState } from "react";
+import PrimaryButton from "../PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { NewWebsiteSelections, WebsiteType } from "../Types/Global";
+import { NewWebsiteSelections, WebsiteType } from "../../Types/Global";
 
 const PlanSelector = ({
   websiteType,
   setSelections,
+  setIsProgressButtonDisabled,
 }: {
   websiteType: WebsiteType;
+  setIsProgressButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
 }) => {
   const [selected, setSelected] = useState<null | string>(null);
+
+  useEffect(() => {
+    if (selected) {
+      setIsProgressButtonDisabled(false);
+    } else {
+      setIsProgressButtonDisabled(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
+
   return (
     <>
       <div>
