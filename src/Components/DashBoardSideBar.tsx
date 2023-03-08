@@ -15,7 +15,7 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="bg-gray-50 w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0">
+    <div className="bg-gray-50 w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0 hidden sm:block">
       <Link className="show mb-5" to="/">
         <LogoTab logoColor={LogoColor.primary} />
       </Link>

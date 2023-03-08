@@ -36,7 +36,7 @@ const DashBoard = () => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex sm:w-screen h-[100dvh] overflow-hidden">
       <DashBoardSideBar />
       <div className="flex-grow bg-white w-5/6 px-8 py-4">
         <div className="flex justify-between items-center w-full">
