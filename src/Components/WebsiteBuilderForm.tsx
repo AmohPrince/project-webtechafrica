@@ -4,16 +4,16 @@ import { NewWebsiteSelections } from "../Types/Global";
 import { SecondaryButton } from "./SecondaryButton";
 import SelectThemeSlide from "./SelectThemeSlide";
 import PlanSelector from "./NewWebsiteSlides/PlanSelector";
-import { dashBoardTitleInfoFunction } from "../Pages/DashBoard";
 import SelectWebsiteType from "./NewWebsiteSlides/SelectWebsiteType";
 import { UserWebsiteDescription } from "./NewWebsiteSlides/UserWebsiteDescription";
 import UserHasOwnContent from "./NewWebsiteSlides/UserHasOwnContent";
 import website_types from "../Json/WebsiteTypes.json";
 import NewWebsiteReview from "./NewWebsiteSlides/NewWebsiteReview";
 import DomainNamePicker from "./NewWebsiteSlides/DomainNamePicker";
+import { globalData } from "../Pages/DashBoard";
 
 const WebsiteBuilderForm = () => {
-  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  const { setDashBoardTitleInfo } = useContext(globalData);
 
   const [stageIndex, setStageIndex] = useState<number>(0);
   const [selections, setSelections] = useState<NewWebsiteSelections>({
@@ -25,6 +25,7 @@ const WebsiteBuilderForm = () => {
   });
   const [isProgressButtonDisabled, setIsProgressButtonDisabled] =
     useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setDashBoardTitleInfo({
@@ -67,6 +68,15 @@ const WebsiteBuilderForm = () => {
   const goToNextSlide = () => {
     if (stageIndex === stages.length - 1) {
       console.log(selections);
+      setIsLoading(true);
+      //TODO
+      //submit to server. after the post call is completed update the state objects holding the pending verification websites
+      //submitToServer(selections, user);
+      //This is just simulation
+      setTimeout(() => {
+        setIsLoading(false);
+        // setPendingVerificationWebsites(selections.)
+      }, 2000);
     } else {
       setStageIndex((prev) => prev + 1);
     }
@@ -107,6 +117,7 @@ const WebsiteBuilderForm = () => {
       )}
       {stageIndex === 4 && (
         <DomainNamePicker
+          selections={selections}
           setSelections={setSelections}
           setIsProgressButtonDisabled={setIsProgressButtonDisabled}
         />

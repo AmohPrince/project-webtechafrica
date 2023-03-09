@@ -8,7 +8,7 @@ import PrimaryButton from "../Components/PrimaryButton";
 import SinglePayment from "../Components/SinglePayment";
 import { useAuth } from "../Hooks/UseAuth";
 import { Card } from "../Types/Global";
-import { dashBoardTitleInfoFunction } from "./DashBoard";
+import { globalData } from "./DashBoard";
 
 const Payments = () => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] =
@@ -16,7 +16,7 @@ const Payments = () => {
   const { user } = useAuth();
   const [showPaymentMethodsModal, setShowPaymentMethodsModal] =
     useState<boolean>(false);
-  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Payments",

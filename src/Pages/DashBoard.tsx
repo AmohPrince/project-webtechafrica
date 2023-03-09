@@ -11,16 +11,23 @@ import { assets } from "../Assets/assets";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import { useAuth } from "../Hooks/UseAuth";
+import { PendingVerificationWebsite } from "../Types/Global";
 
-export const dashBoardTitleInfoFunction = createContext<{
+export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
     React.SetStateAction<{
       h1: string;
       sub: string;
     }>
   >;
+  pendingVerificationWebsites: PendingVerificationWebsite[] | undefined;
+  setPendingVerificationWebsites: React.Dispatch<
+    React.SetStateAction<PendingVerificationWebsite[] | undefined>
+  >;
 }>({
   setDashBoardTitleInfo: () => {},
+  pendingVerificationWebsites: undefined,
+  setPendingVerificationWebsites: () => {},
 });
 
 const DashBoard = () => {
@@ -30,6 +37,10 @@ const DashBoard = () => {
     h1: "Active Websites",
     sub: "test",
   });
+  const [pendingVerificationWebsites, setPendingVerificationWebsites] =
+    useState<PendingVerificationWebsite[] | undefined>(
+      user?.pendingVerificationWebsites
+    );
 
   useEffect(() => {
     if (user) {
@@ -76,13 +87,15 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
-        <dashBoardTitleInfoFunction.Provider
+        <globalData.Provider
           value={{
             setDashBoardTitleInfo,
+            pendingVerificationWebsites,
+            setPendingVerificationWebsites,
           }}
         >
           <Outlet />
-        </dashBoardTitleInfoFunction.Provider>
+        </globalData.Provider>
       </div>
     </div>
   );

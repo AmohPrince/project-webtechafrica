@@ -4,11 +4,11 @@ import DevWebsiteComponent from "../Components/DevWebsiteComponent";
 import PendingVerification from "../Components/PendingVerification";
 import { SecondaryButton } from "../Components/SecondaryButton";
 import { useAuth } from "../Hooks/UseAuth";
-import { dashBoardTitleInfoFunction } from "./DashBoard";
+import { globalData } from "./DashBoard";
 
 const DevWebsites = () => {
   const { user } = useAuth();
-  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Development Websites",

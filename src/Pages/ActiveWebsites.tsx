@@ -4,11 +4,11 @@ import { assets } from "../Assets/assets";
 import ActiveWebsite from "../Components/ActiveWebsite";
 import { SecondaryButton } from "../Components/SecondaryButton";
 import { useAuth } from "../Hooks/UseAuth";
-import { dashBoardTitleInfoFunction } from "./DashBoard";
+import { globalData } from "./DashBoard";
 
 const ActiveWebsites = () => {
   const { user } = useAuth();
-  const { setDashBoardTitleInfo } = useContext(dashBoardTitleInfoFunction);
+  const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Active Websites",
