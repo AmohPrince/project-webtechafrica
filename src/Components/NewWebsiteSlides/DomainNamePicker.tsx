@@ -16,8 +16,17 @@ const DomainNamePicker = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] =
     useState<boolean>(true);
+  const [placeHolderStyles, setPlaceHolderStyles] =
+    useState<React.CSSProperties | null>(null);
 
   const domainInput = useRef<HTMLInputElement>(null);
+
+  const buttonStyles = {
+    backgroundColor: isSearchButtonDisabled
+      ? getLighterColor(selections.theme.colors.primary)
+      : selections.theme.colors.primary,
+    color: selections.theme.colors.text,
+  };
 
   const handleSearch = () => {
     setIsLoading(true);
@@ -43,13 +52,6 @@ const DomainNamePicker = ({
     }
   };
 
-  const buttonStyles = {
-    backgroundColor: isSearchButtonDisabled
-      ? getLighterColor(selections.theme.colors.primary)
-      : selections.theme.colors.primary,
-    color: selections.theme.colors.text,
-  };
-
   return (
     <div className="mt-5">
       <p className="font-bold text-xl">Find your domain</p>
@@ -61,15 +63,39 @@ const DomainNamePicker = ({
         <div className="flex-grow mr-5 relative">
           <input
             type="text"
-            className="w-full text-sm border rounded-md px-4 py-3"
-            placeholder="Enter your desired domain name"
+            className="w-full text-sm border rounded-md px-4 py-3 z-10 relative bg-transparent domain-name-input"
             style={{
               outlineColor: selections.theme.colors.primary,
             }}
             onChange={(e) => handleDomainInput(e)}
             ref={domainInput}
             onKeyDown={handleKeyDown}
+            onFocus={() =>
+              setPlaceHolderStyles({
+                top: 0,
+                zIndex: 20,
+                color: selections.theme.colors.primary,
+                fontWeight: 600,
+                paddingLeft: 6,
+                paddingRight: 6,
+              })
+            }
+            onBlur={(e) => {
+              if (e.target.value.length === 0) {
+                setPlaceHolderStyles(null);
+              } else {
+                setPlaceHolderStyles({
+                  display: "none",
+                });
+              }
+            }}
           />
+          <p
+            className="text-gray-500 text-sm absolute left-4 top-1/2 -translate-y-1/2 z-0 enter-your-design-name transition-all bg-white"
+            style={placeHolderStyles!}
+          >
+            Enter your desired domain name
+          </p>
           <FontAwesomeIcon
             icon={faSearch}
             className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
