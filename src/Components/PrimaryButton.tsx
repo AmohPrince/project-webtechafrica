@@ -5,19 +5,22 @@ const PrimaryButton = ({
   className,
   onClick,
   style,
+  disabled,
 }: {
   style?: React.CSSProperties;
   text: string;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  disabled?: boolean;
 }) => {
   return (
     <button
-      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight hover:scale-110 transition-all ${className}`}
+      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight hover:scale-110 transition-all disabled:cursor-not-allowed ${className}`}
       onClick={onClick}
       style={style}
+      disabled={disabled}
     >
-      <p>{text}</p>
+      {text}
     </button>
   );
 };

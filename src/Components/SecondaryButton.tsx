@@ -1,3 +1,5 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { getLighterColor } from "../Util/Utilities";
 
@@ -7,12 +9,14 @@ export const SecondaryButton = ({
   style,
   className,
   disabled,
+  isLoading,
 }: {
   text: string;
   onClick?: () => void;
   style?: React.CSSProperties;
   className?: string;
   disabled?: boolean;
+  isLoading?: boolean;
 }) => {
   const buttonStyles: React.CSSProperties = {
     ...style,
@@ -20,6 +24,7 @@ export const SecondaryButton = ({
       ? getLighterColor(style!.backgroundColor!)
       : style?.backgroundColor,
   };
+
   return (
     <button
       className={`py-3 px-7 rounded-full border transition-all text-sm font-bold hover:scale-105 hover:bg-orange hover:border-orange disabled:cursor-not-allowed ${className}`}
@@ -27,7 +32,7 @@ export const SecondaryButton = ({
       style={buttonStyles}
       disabled={disabled}
     >
-      {text}
+      {isLoading ? <FontAwesomeIcon icon={faSpinner} className="spin" /> : text}
     </button>
   );
 };

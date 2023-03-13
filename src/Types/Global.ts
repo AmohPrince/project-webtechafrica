@@ -73,6 +73,7 @@ export type WebsiteType = {
 export type NewWebsiteSelections = {
   theme: Theme;
   websiteType: WebsiteType;
+  domainName: string | null;
   websiteDescription: string | null;
   userHasOwnContent: boolean | null;
   plan: string | null;

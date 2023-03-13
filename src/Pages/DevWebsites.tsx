@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import DevWebsiteComponent from "../Components/DevWebsiteComponent";
 import PendingVerification from "../Components/PendingVerification";
 import { SecondaryButton } from "../Components/SecondaryButton";
-import { useAuth } from "../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
 
 const DevWebsites = () => {
-  const { user } = useAuth();
-  const { setDashBoardTitleInfo } = useContext(globalData);
+  const { setDashBoardTitleInfo, mutableUserObject } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Development Websites",
@@ -18,16 +16,16 @@ const DevWebsites = () => {
 
   return (
     <div className="mt-5">
-      {user?.devWebsites ? (
+      {mutableUserObject?.devWebsites ? (
         <>
           <div className="flex flex-wrap justify-between mt-7">
-            {user.devWebsites.map((website, index) => (
+            {mutableUserObject.devWebsites.map((website, index) => (
               <DevWebsiteComponent website={website} key={index} />
             ))}
           </div>
           <p className="my-3 font-semibold">Pending Verification</p>
           <div>
-            {user!.pendingVerificationWebsites?.map((website) => (
+            {mutableUserObject!.pendingVerificationWebsites?.map((website) => (
               <PendingVerification website={website} />
             ))}
           </div>

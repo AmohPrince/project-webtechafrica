@@ -11,7 +11,7 @@ import { assets } from "../Assets/assets";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import { useAuth } from "../Hooks/UseAuth";
-import { PendingVerificationWebsite } from "../Types/Global";
+import { User } from "../Types/Global";
 
 export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
@@ -20,14 +20,12 @@ export const globalData = createContext<{
       sub: string;
     }>
   >;
-  pendingVerificationWebsites: PendingVerificationWebsite[] | undefined;
-  setPendingVerificationWebsites: React.Dispatch<
-    React.SetStateAction<PendingVerificationWebsite[] | undefined>
-  >;
+  mutableUserObject: User | null;
+  setMutableUserObject: React.Dispatch<React.SetStateAction<User | null>>;
 }>({
   setDashBoardTitleInfo: () => {},
-  pendingVerificationWebsites: undefined,
-  setPendingVerificationWebsites: () => {},
+  mutableUserObject: null,
+  setMutableUserObject: () => {},
 });
 
 const DashBoard = () => {
@@ -37,10 +35,8 @@ const DashBoard = () => {
     h1: "Active Websites",
     sub: "test",
   });
-  const [pendingVerificationWebsites, setPendingVerificationWebsites] =
-    useState<PendingVerificationWebsite[] | undefined>(
-      user?.pendingVerificationWebsites
-    );
+
+  const [mutableUserObject, setMutableUserObject] = useState(user);
 
   useEffect(() => {
     if (user) {
@@ -90,8 +86,8 @@ const DashBoard = () => {
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,
-            pendingVerificationWebsites,
-            setPendingVerificationWebsites,
+            mutableUserObject,
+            setMutableUserObject,
           }}
         >
           <Outlet />

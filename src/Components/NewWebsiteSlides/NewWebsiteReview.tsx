@@ -9,7 +9,7 @@ const NewWebsiteReview = ({
 }) => {
   return (
     <div>
-      <p>Theme</p>
+      <p className="font-semibold mt-5">Theme</p>
       <ThemeBox theme={selections.theme} activeThemeId={selections.theme.id} />
       <div>
         <p className="font-semibold mt-5">Description</p>
@@ -30,6 +30,10 @@ const NewWebsiteReview = ({
       <div>
         <p className="font-semibold mt-5">Website Type</p>
         <p>{selections.websiteType.type}</p>
+      </div>
+      <div>
+        <p className="font-semibold mt-5">Website Domain</p>
+        <p>{selections.domainName}</p>
       </div>
     </div>
   );

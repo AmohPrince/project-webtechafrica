@@ -1,8 +1,13 @@
-import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faSearch,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NewWebsiteSelections } from "../../Types/Global";
 import { getLighterColor } from "../../Util/Utilities";
+import PrimaryButton from "../PrimaryButton";
 
 const DomainNamePicker = ({
   selections,
@@ -18,6 +23,9 @@ const DomainNamePicker = ({
     useState<boolean>(true);
   const [placeHolderStyles, setPlaceHolderStyles] =
     useState<React.CSSProperties | null>(null);
+  const [domainNameInputValue, setDomainNameInputValue] = useState<string>("");
+  const [showDomainSearchResults, setShowDomainSearchResults] =
+    useState<boolean>(false);
 
   const domainInput = useRef<HTMLInputElement>(null);
 
@@ -28,12 +36,15 @@ const DomainNamePicker = ({
     color: selections.theme.colors.text,
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setIsProgressButtonDisabled(true), []);
+
   const handleSearch = () => {
     setIsLoading(true);
     //TODO here is where i should validate the domain somehow
     setTimeout(() => {
       setIsLoading(false);
-      console.log(domainInput.current?.value);
+      setShowDomainSearchResults(true);
     }, 2000);
   };
 
@@ -42,6 +53,7 @@ const DomainNamePicker = ({
       const extensions = [".com", ".org", ".online", ".shop", ".net", ".io"];
       return extensions.some((extension) => e.includes(extension));
     };
+    setDomainNameInputValue(e.target.value.toLowerCase());
 
     setIsSearchButtonDisabled(!isValidDomain(e.target.value));
   };
@@ -89,6 +101,7 @@ const DomainNamePicker = ({
                 });
               }
             }}
+            value={domainNameInputValue}
           />
           <p
             className="text-gray-500 text-sm absolute left-4 top-1/2 -translate-y-1/2 z-0 enter-your-design-name transition-all bg-white"
@@ -115,7 +128,12 @@ const DomainNamePicker = ({
         </button>
       </div>
       <p className="my-5">Supported domains</p>
-      <div className="flex justify-between w-3/4 mx-auto">
+      <div
+        className="flex justify-between w-3/4 mx-auto font-semibold"
+        style={{
+          color: selections.theme.colors.primary,
+        }}
+      >
         <p>.com</p>
         <p>.org</p>
         <p>.online</p>
@@ -123,6 +141,31 @@ const DomainNamePicker = ({
         <p>.net</p>
         <p>.io</p>
       </div>
+      {showDomainSearchResults && (
+        <div className="border rounded-md p-4 w-1/4 mt-9">
+          <div className="flex items-center">
+            <FontAwesomeIcon
+              icon={faCircleCheck}
+              className="mr-3 text-green-600"
+            />
+            <p className="font-bold text-sm">{domainInput.current?.value}</p>
+          </div>
+          <PrimaryButton
+            text={selections.domainName === null ? "Select domain" : "Selected"}
+            className="w-full rounded-md mt-5 hover:scale-100"
+            onClick={() => {
+              setSelections((prev) => {
+                return {
+                  ...prev,
+                  domainName: domainInput.current!.value,
+                };
+              });
+              setIsProgressButtonDisabled(false);
+            }}
+            disabled={selections.domainName !== null}
+          />
+        </div>
+      )}
     </div>
   );
 };

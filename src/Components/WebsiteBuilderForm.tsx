@@ -11,14 +11,17 @@ import website_types from "../Json/WebsiteTypes.json";
 import NewWebsiteReview from "./NewWebsiteSlides/NewWebsiteReview";
 import DomainNamePicker from "./NewWebsiteSlides/DomainNamePicker";
 import { globalData } from "../Pages/DashBoard";
+import Confirmation from "./Confirmation";
 
 const WebsiteBuilderForm = () => {
-  const { setDashBoardTitleInfo } = useContext(globalData);
+  const { setDashBoardTitleInfo, setMutableUserObject } =
+    useContext(globalData);
 
   const [stageIndex, setStageIndex] = useState<number>(0);
   const [selections, setSelections] = useState<NewWebsiteSelections>({
     plan: null,
     theme: themes[0],
+    domainName: null,
     userHasOwnContent: null,
     websiteDescription: null,
     websiteType: website_types[0],
@@ -26,6 +29,7 @@ const WebsiteBuilderForm = () => {
   const [isProgressButtonDisabled, setIsProgressButtonDisabled] =
     useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [confirmationModal, showConfirmationModal] = useState(false);
 
   useEffect(() => {
     setDashBoardTitleInfo({
@@ -75,15 +79,37 @@ const WebsiteBuilderForm = () => {
       //This is just simulation
       setTimeout(() => {
         setIsLoading(false);
-        // setPendingVerificationWebsites(selections.)
-      }, 2000);
+        setMutableUserObject((prev) => {
+          const newWebsite = {
+            websiteUrl: selections.domainName!,
+            hasShop: true,
+          };
+
+          return {
+            ...prev,
+            pendingVerificationWebsites:
+              prev?.pendingVerificationWebsites &&
+              Array.isArray(prev.pendingVerificationWebsites)
+                ? [...prev.pendingVerificationWebsites, newWebsite]
+                : [newWebsite],
+            name: prev?.name ?? "", // default to empty string if name is undefined
+            email: prev?.email ?? "",
+            plan: prev?.plan ?? "",
+            paymentMethodSelected: prev?.paymentMethodSelected ?? false,
+            activeWebsites: prev?.activeWebsites ?? [],
+            devWebsites: prev?.devWebsites ?? [],
+            cards: prev?.cards ?? [],
+          };
+        });
+        showConfirmationModal(true);
+      }, 3000);
     } else {
       setStageIndex((prev) => prev + 1);
     }
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 relative w-full">
       <div className="flex justify-end">
         <SecondaryButton
           text={stages[stageIndex].buttonText}
@@ -94,8 +120,14 @@ const WebsiteBuilderForm = () => {
           className="outline-none hover:scale-100 ml-auto transition-all duration-300"
           onClick={goToNextSlide}
           disabled={isProgressButtonDisabled}
+          isLoading={isLoading}
         />
       </div>
+      {confirmationModal && (
+        <Confirmation
+          text={`Your website at ${selections.domainName} has been submitted for approval. Expect a response within one to three business days`}
+        />
+      )}
       {stageIndex === 0 && (
         <SelectThemeSlide
           setSelections={setSelections}
