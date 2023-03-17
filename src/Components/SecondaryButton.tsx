@@ -11,7 +11,7 @@ export const SecondaryButton = ({
   disabled,
   isLoading,
 }: {
-  text: string;
+  text: string | JSX.Element;
   onClick?: () => void;
   style?: React.CSSProperties;
   className?: string;

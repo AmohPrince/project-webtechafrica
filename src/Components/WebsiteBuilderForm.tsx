@@ -12,6 +12,7 @@ import NewWebsiteReview from "./NewWebsiteSlides/NewWebsiteReview";
 import DomainNamePicker from "./NewWebsiteSlides/DomainNamePicker";
 import { globalData } from "../Pages/DashBoard";
 import Confirmation from "./Confirmation";
+import { DashboardButtonText } from "./DashboardButtonText";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo, setMutableUserObject } =
@@ -41,15 +42,15 @@ const WebsiteBuilderForm = () => {
   const stages = [
     {
       stage: "Theme",
-      buttonText: "Pick " + selections.theme.name + " ⚒",
+      buttonText: "Pick " + selections.theme.name,
     },
     {
       stage: "Website Type",
-      buttonText: "Pick " + selections.websiteType.type + " 🤝",
+      buttonText: "Pick " + selections.websiteType.type,
     },
     {
       stage: "Website Description",
-      buttonText: "Submit description 📑",
+      buttonText: "Submit description",
     },
     {
       stage: "Got any content?",
@@ -57,15 +58,15 @@ const WebsiteBuilderForm = () => {
     },
     {
       stage: "Pick Domain",
-      buttonText: "Pick a plan ✈",
+      buttonText: "Pick a plan",
     },
     {
       stage: "Plan",
-      buttonText: "Review and Finish 🏁",
+      buttonText: "Review and Finish",
     },
     {
       stage: "Review",
-      buttonText: "Complete 🚀",
+      buttonText: "Complete",
     },
   ];
 
@@ -112,7 +113,7 @@ const WebsiteBuilderForm = () => {
     <div className="mt-5 relative w-full">
       <div className="flex justify-end">
         <SecondaryButton
-          text={stages[stageIndex].buttonText}
+          text={<DashboardButtonText text={stages[stageIndex].buttonText} />}
           style={{
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
@@ -132,6 +133,7 @@ const WebsiteBuilderForm = () => {
         <SelectThemeSlide
           setSelections={setSelections}
           selections={selections}
+          setActiveStageId={setStageIndex}
         />
       )}
       {stageIndex === 1 && <SelectWebsiteType setSelections={setSelections} />}

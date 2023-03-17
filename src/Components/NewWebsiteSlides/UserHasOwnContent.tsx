@@ -28,7 +28,7 @@ const UserHasOwnContent = ({
         Do you have any content or would you like our AI to generate everything
         for you? You are allowed to change anything you want later
       </p>
-      <div className="flex">
+      <div className="flex items-center">
         <input
           type="checkbox"
           onChange={(e) => {
@@ -41,11 +41,12 @@ const UserHasOwnContent = ({
             });
           }}
           ref={userHasOwnContentRef}
+          className=" mr-2 w-4 cursor-pointer h-4"
         />
         <p>I have my own</p>
         <input
           type="checkbox"
-          className="ml-6"
+          className="ml-6 mr-2 w-4 cursor-pointer h-4"
           onChange={(e) => {
             userHasOwnContentRef.current!.checked = false;
             setSelections((prev) => {

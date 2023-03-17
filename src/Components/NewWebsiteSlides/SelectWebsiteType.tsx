@@ -26,10 +26,15 @@ const SelectWebsiteType = ({
             };
           });
         }}
-        className="border my-5"
+        className="border-2 rounded-md cursor-pointer my-5 p-3 border-primaryOne outline-none"
       >
         {website_types.map((type) => (
-          <option value={type.type}>{type.type}</option>
+          <option
+            value={type.type}
+            className="rounded-sm border border-primaryOne"
+          >
+            {type.type}
+          </option>
         ))}
       </select>
       <p>{activeWebsiteType.description}</p>

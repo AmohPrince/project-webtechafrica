@@ -152,7 +152,7 @@ const DomainNamePicker = ({
           </div>
           <PrimaryButton
             text={selections.domainName === null ? "Select domain" : "Selected"}
-            className="w-full rounded-md mt-5 hover:scale-100"
+            className="w-full rounded-md mt-5 hover:scale-100 disabled:bg-gray-400 disabled:hover:bg-gray-400"
             onClick={() => {
               setSelections((prev) => {
                 return {

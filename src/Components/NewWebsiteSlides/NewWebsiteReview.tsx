@@ -15,25 +15,27 @@ const NewWebsiteReview = ({
         <p className="font-semibold mt-5">Description</p>
         <p className="break-words">{selections.websiteDescription}</p>
       </div>
-      <div>
-        <p className="font-semibold mt-5">Plan</p>
-        <p>{selections.plan}</p>
-      </div>
-      <div>
-        <p className="font-semibold mt-5">Content Style</p>
-        {selections.userHasOwnContent ? (
-          <p>User generated</p>
-        ) : (
-          <p>AI generated</p>
-        )}
-      </div>
-      <div>
-        <p className="font-semibold mt-5">Website Type</p>
-        <p>{selections.websiteType.type}</p>
-      </div>
-      <div>
-        <p className="font-semibold mt-5">Website Domain</p>
-        <p>{selections.domainName}</p>
+      <div className="flex justify-between w-2/3">
+        <div>
+          <p className="mt-5 text-sm text-gray-400">Plan</p>
+          <p className="font-semibold">{selections.plan}</p>
+        </div>
+        <div>
+          <p className="mt-5 text-sm text-gray-400">Content Style</p>
+          {selections.userHasOwnContent ? (
+            <p className="font-semibold">User generated</p>
+          ) : (
+            <p className="font-semibold">AI generated</p>
+          )}
+        </div>
+        <div>
+          <p className="mt-5 text-sm text-gray-400">Website Type</p>
+          <p className="font-semibold">{selections.websiteType.type}</p>
+        </div>
+        <div>
+          <p className="mt-5 text-sm text-gray-400">Website Domain</p>
+          <p className="font-semibold">{selections.domainName}</p>
+        </div>
       </div>
     </div>
   );
