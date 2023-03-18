@@ -15,9 +15,9 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="bg-gray-50 w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0 hidden sm:block">
+    <div className="bg-menu text-white w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0 hidden sm:block">
       <Link className="show mb-5" to="/">
-        <LogoTab logoColor={LogoColor.primary} />
+        <LogoTab logoColor={LogoColor.menu} />
       </Link>
       <div className="mt-12">
         <DashboardOption name="active-websites" />

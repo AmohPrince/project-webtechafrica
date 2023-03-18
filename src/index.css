@@ -42,6 +42,9 @@
   .playfair {
     font-family: "Playfair Display", serif;
   }
+  .transition-global-duration {
+    @apply duration-300;
+  }
 }
 
 button.active {

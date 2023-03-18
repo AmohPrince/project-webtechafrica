@@ -6,7 +6,7 @@ import { SecondaryButton } from "./SecondaryButton";
 
 const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
   return (
-    <div className="border-t w-[49%] bg-white p-6 rounded-2xl">
+    <div className="border w-[49%] bg-white p-6 rounded-2xl">
       <div className="flex justify-between items-center">
         <div className="w-1/3 mr-7">
           <p className="font-semibold">{extractHostname(website.previewUrl)}</p>

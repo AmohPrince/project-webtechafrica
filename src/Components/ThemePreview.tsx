@@ -5,7 +5,7 @@ import LVLogo from "./LVLogo";
 const ThemePreview = ({ theme }: { theme: Theme }) => {
   return (
     <div
-      className="mt-6 border-t py-[5%] px-[2%] border rounded-md shadow transition-all duration-150"
+      className="mt-5 border-t py-[5%] px-[2%] border rounded-md shadow transition-all transition-global-duration mx-6"
       style={{
         backgroundColor: theme.colors.background,
         color: theme.colors.text,

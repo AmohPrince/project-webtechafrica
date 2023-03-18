@@ -1,15 +1,66 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { globalData } from "../../Pages/DashBoard";
 import { NewWebsiteSelections } from "../../Types/Global";
+import { SecondaryButton } from "../SecondaryButton";
 import { ThemeBox } from "../ThemeBox";
 
 const NewWebsiteReview = ({
   selections,
+  showConfirmationModal,
 }: {
   selections: NewWebsiteSelections;
+  showConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setMutableUserObject } = useContext(globalData);
+  const completeWebsiteBuildingProcess = () => {
+    setIsLoading(true);
+    //TODO
+    //submit to server. after the post call is completed update the state objects holding the pending verification websites
+    //submitToServer(selections, user);
+    //This is just simulation
+    setTimeout(() => {
+      setIsLoading(false);
+      setMutableUserObject((prev) => {
+        const newWebsite = {
+          websiteUrl: selections.domainName!,
+          hasShop: true,
+        };
+
+        return {
+          ...prev,
+          pendingVerificationWebsites:
+            prev?.pendingVerificationWebsites &&
+            Array.isArray(prev.pendingVerificationWebsites)
+              ? [...prev.pendingVerificationWebsites, newWebsite]
+              : [newWebsite],
+          name: prev?.name ?? "", // default to empty string if name is undefined
+          email: prev?.email ?? "",
+          plan: prev?.plan ?? "",
+          paymentMethodSelected: prev?.paymentMethodSelected ?? false,
+          activeWebsites: prev?.activeWebsites ?? [],
+          devWebsites: prev?.devWebsites ?? [],
+          cards: prev?.cards ?? [],
+        };
+      });
+      showConfirmationModal(true);
+    }, 3000);
+  };
   return (
-    <div>
-      <p className="font-semibold mt-5">Theme</p>
+    <div className="bg-white p-6">
+      <div className="flex items-center justify-center">
+        <SecondaryButton
+          text="Complete 🚀"
+          style={{
+            backgroundColor: selections.theme.colors.primary,
+            color: selections.theme.colors.text,
+          }}
+          className="outline-none hover:scale-100 transition-all ml-auto"
+          onClick={() => completeWebsiteBuildingProcess()}
+          isLoading={isLoading}
+        />
+      </div>
+      <p className="font-semibold mt-5 mb-2">Theme</p>
       <ThemeBox theme={selections.theme} activeThemeId={selections.theme.id} />
       <div>
         <p className="font-semibold mt-5">Description</p>

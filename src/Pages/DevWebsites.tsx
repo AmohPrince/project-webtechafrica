@@ -15,10 +15,10 @@ const DevWebsites = () => {
   }, [setDashBoardTitleInfo]);
 
   return (
-    <div className="mt-5">
+    <div className="bg-white mt-4 pt-4 px-6">
       {mutableUserObject?.devWebsites ? (
         <>
-          <div className="flex flex-wrap justify-between mt-7">
+          <div className="flex flex-wrap justify-between">
             {mutableUserObject.devWebsites.map((website, index) => (
               <DevWebsiteComponent website={website} key={index} />
             ))}

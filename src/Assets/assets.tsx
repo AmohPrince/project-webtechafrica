@@ -116,4 +116,5 @@ export const LogoColor = {
   primary: "#5236FF",
   sign_up: "#005dbf",
   sign_in: "#7d6f20",
+  menu: "#ffffff",
 };

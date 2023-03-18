@@ -26,7 +26,7 @@ const Payments = () => {
   }, [setDashBoardTitleInfo]);
 
   return (
-    <div className="flex justify-between mt-7 items-start gap-x-5 border-t pt-4">
+    <div className="flex justify-between items-start gap-x-5 p-6 mt-4 bg-white">
       {showPaymentMethodsModal ? (
         <div className="flex-grow bg-white rounded-xl">
           <div className="py-3 px-5 border-b flex justify-between items-center">
@@ -41,20 +41,31 @@ const Payments = () => {
             <p className="text-sm font-semibold">Select payment method</p>
             <div className="flex flex-wrap mt-2">
               <div
-                className="border-primaryOne p-2 border rounded-sm flex items-center mr-3 cursor-pointer"
+                className={`border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer mr-2 ${
+                  selectingPaymentMethod === "credit-card"
+                    ? "text-white bg-primaryOne shadow-lg"
+                    : ""
+                }`}
                 onClick={() => setSelectingPaymentMethod("credit-card")}
               >
                 <FontAwesomeIcon
                   icon={faCreditCard}
-                  className="text-primaryOne"
+                  className="transition-all duration-300"
                 />
                 <p className="text-xs ml-2 font-medium">Credit/Debit Card</p>
               </div>
               <div
-                className="border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer"
+                className={`border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer ${
+                  selectingPaymentMethod === "paypal"
+                    ? "text-white bg-primaryOne shadow-lg"
+                    : ""
+                }`}
                 onClick={() => setSelectingPaymentMethod("paypal")}
               >
-                <FontAwesomeIcon icon={faPaypal} className="text-primaryOne" />
+                <FontAwesomeIcon
+                  icon={faPaypal}
+                  className="transition-all duration-300"
+                />
                 <p className="text-xs ml-2 font-medium">Paypal</p>
               </div>
             </div>
@@ -66,7 +77,7 @@ const Payments = () => {
           )}
         </div>
       ) : (
-        <div className="flex-grow">
+        <div className="flex-grow border p-2 rounded-md">
           <div className="flex justify-between text-sm mt-2 text-gray-500">
             <p className="w-1/4">Website url</p>
             <p className="w-1/5">Payment Date</p>
@@ -84,12 +95,7 @@ const Payments = () => {
         </div>
       )}
       <div className="w-1/4 flex flex-col">
-        <PrimaryButton
-          text="Add Payment Method"
-          className="hover:scale-100 ml-auto"
-          onClick={() => setShowPaymentMethodsModal(true)}
-        />
-        <div className="w-full bg-white rounded-xl">
+        <div className="w-full bg-white rounded-xl border">
           <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
           {user?.cards ? (
             user.cards.map((card) => <CardInfo card={card} />)
@@ -99,6 +105,11 @@ const Payments = () => {
             </p>
           )}
         </div>
+        <PrimaryButton
+          text="Add Payment Method"
+          className="hover:scale-100 ml-auto mt-5"
+          onClick={() => setShowPaymentMethodsModal(true)}
+        />
       </div>
     </div>
   );
@@ -108,7 +119,7 @@ export default Payments;
 
 export const CardInfo = ({ card }: { card: Card }) => {
   return (
-    <div className="py-4 px-3 shadow-md my-4 flex flex-col rounded-md">
+    <div className="py-4 px-2 mx-2 shadow-md my-4 flex flex-col rounded-md">
       <div className="flex items-start">
         <img src={getCardTypeIcon(card.type)} alt={`${card.type}'s logo `} />
         <div className="ml-3 text-sm">

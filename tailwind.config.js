@@ -21,6 +21,7 @@ module.exports = {
         purpleText: "#C1749E",
         bgSignupPage: "#005dbf",
         bgSignInPage: "#7d6f20",
+        menu: "#140527",
       },
     },
   },

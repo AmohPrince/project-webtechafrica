@@ -17,7 +17,7 @@ const ActiveWebsites = () => {
   }, [setDashBoardTitleInfo]);
 
   return (
-    <div className="mt-5">
+    <>
       {user!.activeWebsites === undefined ? (
         <div className="w-max mx-auto mt-10 flex flex-col items-center">
           <p>You dont have any active websites! Let`s get you one</p>
@@ -27,7 +27,7 @@ const ActiveWebsites = () => {
         </div>
       ) : (
         user!.activeWebsites.map((website) => (
-          <div className="flex items-end justify-between mt-7">
+          <div className="flex items-end justify-between mt-4 px-6">
             <ActiveWebsite website={website} />
             <img
               src={assets.remote_design}
@@ -37,7 +37,7 @@ const ActiveWebsites = () => {
           </div>
         ))
       )}
-    </div>
+    </>
   );
 };
 

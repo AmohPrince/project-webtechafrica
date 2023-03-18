@@ -1,18 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NewWebsiteSelections } from "../../Types/Global";
+import { SecondaryButton } from "../SecondaryButton";
 
 const UserHasOwnContent = ({
+  selections,
   setSelections,
-  setIsProgressButtonDisabled,
+  setActiveStageId,
 }: {
+  selections: NewWebsiteSelections;
   setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
-  setIsProgressButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const userHasOwnContentRef = useRef<HTMLInputElement>(null);
   const automaticContentGenerationRef = useRef<HTMLInputElement>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsProgressButtonDisabled(
+    setIsButtonDisabled(
       automaticContentGenerationRef.current?.checked === false &&
         userHasOwnContentRef.current?.checked === false
     );
@@ -23,12 +27,12 @@ const UserHasOwnContent = ({
   ]);
 
   return (
-    <div className="mb-5">
+    <div className="bg-white p-6">
       <p>
         Do you have any content or would you like our AI to generate everything
         for you? You are allowed to change anything you want later
       </p>
-      <div className="flex items-center">
+      <div className="flex items-center my-5">
         <input
           type="checkbox"
           onChange={(e) => {
@@ -60,6 +64,16 @@ const UserHasOwnContent = ({
         />
         <p>Find out what might seem right for me.</p>
       </div>
+      <SecondaryButton
+        text="Pick domain"
+        style={{
+          backgroundColor: selections.theme.colors.primary,
+          color: selections.theme.colors.text,
+        }}
+        className="outline-none hover:scale-100 transition-all ml-auto"
+        onClick={() => setActiveStageId((prev) => prev + 1)}
+        disabled={isButtonDisabled}
+      />
     </div>
   );
 };

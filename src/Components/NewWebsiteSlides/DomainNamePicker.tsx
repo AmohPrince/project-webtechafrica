@@ -4,19 +4,20 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { NewWebsiteSelections } from "../../Types/Global";
 import { getLighterColor } from "../../Util/Utilities";
 import PrimaryButton from "../PrimaryButton";
+import { SecondaryButton } from "../SecondaryButton";
 
 const DomainNamePicker = ({
   selections,
   setSelections,
-  setIsProgressButtonDisabled,
+  setActiveStageId,
 }: {
   selections: NewWebsiteSelections;
   setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
-  setIsProgressButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] =
@@ -26,6 +27,7 @@ const DomainNamePicker = ({
   const [domainNameInputValue, setDomainNameInputValue] = useState<string>("");
   const [showDomainSearchResults, setShowDomainSearchResults] =
     useState<boolean>(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const domainInput = useRef<HTMLInputElement>(null);
 
@@ -37,7 +39,6 @@ const DomainNamePicker = ({
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setIsProgressButtonDisabled(true), []);
 
   const handleSearch = () => {
     setIsLoading(true);
@@ -65,12 +66,26 @@ const DomainNamePicker = ({
   };
 
   return (
-    <div className="mt-5">
-      <p className="font-bold text-xl">Find your domain</p>
-      <p className="mt-3">
-        Search domain name availability using our domain checker tool. Type in
-        your desired name and get instant results.
-      </p>
+    <div className="bg-white p-6">
+      <div className="flex items-center justify-center">
+        <div>
+          <p className="font-bold text-xl">Find your domain</p>
+          <p className="mt-3">
+            Search domain name availability using our domain checker tool. Type
+            in your desired name and get instant results.
+          </p>
+        </div>
+        <SecondaryButton
+          text="Pick plan"
+          style={{
+            backgroundColor: selections.theme.colors.primary,
+            color: selections.theme.colors.text,
+          }}
+          className="outline-none hover:scale-100 transition-all ml-auto"
+          onClick={() => setActiveStageId((prev) => prev + 1)}
+          disabled={isButtonDisabled}
+        />
+      </div>
       <div className="flex mt-5">
         <div className="flex-grow mr-5 relative">
           <input
@@ -160,7 +175,7 @@ const DomainNamePicker = ({
                   domainName: domainInput.current!.value,
                 };
               });
-              setIsProgressButtonDisabled(false);
+              setIsButtonDisabled(false);
             }}
             disabled={selections.domainName !== null}
           />

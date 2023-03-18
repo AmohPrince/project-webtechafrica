@@ -2,37 +2,51 @@ import React, { useEffect, useState } from "react";
 import PrimaryButton from "../PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { NewWebsiteSelections, WebsiteType } from "../../Types/Global";
+import { NewWebsiteSelections } from "../../Types/Global";
+import { SecondaryButton } from "../SecondaryButton";
 
 const PlanSelector = ({
-  websiteType,
+  selections,
   setSelections,
-  setIsProgressButtonDisabled,
+  setActiveStageId,
 }: {
-  websiteType: WebsiteType;
-  setIsProgressButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  selections: NewWebsiteSelections;
   setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
+  setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [selected, setSelected] = useState<null | string>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     if (selected) {
-      setIsProgressButtonDisabled(false);
+      setIsButtonDisabled(false);
     } else {
-      setIsProgressButtonDisabled(true);
+      setIsButtonDisabled(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   return (
-    <>
-      <div>
-        {websiteType.type === "E-commerce websites" && (
-          <p>The basic plan is not available for {websiteType.type}</p>
+    <div className="bg-white p-6">
+      <div className="flex items-center justify-center">
+        {selections.websiteType.type === "E-commerce websites" && (
+          <p>
+            The basic plan is not available for {selections.websiteType.type}
+          </p>
         )}
+        <SecondaryButton
+          text="Submit description"
+          style={{
+            backgroundColor: selections.theme.colors.primary,
+            color: selections.theme.colors.text,
+          }}
+          className="outline-none hover:scale-100 transition-all ml-auto"
+          onClick={() => setActiveStageId((prev) => prev + 1)}
+          disabled={isButtonDisabled}
+        />
       </div>
-      <div className="flex py-8 px-7">
-        {websiteType.type !== "E-commerce websites" && (
+      <div className="flex py-4">
+        {selections.websiteType.type !== "E-commerce websites" && (
           <div className="shadow-md py-6 px-6 w-1/3 rounded-xl">
             <p className="font-bold text-lg">Basic</p>
             <p className="font-medium text-sm">Perfect for beginners</p>
@@ -143,7 +157,7 @@ const PlanSelector = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

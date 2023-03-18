@@ -27,7 +27,7 @@ export const SecondaryButton = ({
 
   return (
     <button
-      className={`py-3 px-7 rounded-full border transition-all text-sm font-bold hover:scale-105 hover:bg-orange hover:border-orange disabled:cursor-not-allowed ${className}`}
+      className={`py-3 px-7 rounded-full border transition-all transition-global-duration text-sm font-bold hover:scale-105 hover:bg-orange hover:border-orange disabled:cursor-not-allowed ${className}`}
       onClick={onClick}
       style={buttonStyles}
       disabled={disabled}

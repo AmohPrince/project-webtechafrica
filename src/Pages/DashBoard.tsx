@@ -54,8 +54,8 @@ const DashBoard = () => {
         className="sm:hidden block absolute top-5 left-5"
       />
       <DashBoardSideBar />
-      <div className="flex-grow bg-white w-full sm:w-5/6 px-8 pt-12 pb-4 sm:py-4">
-        <div className="flex justify-between items-center w-full">
+      <div className="flex-grow bg-gray-100 w-full sm:w-5/6">
+        <div className="flex justify-between items-center w-full px-6 py-3 bg-white">
           <DashBoardTitle
             h1={dashBoardTitleInfo.h1}
             sub={dashBoardTitleInfo.sub}

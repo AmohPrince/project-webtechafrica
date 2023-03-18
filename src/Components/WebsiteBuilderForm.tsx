@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import themes from "../Util/themes.json";
 import { NewWebsiteSelections } from "../Types/Global";
-import { SecondaryButton } from "./SecondaryButton";
 import SelectThemeSlide from "./SelectThemeSlide";
 import PlanSelector from "./NewWebsiteSlides/PlanSelector";
 import SelectWebsiteType from "./NewWebsiteSlides/SelectWebsiteType";
@@ -12,11 +11,9 @@ import NewWebsiteReview from "./NewWebsiteSlides/NewWebsiteReview";
 import DomainNamePicker from "./NewWebsiteSlides/DomainNamePicker";
 import { globalData } from "../Pages/DashBoard";
 import Confirmation from "./Confirmation";
-import { DashboardButtonText } from "./DashboardButtonText";
 
 const WebsiteBuilderForm = () => {
-  const { setDashBoardTitleInfo, setMutableUserObject } =
-    useContext(globalData);
+  const { setDashBoardTitleInfo } = useContext(globalData);
 
   const [stageIndex, setStageIndex] = useState<number>(0);
   const [selections, setSelections] = useState<NewWebsiteSelections>({
@@ -27,9 +24,6 @@ const WebsiteBuilderForm = () => {
     websiteDescription: null,
     websiteType: website_types[0],
   });
-  const [isProgressButtonDisabled, setIsProgressButtonDisabled] =
-    useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [confirmationModal, showConfirmationModal] = useState(false);
 
   useEffect(() => {
@@ -70,60 +64,8 @@ const WebsiteBuilderForm = () => {
     },
   ];
 
-  const goToNextSlide = () => {
-    if (stageIndex === stages.length - 1) {
-      console.log(selections);
-      setIsLoading(true);
-      //TODO
-      //submit to server. after the post call is completed update the state objects holding the pending verification websites
-      //submitToServer(selections, user);
-      //This is just simulation
-      setTimeout(() => {
-        setIsLoading(false);
-        setMutableUserObject((prev) => {
-          const newWebsite = {
-            websiteUrl: selections.domainName!,
-            hasShop: true,
-          };
-
-          return {
-            ...prev,
-            pendingVerificationWebsites:
-              prev?.pendingVerificationWebsites &&
-              Array.isArray(prev.pendingVerificationWebsites)
-                ? [...prev.pendingVerificationWebsites, newWebsite]
-                : [newWebsite],
-            name: prev?.name ?? "", // default to empty string if name is undefined
-            email: prev?.email ?? "",
-            plan: prev?.plan ?? "",
-            paymentMethodSelected: prev?.paymentMethodSelected ?? false,
-            activeWebsites: prev?.activeWebsites ?? [],
-            devWebsites: prev?.devWebsites ?? [],
-            cards: prev?.cards ?? [],
-          };
-        });
-        showConfirmationModal(true);
-      }, 3000);
-    } else {
-      setStageIndex((prev) => prev + 1);
-    }
-  };
-
   return (
-    <div className="mt-5 relative w-full">
-      <div className="flex justify-end">
-        <SecondaryButton
-          text={<DashboardButtonText text={stages[stageIndex].buttonText} />}
-          style={{
-            backgroundColor: selections.theme.colors.primary,
-            color: selections.theme.colors.text,
-          }}
-          className="outline-none hover:scale-100 ml-auto transition-all duration-300"
-          onClick={goToNextSlide}
-          disabled={isProgressButtonDisabled}
-          isLoading={isLoading}
-        />
-      </div>
+    <div className="relative w-full pt-4">
       {confirmationModal && (
         <Confirmation
           text={`Your website at ${selections.domainName} has been submitted for approval. Expect a response within one to three business days`}
@@ -136,35 +78,46 @@ const WebsiteBuilderForm = () => {
           setActiveStageId={setStageIndex}
         />
       )}
-      {stageIndex === 1 && <SelectWebsiteType setSelections={setSelections} />}
+      {stageIndex === 1 && (
+        <SelectWebsiteType
+          setSelections={setSelections}
+          selections={selections}
+          setActiveStageId={setStageIndex}
+        />
+      )}
       {stageIndex === 2 && (
         <UserWebsiteDescription
-          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
           setSelections={setSelections}
+          selections={selections}
+          setActiveStageId={setStageIndex}
         />
       )}
       {stageIndex === 3 && (
         <UserHasOwnContent
           setSelections={setSelections}
-          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
+          selections={selections}
+          setActiveStageId={setStageIndex}
         />
       )}
       {stageIndex === 4 && (
         <DomainNamePicker
-          selections={selections}
           setSelections={setSelections}
-          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
+          selections={selections}
+          setActiveStageId={setStageIndex}
         />
       )}
       {stageIndex === 5 && (
         <PlanSelector
-          websiteType={selections.websiteType}
           setSelections={setSelections}
-          setIsProgressButtonDisabled={setIsProgressButtonDisabled}
+          selections={selections}
+          setActiveStageId={setStageIndex}
         />
       )}
       {stageIndex === stages.length - 1 && (
-        <NewWebsiteReview selections={selections} />
+        <NewWebsiteReview
+          selections={selections}
+          showConfirmationModal={showConfirmationModal}
+        />
       )}
     </div>
   );
