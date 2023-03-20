@@ -1,8 +1,9 @@
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
-import { SpinningDots } from "../Components/SpinningDots/SpinningDots";
+import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import { useAuth } from "../Hooks/UseAuth";
 import { User } from "../Types/Global";
 
@@ -112,13 +113,13 @@ const SignIn = () => {
             Forgot password
           </p>
         </div>
-        <button
-          className="text-sm font-semibold bg-bgSignupPage text-white w-full px-5 py-3 rounded-lg"
+        <SignInOrSignUpButton
+          disabled={false}
+          icon={faCircleNotch}
+          isLoading={isLoading}
           onClick={handleLogin}
-          disabled={isLoading}
-        >
-          {isLoading ? <SpinningDots /> : "Sign in"}
-        </button>
+          text="Log In"
+        />
         <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>

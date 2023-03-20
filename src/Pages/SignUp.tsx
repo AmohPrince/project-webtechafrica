@@ -1,25 +1,57 @@
-import React, { useRef } from "react";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
+import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 // import { useAuth } from "../Hooks/UseAuth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 export const SignUp = () => {
-  const fullNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const firstNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   // const { setUser } = useAuth();
+  //TODO Disable submit button when the inputs are empty.
 
   const handleSignUp = () => {
-    console.log(fullNameRef.current?.value);
-    console.log(emailRef.current?.value);
-    console.log(passwordRef.current?.value);
+    console.log(firstNameRef.current?.value.length);
+    console.log(lastNameRef.current?.value.length);
+    console.log(emailRef.current?.value.length);
+    console.log(passwordRef.current?.value.length);
+    // const auth = getAuth(firebaseApp);
+    // createUserWithEmailAndPassword(auth , emailRef.current!.value , passwordRef.current!.value).then(() => {
+
+    // }).catch(error => console.log(error))
     // setUser({
     //   email: emailRef.current!.value,
     //   name: "From Sign Up",
     // });
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 3000);
   };
+
+  useEffect(() => {
+    if (
+      lastNameRef.current?.value.length === 0 ||
+      firstNameRef.current?.value.length === 0 ||
+      emailRef.current?.value.length === 0 ||
+      passwordRef.current?.value.length === 0
+    ) {
+      setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
+    }
+  }, [
+    lastNameRef.current?.value,
+    firstNameRef.current?.value,
+    emailRef.current?.value,
+    passwordRef.current?.value,
+  ]);
 
   return (
     <div className="h-screen flex">
@@ -31,15 +63,30 @@ export const SignUp = () => {
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
-        <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
-          Full name
-        </p>
-        <input
-          type="text"
-          placeholder="Enter your full names"
-          className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-          ref={fullNameRef}
-        />
+        <div className="flex gap-x-2">
+          <div>
+            <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+              First Name
+            </p>
+            <input
+              type="text"
+              placeholder="Enter your first name"
+              className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+              ref={firstNameRef}
+            />
+          </div>
+          <div>
+            <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+              Last Name
+            </p>
+            <input
+              type="text"
+              placeholder="Enter your last name"
+              className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+              ref={lastNameRef}
+            />
+          </div>
+        </div>
         <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
         <input
           type="email"
@@ -56,12 +103,13 @@ export const SignUp = () => {
           placeholder="Password"
           ref={passwordRef}
         />
-        <button
-          className="text-sm font-semibold bg-bgSignInPage w-full px-5 py-3 rounded-lg mt-6"
+        <SignInOrSignUpButton
+          disabled={isButtonDisabled}
+          icon={faGear}
+          isLoading={isLoading}
           onClick={handleSignUp}
-        >
-          Create account
-        </button>
+          text="Create Account"
+        />
         <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign up with google</p>
