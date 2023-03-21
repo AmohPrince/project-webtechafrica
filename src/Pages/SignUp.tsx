@@ -1,28 +1,35 @@
-import { faGear } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useRef, useState } from "react";
+import { faCaretDown, faGear } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 // import { useAuth } from "../Hooks/UseAuth";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+// import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+type Inputs = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 export const SignUp = () => {
-  const lastNameRef = useRef<HTMLInputElement>(null);
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   // const { setUser } = useAuth();
   //TODO Disable submit button when the inputs are empty.
 
-  const handleSignUp = () => {
-    console.log(firstNameRef.current?.value.length);
-    console.log(lastNameRef.current?.value.length);
-    console.log(emailRef.current?.value.length);
-    console.log(passwordRef.current?.value.length);
+  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+    // console.log(firstName, lastName, email, password);
     // const auth = getAuth(firebaseApp);
     // createUserWithEmailAndPassword(auth , emailRef.current!.value , passwordRef.current!.value).then(() => {
 
@@ -31,27 +38,10 @@ export const SignUp = () => {
     //   email: emailRef.current!.value,
     //   name: "From Sign Up",
     // });
+    console.log(data);
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 3000);
   };
-
-  useEffect(() => {
-    if (
-      lastNameRef.current?.value.length === 0 ||
-      firstNameRef.current?.value.length === 0 ||
-      emailRef.current?.value.length === 0 ||
-      passwordRef.current?.value.length === 0
-    ) {
-      setIsButtonDisabled(true);
-    } else {
-      setIsButtonDisabled(false);
-    }
-  }, [
-    lastNameRef.current?.value,
-    firstNameRef.current?.value,
-    emailRef.current?.value,
-    passwordRef.current?.value,
-  ]);
 
   return (
     <div className="h-screen flex">
@@ -63,53 +53,79 @@ export const SignUp = () => {
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
-        <div className="flex gap-x-2">
-          <div>
-            <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
-              First Name
-            </p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex gap-x-2">
+            <div>
+              <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+                First Name
+              </p>
+              <div className="relative">
+                {errors.firstName && <ToolTip text="Enter your first name" />}
+                <input
+                  type="text"
+                  placeholder="Enter your first name"
+                  className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+                  {...register("firstName", { required: true })}
+                />
+              </div>
+            </div>
+            <div>
+              <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+                Last Name
+              </p>
+              <div className="relative">
+                {errors.lastName && <ToolTip text="Enter your last name" />}
+                <input
+                  type="text"
+                  placeholder="Enter your last name"
+                  className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+                  {...register("lastName", { required: true })}
+                />
+              </div>
+            </div>
+          </div>
+          <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
+          <div className="relative">
+            {errors.email?.type === "required" && (
+              <ToolTip text="Email is required" />
+            )}
+            {errors.email?.type === "pattern" && (
+              <ToolTip text="Email is not valid" />
+            )}
             <input
-              type="text"
-              placeholder="Enter your first name"
-              className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-              ref={firstNameRef}
+              type="email"
+              placeholder="Enter your email"
+              className={`py-2 px-4 text-sm border w-full smooth dark:bg-transparent dark:text-white focus:outline-none`}
+              {...register("email", {
+                required: true,
+                // eslint-disable-next-line no-useless-escape
+                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              })}
             />
           </div>
-          <div>
-            <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
-              Last Name
-            </p>
+          <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
+            Password
+          </p>
+          <div className="relative">
+            {errors.password && <ToolTip text="Password is required" />}
             <input
-              type="text"
-              placeholder="Enter your last name"
-              className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-              ref={lastNameRef}
+              type="password"
+              className={`py-2 px-4 border w-full dark:bg-transparent dark:text-white focus:outline-none`}
+              placeholder="Password"
+              {...register("password", {
+                required: true,
+                // pattern: /^[\u4e00-\u9fa5]{2,9}$/,
+              })}
             />
           </div>
-        </div>
-        <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-          ref={emailRef}
-        />
-        <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
-          Password
-        </p>
-        <input
-          type="password"
-          className="py-2 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <SignInOrSignUpButton
-          disabled={isButtonDisabled}
-          icon={faGear}
-          isLoading={isLoading}
-          onClick={handleSignUp}
-          text="Create Account"
-        />
+          <SignInOrSignUpButton
+            disabled={Object.keys(errors).length !== 0}
+            icon={faGear}
+            isLoading={isLoading}
+            text="Create Account"
+            className="bg-bgSignupPage"
+          />
+        </form>
         <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign up with google</p>
@@ -133,6 +149,18 @@ export const SignUp = () => {
           className="h-full object-cover w-full"
         />
       </div>
+    </div>
+  );
+};
+
+export const ToolTip = ({ text }: { text: string }) => {
+  return (
+    <div className="absolute -top-2 p-1 left-1/2 -translate-x-1/2 -translate-y-full text-center rounded-sm text-white text-xs bg-bgSignupPage">
+      <p>{text}</p>
+      <FontAwesomeIcon
+        icon={faCaretDown}
+        className="absolute left-1/2 -translate-x-1/2 text-bgSignupPage"
+      />
     </div>
   );
 };

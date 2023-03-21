@@ -1,29 +1,37 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import { useAuth } from "../Hooks/UseAuth";
 import { User } from "../Types/Global";
+import { ToolTip } from "./SignUp";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const SignIn = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const thirtyDaysCheckboxRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuth();
 
-  const handleLogin = () => {
-    console.log(emailRef.current?.value);
-    console.log(passwordRef.current?.value);
-    console.log(thirtyDaysCheckboxRef.current?.checked);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     //here is where we might call a backend service;
+    console.log(data);
 
     const user: User = {
       name: "Test User",
-      email: emailRef.current!.value,
+      email: data.email,
       plan: "Basic",
       paymentMethodSelected: false,
       activeWebsites: [
@@ -84,42 +92,60 @@ const SignIn = () => {
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
-        <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="py-3 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-          ref={emailRef}
-        />
-        <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
-          Password
-        </p>
-        <input
-          type="password"
-          className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <div className="flex items-center mt-5 mb-6">
-          <input
-            type="checkbox"
-            className="w-4 h-4 mr-2 dark:bg-transparent"
-            ref={thirtyDaysCheckboxRef}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
+          <div className="relative">
+            {errors.email?.type === "required" && (
+              <ToolTip text="Email is required" />
+            )}
+            {errors.email?.type === "pattern" && (
+              <ToolTip text="Email is not valid" />
+            )}
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="py-3 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+              {...register("email", {
+                required: true,
+                // eslint-disable-next-line no-useless-escape
+                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              })}
+            />
+          </div>
+          <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
+            Password
+          </p>
+          <div className="relative">
+            {errors.password && <ToolTip text="Password is required" />}
+            <input
+              type="password"
+              className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+              placeholder="Password"
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </div>
+          <div className="flex items-center mt-5 mb-6">
+            <input
+              type="checkbox"
+              className="w-4 h-4 mr-2 dark:bg-transparent"
+            />
+            <p className="text-sm font-medium dark:text-white">
+              Remember for 30 days
+            </p>
+            <p className="font-medium text-sm ml-auto dark:text-white">
+              Forgot password
+            </p>
+          </div>
+          <SignInOrSignUpButton
+            disabled={Object.keys(errors).length !== 0}
+            icon={faCircleNotch}
+            isLoading={isLoading}
+            text="Log In"
+            className="bg-bgSignInPage"
           />
-          <p className="text-sm font-medium dark:text-white">
-            Remember for 30 days
-          </p>
-          <p className="font-medium text-sm ml-auto dark:text-white">
-            Forgot password
-          </p>
-        </div>
-        <SignInOrSignUpButton
-          disabled={false}
-          icon={faCircleNotch}
-          isLoading={isLoading}
-          onClick={handleLogin}
-          text="Log In"
-        />
+        </form>
         <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>

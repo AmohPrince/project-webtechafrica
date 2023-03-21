@@ -42,8 +42,9 @@
   .playfair {
     font-family: "Playfair Display", serif;
   }
-  .transition-global-duration {
-    @apply duration-300;
+  .transition-global-duration,
+  .smooth {
+    @apply duration-300 transition-all;
   }
 }
 
