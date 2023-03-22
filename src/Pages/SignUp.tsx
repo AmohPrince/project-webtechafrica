@@ -1,13 +1,15 @@
 import { faCaretDown, faGear } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 // import { useAuth } from "../Hooks/UseAuth";
-// import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { firebaseApp } from "../Firebase/firebase";
+import { useAuth } from "../Hooks/UseAuth";
 
 type Inputs = {
   firstName: string;
@@ -16,8 +18,20 @@ type Inputs = {
   password: string;
 };
 
+export type PopUpInfo = {
+  showing: boolean;
+  text: null | string;
+  type: null | "success" | "error";
+};
+
 export const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const [popUp, setPopUp] = useState<PopUpInfo>({
+    showing: false,
+    text: null,
+    type: null,
+  });
 
   const {
     register,
@@ -25,26 +39,62 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  // const { setUser } = useAuth();
-  //TODO Disable submit button when the inputs are empty.
+  const { setUser } = useAuth();
+  const redirect = useNavigate();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
-    // console.log(firstName, lastName, email, password);
-    // const auth = getAuth(firebaseApp);
-    // createUserWithEmailAndPassword(auth , emailRef.current!.value , passwordRef.current!.value).then(() => {
+  const showPopUp = (type: "success" | "error", userName?: string) => {
+    setPopUp({
+      showing: true,
+      text: userName ? "" : userName!,
+      type: type,
+    });
 
-    // }).catch(error => console.log(error))
-    // setUser({
-    //   email: emailRef.current!.value,
-    //   name: "From Sign Up",
-    // });
-    console.log(data);
+    setTimeout(() => {
+      //reset popup object
+      setPopUp({
+        showing: false,
+        text: null,
+        type: null,
+      });
+      if (type === "success") {
+        redirect("/dashboard");
+      }
+    }, 3000);
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+    const auth = getAuth(firebaseApp);
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 3000);
+    setTimeout(
+      () =>
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+          .then((user) => {
+            setUser({
+              email: user.user.email!,
+              name: user.user.displayName
+                ? user.user.email!
+                : user.user.displayName!,
+              paymentMethodSelected: false,
+              plan: "basic",
+            });
+            setIsLoading(false);
+            showPopUp(
+              "success",
+              user.user.displayName ? user.user.email! : user.user.displayName!
+            );
+          })
+          .catch((error) => {
+            console.log(error.message);
+            setIsLoading(false);
+            showPopUp("error");
+          }),
+      3000
+    );
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex relative z-0">
+      {popUp.showing && <PopUp popUpInfo={popUp} />}
       <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
         <LogoTab logoColor={LogoColor.sign_up} />
         <p className="font-semibold text-3xl mt-[9%] dark:text-white">
@@ -161,6 +211,25 @@ export const ToolTip = ({ text }: { text: string }) => {
         icon={faCaretDown}
         className="absolute left-1/2 -translate-x-1/2 text-bgSignupPage"
       />
+    </div>
+  );
+};
+
+export const PopUp = ({ popUpInfo }: { popUpInfo: PopUpInfo }) => {
+  return (
+    <div
+      className={`absolute top-4 left-1/2 bg-white rounded-sm py-2 px-3 shadow-sm text-sm -translate-x-1/2 overflow-x-hidden ${
+        popUpInfo.type === "success"
+          ? "border-b shadow-green-500"
+          : "border shadow-red-500"
+      }`}
+    >
+      <p>
+        {popUpInfo.type === "success"
+          ? "Hello " + popUpInfo.text + "!"
+          : "An error occurred! most probably you had already registered."}
+      </p>
+      <div className="h-[2px] transition" />
     </div>
   );
 };

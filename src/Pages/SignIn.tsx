@@ -1,13 +1,14 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
+import { firebaseApp } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
-import { User } from "../Types/Global";
-import { ToolTip } from "./SignUp";
+import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
 
 type Inputs = {
   email: string;
@@ -18,6 +19,11 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuth();
+  const [popUp, setPopUp] = useState<PopUpInfo>({
+    showing: false,
+    text: null,
+    type: null,
+  });
 
   const {
     register,
@@ -25,65 +31,105 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    //here is where we might call a backend service;
-    console.log(data);
+  const showPopUp = (type: "success" | "error", userName?: string) => {
+    setPopUp({ showing: true, text: userName ? userName : "", type: type });
+    setTimeout(() => {
+      setPopUp({
+        showing: false,
+        text: null,
+        type: null,
+      });
+      if (type === "success") {
+        navigate("/dashboard");
+      }
+    }, 3000);
+  };
 
-    const user: User = {
-      name: "Test User",
-      email: data.email,
-      plan: "Basic",
-      paymentMethodSelected: false,
-      activeWebsites: [
-        {
-          websiteUrl: "https://testuser.webtechafrica.com/",
-          hasShop: true,
-          shopUrl: "https://testuser.webtechafrica.com/shop",
-          websiteScreenShot:
-            "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
-          plan: "Basic",
-        },
-      ],
-      devWebsites: [
-        {
-          previewUrl: "https://testuser.webtechafrica.com/",
-          hasShop: true,
-          shopUrl: "https://testuser.webtechafrica.com/shop",
-          websiteScreenShot:
-            "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
-        },
-        {
-          previewUrl: "https://testuser.webtechafrica.com/",
-          hasShop: false,
-          websiteScreenShot:
-            "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
-        },
-      ],
-      pendingVerificationWebsites: [
-        {
-          hasShop: true,
-          websiteUrl: "https://website.com",
-        },
-      ],
-      cards: [
-        {
-          endsIn: "5353",
-          expiryDate: "04/2023",
-          type: "MasterCard",
-        },
-      ],
-    };
+  const onSubmit: SubmitHandler<Inputs> = (userCredentials: Inputs) => {
+    const auth = getAuth(firebaseApp);
+
+    // const user: User = {
+    //   name: "Test User",
+    //   email: userCredentials.email,
+    //   plan: "Basic",
+    //   paymentMethodSelected: false,
+    //   activeWebsites: [
+    //     {
+    //       websiteUrl: "https://testuser.webtechafrica.com/",
+    //       hasShop: true,
+    //       shopUrl: "https://testuser.webtechafrica.com/shop",
+    //       websiteScreenShot:
+    //         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
+    //       plan: "Basic",
+    //     },
+    //   ],
+    //   devWebsites: [
+    //     {
+    //       previewUrl: "https://testuser.webtechafrica.com/",
+    //       hasShop: true,
+    //       shopUrl: "https://testuser.webtechafrica.com/shop",
+    //       websiteScreenShot:
+    //         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
+    //     },
+    //     {
+    //       previewUrl: "https://testuser.webtechafrica.com/",
+    //       hasShop: false,
+    //       websiteScreenShot:
+    //         "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
+    //     },
+    //   ],
+    //   pendingVerificationWebsites: [
+    //     {
+    //       hasShop: true,
+    //       websiteUrl: "https://website.com",
+    //     },
+    //   ],
+    //   cards: [
+    //     {
+    //       endsIn: "5353",
+    //       expiryDate: "04/2023",
+    //       type: "MasterCard",
+    //     },
+    //   ],
+    // };
+
+    // setUser(user);
 
     setIsLoading(true);
-    setUser(user);
+
     setTimeout(() => {
-      setIsLoading(false);
-      navigate("/");
+      signInWithEmailAndPassword(
+        auth,
+        userCredentials.email,
+        userCredentials.password
+      )
+        .then((user) => {
+          setUser({
+            email: user.user.email!,
+            name: user.user.displayName
+              ? user.user.displayName!
+              : user.user.email!,
+            paymentMethodSelected: false,
+            plan: "basic",
+          });
+          setIsLoading(false);
+          showPopUp(
+            "success",
+            user.user.displayName ? user.user.displayName! : user.user.email!
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          showPopUp("error");
+          setIsLoading(false);
+        });
     }, 3000);
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex relative">
+      {popUp.showing && <PopUp popUpInfo={popUp} />}
+
       <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
         <LogoTab logoColor={LogoColor.sign_in} />
         <p className="font-semibold text-3xl mt-[14%] dark:text-white">
