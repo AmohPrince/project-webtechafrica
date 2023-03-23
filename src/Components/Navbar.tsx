@@ -74,16 +74,7 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        {user === null ? (
-          <Link
-            className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
-              basePath !== "/" && "bg-primaryOne text-white"
-            }`}
-            to="/sign-in"
-          >
-            Sign in
-          </Link>
-        ) : (
+        {user ? (
           <Link
             className={`bg-white px-4 rounded-full ml-10 font-semibold flex items-center ${
               basePath !== "/" && "bg-primaryOne text-white"
@@ -91,6 +82,15 @@ const Navbar = () => {
             to="/dashboard"
           >
             My Dashboard 🚀
+          </Link>
+        ) : (
+          <Link
+            className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
+              basePath !== "/" && "bg-primaryOne text-white"
+            }`}
+            to="/sign-in"
+          >
+            Sign in
           </Link>
         )}
       </div>

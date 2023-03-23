@@ -1,12 +1,18 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
+  UserCredential,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
-import { firebaseApp } from "../Firebase/firebase";
+import { auth } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
 
@@ -17,19 +23,20 @@ type Inputs = {
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState<PopUpInfo>({
     showing: false,
     text: null,
     type: null,
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const googleAuthProvider = new GoogleAuthProvider();
 
   const showPopUp = (type: "success" | "error", userName?: string) => {
     setPopUp({ showing: true, text: userName ? userName : "", type: type });
@@ -46,8 +53,6 @@ const SignIn = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (userCredentials: Inputs) => {
-    const auth = getAuth(firebaseApp);
-
     // const user: User = {
     //   name: "Test User",
     //   email: userCredentials.email,
@@ -120,9 +125,81 @@ const SignIn = () => {
         })
         .catch((err) => {
           console.log(err);
-          showPopUp("error");
+          showPopUp("error", err.message);
           setIsLoading(false);
         });
+    }, 3000);
+  };
+
+  const loginWithGoogle = () => {
+    setIsLoading(true);
+
+    //TODO fix sign in for small screens
+    setTimeout(() => {
+      if (window.innerWidth < 768) {
+        // code for mobile devices
+        signInWithRedirect(auth, googleAuthProvider)
+          .then((result: UserCredential) => {
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential?.accessToken;
+            // console.log(token, "token");
+            const user = result.user;
+            // console.log(user, "user");
+            console.log(result);
+            setUser({
+              email: user.email ? user.email : "Undefined email",
+              name: user.displayName ? user.displayName! : user.email!,
+              paymentMethodSelected: false,
+              plan: "basic",
+              photoUrl: user.photoURL!,
+            });
+            setIsLoading(false);
+            showPopUp("success", user.displayName!);
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            // const email = error.customData.email;
+            // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            setIsLoading(false);
+            showPopUp("error", errorMessage);
+          });
+      } else {
+        // code for desktop devices
+        signInWithPopup(auth, googleAuthProvider)
+          .then((result) => {
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential?.accessToken;
+            // console.log(token, "token");
+            const user = result.user;
+            // console.log(user, "user");
+            setUser({
+              email: user.email ? user.email : "Undefined email",
+              name: user.displayName ? user.displayName! : user.email!,
+              paymentMethodSelected: false,
+              plan: "basic",
+              photoUrl: user.photoURL!,
+            });
+            setIsLoading(false);
+            showPopUp("success", user.displayName!);
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            // const email = error.customData.email;
+            // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            setIsLoading(false);
+            showPopUp("error", errorMessage);
+          });
+      }
     }, 3000);
   };
 
@@ -192,7 +269,10 @@ const SignIn = () => {
             className="bg-bgSignInPage"
           />
         </form>
-        <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
+        <div
+          className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
+          onClick={loginWithGoogle}
+        >
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>
         </div>

@@ -17,6 +17,7 @@ export type User = {
   name: string;
   email: string;
   plan: string;
+  photoUrl?: string;
   paymentMethodSelected: boolean;
   activeWebsites?: ActiveWebsiteType[];
   devWebsites?: DevWebsite[];

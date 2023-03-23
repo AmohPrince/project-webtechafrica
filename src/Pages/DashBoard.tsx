@@ -11,6 +11,7 @@ import { assets } from "../Assets/assets";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import { useAuth } from "../Hooks/UseAuth";
+import { useUpdateLogger } from "../Hooks/useUpdateLogger";
 import { User } from "../Types/Global";
 
 export const globalData = createContext<{
@@ -47,6 +48,8 @@ const DashBoard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useUpdateLogger(window.innerWidth, "inner-width");
+
   return (
     <div className="flex sm:w-screen h-[100dvh] overflow-hidden">
       <FontAwesomeIcon
@@ -71,7 +74,7 @@ const DashBoard = () => {
             />
             <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer">
               <img
-                src={assets.profile}
+                src={user?.photoUrl ? user.photoUrl : assets.profile}
                 alt="profile"
                 className="h-7 w-7 object-cover rounded-full mr-3"
               />

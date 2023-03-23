@@ -92,6 +92,14 @@ export const SignUp = () => {
     );
   };
 
+  //TODO LOGIN with google
+  const logInWithGoogle = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  };
+
   return (
     <div className="h-screen flex relative z-0">
       {popUp.showing && <PopUp popUpInfo={popUp} />}
@@ -176,7 +184,10 @@ export const SignUp = () => {
             className="bg-bgSignupPage"
           />
         </form>
-        <div className="flex justify-center mt-4 mb-6 cursor-pointer items-center">
+        <div
+          className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
+          onClick={logInWithGoogle}
+        >
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign up with google</p>
         </div>
