@@ -52,6 +52,7 @@ const SignIn = () => {
     }, 3000);
   };
 
+  //sign-in with email and password
   const onSubmit: SubmitHandler<Inputs> = (userCredentials: Inputs) => {
     // const user: User = {
     //   name: "Test User",
@@ -131,10 +132,10 @@ const SignIn = () => {
     }, 3000);
   };
 
-  const loginWithGoogle = () => {
-    setIsLoading(true);
+  //TODO handle sign-in errors
 
-    //TODO fix sign in for small screens
+  const signInWithGoogle = () => {
+    setIsLoading(true);
     setTimeout(() => {
       if (window.innerWidth < 768) {
         // code for mobile devices
@@ -265,13 +266,13 @@ const SignIn = () => {
             disabled={Object.keys(errors).length !== 0}
             icon={faCircleNotch}
             isLoading={isLoading}
-            text="Log In"
+            text="Sign In"
             className="bg-bgSignInPage"
           />
         </form>
         <div
           className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
-          onClick={loginWithGoogle}
+          onClick={signInWithGoogle}
         >
           <img src={assets.google} alt="google icon" className="w-5 h-5" />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>

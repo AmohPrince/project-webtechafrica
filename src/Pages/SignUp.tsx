@@ -5,10 +5,17 @@ import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 // import { useAuth } from "../Hooks/UseAuth";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  UserCredential,
+} from "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { firebaseApp } from "../Firebase/firebase";
+import { auth, firebaseApp } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 
 type Inputs = {
@@ -42,10 +49,12 @@ export const SignUp = () => {
   const { setUser } = useAuth();
   const redirect = useNavigate();
 
-  const showPopUp = (type: "success" | "error", userName?: string) => {
+  const googleAuthProvider = new GoogleAuthProvider();
+
+  const showPopUp = (type: "success" | "error", text: string) => {
     setPopUp({
       showing: true,
-      text: userName ? "" : userName!,
+      text: text,
       type: type,
     });
 
@@ -62,6 +71,7 @@ export const SignUp = () => {
     }, 3000);
   };
 
+  //sign up with email and password
   const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
     const auth = getAuth(firebaseApp);
     setIsLoading(true);
@@ -72,8 +82,8 @@ export const SignUp = () => {
             setUser({
               email: user.user.email!,
               name: user.user.displayName
-                ? user.user.email!
-                : user.user.displayName!,
+                ? user.user.displayName!
+                : user.user.email!,
               paymentMethodSelected: false,
               plan: "basic",
             });
@@ -84,19 +94,81 @@ export const SignUp = () => {
             );
           })
           .catch((error) => {
-            console.log(error.message);
             setIsLoading(false);
-            showPopUp("error");
+            showPopUp("error", error.message);
           }),
       3000
     );
   };
 
-  //TODO LOGIN with google
+  //TODO signUpWithGoogle with google
   const logInWithGoogle = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
+      if (window.innerWidth < 768) {
+        // code for mobile devices
+        signInWithRedirect(auth, googleAuthProvider)
+          .then((result: UserCredential) => {
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential?.accessToken;
+            // console.log(token, "token");
+            const user = result.user;
+            // console.log(user, "user");
+            console.log(result);
+            setUser({
+              email: user.email ? user.email : "Undefined email",
+              name: user.displayName ? user.displayName! : user.email!,
+              paymentMethodSelected: false,
+              plan: "basic",
+              photoUrl: user.photoURL!,
+            });
+            setIsLoading(false);
+            showPopUp("success", user.displayName!);
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            // const email = error.customData.email;
+            // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            setIsLoading(false);
+            showPopUp("error", errorMessage);
+          });
+      } else {
+        // code for desktop devices
+        signInWithPopup(auth, googleAuthProvider)
+          .then((result) => {
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential?.accessToken;
+            // console.log(token, "token");
+            const user = result.user;
+            // console.log(user, "user");
+            setUser({
+              email: user.email ? user.email : "Undefined email",
+              name: user.displayName ? user.displayName! : user.email!,
+              paymentMethodSelected: false,
+              plan: "basic",
+              photoUrl: user.photoURL!,
+            });
+            setIsLoading(false);
+            showPopUp("success", user.displayName!);
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            // const email = error.customData.email;
+            // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            setIsLoading(false);
+            showPopUp("error", errorMessage);
+          });
+      }
     }, 3000);
   };
 
@@ -238,7 +310,7 @@ export const PopUp = ({ popUpInfo }: { popUpInfo: PopUpInfo }) => {
       <p>
         {popUpInfo.type === "success"
           ? "Hello " + popUpInfo.text + "!"
-          : "An error occurred! most probably you had already registered."}
+          : popUpInfo.text}
       </p>
       <div className="h-[2px] transition" />
     </div>
