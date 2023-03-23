@@ -32,7 +32,8 @@ export type PopUpInfo = {
 };
 
 export const SignUp = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
+  const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
 
   const [popUp, setPopUp] = useState<PopUpInfo>({
     showing: false,
@@ -72,9 +73,9 @@ export const SignUp = () => {
   };
 
   //sign up with email and password
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+  const signUpWithEmailAndPassword: SubmitHandler<Inputs> = (data: Inputs) => {
     const auth = getAuth(firebaseApp);
-    setIsLoading(true);
+    setCreatingUserWithEmail(true);
     setTimeout(
       () =>
         createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -87,23 +88,23 @@ export const SignUp = () => {
               paymentMethodSelected: false,
               plan: "basic",
             });
-            setIsLoading(false);
+            setCreatingUserWithEmail(false);
             showPopUp(
               "success",
               user.user.displayName ? user.user.email! : user.user.displayName!
             );
           })
           .catch((error) => {
-            setIsLoading(false);
-            showPopUp("error", error.message);
+            setCreatingUserWithEmail(false);
+            showPopUp("error", getSignUpErrorMessage(error));
           }),
       3000
     );
   };
 
-  //TODO signUpWithGoogle with google
-  const logInWithGoogle = () => {
-    setIsLoading(true);
+  //TODO fix sign up with google errors on small screens that redirect
+  const signUpWithGoogle = () => {
+    setCreatingUserWithGoogle(true);
     setTimeout(() => {
       if (window.innerWidth < 768) {
         // code for mobile devices
@@ -112,9 +113,9 @@ export const SignUp = () => {
             // const credential = GoogleAuthProvider.credentialFromResult(result);
             // const token = credential?.accessToken;
             // console.log(token, "token");
-            const user = result.user;
             // console.log(user, "user");
-            console.log(result);
+            // console.log(result);
+            const user = result.user;
             setUser({
               email: user.email ? user.email : "Undefined email",
               name: user.displayName ? user.displayName! : user.email!,
@@ -122,20 +123,20 @@ export const SignUp = () => {
               plan: "basic",
               photoUrl: user.photoURL!,
             });
-            setIsLoading(false);
+            setCreatingUserWithGoogle(false);
             showPopUp("success", user.displayName!);
           })
           .catch((error) => {
             // Handle Errors here.
             // const errorCode = error.code;
-            const errorMessage = error.message;
+            // const errorMessage = error.message;
             // The email of the user's account used.
             // const email = error.customData.email;
             // The AuthCredential type that was used.
             // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-            setIsLoading(false);
-            showPopUp("error", errorMessage);
+            setCreatingUserWithGoogle(false);
+            showPopUp("error", getSignUpErrorMessage(error));
           });
       } else {
         // code for desktop devices
@@ -144,8 +145,8 @@ export const SignUp = () => {
             // const credential = GoogleAuthProvider.credentialFromResult(result);
             // const token = credential?.accessToken;
             // console.log(token, "token");
-            const user = result.user;
             // console.log(user, "user");
+            const user = result.user;
             setUser({
               email: user.email ? user.email : "Undefined email",
               name: user.displayName ? user.displayName! : user.email!,
@@ -153,20 +154,20 @@ export const SignUp = () => {
               plan: "basic",
               photoUrl: user.photoURL!,
             });
-            setIsLoading(false);
+            setCreatingUserWithGoogle(false);
             showPopUp("success", user.displayName!);
           })
           .catch((error) => {
             // Handle Errors here.
             // const errorCode = error.code;
-            const errorMessage = error.message;
+            // const errorMessage = error.message;
             // The email of the user's account used.
             // const email = error.customData.email;
             // The AuthCredential type that was used.
             // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-            setIsLoading(false);
-            showPopUp("error", errorMessage);
+            setCreatingUserWithGoogle(false);
+            showPopUp("error", getSignUpErrorMessage(error));
           });
       }
     }, 3000);
@@ -183,7 +184,7 @@ export const SignUp = () => {
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(signUpWithEmailAndPassword)}>
           <div className="flex gap-x-2">
             <div>
               <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
@@ -251,16 +252,20 @@ export const SignUp = () => {
           <SignInOrSignUpButton
             disabled={Object.keys(errors).length !== 0}
             icon={faGear}
-            isLoading={isLoading}
+            isLoading={creatingUserWithEmail}
             text="Create Account"
             className="bg-bgSignupPage"
           />
         </form>
         <div
           className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
-          onClick={logInWithGoogle}
+          onClick={signUpWithGoogle}
         >
-          <img src={assets.google} alt="google icon" className="w-5 h-5" />
+          <img
+            src={assets.google}
+            alt="google icon"
+            className={`w-5 h-5 ${creatingUserWithGoogle ? "spin" : ""}`}
+          />
           <p className="font-medium ml-2 text-gray-600">Sign up with google</p>
         </div>
         <p className="text-sm text-gray-400 text-center">
@@ -315,4 +320,22 @@ export const PopUp = ({ popUpInfo }: { popUpInfo: PopUpInfo }) => {
       <div className="h-[2px] transition" />
     </div>
   );
+};
+
+export const getSignUpErrorMessage = (error: any): string => {
+  if (error.code === "auth/account-exists-with-different-credential") {
+    return "An account with this email already exists. Try signing in with a different method.";
+  } else if (error.code === "auth/popup-closed-by-user") {
+    return "The sign-up popup was closed before authentication could complete. Please try again.";
+  } else if (error.code === "auth/cancelled-popup-request") {
+    return "The sign-up popup was cancelled before authentication could complete. Please try again.";
+  } else if (error.code === "auth/email-already-in-use") {
+    return "An account with this email already exists. Please use a different email address.";
+  } else if (error.code === "auth/invalid-email") {
+    return "The email address you entered is not valid. Please check your email and try again.";
+  } else if (error.code === "auth/weak-password") {
+    return "Your password is too weak. Please choose a stronger password.";
+  } else {
+    return "An error occurred. Please try again later.";
+  }
 };

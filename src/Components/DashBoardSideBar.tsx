@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faEllipsis,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -8,22 +11,17 @@ import DashboardOption from "./DashboardOption";
 import LogoTab from "./LogoTab";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
-import { useAuth } from "../Hooks/UseAuth";
 
 const DashBoardSideBar = () => {
   const navigate = useNavigate();
-  const { setUser } = useAuth();
   const [loading, setLoading] = useState(false);
 
-  //TODO handle user logOut
   const handleLogOut = () => {
     setLoading(true);
-
     setTimeout(() => {
       signOut(auth)
         .then((res) => {
-          console.log(res);
-          setUser(null);
+          localStorage.removeItem("user-data");
           navigate("/");
           setLoading(false);
         })
@@ -52,7 +50,7 @@ const DashBoardSideBar = () => {
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
 
         {loading ? (
-          <p className="font-semibold ml-3">Logging you out ...</p>
+          <FontAwesomeIcon icon={faEllipsis} />
         ) : (
           <p className="font-semibold ml-3">Log out</p>
         )}

@@ -29,7 +29,8 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
+  const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
   const [popUp, setPopUp] = useState<PopUpInfo>({
     showing: false,
     text: null,
@@ -53,55 +54,10 @@ const SignIn = () => {
   };
 
   //sign-in with email and password
-  const onSubmit: SubmitHandler<Inputs> = (userCredentials: Inputs) => {
-    // const user: User = {
-    //   name: "Test User",
-    //   email: userCredentials.email,
-    //   plan: "Basic",
-    //   paymentMethodSelected: false,
-    //   activeWebsites: [
-    //     {
-    //       websiteUrl: "https://testuser.webtechafrica.com/",
-    //       hasShop: true,
-    //       shopUrl: "https://testuser.webtechafrica.com/shop",
-    //       websiteScreenShot:
-    //         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
-    //       plan: "Basic",
-    //     },
-    //   ],
-    //   devWebsites: [
-    //     {
-    //       previewUrl: "https://testuser.webtechafrica.com/",
-    //       hasShop: true,
-    //       shopUrl: "https://testuser.webtechafrica.com/shop",
-    //       websiteScreenShot:
-    //         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
-    //     },
-    //     {
-    //       previewUrl: "https://testuser.webtechafrica.com/",
-    //       hasShop: false,
-    //       websiteScreenShot:
-    //         "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
-    //     },
-    //   ],
-    //   pendingVerificationWebsites: [
-    //     {
-    //       hasShop: true,
-    //       websiteUrl: "https://website.com",
-    //     },
-    //   ],
-    //   cards: [
-    //     {
-    //       endsIn: "5353",
-    //       expiryDate: "04/2023",
-    //       type: "MasterCard",
-    //     },
-    //   ],
-    // };
-
-    // setUser(user);
-
-    setIsLoading(true);
+  const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = (
+    userCredentials: Inputs
+  ) => {
+    setCreatingUserWithEmail(true);
 
     setTimeout(() => {
       signInWithEmailAndPassword(
@@ -118,7 +74,7 @@ const SignIn = () => {
             paymentMethodSelected: false,
             plan: "basic",
           });
-          setIsLoading(false);
+          setCreatingUserWithEmail(false);
           showPopUp(
             "success",
             user.user.displayName ? user.user.displayName! : user.user.email!
@@ -126,27 +82,23 @@ const SignIn = () => {
         })
         .catch((err) => {
           console.log(err);
-          showPopUp("error", err.message);
-          setIsLoading(false);
+          showPopUp("error", getSignInErrorMessage(err));
+          setCreatingUserWithEmail(false);
         });
     }, 3000);
   };
 
-  //TODO handle sign-in errors
+  // TODO handle sign in errors for small screens
 
+  //sign in with google
   const signInWithGoogle = () => {
-    setIsLoading(true);
+    setCreatingUserWithGoogle(true);
     setTimeout(() => {
       if (window.innerWidth < 768) {
         // code for mobile devices
         signInWithRedirect(auth, googleAuthProvider)
           .then((result: UserCredential) => {
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential?.accessToken;
-            // console.log(token, "token");
             const user = result.user;
-            // console.log(user, "user");
-            console.log(result);
             setUser({
               email: user.email ? user.email : "Undefined email",
               name: user.displayName ? user.displayName! : user.email!,
@@ -154,30 +106,18 @@ const SignIn = () => {
               plan: "basic",
               photoUrl: user.photoURL!,
             });
-            setIsLoading(false);
+            setCreatingUserWithGoogle(false);
             showPopUp("success", user.displayName!);
           })
-          .catch((error) => {
-            // Handle Errors here.
-            // const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            // const email = error.customData.email;
-            // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-            setIsLoading(false);
-            showPopUp("error", errorMessage);
+          .catch((err) => {
+            setCreatingUserWithGoogle(false);
+            showPopUp("error", getSignInErrorMessage(err));
           });
       } else {
         // code for desktop devices
         signInWithPopup(auth, googleAuthProvider)
           .then((result) => {
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential?.accessToken;
-            // console.log(token, "token");
             const user = result.user;
-            // console.log(user, "user");
             setUser({
               email: user.email ? user.email : "Undefined email",
               name: user.displayName ? user.displayName! : user.email!,
@@ -185,20 +125,12 @@ const SignIn = () => {
               plan: "basic",
               photoUrl: user.photoURL!,
             });
-            setIsLoading(false);
+            setCreatingUserWithGoogle(false);
             showPopUp("success", user.displayName!);
           })
-          .catch((error) => {
-            // Handle Errors here.
-            // const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            // const email = error.customData.email;
-            // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-            setIsLoading(false);
-            showPopUp("error", errorMessage);
+          .catch((err) => {
+            setCreatingUserWithGoogle(false);
+            showPopUp("error", getSignInErrorMessage(err));
           });
       }
     }, 3000);
@@ -216,7 +148,7 @@ const SignIn = () => {
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
           <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
           <div className="relative">
             {errors.email?.type === "required" && (
@@ -265,7 +197,7 @@ const SignIn = () => {
           <SignInOrSignUpButton
             disabled={Object.keys(errors).length !== 0}
             icon={faCircleNotch}
-            isLoading={isLoading}
+            isLoading={creatingUserWithEmail}
             text="Sign In"
             className="bg-bgSignInPage"
           />
@@ -274,7 +206,11 @@ const SignIn = () => {
           className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
           onClick={signInWithGoogle}
         >
-          <img src={assets.google} alt="google icon" className="w-5 h-5" />
+          <img
+            src={assets.google}
+            alt="google icon"
+            className={`w-5 h-5 ${creatingUserWithGoogle ? "spin" : ""}`}
+          />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>
         </div>
         <p className="text-sm text-gray-400 text-center">
@@ -301,3 +237,44 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const getSignInErrorMessage = (err: any): string => {
+  let errorMessage: string;
+  switch (err.code) {
+    case "auth/user-not-found":
+      errorMessage = "User not found. Please check your email and try again.";
+      break;
+    case "auth/wrong-password":
+      errorMessage =
+        "Wrong password. Please check your password and try again.";
+      break;
+    case "auth/network-request-failed":
+      errorMessage =
+        "Network error. Please check your internet connection and try again.";
+      break;
+    case "auth/popup-closed-by-user":
+      errorMessage = "Sign in failed: You closed the sign-in window.";
+      break;
+    case "auth/cancelled-popup-request":
+      errorMessage = "Sign in failed: You cancelled the sign-in window.";
+      break;
+    case "auth/email-already-in-use":
+      errorMessage =
+        "This email is already in use. Please sign in or use a different email address.";
+      break;
+    case "auth/operation-not-allowed":
+      errorMessage =
+        "Sign in is currently not available. Please try again later.";
+      break;
+    case "auth/too-many-requests":
+      errorMessage =
+        "Sign in has been temporarily disabled due to too many requests. Please try again later.";
+      break;
+    case "auth/internal-error":
+      errorMessage = "An internal error has occurred. Please try again later.";
+      break;
+    default:
+      errorMessage = err.message;
+  }
+  return errorMessage;
+};

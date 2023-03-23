@@ -3,11 +3,11 @@ import {
   faBell,
   faCaretDown,
   faMagnifyingGlass,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { assets } from "../Assets/assets";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import { useAuth } from "../Hooks/UseAuth";
@@ -73,11 +73,15 @@ const DashBoard = () => {
               className="w-3 h-3 text-gray-400 cursor-pointer hover:text-primaryOne transition-all"
             />
             <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer">
-              <img
-                src={user?.photoUrl ? user.photoUrl : assets.profile}
-                alt="profile"
-                className="h-7 w-7 object-cover rounded-full mr-3"
-              />
+              {user?.photoUrl ? (
+                <img
+                  src={user.photoUrl}
+                  alt="profile"
+                  className="h-7 w-7 object-cover rounded-full mr-3"
+                />
+              ) : (
+                <FontAwesomeIcon icon={faUser} className="mr-3" />
+              )}
               <p className="text-sm font-bold mr-7">{user?.name}</p>
               <FontAwesomeIcon
                 icon={faCaretDown}
