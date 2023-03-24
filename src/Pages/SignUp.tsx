@@ -1,21 +1,17 @@
 import { faCaretDown, faGear } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
-// import { useAuth } from "../Hooks/UseAuth";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  UserCredential,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { auth, firebaseApp } from "../Firebase/firebase";
+import {
+  firebaseApp,
+  redirectResult,
+  signInWithGoogle,
+} from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 
 type Inputs = {
@@ -49,8 +45,6 @@ export const SignUp = () => {
 
   const { setUser } = useAuth();
   const redirect = useNavigate();
-
-  const googleAuthProvider = new GoogleAuthProvider();
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setPopUp({
@@ -102,76 +96,37 @@ export const SignUp = () => {
     );
   };
 
-  //TODO fix sign up with google errors on small screens that redirect
-  const signUpWithGoogle = () => {
+  const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
-    setTimeout(() => {
-      if (window.innerWidth < 768) {
-        // code for mobile devices
-        signInWithRedirect(auth, googleAuthProvider)
-          .then((result: UserCredential) => {
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential?.accessToken;
-            // console.log(token, "token");
-            // console.log(user, "user");
-            // console.log(result);
-            const user = result.user;
-            setUser({
-              email: user.email ? user.email : "Undefined email",
-              name: user.displayName ? user.displayName! : user.email!,
-              paymentMethodSelected: false,
-              plan: "basic",
-              photoUrl: user.photoURL!,
-            });
-            setCreatingUserWithGoogle(false);
-            showPopUp("success", user.displayName!);
-          })
-          .catch((error) => {
-            // Handle Errors here.
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            // The email of the user's account used.
-            // const email = error.customData.email;
-            // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-            setCreatingUserWithGoogle(false);
-            showPopUp("error", getSignUpErrorMessage(error));
-          });
-      } else {
-        // code for desktop devices
-        signInWithPopup(auth, googleAuthProvider)
-          .then((result) => {
-            // const credential = GoogleAuthProvider.credentialFromResult(result);
-            // const token = credential?.accessToken;
-            // console.log(token, "token");
-            // console.log(user, "user");
-            const user = result.user;
-            setUser({
-              email: user.email ? user.email : "Undefined email",
-              name: user.displayName ? user.displayName! : user.email!,
-              paymentMethodSelected: false,
-              plan: "basic",
-              photoUrl: user.photoURL!,
-            });
-            setCreatingUserWithGoogle(false);
-            showPopUp("success", user.displayName!);
-          })
-          .catch((error) => {
-            // Handle Errors here.
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            // The email of the user's account used.
-            // const email = error.customData.email;
-            // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-            setCreatingUserWithGoogle(false);
-            showPopUp("error", getSignUpErrorMessage(error));
-          });
-      }
-    }, 3000);
+    try {
+      const user = await signInWithGoogle();
+      setUser(user);
+      showPopUp("success", user.name);
+    } catch (err: any) {
+      showPopUp("error", getSignUpErrorMessage(err.message));
+    }
+    setCreatingUserWithGoogle(false);
   };
+
+  useEffect(() => {
+    const getRedirectResult = async () => {
+      setCreatingUserWithGoogle(true);
+
+      await redirectResult()
+        .then((res) => {
+          if (res) {
+            setUser(res);
+            showPopUp("success", res.name);
+          }
+        })
+        .catch((err) => {
+          showPopUp("error", getSignUpErrorMessage(err));
+        });
+      setCreatingUserWithGoogle(false);
+    };
+    getRedirectResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="h-screen flex relative z-0">

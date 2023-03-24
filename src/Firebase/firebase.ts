@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  UserCredential,
+} from "firebase/auth";
+import { User } from "../Types/Global";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,6 +23,69 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const analytics = getAnalytics(firebaseApp);
+
+const googleAuthProvider = new GoogleAuthProvider();
+
+//TODO fix sign up with google errors on small screens that redirect
+export const signInWithGoogle = (): Promise<User> => {
+  if (window.innerWidth < 768) {
+    return signInWithRedirect(auth, googleAuthProvider)
+      .then((result: UserCredential) => {
+        const user = result.user;
+        return {
+          email: user.email!,
+          name: user.displayName ? user.displayName! : user.email!,
+          paymentMethodSelected: false,
+          plan: "basic",
+          photoUrl: user.photoURL!,
+        };
+      })
+      .catch((error) => {
+        throw error;
+      });
+  } else {
+    return signInWithPopup(auth, googleAuthProvider)
+      .then((result) => {
+        const user = result.user;
+        return {
+          email: user.email!,
+          name: user.displayName ? user.displayName! : user.email!,
+          paymentMethodSelected: false,
+          plan: "basic",
+          photoUrl: user.photoURL!,
+        };
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+};
+
+export const redirectResult = (): Promise<User | null> => {
+  return getRedirectResult(auth)
+    .then((result) => {
+      // // This gives you a Google Access Token. You can use it to access Google APIs.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+
+      // The signed-in user info.
+      // IdP data available using getAdditionalUserInfo(result)
+      if (result) {
+        const user = result.user;
+        return {
+          email: user.email!,
+          name: user.displayName ? user.displayName! : user.email!,
+          paymentMethodSelected: false,
+          plan: "basic",
+          photoUrl: user.photoURL!,
+        };
+      }
+      return null;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 
 // const user: User = {
 //   name: "Test User",

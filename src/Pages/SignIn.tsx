@@ -1,18 +1,12 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signInWithRedirect,
-  UserCredential,
-} from "firebase/auth";
-import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
-import { auth } from "../Firebase/firebase";
+import { auth, redirectResult, signInWithGoogle } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
 
@@ -29,18 +23,16 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
-  const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
+  const [signingInWithEmail, setSigningInWithEmail] = useState(false);
+  const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
   const [popUp, setPopUp] = useState<PopUpInfo>({
     showing: false,
     text: null,
     type: null,
   });
 
-  const googleAuthProvider = new GoogleAuthProvider();
-
-  const showPopUp = (type: "success" | "error", userName?: string) => {
-    setPopUp({ showing: true, text: userName ? userName : "", type: type });
+  const showPopUp = (type: "success" | "error", text: string) => {
+    setPopUp({ showing: true, text: text, type: type });
     setTimeout(() => {
       setPopUp({
         showing: false,
@@ -57,8 +49,7 @@ const SignIn = () => {
   const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = (
     userCredentials: Inputs
   ) => {
-    setCreatingUserWithEmail(true);
-
+    setSigningInWithEmail(true);
     setTimeout(() => {
       signInWithEmailAndPassword(
         auth,
@@ -74,67 +65,51 @@ const SignIn = () => {
             paymentMethodSelected: false,
             plan: "basic",
           });
-          setCreatingUserWithEmail(false);
+          setSigningInWithEmail(false);
           showPopUp(
             "success",
             user.user.displayName ? user.user.displayName! : user.user.email!
           );
         })
         .catch((err) => {
-          console.log(err);
           showPopUp("error", getSignInErrorMessage(err));
-          setCreatingUserWithEmail(false);
+          setSigningInWithEmail(false);
         });
     }, 3000);
   };
 
-  // TODO handle sign in errors for small screens
-
-  //sign in with google
-  const signInWithGoogle = () => {
-    setCreatingUserWithGoogle(true);
-    setTimeout(() => {
-      if (window.innerWidth < 768) {
-        // code for mobile devices
-        signInWithRedirect(auth, googleAuthProvider)
-          .then((result: UserCredential) => {
-            const user = result.user;
-            setUser({
-              email: user.email ? user.email : "Undefined email",
-              name: user.displayName ? user.displayName! : user.email!,
-              paymentMethodSelected: false,
-              plan: "basic",
-              photoUrl: user.photoURL!,
-            });
-            setCreatingUserWithGoogle(false);
-            showPopUp("success", user.displayName!);
-          })
-          .catch((err) => {
-            setCreatingUserWithGoogle(false);
-            showPopUp("error", getSignInErrorMessage(err));
-          });
-      } else {
-        // code for desktop devices
-        signInWithPopup(auth, googleAuthProvider)
-          .then((result) => {
-            const user = result.user;
-            setUser({
-              email: user.email ? user.email : "Undefined email",
-              name: user.displayName ? user.displayName! : user.email!,
-              paymentMethodSelected: false,
-              plan: "basic",
-              photoUrl: user.photoURL!,
-            });
-            setCreatingUserWithGoogle(false);
-            showPopUp("success", user.displayName!);
-          })
-          .catch((err) => {
-            setCreatingUserWithGoogle(false);
-            showPopUp("error", getSignInErrorMessage(err));
-          });
-      }
-    }, 3000);
+  //sign-in with google
+  const googleSignIn = async () => {
+    setSigningInWithGoogle(true);
+    try {
+      const user = await signInWithGoogle();
+      setUser(user);
+      showPopUp("success", user.name);
+    } catch (err: any) {
+      showPopUp("error", getSignInErrorMessage(err));
+    }
+    setSigningInWithGoogle(false);
   };
+
+  useEffect(() => {
+    const getRedirectResult = async () => {
+      setSigningInWithGoogle(true);
+
+      await redirectResult()
+        .then((res) => {
+          if (res) {
+            setUser(res);
+            showPopUp("success", res.name);
+          }
+        })
+        .catch((err) => {
+          showPopUp("error", getSignInErrorMessage(err));
+        });
+      setSigningInWithGoogle(false);
+    };
+    getRedirectResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="h-screen flex relative">
@@ -197,19 +172,19 @@ const SignIn = () => {
           <SignInOrSignUpButton
             disabled={Object.keys(errors).length !== 0}
             icon={faCircleNotch}
-            isLoading={creatingUserWithEmail}
+            isLoading={signingInWithEmail}
             text="Sign In"
             className="bg-bgSignInPage"
           />
         </form>
         <div
           className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
-          onClick={signInWithGoogle}
+          onClick={googleSignIn}
         >
           <img
             src={assets.google}
             alt="google icon"
-            className={`w-5 h-5 ${creatingUserWithGoogle ? "spin" : ""}`}
+            className={`w-5 h-5 ${signingInWithGoogle ? "spin" : ""}`}
           />
           <p className="font-medium ml-2 text-gray-600">Sign in with google</p>
         </div>
