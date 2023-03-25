@@ -18,15 +18,8 @@ const ActiveWebsitesPage = () => {
 
   return (
     <>
-      {user!.activeWebsites === undefined ? (
-        <div className="w-max mx-auto mt-10 flex flex-col items-center">
-          <p>You dont have any active websites! Let`s get you one</p>
-          <Link to="/dashboard/new-website" className="mt-5">
-            <SecondaryButton text="Give it to me" />
-          </Link>
-        </div>
-      ) : (
-        user!.activeWebsites.map((website) => (
+      {user?.activeWebsites ? (
+        user?.activeWebsites.map((website) => (
           <div className="flex items-end justify-between mt-4 px-6">
             <ActiveWebsite website={website} />
             <img
@@ -36,6 +29,13 @@ const ActiveWebsitesPage = () => {
             />
           </div>
         ))
+      ) : (
+        <div className="py-5 mx-auto mt-10 flex flex-col items-center bg-white">
+          <p>You dont have any active websites! Let`s get you one</p>
+          <Link to="/dashboard/new-website" className="mt-5">
+            <SecondaryButton text="Give it to me" />
+          </Link>
+        </div>
       )}
     </>
   );
