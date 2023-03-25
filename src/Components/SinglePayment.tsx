@@ -1,12 +1,12 @@
 import React from "react";
-import { ActiveWebsiteType } from "../Types/Global";
+import { ActiveWebsite } from "../Types/Global";
 import { extractHostname } from "../Util/Utilities";
 
-const SinglePayment = ({ website }: { website: ActiveWebsiteType }) => {
+const SinglePayment = ({ website }: { website: ActiveWebsite }) => {
   return (
     <div className="flex justify-between text-sm mt-2 border-b font-semibold pb-4">
       <div className="w-1/4">
-        <p>{extractHostname(website.websiteUrl)}</p>
+        <p>{extractHostname(website.url)}</p>
         <p className="text-xs text-gray-500">Plan : {website.plan}</p>
       </div>
       <div className="w-1/5">

@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
 import { globalData } from "../../Pages/DashBoard";
-import { NewWebsiteSelections } from "../../Types/Global";
+import {
+  NewWebsiteSelections,
+  PendingVerificationWebsite,
+} from "../../Types/Global";
 import { SecondaryButton } from "../SecondaryButton";
 import { ThemeBox } from "../ThemeBox";
 
@@ -22,25 +25,26 @@ const NewWebsiteReview = ({
     setTimeout(() => {
       setIsLoading(false);
       setMutableUserObject((prev) => {
-        const newWebsite = {
-          websiteUrl: selections.domainName!,
+        const newWebsite: PendingVerificationWebsite = {
+          id: "fakeId",
+          url: selections.domainName!,
           hasShop: true,
+          decisionDeadline: "24th June 2021",
         };
 
         return {
           ...prev,
-          pendingVerificationWebsites:
-            prev?.pendingVerificationWebsites &&
-            Array.isArray(prev.pendingVerificationWebsites)
-              ? [...prev.pendingVerificationWebsites, newWebsite]
-              : [newWebsite],
-          name: prev?.name ?? "", // default to empty string if name is undefined
+          id: prev!.id ?? "",
+          name: prev?.name ?? "",
           email: prev?.email ?? "",
-          plan: prev?.plan ?? "",
+          plan: prev?.plan ?? "basic",
           paymentMethodSelected: prev?.paymentMethodSelected ?? false,
-          activeWebsites: prev?.activeWebsites ?? [],
-          devWebsites: prev?.devWebsites ?? [],
-          cards: prev?.cards ?? [],
+          pendingVerificationWebsites: [
+            ...(prev?.pendingVerificationWebsites
+              ? prev?.pendingVerificationWebsites!
+              : []),
+            newWebsite,
+          ],
         };
       });
       showConfirmationModal(true);

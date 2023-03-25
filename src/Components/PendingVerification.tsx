@@ -1,12 +1,12 @@
 import React from "react";
 import { PendingVerificationWebsite } from "../Types/Global";
 
-const PendingVerification = ({
+const PendingVerificationComponent = ({
   website,
 }: {
   website: PendingVerificationWebsite;
 }) => {
-  return <p>{website.websiteUrl}</p>;
+  return <p>{website.url}</p>;
 };
 
-export default PendingVerification;
+export default PendingVerificationComponent;

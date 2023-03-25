@@ -9,9 +9,9 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
     <div className="border w-[49%] bg-white p-6 rounded-2xl">
       <div className="flex justify-between items-center">
         <div className="w-1/3 mr-7">
-          <p className="font-semibold">{extractHostname(website.previewUrl)}</p>
+          <p className="font-semibold">{extractHostname(website.url)}</p>
           <p className="text-gray-500 text-sm">
-            Expected Completion: 24th May 2023
+            Expected Completion: {website.expectedCompletionDate}
           </p>
         </div>
         {website.hasShop && (
@@ -19,7 +19,7 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
             <SecondaryButton text="View shop" />
           </a>
         )}
-        <a href={website.previewUrl}>
+        <a href={website.url}>
           <PrimaryButton text="Preview site" />
         </a>
       </div>

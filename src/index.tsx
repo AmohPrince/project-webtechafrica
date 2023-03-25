@@ -19,8 +19,8 @@ import { AnimatePresence } from "framer-motion";
 import SignIn from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import DashBoard from "./Pages/DashBoard";
-import ActiveWebsites from "./Pages/ActiveWebsites";
-import DevWebsites from "./Pages/DevWebsites";
+import ActiveWebsitesPage from "./Pages/ActiveWebsitesPage";
+import DevWebsitesPage from "./Pages/DevWebsitesPage";
 import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
 import Payments from "./Pages/Payments";
 
@@ -49,10 +49,10 @@ root.render(
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<DashBoard />}>
             <Route
-              element={<ActiveWebsites />}
+              element={<ActiveWebsitesPage />}
               path="/dashboard/active-websites"
             />
-            <Route element={<DevWebsites />} path="dev-websites" />
+            <Route element={<DevWebsitesPage />} path="dev-websites" />
             <Route element={<Payments />} path="payments" />
             <Route element={<WebsiteBuilderForm />} path="new-website" />
           </Route>

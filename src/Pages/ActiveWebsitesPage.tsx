@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
-import ActiveWebsite from "../Components/ActiveWebsite";
+import ActiveWebsite from "../Components/ActiveWebsiteComponent";
 import { SecondaryButton } from "../Components/SecondaryButton";
 import { useAuth } from "../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
 
-const ActiveWebsites = () => {
+const ActiveWebsitesPage = () => {
   const { user } = useAuth();
   const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
@@ -41,4 +41,4 @@ const ActiveWebsites = () => {
   );
 };
 
-export default ActiveWebsites;
+export default ActiveWebsitesPage;

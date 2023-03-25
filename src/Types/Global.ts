@@ -14,41 +14,43 @@ export type BlogArticleType = {
 };
 
 export type User = {
+  id: string;
   name: string;
   email: string;
+  plan: "basic" | "premium" | string; // Either basic or premium but basic by default.
+  photoUrl?: string; //For people with a profile picture this field exists. For those with no picture it doesn't exist.
+  paymentMethodSelected: boolean; // whether or not the use has selected a payment method. false by default
+  activeWebsites?: ActiveWebsite[]; //list of the users active websites.
+  devWebsites?: DevWebsite[]; //list of the users dev websites. This are websites currently in development.
+  pendingVerificationWebsites?: PendingVerificationWebsite[]; //list of websites that are pending verification. For people with no pending verification website this field does not exist
+  cards?: Card[]; //list of user credit cards.
+};
+
+export type Website = {
+  id: string;
+  url: string;
+  hasShop: boolean;
+  shopUrl?: string;
+};
+
+export type ActiveWebsite = Website & {
+  websiteScreenShot: string;
   plan: string;
-  photoUrl?: string;
-  paymentMethodSelected: boolean;
-  activeWebsites?: ActiveWebsiteType[];
-  devWebsites?: DevWebsite[];
-  pendingVerificationWebsites?: PendingVerificationWebsite[];
-  cards?: Card[];
+};
+
+export type DevWebsite = Website & {
+  websiteScreenShot?: string;
+  expectedCompletionDate: string; //The date of completion of the website
+};
+
+export type PendingVerificationWebsite = Website & {
+  decisionDeadline: string; //The date by which a decision has to be made.
 };
 
 export type Card = {
   type: string;
   expiryDate: string;
   endsIn: string;
-};
-
-export type ActiveWebsiteType = {
-  websiteUrl: string;
-  hasShop: boolean;
-  shopUrl?: string;
-  websiteScreenShot: string;
-  plan: string;
-};
-
-export type DevWebsite = {
-  previewUrl: string;
-  hasShop: boolean;
-  shopUrl?: string;
-  websiteScreenShot: string;
-};
-
-export type PendingVerificationWebsite = {
-  websiteUrl: string;
-  hasShop: boolean;
 };
 
 export type Theme = {
@@ -66,6 +68,7 @@ export type Theme = {
   };
 };
 
+//This is for the choices the user makes in the app.
 export type WebsiteType = {
   type: string;
   description: string;

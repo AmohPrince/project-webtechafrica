@@ -33,6 +33,7 @@ export const signInWithGoogle = (): Promise<User> => {
       .then((result: UserCredential) => {
         const user = result.user;
         return {
+          id: user.uid,
           email: user.email!,
           name: user.displayName ? user.displayName! : user.email!,
           paymentMethodSelected: false,
@@ -48,6 +49,7 @@ export const signInWithGoogle = (): Promise<User> => {
       .then((result) => {
         const user = result.user;
         return {
+          id: user.uid,
           email: user.email!,
           name: user.displayName ? user.displayName! : user.email!,
           paymentMethodSelected: false,
@@ -73,6 +75,7 @@ export const redirectResult = (): Promise<User | null> => {
       if (result) {
         const user = result.user;
         return {
+          id: user.uid,
           email: user.email!,
           name: user.displayName ? user.displayName! : user.email!,
           paymentMethodSelected: false,

@@ -5,7 +5,7 @@ import PendingVerification from "../Components/PendingVerification";
 import { SecondaryButton } from "../Components/SecondaryButton";
 import { globalData } from "./DashBoard";
 
-const DevWebsites = () => {
+const DevWebsitesPage = () => {
   const { setDashBoardTitleInfo, mutableUserObject } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
@@ -31,12 +31,12 @@ const DevWebsites = () => {
           </div>
         </>
       ) : (
-        <div className="w-max mx-auto mt-10 flex flex-col items-center">
+        <div className="w-max mx-auto flex flex-col items-center">
           <p>
             No website is currently being developed for you 😟 Let`s change
             that!
           </p>
-          <Link to="/dashboard/new-website" className="mt-5">
+          <Link to="/dashboard/new-website" className="my-5">
             <SecondaryButton text="Give it to me" />
           </Link>
         </div>
@@ -45,4 +45,4 @@ const DevWebsites = () => {
   );
 };
 
-export default DevWebsites;
+export default DevWebsitesPage;

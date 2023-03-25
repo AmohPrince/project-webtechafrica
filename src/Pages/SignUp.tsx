@@ -75,10 +75,9 @@ export const SignUp = () => {
         createUserWithEmailAndPassword(auth, data.email, data.password)
           .then((user) => {
             setUser({
+              id: user.user.uid,
               email: user.user.email!,
-              name: user.user.displayName
-                ? user.user.displayName!
-                : user.user.email!,
+              name: user.user.displayName ?? user.user.email!,
               paymentMethodSelected: false,
               plan: "basic",
             });
