@@ -4,13 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  firebaseApp,
+  createUserWithEmailAndPassword,
   redirectResult,
   signInWithGoogle,
+  testUser,
 } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 
@@ -54,7 +54,6 @@ export const SignUp = () => {
     });
 
     setTimeout(() => {
-      //reset popup object
       setPopUp({
         showing: false,
         text: null,
@@ -68,24 +67,17 @@ export const SignUp = () => {
 
   //sign up with email and password
   const signUpWithEmailAndPassword: SubmitHandler<Inputs> = (data: Inputs) => {
-    const auth = getAuth(firebaseApp);
     setCreatingUserWithEmail(true);
     setTimeout(
       () =>
-        createUserWithEmailAndPassword(auth, data.email, data.password)
+        createUserWithEmailAndPassword(data.email, data.password, {
+          firstName: data.firstName,
+          lastName: data.lastName,
+        })
           .then((user) => {
-            setUser({
-              id: user.user.uid,
-              email: user.user.email!,
-              name: user.user.displayName ?? user.user.email!,
-              paymentMethodSelected: false,
-              plan: "basic",
-            });
+            setUser(user);
             setCreatingUserWithEmail(false);
-            showPopUp(
-              "success",
-              user.user.displayName ? user.user.email! : user.user.displayName!
-            );
+            showPopUp("success", user.name);
           })
           .catch((error) => {
             setCreatingUserWithEmail(false);
@@ -114,7 +106,8 @@ export const SignUp = () => {
       await redirectResult()
         .then((res) => {
           if (res) {
-            setUser(res);
+            // setUser(res);
+            setUser(testUser);
             showPopUp("success", res.name);
           }
         })
@@ -130,8 +123,15 @@ export const SignUp = () => {
   return (
     <div className="h-screen flex relative z-0">
       {popUp.showing && <PopUp popUpInfo={popUp} />}
-      <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
-        <LogoTab logoColor={LogoColor.sign_up} />
+      <img
+        src={
+          "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }
+        alt="hand holding with icon"
+        className="h-full object-cover w-1/2"
+      />
+      <div className="w-1/2 py-[4%] px-[5%] h-full dark:bg-magloBlack">
+        <LogoTab logoColor={LogoColor.primary} />
         <p className="font-semibold text-3xl mt-[9%] dark:text-white">
           Create new account
         </p>
@@ -140,7 +140,7 @@ export const SignUp = () => {
         </p>
         <form onSubmit={handleSubmit(signUpWithEmailAndPassword)}>
           <div className="flex gap-x-2">
-            <div>
+            <div className="w-1/2">
               <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
                 First Name
               </p>
@@ -154,7 +154,7 @@ export const SignUp = () => {
                 />
               </div>
             </div>
-            <div>
+            <div className="w-1/2">
               <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
                 Last Name
               </p>
@@ -208,7 +208,6 @@ export const SignUp = () => {
             icon={faGear}
             isLoading={creatingUserWithEmail}
             text="Create Account"
-            className="bg-bgSignupPage"
           />
         </form>
         <div
@@ -231,15 +230,6 @@ export const SignUp = () => {
             Sign in
           </Link>
         </p>
-      </div>
-      <div className="w-1/2 h-full">
-        <img
-          src={
-            "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
-          }
-          alt="hand holding with icon"
-          className="h-full object-cover w-full"
-        />
       </div>
     </div>
   );
@@ -290,6 +280,6 @@ export const getSignUpErrorMessage = (error: any): string => {
   } else if (error.code === "auth/weak-password") {
     return "Your password is too weak. Please choose a stronger password.";
   } else {
-    return "An error occurred. Please try again later.";
+    return "An error occurred. Please try again later. " + error.code;
   }
 };

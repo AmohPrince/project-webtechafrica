@@ -1,12 +1,16 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
-import { auth, redirectResult, signInWithGoogle } from "../Firebase/firebase";
+import {
+  redirectResult,
+  signInWithEmailAndPassword,
+  signInWithGoogle,
+  testUser,
+} from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
 
@@ -52,23 +56,13 @@ const SignIn = () => {
     setSigningInWithEmail(true);
     setTimeout(() => {
       signInWithEmailAndPassword(
-        auth,
         userCredentials.email,
         userCredentials.password
       )
         .then((user) => {
-          setUser({
-            id: user.user.uid,
-            email: user.user.email!,
-            name: user.user.displayName ?? user.user.email!,
-            paymentMethodSelected: false,
-            plan: "basic",
-          });
+          setUser(user);
           setSigningInWithEmail(false);
-          showPopUp(
-            "success",
-            user.user.displayName ? user.user.displayName! : user.user.email!
-          );
+          showPopUp("success", user.name);
         })
         .catch((err) => {
           showPopUp("error", getSignInErrorMessage(err));
@@ -93,11 +87,11 @@ const SignIn = () => {
   useEffect(() => {
     const getRedirectResult = async () => {
       setSigningInWithGoogle(true);
-
       await redirectResult()
         .then((res) => {
           if (res) {
-            setUser(res);
+            // setUser(res);
+            setUser(testUser);
             showPopUp("success", res.name);
           }
         })
@@ -113,10 +107,16 @@ const SignIn = () => {
   return (
     <div className="h-screen flex relative">
       {popUp.showing && <PopUp popUpInfo={popUp} />}
-
-      <div className="w-1/2 py-[4%] px-[10%] h-full dark:bg-magloBlack">
-        <LogoTab logoColor={LogoColor.sign_in} />
-        <p className="font-semibold text-3xl mt-[14%] dark:text-white">
+      <img
+        src={
+          "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        }
+        alt="hand holding with icon"
+        className="h-full object-cover w-1/2"
+      />
+      <div className="w-1/2 py-[4%] px-[5%] h-full dark:bg-magloBlack">
+        <LogoTab logoColor={LogoColor.primary} />
+        <p className="font-semibold text-3xl mt-[7%] dark:text-white">
           Welcome back
         </p>
         <p className="font-normal text-base text-gray-400">
@@ -173,7 +173,6 @@ const SignIn = () => {
             icon={faCircleNotch}
             isLoading={signingInWithEmail}
             text="Sign In"
-            className="bg-bgSignInPage"
           />
         </form>
         <div
@@ -196,15 +195,6 @@ const SignIn = () => {
             Sign up its free!
           </Link>
         </p>
-      </div>
-      <div className="w-1/2 h-full">
-        <img
-          src={
-            "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          }
-          alt="hand holding with icon"
-          className="h-full object-cover w-full"
-        />
       </div>
     </div>
   );
