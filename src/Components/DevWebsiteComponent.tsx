@@ -6,22 +6,24 @@ import { SecondaryButton } from "./SecondaryButton";
 
 const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
   return (
-    <div className="border w-[49%] bg-white p-6 rounded-2xl">
-      <div className="flex justify-between items-center">
-        <div className="w-1/3 mr-7">
+    <div className="border w-full sm:w-[49%] bg-white p-4 sm:p-6 rounded-2xl">
+      <div className="block sm:flex justify-between items-center">
+        <div className="w-full mb-5 sm:mb-0 sm:w-1/3 mr-7">
           <p className="font-semibold">{extractHostname(website.url)}</p>
           <p className="text-gray-500 text-sm">
             Expected Completion: {website.expectedCompletionDate}
           </p>
         </div>
-        {website.hasShop && (
-          <a href={website.shopUrl}>
-            <SecondaryButton text="View shop" />
+        <div className="flex justify-between items-center sm:block">
+          {website.hasShop && (
+            <a href={website.shopUrl}>
+              <SecondaryButton text="View shop" />
+            </a>
+          )}
+          <a href={website.url}>
+            <PrimaryButton text="Preview site" />
           </a>
-        )}
-        <a href={website.url}>
-          <PrimaryButton text="Preview site" />
-        </a>
+        </div>
       </div>
       <img
         src={website.websiteScreenShot}

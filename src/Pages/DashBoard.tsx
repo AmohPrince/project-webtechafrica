@@ -51,16 +51,17 @@ const DashBoard = () => {
     useState<boolean>(false);
 
   return (
-    <div className="flex sm:w-screen h-[100dvh] overflow-hidden">
+    <div className="flex sm:w-screen min-h-screen sm:h-[100dvh] overflow-hidden">
       <DashBoardSideBar
         showSmallScreenMenu={showSmallScreenMenu}
         setShowSmallScreenMenu={setShowSmallScreenMenu}
       />
-      <div className="flex-grow bg-gray-100 w-full sm:w-5/6">
-        <div className="flex justify-between items-center w-full pr-3 sm:px-6 py-3 bg-white">
+      <div className="flex-grow bg-gray-100 w-full sm:w-5/6 z-0">
+        <div className="flex justify-between items-center w-full pr-3 sm:px-6 py-3 bg-white fixed top-0 left-0 z-50 sm:static">
           <DashBoardTitle
             h1={dashBoardTitleInfo.h1}
             sub={dashBoardTitleInfo.sub}
+            className="hidden sm:block"
           />
           <HamburgerMenu
             location="nav"
@@ -95,6 +96,11 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
+        <DashBoardTitle
+          h1={dashBoardTitleInfo.h1}
+          sub={dashBoardTitleInfo.sub}
+          className="block mt-20 sm:mt-0 sm:hidden px-6"
+        />
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,

@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import DevWebsiteComponent from "../Components/DevWebsiteComponent";
+import NoWebsite from "../Components/NoWebsite";
 import PendingVerification from "../Components/PendingVerification";
-import { SecondaryButton } from "../Components/SecondaryButton";
 import { globalData } from "./DashBoard";
+import { testUser } from "../Firebase/firebase";
 
 const DevWebsitesPage = () => {
-  const { setDashBoardTitleInfo, mutableUserObject } = useContext(globalData);
+  const { setDashBoardTitleInfo } = useContext(globalData);
+  const mutableUserObject = testUser;
+
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Development Websites",
@@ -18,7 +20,7 @@ const DevWebsitesPage = () => {
     <div className="bg-white mt-4 pt-4 px-6">
       {mutableUserObject?.devWebsites ? (
         <>
-          <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap gap-x-2 gap-y-4">
             {mutableUserObject.devWebsites.map((website, index) => (
               <DevWebsiteComponent website={website} key={index} />
             ))}
@@ -31,15 +33,10 @@ const DevWebsitesPage = () => {
           </div>
         </>
       ) : (
-        <div className="w-max mx-auto flex flex-col items-center">
-          <p>
-            No website is currently being developed for you 😟 Let`s change
-            that!
-          </p>
-          <Link to="/dashboard/new-website" className="my-5">
-            <SecondaryButton text="Give it to me" />
-          </Link>
-        </div>
+        <NoWebsite
+          text="No website is currently being developed for you 😟 Let`s change
+        that!"
+        />
       )}
     </div>
   );

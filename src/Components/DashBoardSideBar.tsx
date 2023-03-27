@@ -41,7 +41,7 @@ const DashBoardSideBar = ({
 
   return (
     <div
-      className={`bg-menu text-white w-1/6 h-screen overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block ${
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block ${
         showSmallScreenMenu ? "block absolute top-0 left-0 w-5/6" : "hidden"
       }`}
     >

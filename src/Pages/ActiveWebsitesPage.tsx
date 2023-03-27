@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import ActiveWebsite from "../Components/ActiveWebsiteComponent";
-import { SecondaryButton } from "../Components/SecondaryButton";
+import NoWebsite from "../Components/NoWebsite";
+import { testUser } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
 
 const ActiveWebsitesPage = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+
+  const user = testUser;
   const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
     setDashBoardTitleInfo({
@@ -25,17 +27,12 @@ const ActiveWebsitesPage = () => {
             <img
               src={assets.remote_design}
               alt="remote_design"
-              className="w-1/4"
+              className="hidden sm:block sm:w-1/4"
             />
           </div>
         ))
       ) : (
-        <div className="py-5 mx-auto mt-10 flex flex-col items-center bg-white">
-          <p>You dont have any active websites! Let`s get you one</p>
-          <Link to="/dashboard/new-website" className="mt-5">
-            <SecondaryButton text="Give it to me" />
-          </Link>
-        </div>
+        <NoWebsite text="You dont have any active websites! Let`s get you one" />
       )}
     </>
   );
