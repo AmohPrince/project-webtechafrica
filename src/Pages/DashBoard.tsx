@@ -1,5 +1,4 @@
 import {
-  faBars,
   faBell,
   faCaretDown,
   faMagnifyingGlass,
@@ -10,8 +9,8 @@ import React, { createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
+import HamburgerMenu from "../Components/HamburgerMenu";
 import { useAuth } from "../Hooks/UseAuth";
-import { useUpdateLogger } from "../Hooks/useUpdateLogger";
 import { User } from "../Types/Global";
 
 export const globalData = createContext<{
@@ -48,22 +47,26 @@ const DashBoard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useUpdateLogger(window.innerWidth, "inner-width");
+  const [showSmallScreenMenu, setShowSmallScreenMenu] =
+    useState<boolean>(false);
 
   return (
     <div className="flex sm:w-screen h-[100dvh] overflow-hidden">
-      <FontAwesomeIcon
-        icon={faBars}
-        className="sm:hidden block absolute top-5 left-5"
+      <DashBoardSideBar
+        showSmallScreenMenu={showSmallScreenMenu}
+        setShowSmallScreenMenu={setShowSmallScreenMenu}
       />
-      <DashBoardSideBar />
       <div className="flex-grow bg-gray-100 w-full sm:w-5/6">
-        <div className="flex justify-between items-center w-full px-6 py-3 bg-white">
+        <div className="flex justify-between items-center w-full pr-3 sm:px-6 py-3 bg-white">
           <DashBoardTitle
             h1={dashBoardTitleInfo.h1}
             sub={dashBoardTitleInfo.sub}
           />
-          <div className="flex items-center w-1/3 justify-between">
+          <HamburgerMenu
+            location="nav"
+            setShowSmallScreenMenu={setShowSmallScreenMenu}
+          />
+          <div className="flex items-center w-3/4 sm:w-1/3 justify-between">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="w-3 h-3 text-gray-400 cursor-pointer hover:text-primaryOne transition-all"
@@ -72,7 +75,7 @@ const DashBoard = () => {
               icon={faBell}
               className="w-3 h-3 text-gray-400 cursor-pointer hover:text-primaryOne transition-all"
             />
-            <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer">
+            <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer w-1/2 sm:w-auto">
               {user?.photoUrl ? (
                 <img
                   src={user.photoUrl}
@@ -82,10 +85,12 @@ const DashBoard = () => {
               ) : (
                 <FontAwesomeIcon icon={faUser} className="mr-3" />
               )}
-              <p className="text-sm font-bold mr-7">{user?.name}</p>
+              <p className="text-[10px] sm:text-sm font-bold mr-2 sm:mr-7">
+                {user?.name}
+              </p>
               <FontAwesomeIcon
                 icon={faCaretDown}
-                className="text-gray-400 w-3 h-3 ml-3"
+                className="text-gray-400 w-3 h-3 ml-0 sm:ml-3"
               />
             </div>
           </div>

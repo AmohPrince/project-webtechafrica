@@ -11,8 +11,15 @@ import DashboardOption from "./DashboardOption";
 import LogoTab from "./LogoTab";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
+import HamburgerMenu from "./HamburgerMenu";
 
-const DashBoardSideBar = () => {
+const DashBoardSideBar = ({
+  showSmallScreenMenu,
+  setShowSmallScreenMenu,
+}: {
+  setShowSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  showSmallScreenMenu: boolean;
+}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -33,10 +40,20 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="bg-menu text-white w-1/6 h-screen overflow-x-hidden pt-6 pl-6 sticky top-0 left-0 hidden sm:block">
-      <Link className="show mb-5" to="/">
-        <LogoTab logoColor={LogoColor.menu} />
-      </Link>
+    <div
+      className={`bg-menu text-white w-1/6 h-screen overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block ${
+        showSmallScreenMenu ? "block absolute top-0 left-0 w-5/6" : "hidden"
+      }`}
+    >
+      <div className="flex justify-between items-center mb-5">
+        <Link to="/">
+          <LogoTab logoColor={LogoColor.menu} />
+        </Link>
+        <HamburgerMenu
+          location="menu"
+          setShowSmallScreenMenu={setShowSmallScreenMenu}
+        />
+      </div>
       <div className="mt-12">
         <DashboardOption name="active-websites" />
         <DashboardOption name="dev-websites" />
