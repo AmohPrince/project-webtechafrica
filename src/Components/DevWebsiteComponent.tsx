@@ -20,8 +20,11 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
               <SecondaryButton text="View shop" />
             </a>
           )}
-          <a href={website.url}>
-            <PrimaryButton text="Preview site" />
+          <a
+            href={website.url}
+            className={`${!website.hasShop ? "w-full sm:w-auto" : ""}`}
+          >
+            <PrimaryButton text="Preview site" className="w-full" />
           </a>
         </div>
       </div>

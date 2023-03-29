@@ -59,3 +59,7 @@ export function getLighterColor(hexColor: string): string {
     "#" + ((newR << 16) | (newG << 8) | newB).toString(16).padStart(6, "0")
   );
 }
+
+export const isSmallScreen = () => {
+  return window.innerWidth <= 768;
+};

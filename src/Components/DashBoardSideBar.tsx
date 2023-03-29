@@ -42,7 +42,9 @@ const DashBoardSideBar = ({
   return (
     <div
       className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block ${
-        showSmallScreenMenu ? "block absolute top-0 left-0 w-5/6" : "hidden"
+        showSmallScreenMenu
+          ? "block fixed top-0 left-0 bottom-0 w-5/6"
+          : "hidden"
       }`}
     >
       <div className="flex justify-between items-center mb-5">

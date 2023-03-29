@@ -86,7 +86,7 @@ const PayPalInput = () => {
       </div>
       <PrimaryButton
         text="Add Payment Method"
-        className="w-full mt-6 hover:scale-100"
+        className="w-full my-6 hover:scale-100"
       />
     </div>
   );
