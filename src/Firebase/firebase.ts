@@ -11,7 +11,7 @@ import {
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { User } from "../Types/Global";
 import {
-  createUserWithEmailAndPassword as createUserFnFromFirebase,
+  createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
   signInWithEmailAndPassword as signInUserFnFromFirebase,
 } from "firebase/auth";
 
@@ -31,83 +31,80 @@ export const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = (): Promise<User> => {
+/**
+ * A function to sign in or create a new user using google firebase.
+ * @param firstTimeUser a flag indicating that it is a first time user
+ */
+export const signInWithGoogle = async (
+  firstTimeUser: boolean
+): Promise<User> => {
   if (window.innerWidth < 768) {
-    return signInWithRedirect(auth, googleAuthProvider)
-      .then((result: UserCredential) => {
-        const newUser: User = {
-          id: result.user.uid,
-          email: result.user.email!,
-          name: result.user.displayName ?? result.user.email!,
-          paymentMethodSelected: false,
-          plan: "basic",
-          photoUrl: result.user.photoURL!,
-        };
-        return newUser;
-      })
-      .catch((error) => {
-        throw error;
-      });
+    try {
+      const userCredential: UserCredential = await signInWithRedirect(
+        auth,
+        googleAuthProvider
+      );
+      const user = {
+        id: userCredential.user.uid,
+        email: userCredential.user.email!,
+        name: userCredential.user.displayName ?? userCredential.user.email!,
+        paymentMethodSelected: false,
+        plan: "basic",
+        photoUrl: userCredential.user.photoURL!,
+      };
+
+      if (firstTimeUser) {
+        addNewUserToDB(user);
+      } else {
+        //TODO fetch and return saved user from DB
+      }
+      return user;
+    } catch (err) {
+      throw err;
+    }
   } else {
-    return signInWithPopup(auth, googleAuthProvider)
-      .then((result) => {
-        const newUser: User = {
-          id: result.user.uid,
-          email: result.user.email!,
-          name: result.user.displayName ?? result.user.email!,
-          paymentMethodSelected: false,
-          plan: "basic",
-          photoUrl: result.user.photoURL!,
-        };
-        addNewUserToDB(newUser);
-        return newUser;
-      })
-      .catch((error) => {
-        throw error;
-      });
+    try {
+      const UserCredential: UserCredential = await signInWithPopup(
+        auth,
+        googleAuthProvider
+      );
+      const user = {
+        id: UserCredential.user.uid,
+        email: UserCredential.user.email!,
+        name: UserCredential.user.displayName ?? UserCredential.user.email!,
+        paymentMethodSelected: false,
+        plan: "basic",
+        photoUrl: UserCredential.user.photoURL!,
+      };
+      if (firstTimeUser) {
+        addNewUserToDB(user);
+      } else {
+        //TODO fetch and return saved user from DB
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 };
 
-//TODO fetch the user from the db
-export const signInWithEmailAndPassword = (
+export const signInWithEmailAndPassword = async (
   email: string,
   password: string
 ): Promise<User> => {
-  return signInUserFnFromFirebase(auth, email, password)
-    .then((user) => {
-      return {
-        id: user.user.uid,
-        email: user.user.email!,
-        name: user.user.displayName ?? user.user.email!,
-        paymentMethodSelected: false,
-        plan: "basic",
-      };
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
-
-export const redirectResult = (): Promise<User | null> => {
-  return getRedirectResult(auth)
-    .then((result) => {
-      if (result) {
-        const newUser: User = {
-          id: result.user.uid,
-          email: result.user.email!,
-          name: result.user.displayName ?? result.user.email!,
-          paymentMethodSelected: false,
-          plan: "basic",
-          photoUrl: result.user.photoURL!,
-        };
-        addNewUserToDB(newUser);
-        return newUser;
-      }
-      return null;
-    })
-    .catch((error) => {
-      throw error;
-    });
+  try {
+    const user = await signInUserFnFromFirebase(auth, email, password);
+    //TODO fetch saved user from DB
+    return {
+      id: user.user.uid,
+      email: user.user.email!,
+      name: user.user.displayName ?? user.user.email!,
+      paymentMethodSelected: false,
+      plan: "basic",
+    };
+  } catch (err) {
+    throw err;
+  }
 };
 
 /**
@@ -117,26 +114,48 @@ export const redirectResult = (): Promise<User | null> => {
  * @param name a name object containing a firstName and lastName property
  * @returns a promise of a user object
  */
-export const createUserWithEmailAndPassword = (
+export const createUserWithEmailAndPassword = async (
   email: string,
   password: string,
   name: { firstName: string; lastName: string }
 ): Promise<User> => {
-  return createUserFnFromFirebase(auth, email, password)
-    .then(async (user) => {
+  try {
+    const userCredential: UserCredential =
+      await createUserWithEmailFnFromFirebase(auth, email, password);
+    const newUser: User = {
+      id: userCredential.user.uid,
+      email: userCredential.user.email!,
+      name:
+        userCredential.user.displayName ?? name.firstName + " " + name.lastName,
+      paymentMethodSelected: false,
+      plan: "basic",
+    };
+    addNewUserToDB(newUser);
+    return newUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const redirectResult = async (): Promise<User | null> => {
+  try {
+    const userCredential: UserCredential | null = await getRedirectResult(auth);
+    if (userCredential) {
       const newUser: User = {
-        id: user.user.uid,
-        email: user.user.email!,
-        name: user.user.displayName ?? name.firstName + " " + name.lastName,
+        id: userCredential.user.uid,
+        email: userCredential.user.email!,
+        name: userCredential.user.displayName ?? userCredential.user.email!,
         paymentMethodSelected: false,
         plan: "basic",
+        photoUrl: userCredential.user.photoURL!,
       };
-      await addNewUserToDB(newUser);
+      addNewUserToDB(newUser);
       return newUser;
-    })
-    .catch((error) => {
-      throw error;
-    });
+    }
+    return null;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const addNewUserToDB = async (user: User) => {
