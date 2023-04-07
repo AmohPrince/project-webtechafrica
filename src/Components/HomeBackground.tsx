@@ -1,9 +1,14 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { assets } from "../Assets/assets";
+import { slideAnimation } from "../FramerMotion/motion";
 
 const HomeBackground = () => {
   return (
-    <div className="absolute top-0 right-0 w-screen h-screen">
+    <motion.div
+      className="absolute top-0 right-0 w-screen h-screen"
+      {...slideAnimation("down")}
+    >
       <img
         src={assets.BackGround}
         alt="Background"
@@ -24,7 +29,7 @@ const HomeBackground = () => {
         alt="circle"
         className="absolute -right-1/4 -z-10 -top-1/3"
       />
-    </div>
+    </motion.div>
   );
 };
 

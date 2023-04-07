@@ -11,33 +11,30 @@ import FreeTrial from "../Components/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
 import HomeBackground from "../Components/HomeBackground";
 import {
-  pageTransition,
-  stagger,
-  textTransition,
-} from "../FramerMotion/PageTransitions";
+  fadeAnimation,
+  headContainerAnimation,
+  headTextAnimation,
+  slideAnimation,
+} from "../FramerMotion/motion";
 import Blogs from "../Json/Blogs.json";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
 
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div>
       <HomeBackground />
       <motion.section
         className="flex mt-[14%] justify-between relative"
-        variants={stagger}
-        animate="animate"
-        initial="initial"
-        exit="exit"
+        {...slideAnimation("left")}
       >
-        <div className="w-[50%]">
-          <motion.h1 className="h1" animate={textTransition}>
-            Build your <br /> audience and grow <br /> your brand online
-          </motion.h1>
-          <motion.p
-            className="text-gray-500 mt-4 mb-7"
-            animate={textTransition}
-          >
+        <motion.div className="w-[50%]" {...headContainerAnimation}>
+          <motion.div {...headTextAnimation}>
+            <h1 className="h1">
+              Build your <br /> audience and grow <br /> your brand online
+            </h1>
+          </motion.div>
+          <motion.p className="text-gray-500 mt-4 mb-7">
             Get your website or web application on the cheap today with Africa's{" "}
             <br />
             fastest growing tech corporation.{" "}
@@ -55,12 +52,12 @@ export const Home = () => {
               />
             </button>
           </div>
-        </div>
+        </motion.div>
         <motion.img
           src={assets.GraphScreenPng}
           alt="graph"
           className="w-[50%] ml-11 object-cover absolute -right-12 -top-12"
-          animate="animate"
+          {...fadeAnimation}
         />
       </motion.section>
       <FeaturesComponent />
