@@ -90,7 +90,7 @@ export const SignUp = () => {
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
-      const user = await signInWithGoogle();
+      const user = await signInWithGoogle(true);
       setUser(user);
       showPopUp("success", user.name);
     } catch (err: any) {
@@ -128,9 +128,9 @@ export const SignUp = () => {
           "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
         }
         alt="hand holding with icon"
-        className="h-full object-cover w-1/2"
+        className="hidden sm:block h-full object-cover w-1/2"
       />
-      <div className="w-1/2 py-[4%] px-[5%] h-full dark:bg-magloBlack">
+      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack">
         <LogoTab logoColor={LogoColor.primary} />
         <p className="font-semibold text-3xl mt-[9%] dark:text-white">
           Create new account

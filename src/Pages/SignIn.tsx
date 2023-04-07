@@ -75,7 +75,7 @@ const SignIn = () => {
   const googleSignIn = async () => {
     setSigningInWithGoogle(true);
     try {
-      const user = await signInWithGoogle();
+      const user = await signInWithGoogle(false);
       setUser(user);
       showPopUp("success", user.name);
     } catch (err: any) {
@@ -112,9 +112,9 @@ const SignIn = () => {
           "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }
         alt="hand holding with icon"
-        className="h-full object-cover w-1/2"
+        className="h-full object-cover hidden sm:block w-1/2"
       />
-      <div className="w-1/2 py-[4%] px-[5%] h-full dark:bg-magloBlack">
+      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack">
         <LogoTab logoColor={LogoColor.primary} />
         <p className="font-semibold text-3xl mt-[7%] dark:text-white">
           Welcome back

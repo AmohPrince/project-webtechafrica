@@ -165,6 +165,65 @@ const addNewUserToDB = async (user: User) => {
   });
 };
 
+export const getSignInErrorMessage = (err: any): string => {
+  let errorMessage: string;
+  switch (err.code) {
+    case 'auth/user-not-found':
+      errorMessage = 'User not found. Please check your email and try again.';
+      break;
+    case 'auth/wrong-password':
+      errorMessage =
+        'Wrong password. Please check your password and try again.';
+      break;
+    case 'auth/network-request-failed':
+      errorMessage =
+        'Network error. Please check your internet connection and try again.';
+      break;
+    case 'auth/popup-closed-by-user':
+      errorMessage = 'Sign in failed: You closed the sign-in window.';
+      break;
+    case 'auth/cancelled-popup-request':
+      errorMessage = 'Sign in failed: You cancelled the sign-in window.';
+      break;
+    case 'auth/email-already-in-use':
+      errorMessage =
+        'This email is already in use. Please sign in or use a different email address.';
+      break;
+    case 'auth/operation-not-allowed':
+      errorMessage =
+        'Sign in is currently not available. Please try again later.';
+      break;
+    case 'auth/too-many-requests':
+      errorMessage =
+        'Sign in has been temporarily disabled due to too many requests. Please try again later.';
+      break;
+    case 'auth/internal-error':
+      errorMessage = 'An internal error has occurred. Please try again later.';
+      break;
+    default:
+      errorMessage = err.message;
+  }
+  return errorMessage;
+};
+
+export const getSignUpErrorMessage = (error: any): string => {
+  if (error.code === 'auth/account-exists-with-different-credential') {
+    return 'An account with this email already exists. Try signing in with a different method.';
+  } else if (error.code === 'auth/popup-closed-by-user') {
+    return 'The sign-up popup was closed before authentication could complete. Please try again.';
+  } else if (error.code === 'auth/cancelled-popup-request') {
+    return 'The sign-up popup was cancelled before authentication could complete. Please try again.';
+  } else if (error.code === 'auth/email-already-in-use') {
+    return 'An account with this email already exists. Please use a different email address.';
+  } else if (error.code === 'auth/invalid-email') {
+    return 'The email address you entered is not valid. Please check your email and try again.';
+  } else if (error.code === 'auth/weak-password') {
+    return 'Your password is too weak. Please choose a stronger password.';
+  } else {
+    return 'An error occurred. Please try again later. ' + error.code;
+  }
+};
+
 export const testUser: User = {
   id: "ssydd",
   name: "Test User",
