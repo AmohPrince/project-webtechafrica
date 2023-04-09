@@ -75,7 +75,7 @@ const SignIn = () => {
   const googleSignIn = async () => {
     setSigningInWithGoogle(true);
     try {
-      const user = await signInWithGoogle(false);
+      const user = await signInWithGoogle();
       setUser(user);
       showPopUp("success", user.name);
     } catch (err: any) {

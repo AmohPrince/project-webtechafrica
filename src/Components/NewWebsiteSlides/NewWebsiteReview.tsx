@@ -39,6 +39,7 @@ const NewWebsiteReview = ({
           email: prev?.email ?? "",
           plan: prev?.plan ?? "basic",
           paymentMethodSelected: prev?.paymentMethodSelected ?? false,
+          photoUrl: null,
           pendingVerificationWebsites: [
             ...(prev?.pendingVerificationWebsites
               ? prev?.pendingVerificationWebsites!

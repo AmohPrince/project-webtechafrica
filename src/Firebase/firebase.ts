@@ -8,7 +8,7 @@ import {
   signInWithRedirect,
   UserCredential,
 } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { User } from "../Types/Global";
 import {
   createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
@@ -31,13 +31,7 @@ export const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
 
-/**
- * A function to sign in or create a new user using google firebase.
- * @param firstTimeUser a flag indicating that it is a first time user
- */
-export const signInWithGoogle = async (
-  firstTimeUser: boolean
-): Promise<User> => {
+export const signInWithGoogle = async (): Promise<User> => {
   if (window.innerWidth < 768) {
     try {
       const userCredential: UserCredential = await signInWithRedirect(
@@ -50,38 +44,39 @@ export const signInWithGoogle = async (
         name: userCredential.user.displayName ?? userCredential.user.email!,
         paymentMethodSelected: false,
         plan: "basic",
-        photoUrl: userCredential.user.photoURL!,
+        photoUrl: userCredential.user.photoURL,
       };
-
-      if (firstTimeUser) {
-        addNewUserToDB(user);
-      } else {
-        //TODO fetch and return saved user from DB
+      try {
+        const savedUser = await fetchUserFromDB(user.id);
+        return savedUser;
+      } catch (error) {
+        await addNewUserToDB(user);
+        return user;
       }
-      return user;
     } catch (err) {
       throw err;
     }
   } else {
     try {
-      const UserCredential: UserCredential = await signInWithPopup(
+      const userCredential: UserCredential = await signInWithPopup(
         auth,
         googleAuthProvider
       );
       const user = {
-        id: UserCredential.user.uid,
-        email: UserCredential.user.email!,
-        name: UserCredential.user.displayName ?? UserCredential.user.email!,
+        id: userCredential.user.uid,
+        email: userCredential.user.email!,
+        name: userCredential.user.displayName ?? userCredential.user.email!,
         paymentMethodSelected: false,
         plan: "basic",
-        photoUrl: UserCredential.user.photoURL!,
+        photoUrl: userCredential.user.photoURL,
       };
-      if (firstTimeUser) {
-        addNewUserToDB(user);
-      } else {
-        //TODO fetch and return saved user from DB
+      try {
+        const savedUser = await fetchUserFromDB(user.id);
+        return savedUser;
+      } catch (error) {
+        await addNewUserToDB(user);
+        return user;
       }
-      return user;
     } catch (error) {
       throw error;
     }
@@ -93,15 +88,9 @@ export const signInWithEmailAndPassword = async (
   password: string
 ): Promise<User> => {
   try {
-    const user = await signInUserFnFromFirebase(auth, email, password);
-    //TODO fetch saved user from DB
-    return {
-      id: user.user.uid,
-      email: user.user.email!,
-      name: user.user.displayName ?? user.user.email!,
-      paymentMethodSelected: false,
-      plan: "basic",
-    };
+    const { user } = await signInUserFnFromFirebase(auth, email, password);
+    const savedUser = await fetchUserFromDB(user.uid);
+    return savedUser;
   } catch (err) {
     throw err;
   }
@@ -122,16 +111,16 @@ export const createUserWithEmailAndPassword = async (
   try {
     const userCredential: UserCredential =
       await createUserWithEmailFnFromFirebase(auth, email, password);
-    const newUser: User = {
+    const user = {
       id: userCredential.user.uid,
       email: userCredential.user.email!,
-      name:
-        userCredential.user.displayName ?? name.firstName + " " + name.lastName,
+      name: userCredential.user.displayName ?? userCredential.user.email!,
       paymentMethodSelected: false,
       plan: "basic",
+      photoUrl: userCredential.user.photoURL,
     };
-    addNewUserToDB(newUser);
-    return newUser;
+    addNewUserToDB(user);
+    return user;
   } catch (error) {
     throw error;
   }
@@ -165,40 +154,57 @@ const addNewUserToDB = async (user: User) => {
   });
 };
 
+const fetchUserFromDB = async (userId: string): Promise<User> => {
+  try {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data() as User;
+    } else {
+      console.log("User not found in the database");
+      throw new Error("User not found in the database");
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const getSignInErrorMessage = (err: any): string => {
   let errorMessage: string;
   switch (err.code) {
-    case 'auth/user-not-found':
-      errorMessage = 'User not found. Please check your email and try again.';
+    case "auth/user-not-found":
+      errorMessage = "User not found. Please check your email and try again.";
       break;
-    case 'auth/wrong-password':
+    case "auth/wrong-password":
       errorMessage =
-        'Wrong password. Please check your password and try again.';
+        "Wrong password. Please check your password and try again.";
       break;
-    case 'auth/network-request-failed':
+    case "auth/network-request-failed":
       errorMessage =
-        'Network error. Please check your internet connection and try again.';
+        "Network error. Please check your internet connection and try again.";
       break;
-    case 'auth/popup-closed-by-user':
-      errorMessage = 'Sign in failed: You closed the sign-in window.';
+    case "auth/popup-closed-by-user":
+      errorMessage = "Sign in failed: You closed the sign-in window.";
       break;
-    case 'auth/cancelled-popup-request':
-      errorMessage = 'Sign in failed: You cancelled the sign-in window.';
+    case "auth/cancelled-popup-request":
+      errorMessage = "Sign in failed: You cancelled the sign-in window.";
       break;
-    case 'auth/email-already-in-use':
+    case "auth/email-already-in-use":
       errorMessage =
-        'This email is already in use. Please sign in or use a different email address.';
+        "This email is already in use. Please sign in or use a different email address.";
       break;
-    case 'auth/operation-not-allowed':
+    case "auth/operation-not-allowed":
       errorMessage =
-        'Sign in is currently not available. Please try again later.';
+        "Sign in is currently not available. Please try again later.";
       break;
-    case 'auth/too-many-requests':
+    case "auth/too-many-requests":
       errorMessage =
-        'Sign in has been temporarily disabled due to too many requests. Please try again later.';
+        "Sign in has been temporarily disabled due to too many requests. Please try again later.";
       break;
-    case 'auth/internal-error':
-      errorMessage = 'An internal error has occurred. Please try again later.';
+    case "auth/internal-error":
+      errorMessage = "An internal error has occurred. Please try again later.";
       break;
     default:
       errorMessage = err.message;
@@ -207,20 +213,20 @@ export const getSignInErrorMessage = (err: any): string => {
 };
 
 export const getSignUpErrorMessage = (error: any): string => {
-  if (error.code === 'auth/account-exists-with-different-credential') {
-    return 'An account with this email already exists. Try signing in with a different method.';
-  } else if (error.code === 'auth/popup-closed-by-user') {
-    return 'The sign-up popup was closed before authentication could complete. Please try again.';
-  } else if (error.code === 'auth/cancelled-popup-request') {
-    return 'The sign-up popup was cancelled before authentication could complete. Please try again.';
-  } else if (error.code === 'auth/email-already-in-use') {
-    return 'An account with this email already exists. Please use a different email address.';
-  } else if (error.code === 'auth/invalid-email') {
-    return 'The email address you entered is not valid. Please check your email and try again.';
-  } else if (error.code === 'auth/weak-password') {
-    return 'Your password is too weak. Please choose a stronger password.';
+  if (error.code === "auth/account-exists-with-different-credential") {
+    return "An account with this email already exists. Try signing in with a different method.";
+  } else if (error.code === "auth/popup-closed-by-user") {
+    return "The sign-up popup was closed before authentication could complete. Please try again.";
+  } else if (error.code === "auth/cancelled-popup-request") {
+    return "The sign-up popup was cancelled before authentication could complete. Please try again.";
+  } else if (error.code === "auth/email-already-in-use") {
+    return "An account with this email already exists. Please use a different email address.";
+  } else if (error.code === "auth/invalid-email") {
+    return "The email address you entered is not valid. Please check your email and try again.";
+  } else if (error.code === "auth/weak-password") {
+    return "Your password is too weak. Please choose a stronger password.";
   } else {
-    return 'An error occurred. Please try again later. ' + error.code;
+    return "An error occurred. Please try again later. " + error.code;
   }
 };
 
@@ -275,4 +281,5 @@ export const testUser: User = {
       type: "MasterCard",
     },
   ],
+  photoUrl: null,
 };

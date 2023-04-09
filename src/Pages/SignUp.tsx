@@ -90,7 +90,7 @@ export const SignUp = () => {
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
-      const user = await signInWithGoogle(true);
+      const user = await signInWithGoogle();
       setUser(user);
       showPopUp("success", user.name);
     } catch (err: any) {
@@ -102,7 +102,6 @@ export const SignUp = () => {
   useEffect(() => {
     const getRedirectResult = async () => {
       setCreatingUserWithGoogle(true);
-
       await redirectResult()
         .then((res) => {
           if (res) {
