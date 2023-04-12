@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+
 export function GreyButton({
   text,
   className,
@@ -7,12 +9,16 @@ export function GreyButton({
   className?: string;
 }) {
   return (
-    <h1
+    <motion.h1
       className={`text-xs bg-gray-200 text-primaryOne py-4 px-11 rounded-full w-max font-bold ${
         className ? className : "mx-auto"
       }`}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
     >
       {text}
-    </h1>
+    </motion.h1>
   );
 }

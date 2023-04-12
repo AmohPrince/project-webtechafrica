@@ -49,6 +49,18 @@ export const headTextAnimation = {
   },
 };
 
+export const nonShakingTextAnimation = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: {
+    type: "spring",
+    damping: 5,
+    stiffness: 40,
+    restDelta: 0.001,
+    duration: 0.3,
+  },
+};
+
 export const headContentAnimation = {
   initial: { y: 100, opacity: 0 },
   animate: { y: 0, opacity: 1 },

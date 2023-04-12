@@ -2,16 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import { GreyButton } from "./GreyButton";
+import { motion } from "framer-motion";
 
 export const FeaturesComponent = () => {
   return (
-    <section className="mt-[12%]">
+    <motion.section
+      className="mt-[12%]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+    >
       <GreyButton text="Features" />
-      <h1 className="h2 text-center my-5">
+      <motion.h1
+        className="h2 text-center my-5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
         Powerful features to boost <br /> your productivity
-      </h1>
-      <div className="flex justify-between">
-        <div className="text-center w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
+      </motion.h1>
+      <motion.div
+        className="flex justify-between"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, staggerChildren: 0.2 }}
+      >
+        <motion.div className="text-center w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.SecurePlatform}
             alt="secure platform"
@@ -32,8 +47,8 @@ export const FeaturesComponent = () => {
           <Link to="/features" className="underline font-semibold">
             Learn More
           </Link>
-        </div>
-        <div className="text-center w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
+        </motion.div>
+        <motion.div className="text-center w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.AdvancedAnalytics}
             alt="secure platform"
@@ -52,8 +67,8 @@ export const FeaturesComponent = () => {
           <Link to="/features" className="underline font-semibold">
             Learn More
           </Link>
-        </div>
-        <div className="text-center w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
+        </motion.div>
+        <motion.div className="text-center w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.PowerfulAutomation}
             alt="secure platform"
@@ -74,8 +89,8 @@ export const FeaturesComponent = () => {
           <Link to="/features" className="underline font-semibold">
             Learn More
           </Link>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
