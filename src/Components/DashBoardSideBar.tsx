@@ -9,9 +9,8 @@ import { Link } from "react-router-dom";
 import { LogoColor } from "../Assets/assets";
 import DashboardOption from "./DashboardOption";
 import LogoTab from "./LogoTab";
-import { signOut } from "firebase/auth";
-import { auth } from "../Firebase/firebase";
 import HamburgerMenu from "./HamburgerMenu";
+import { signOut } from "../Firebase/firebase";
 
 const DashBoardSideBar = ({
   showSmallScreenMenu,
@@ -25,23 +24,16 @@ const DashBoardSideBar = ({
 
   const handleLogOut = () => {
     setLoading(true);
-    setTimeout(() => {
-      signOut(auth)
-        .then((res) => {
-          localStorage.removeItem("user-data");
-          navigate("/");
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
+    setTimeout(async () => {
+      await signOut();
+      navigate("/");
+      setLoading(false);
     }, 3000);
   };
 
   return (
     <div
-      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block ${
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block relative ${
         showSmallScreenMenu
           ? "block fixed top-0 left-0 bottom-0 w-5/6"
           : "hidden"
@@ -59,6 +51,7 @@ const DashBoardSideBar = ({
       <div className="mt-12">
         <DashboardOption name="active-websites" />
         <DashboardOption name="dev-websites" />
+        <DashboardOption name="pending-verification" />
         <DashboardOption name="payments" />
         <DashboardOption name="new-website" />
       </div>
@@ -67,7 +60,6 @@ const DashBoardSideBar = ({
         onClick={handleLogOut}
       >
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
-
         {loading ? (
           <FontAwesomeIcon icon={faEllipsis} />
         ) : (

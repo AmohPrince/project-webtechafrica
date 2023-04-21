@@ -23,6 +23,7 @@ import ActiveWebsitesPage from "./Pages/ActiveWebsitesPage";
 import DevWebsitesPage from "./Pages/DevWebsitesPage";
 import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
 import Payments from "./Pages/Payments";
+import { PendingVerificationsPage } from "./Pages/PendingVerificationsPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -48,13 +49,14 @@ root.render(
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<DashBoard />}>
-            <Route
-              element={<ActiveWebsitesPage />}
-              path="/dashboard/active-websites"
-            />
+            <Route element={<ActiveWebsitesPage />} path="active-websites" />
             <Route element={<DevWebsitesPage />} path="dev-websites" />
             <Route element={<Payments />} path="payments" />
             <Route element={<WebsiteBuilderForm />} path="new-website" />
+            <Route
+              element={<PendingVerificationsPage />}
+              path="pending-verification"
+            />
           </Route>
         </Routes>
       </BrowserRouter>

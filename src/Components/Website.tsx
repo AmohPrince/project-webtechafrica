@@ -1,18 +1,24 @@
 import React from "react";
-import { DevWebsite } from "../Types/Global";
+import { ActiveWebsite, DevWebsite } from "../Types/Global";
 import { extractHostname } from "../Util/Utilities";
 import PrimaryButton from "./PrimaryButton";
 import { SecondaryButton } from "./SecondaryButton";
 
-const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
+export const Website = ({
+  website,
+}: {
+  website: DevWebsite | ActiveWebsite;
+}) => {
   return (
     <div className="border w-full sm:w-[49%] bg-white p-4 sm:p-6 rounded-2xl">
       <div className="block sm:flex justify-between items-center">
         <div className="w-full mb-5 sm:mb-0 sm:w-1/3 mr-7">
           <p className="font-semibold">{extractHostname(website.url)}</p>
-          <p className="text-gray-500 text-sm">
-            Expected Completion: {website.expectedCompletionDate}
-          </p>
+          {"expectedCompletionDate" in website && (
+            <p className="text-gray-500 text-sm">
+              Expected Completion: {website.expectedCompletionDate}
+            </p>
+          )}
         </div>
         <div className="flex justify-between items-center sm:block">
           {website.hasShop && (
@@ -24,7 +30,7 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
             href={website.url}
             className={`${!website.hasShop ? "w-full sm:w-auto" : ""}`}
           >
-            <PrimaryButton text="Preview site" className="w-full" />
+            <PrimaryButton text="Preview site" className="ml-2" />
           </a>
         </div>
       </div>
@@ -36,5 +42,3 @@ const DevWebsiteComponent = ({ website }: { website: DevWebsite }) => {
     </div>
   );
 };
-
-export default DevWebsiteComponent;

@@ -9,22 +9,22 @@ export function useAuth(): {
 } {
   const [user, setUser] = useLocalStorage<User | null>(null, "user-data");
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((userAuth) => {
-  //     if (userAuth) {
-  //       setUser({
-  //         email: userAuth.email!,
-  //         name: userAuth.displayName ? userAuth.displayName! : userAuth.email!,
-  //         paymentMethodSelected: false,
-  //         plan: "basic",
-  //       });
-  //     } else {
-  //       setUser(null);
-  //     }
-  //   });
-  //   return unsubscribe;
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const lastSavedDate: string | null = localStorage.getItem("lastSignInDate");
+
+  if (lastSavedDate) {
+    const lastSignInDateInMilliSeconds: number = new Date(
+      lastSavedDate
+    ).getTime();
+    const todaysDateInMilliSeconds: number = new Date().getTime();
+    const differenceInMilliSeconds: number =
+      todaysDateInMilliSeconds - lastSignInDateInMilliSeconds;
+    const differenceInDays: number =
+      differenceInMilliSeconds / (1000 * 60 * 60 * 24);
+    if (differenceInDays >= 30) {
+      // It's been 30 days or more since the last sign-in
+      setUser(null);
+    }
+  }
 
   return {
     user,

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCreditCard,
   faGears,
+  faHourglassHalf,
   faLaptop,
   faWallet,
   faWandMagicSparkles,
@@ -55,35 +56,42 @@ const DashboardOptionLogo = ({
     return (
       <FontAwesomeIcon
         icon={faGears}
-        className={isActive ? "text-white" : ""}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "active-websites") {
     return (
       <FontAwesomeIcon
         icon={faWandMagicSparkles}
-        className={isActive ? "text-white" : ""}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "payment") {
     return (
       <FontAwesomeIcon
         icon={faCreditCard}
-        className={isActive ? "text-white" : ""}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "new-website") {
     return (
       <FontAwesomeIcon
         icon={faLaptop}
-        className={isActive ? "text-white" : ""}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+      />
+    );
+  } else if (name === "pending-verification") {
+    return (
+      <FontAwesomeIcon
+        icon={faHourglassHalf}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else {
     return (
       <FontAwesomeIcon
         icon={faWallet}
-        className={isActive ? "text-white" : ""}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   }

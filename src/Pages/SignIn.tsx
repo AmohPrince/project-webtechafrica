@@ -1,5 +1,5 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
@@ -7,9 +7,9 @@ import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import {
   redirectResult,
+  resetPassword,
   signInWithEmailAndPassword,
   signInWithGoogle,
-  testUser,
 } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
 import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
@@ -34,6 +34,7 @@ const SignIn = () => {
     text: null,
     type: null,
   });
+  const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setPopUp({ showing: true, text: text, type: type });
@@ -61,6 +62,9 @@ const SignIn = () => {
       )
         .then((user) => {
           setUser(user);
+          if (rememberFor30DaysCheckBox.current?.checked) {
+            localStorage.setItem("lastSignInDate", new Date().toISOString());
+          }
           setSigningInWithEmail(false);
           showPopUp("success", user.name);
         })
@@ -77,11 +81,26 @@ const SignIn = () => {
     try {
       const user = await signInWithGoogle();
       setUser(user);
+      localStorage.setItem("lastSignInDate", new Date().toISOString());
       showPopUp("success", user.name);
     } catch (err: any) {
       showPopUp("error", getSignInErrorMessage(err));
     }
     setSigningInWithGoogle(false);
+  };
+
+  const [showForgotPasswordEmailError, setShowForgotPasswordEmailError] =
+    useState(false);
+
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const handlePasswordReset = async () => {
+    if (errors.email) {
+      setShowForgotPasswordEmailError(true);
+    } else {
+      setShowForgotPasswordEmailError(false);
+      await resetPassword(emailRef!.current!.value);
+    }
   };
 
   useEffect(() => {
@@ -90,8 +109,8 @@ const SignIn = () => {
       await redirectResult()
         .then((res) => {
           if (res) {
-            // setUser(res);
-            setUser(testUser);
+            setUser(res);
+            localStorage.setItem("lastSignInDate", new Date().toISOString());
             showPopUp("success", res.name);
           }
         })
@@ -131,6 +150,9 @@ const SignIn = () => {
             {errors.email?.type === "pattern" && (
               <ToolTip text="Email is not valid" />
             )}
+            {errors.email && showForgotPasswordEmailError && (
+              <ToolTip text="We need a valid email to reset your password" />
+            )}
             <input
               type="email"
               placeholder="Enter your email"
@@ -140,13 +162,16 @@ const SignIn = () => {
                 // eslint-disable-next-line no-useless-escape
                 pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
               })}
+              ref={emailRef}
             />
           </div>
           <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
             Password
           </p>
           <div className="relative">
-            {errors.password && <ToolTip text="Password is required" />}
+            {errors.password && !showForgotPasswordEmailError && (
+              <ToolTip text="Password is required" />
+            )}
             <input
               type="password"
               className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
@@ -160,11 +185,15 @@ const SignIn = () => {
             <input
               type="checkbox"
               className="w-4 h-4 mr-2 dark:bg-transparent"
+              ref={rememberFor30DaysCheckBox}
             />
             <p className="text-sm font-medium dark:text-white">
               Remember for 30 days
             </p>
-            <p className="font-medium text-sm ml-auto dark:text-white">
+            <p
+              className="font-medium text-sm ml-auto dark:text-white cursor-pointer"
+              onClick={handlePasswordReset}
+            >
               Forgot password
             </p>
           </div>

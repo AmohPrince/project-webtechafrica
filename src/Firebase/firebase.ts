@@ -4,6 +4,7 @@ import {
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithPopup,
   signInWithRedirect,
   UserCredential,
@@ -13,6 +14,7 @@ import { User } from "../Types/Global";
 import {
   createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
   signInWithEmailAndPassword as signInUserFnFromFirebase,
+  signOut as signOutFnFromFirebase,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -147,6 +149,31 @@ export const redirectResult = async (): Promise<User | null> => {
   }
 };
 
+export const signOut = async () => {
+  await signOutFnFromFirebase(auth)
+    .then((res) => {
+      localStorage.removeItem("user-data");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const resetPassword = async (email: string): Promise<boolean> => {
+  await sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+      return true;
+    })
+    .catch((error) => {
+      console.log(error, "errorCode");
+      return false;
+    });
+
+  return false;
+};
+
 const addNewUserToDB = async (user: User) => {
   const usersRef = doc(db, "users", user.id);
   await setDoc(usersRef, user, {
@@ -270,7 +297,7 @@ export const testUser: User = {
     {
       id: "sgukkb",
       hasShop: true,
-      url: "https://website.com",
+      url: "https://testuser.webtechafrica.com/",
       decisionDeadline: "24th March",
     },
   ],

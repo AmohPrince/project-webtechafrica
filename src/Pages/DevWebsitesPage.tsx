@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import DevWebsiteComponent from "../Components/DevWebsiteComponent";
 import NoWebsite from "../Components/NoWebsite";
-import PendingVerification from "../Components/PendingVerification";
 import { globalData } from "./DashBoard";
 import { testUser } from "../Firebase/firebase";
+import { Website } from "../Components/Website";
 
 const DevWebsitesPage = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);
@@ -17,21 +16,11 @@ const DevWebsitesPage = () => {
   }, [setDashBoardTitleInfo]);
 
   return (
-    <div className="bg-white mt-4 pt-4 px-6">
+    <div className="bg-white mt-4 py-4 px-6 flex flex-wrap justify-between gap-y-4">
       {mutableUserObject?.devWebsites ? (
-        <>
-          <div className="flex flex-wrap gap-x-2 gap-y-4">
-            {mutableUserObject.devWebsites.map((website, index) => (
-              <DevWebsiteComponent website={website} key={index} />
-            ))}
-          </div>
-          <p className="my-3 font-semibold">Pending Verification</p>
-          <div>
-            {mutableUserObject!.pendingVerificationWebsites?.map((website) => (
-              <PendingVerification website={website} />
-            ))}
-          </div>
-        </>
+        mutableUserObject.devWebsites.map((website, index) => (
+          <Website website={website} key={index} />
+        ))
       ) : (
         <NoWebsite
           text="No website is currently being developed for you 😟 Let`s change
