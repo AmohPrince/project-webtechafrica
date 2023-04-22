@@ -13,11 +13,11 @@ import HamburgerMenu from "./HamburgerMenu";
 import { signOut } from "../Firebase/firebase";
 
 const DashBoardSideBar = ({
-  showSmallScreenMenu,
-  setShowSmallScreenMenu,
+  showingSmallScreenMenu,
+  setShowingSmallScreenMenu,
 }: {
-  setShowSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  showSmallScreenMenu: boolean;
+  showingSmallScreenMenu: boolean;
+  setShowingSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -31,12 +31,15 @@ const DashBoardSideBar = ({
     }, 3000);
   };
 
+  const shouldBeHidden =
+    showingSmallScreenMenu !== true && window.innerWidth < 768;
+
   return (
     <div
-      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 top-0 left-0 sm:block relative ${
-        showSmallScreenMenu
-          ? "block fixed top-0 left-0 bottom-0 w-5/6"
-          : "hidden"
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${
+        shouldBeHidden ? "hidden relative" : ""
+      } ${
+        window.innerWidth > 768 ? "block" : "w-5/6 fixed top-0 left-0 bottom-0"
       }`}
     >
       <div className="flex justify-between items-center mb-5">
@@ -45,7 +48,7 @@ const DashBoardSideBar = ({
         </Link>
         <HamburgerMenu
           location="menu"
-          setShowSmallScreenMenu={setShowSmallScreenMenu}
+          setShowingSmallScreenMenu={setShowingSmallScreenMenu}
         />
       </div>
       <div className="mt-12">

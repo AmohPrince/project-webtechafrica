@@ -47,14 +47,13 @@ const DashBoard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [showSmallScreenMenu, setShowSmallScreenMenu] =
-    useState<boolean>(false);
+  const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
 
   return (
     <div className="flex sm:w-screen min-h-screen sm:h-[100dvh] overflow-hidden">
       <DashBoardSideBar
-        showSmallScreenMenu={showSmallScreenMenu}
-        setShowSmallScreenMenu={setShowSmallScreenMenu}
+        showingSmallScreenMenu={showingSmallScreenMenu}
+        setShowingSmallScreenMenu={setShowingSmallScreenMenu}
       />
       <div className="flex-grow bg-gray-100 w-full sm:w-5/6 z-0">
         <div className="flex justify-between items-center w-full pr-3 sm:px-6 py-3 bg-white fixed top-0 left-0 z-50 sm:static">
@@ -65,7 +64,7 @@ const DashBoard = () => {
           />
           <HamburgerMenu
             location="nav"
-            setShowSmallScreenMenu={setShowSmallScreenMenu}
+            setShowingSmallScreenMenu={setShowingSmallScreenMenu}
           />
           <div className="flex items-center w-3/4 sm:w-1/3 justify-between">
             <FontAwesomeIcon

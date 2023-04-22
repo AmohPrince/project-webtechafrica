@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
-import PrimaryButton from "./PrimaryButton";
-import { Country } from "../Types/Global";
+import PrimaryButton from "../../PrimaryButton";
+import { Country } from "../../../Types/Global";
 
 const PayPalInput = () => {
   const [countries, setCountries] = useState<Country[]>([]);

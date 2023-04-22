@@ -1,6 +1,6 @@
 import React from "react";
-import PrimaryButton from "./PrimaryButton";
-import PrivacyPolicy from "./PrivacyPolicy";
+import PrimaryButton from "../../PrimaryButton";
+import PrivacyPolicy from "../../PrivacyPolicy";
 
 // const ProductDisplay = () => (
 //   <section>

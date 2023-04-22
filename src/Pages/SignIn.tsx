@@ -6,6 +6,7 @@ import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import {
+  getSignInErrorMessage,
   redirectResult,
   resetPassword,
   signInWithEmailAndPassword,
@@ -230,44 +231,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-const getSignInErrorMessage = (err: any): string => {
-  let errorMessage: string;
-  switch (err.code) {
-    case "auth/user-not-found":
-      errorMessage = "User not found. Please check your email and try again.";
-      break;
-    case "auth/wrong-password":
-      errorMessage =
-        "Wrong password. Please check your password and try again.";
-      break;
-    case "auth/network-request-failed":
-      errorMessage =
-        "Network error. Please check your internet connection and try again.";
-      break;
-    case "auth/popup-closed-by-user":
-      errorMessage = "Sign in failed: You closed the sign-in window.";
-      break;
-    case "auth/cancelled-popup-request":
-      errorMessage = "Sign in failed: You cancelled the sign-in window.";
-      break;
-    case "auth/email-already-in-use":
-      errorMessage =
-        "This email is already in use. Please sign in or use a different email address.";
-      break;
-    case "auth/operation-not-allowed":
-      errorMessage =
-        "Sign in is currently not available. Please try again later.";
-      break;
-    case "auth/too-many-requests":
-      errorMessage =
-        "Sign in has been temporarily disabled due to too many requests. Please try again later.";
-      break;
-    case "auth/internal-error":
-      errorMessage = "An internal error has occurred. Please try again later.";
-      break;
-    default:
-      errorMessage = err.message;
-  }
-  return errorMessage;
-};

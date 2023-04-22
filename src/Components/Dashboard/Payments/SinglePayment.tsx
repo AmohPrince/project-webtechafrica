@@ -1,6 +1,6 @@
 import React from "react";
-import { ActiveWebsite } from "../Types/Global";
-import { extractHostname } from "../Util/Utilities";
+import { ActiveWebsite } from "../../../Types/Global";
+import { extractHostname } from "../../../Util/Utilities";
 
 const SinglePayment = ({ website }: { website: ActiveWebsite }) => {
   return (

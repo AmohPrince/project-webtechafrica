@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const HamburgerMenu = ({
-  setShowSmallScreenMenu,
+  setShowingSmallScreenMenu,
   location,
 }: {
-  setShowSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowingSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   location: "menu" | "nav";
 }) => {
   return (
@@ -14,7 +14,7 @@ const HamburgerMenu = ({
       className={`bg-primaryOne py-1 px-2 text-white ${
         location === "menu" ? "rounded-l-md" : "rounded-r-md"
       } block sm:hidden`}
-      onClick={() => setShowSmallScreenMenu((prev) => !prev)}
+      onClick={() => setShowingSmallScreenMenu((prev) => !prev)}
     >
       <FontAwesomeIcon icon={faBars} className="w-5" />
     </div>
