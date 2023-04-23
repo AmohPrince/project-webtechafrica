@@ -1,5 +1,5 @@
-import { assets } from "../../../Assets/assets";
 import { Card } from "../../../Types/Global";
+import { getCardTypeIcon } from "../../../Util/Utilities";
 
 export const CardInfo = ({ card }: { card: Card }) => {
   return (
@@ -18,10 +18,4 @@ export const CardInfo = ({ card }: { card: Card }) => {
       </button>
     </div>
   );
-};
-
-const getCardTypeIcon = (type: string): string | undefined => {
-  if (type.toLowerCase() === "mastercard") {
-    return assets.mastercard;
-  }
 };

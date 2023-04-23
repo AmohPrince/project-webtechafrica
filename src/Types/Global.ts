@@ -24,6 +24,19 @@ export type User = {
   devWebsites?: DevWebsite[]; //list of the users dev websites. This are websites currently in development.
   pendingVerificationWebsites?: PendingVerificationWebsite[]; //list of websites that are pending verification. For people with no pending verification website this field does not exist
   cards?: Card[]; //list of user credit cards.
+  pastTransactions?: Transaction[];
+  upcomingTransactions?: Transaction[];
+};
+
+export type Transaction = {
+  websiteUrl: string;
+  plan: string;
+  currencyCode: string;
+  lastPaymentDate: string;
+  lastPaymentTime: string;
+  billingDate: string;
+  amount: string;
+  card: Card;
 };
 
 export type Website = {

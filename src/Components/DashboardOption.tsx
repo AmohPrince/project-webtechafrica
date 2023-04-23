@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCreditCard,
+  faGear,
   faGears,
   faHourglassHalf,
   faLaptop,
@@ -84,6 +85,13 @@ const DashboardOptionLogo = ({
     return (
       <FontAwesomeIcon
         icon={faHourglassHalf}
+        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+      />
+    );
+  } else if (name === "settings") {
+    return (
+      <FontAwesomeIcon
+        icon={faGear}
         className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );

@@ -36,8 +36,8 @@ const DashBoardSideBar = ({
 
   return (
     <div
-      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${
-        shouldBeHidden ? "hidden relative" : ""
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 relative ${
+        shouldBeHidden ? "hidden" : ""
       } ${
         window.innerWidth > 768 ? "block" : "w-5/6 fixed top-0 left-0 bottom-0"
       }`}
@@ -57,6 +57,7 @@ const DashBoardSideBar = ({
         <DashboardOption name="pending-verification" />
         <DashboardOption name="payments" />
         <DashboardOption name="new-website" />
+        <DashboardOption name="settings" />
       </div>
       <div
         className="flex bottom-10 absolute items-center py-3 px-4 w-full cursor-pointer hover:bg-primaryOne transition-all hover:text-white rounded-l-lg"

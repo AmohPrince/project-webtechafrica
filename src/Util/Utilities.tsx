@@ -1,3 +1,5 @@
+import { assets } from "../Assets/assets";
+
 export const getBaseUrl = (pathname: string): string => {
   let baseUrl: string = "/";
 
@@ -62,4 +64,10 @@ export function getLighterColor(hexColor: string): string {
 
 export const isSmallScreen = () => {
   return window.innerWidth <= 768;
+};
+
+export const getCardTypeIcon = (type: string): string | undefined => {
+  if (type.toLowerCase() === "mastercard") {
+    return assets.mastercard;
+  }
 };

@@ -24,6 +24,7 @@ import DevWebsitesPage from "./Pages/DevWebsitesPage";
 import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
 import Payments from "./Pages/Payments";
 import { PendingVerificationsPage } from "./Pages/PendingVerificationsPage";
+import Settings from "./Pages/Dashboard/Settings";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -57,6 +58,7 @@ root.render(
               element={<PendingVerificationsPage />}
               path="pending-verification"
             />
+            <Route element={<Settings />} path="settings" />
           </Route>
         </Routes>
       </BrowserRouter>

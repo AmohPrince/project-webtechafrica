@@ -1,8 +1,9 @@
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { assets } from "../../../Assets/assets";
+import { globalData } from "../../../Pages/DashBoard";
 import CreditCardInput from "./CreditCardInput";
 import PayPalInput from "./PayPalInput";
 
@@ -15,6 +16,18 @@ export const PaymentsModal = ({
 }) => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] =
     useState("credit-card");
+
+  const { setDashBoardTitleInfo } = useContext(globalData);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setDashBoardTitleInfo({
+        h1: "Payments",
+        sub: "Add your preferred payment method",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={`flex-grow bg-white rounded-xl ${className}`}>
       <div className="py-3 px-5 border-b flex justify-between items-center">

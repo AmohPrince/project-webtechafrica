@@ -14,7 +14,7 @@ const Payments = () => {
 
   const [activeSmallScreenTab, setActiveSmallScreenTab] = useState<
     "payment-methods" | "cards" | "transactions"
-  >("payment-methods");
+  >("transactions");
 
   const { setDashBoardTitleInfo } = useContext(globalData);
   useEffect(() => {
@@ -28,6 +28,15 @@ const Payments = () => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start gap-x-5 px-4 py-3 sm:bg-white sm:p-6 mt-4">
       <div className="text-sm flex justify-between mx-auto gap-x-4 mb-5 sm:hidden w-full">
+        <button
+          className={`px-3 py-2 border border-primaryOne rounded-[4px] ${
+            activeSmallScreenTab === "transactions" &&
+            "bg-primaryOne shadow-md text-white"
+          } `}
+          onClick={() => setActiveSmallScreenTab("transactions")}
+        >
+          Transactions
+        </button>
         <button
           className={`px-3 py-2 border border-primaryOne font-semibold rounded-[4px] ${
             activeSmallScreenTab === "payment-methods" &&
@@ -46,15 +55,6 @@ const Payments = () => {
         >
           Cards
         </button>
-        <button
-          className={`px-3 py-2 border border-primaryOne rounded-[4px] ${
-            activeSmallScreenTab === "transactions" &&
-            "bg-primaryOne shadow-md text-white"
-          } `}
-          onClick={() => setActiveSmallScreenTab("transactions")}
-        >
-          Transactions
-        </button>
       </div>
       <div className="sm:hidden w-full">
         {activeSmallScreenTab === "payment-methods" && (
@@ -68,7 +68,18 @@ const Payments = () => {
             setActiveSmallScreenTab={setActiveSmallScreenTab}
           />
         )}
-        {activeSmallScreenTab === "transactions" && <Transactions />}
+        {activeSmallScreenTab === "transactions" && (
+          <>
+            <p className="font-semibold mb-2">Upcoming payments</p>
+            <Transactions type="Upcoming" />
+          </>
+        )}
+        {activeSmallScreenTab === "transactions" && (
+          <>
+            <p className="font-semibold mb-2">Past payments</p>
+            <Transactions type="Past" />
+          </>
+        )}
       </div>
       <div className="hidden sm:flex justify-between w-full gap-x-2">
         {showPaymentMethodsModalLargeScreen ? (
@@ -79,11 +90,11 @@ const Payments = () => {
           <div className="flex-grow">
             <div>
               <p className="font-semibold mb-2">Upcoming payments</p>
-              <Transactions />
+              <Transactions type="Upcoming" />
             </div>
             <div>
               <p className="font-semibold mb-2">Past payments</p>
-              <Transactions />
+              <Transactions type="Past" />
             </div>
           </div>
         )}
