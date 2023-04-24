@@ -11,7 +11,6 @@ import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { useAuth } from "../Hooks/UseAuth";
-import { User } from "../Types/Global";
 
 export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
@@ -29,7 +28,7 @@ export const globalData = createContext<{
 });
 
 const DashBoard = () => {
-  const { user } = useAuth();
+  const { userData } = useAuth();
   const redirect = useNavigate();
   const [dashBoardTitleInfo, setDashBoardTitleInfo] = useState({
     h1: "Active Websites",
@@ -39,7 +38,7 @@ const DashBoard = () => {
   const [mutableUserObject, setMutableUserObject] = useState(user);
 
   useEffect(() => {
-    if (user) {
+    if (userData) {
       redirect("/dashboard/active-websites");
     } else {
       redirect("/sign-in");
