@@ -40,6 +40,7 @@ export const signInWithGoogle = async (): Promise<User> => {
         auth,
         googleAuthProvider
       );
+
       const user = {
         id: userCredential.user.uid,
         email: userCredential.user.email!,
