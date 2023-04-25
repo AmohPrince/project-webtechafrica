@@ -1,21 +1,26 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
+  deleteUser,
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithPopup,
   signInWithRedirect,
+  updateEmail,
+  updatePassword,
   UserCredential,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
-import { User } from "../Types/Global";
 import {
   createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
   signInWithEmailAndPassword as signInUserFnFromFirebase,
   signOut as signOutFnFromFirebase,
 } from "firebase/auth";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
+import { UserData } from "../Types/Global";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -33,29 +38,14 @@ export const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async (): Promise<User> => {
+export const signInWithGoogle = async (): Promise<UserCredential> => {
   if (window.innerWidth < 768) {
     try {
       const userCredential: UserCredential = await signInWithRedirect(
         auth,
         googleAuthProvider
       );
-
-      const user = {
-        id: userCredential.user.uid,
-        email: userCredential.user.email!,
-        name: userCredential.user.displayName ?? userCredential.user.email!,
-        paymentMethodSelected: false,
-        plan: "basic",
-        photoUrl: userCredential.user.photoURL,
-      };
-      try {
-        const savedUser = await fetchUserFromDB(user.id);
-        return savedUser;
-      } catch (error) {
-        await addNewUserToDB(user);
-        return user;
-      }
+      return userCredential;
     } catch (err) {
       throw err;
     }
@@ -65,21 +55,7 @@ export const signInWithGoogle = async (): Promise<User> => {
         auth,
         googleAuthProvider
       );
-      const user = {
-        id: userCredential.user.uid,
-        email: userCredential.user.email!,
-        name: userCredential.user.displayName ?? userCredential.user.email!,
-        paymentMethodSelected: false,
-        plan: "basic",
-        photoUrl: userCredential.user.photoURL,
-      };
-      try {
-        const savedUser = await fetchUserFromDB(user.id);
-        return savedUser;
-      } catch (error) {
-        await addNewUserToDB(user);
-        return user;
-      }
+      return userCredential;
     } catch (error) {
       throw error;
     }
@@ -89,11 +65,14 @@ export const signInWithGoogle = async (): Promise<User> => {
 export const signInWithEmailAndPassword = async (
   email: string,
   password: string
-): Promise<User> => {
+): Promise<UserCredential> => {
   try {
-    const { user } = await signInUserFnFromFirebase(auth, email, password);
-    const savedUser = await fetchUserFromDB(user.uid);
-    return savedUser;
+    const userCredential: UserCredential = await signInUserFnFromFirebase(
+      auth,
+      email,
+      password
+    );
+    return userCredential;
   } catch (err) {
     throw err;
   }
@@ -110,39 +89,21 @@ export const createUserWithEmailAndPassword = async (
   email: string,
   password: string,
   name: { firstName: string; lastName: string }
-): Promise<User> => {
+): Promise<UserCredential> => {
   try {
     const userCredential: UserCredential =
       await createUserWithEmailFnFromFirebase(auth, email, password);
-    const user = {
-      id: userCredential.user.uid,
-      email: userCredential.user.email!,
-      name: userCredential.user.displayName ?? userCredential.user.email!,
-      paymentMethodSelected: false,
-      plan: "basic",
-      photoUrl: userCredential.user.photoURL,
-    };
-    addNewUserToDB(user);
-    return user;
+    return userCredential;
   } catch (error) {
     throw error;
   }
 };
 
-export const redirectResult = async (): Promise<User | null> => {
+export const redirectResult = async (): Promise<UserCredential | null> => {
   try {
     const userCredential: UserCredential | null = await getRedirectResult(auth);
     if (userCredential) {
-      const newUser: User = {
-        id: userCredential.user.uid,
-        email: userCredential.user.email!,
-        name: userCredential.user.displayName ?? userCredential.user.email!,
-        paymentMethodSelected: false,
-        plan: "basic",
-        photoUrl: userCredential.user.photoURL!,
-      };
-      addNewUserToDB(newUser);
-      return newUser;
+      return userCredential;
     }
     return null;
   } catch (error) {
@@ -153,42 +114,107 @@ export const redirectResult = async (): Promise<User | null> => {
 export const signOut = async () => {
   await signOutFnFromFirebase(auth)
     .then((res) => {
-      localStorage.removeItem("user-data");
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.USER_CREDENTIAL);
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
+// https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email
 export const resetPassword = async (email: string): Promise<boolean> => {
-  await sendPasswordResetEmail(auth, email)
+  return await sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
       // ..
       return true;
     })
     .catch((error) => {
-      console.log(error, "errorCode");
+      console.log(error);
+      return false;
+    });
+};
+
+// https://firebase.google.com/docs/auth/web/manage-users#set_a_users_email_address
+export const updateUserEmailAddress = async (
+  email: string
+): Promise<boolean> => {
+  return await updateEmail(auth.currentUser!, email)
+    .then(() => {
+      // Email updated!
+      // ...
+      return true;
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+      console.log(error);
+      return false;
+    });
+};
+
+// https://firebase.google.com/docs/auth/web/manage-users#set_a_users_password
+export const updateUserPassword = async (
+  newPassword: string
+): Promise<boolean> => {
+  return await updatePassword(auth.currentUser!, newPassword)
+    .then(() => {
+      // Update successful.
+      return true;
+    })
+    .catch((error) => {
+      // An error ocurred
+      // ...
+      console.log(error);
+      return false;
+    });
+};
+
+export const deleteAccount = async (): Promise<boolean> => {
+  return deleteUser(auth.currentUser!)
+    .then(() => {
+      // User deleted.
+      return true;
+    })
+    .catch((error) => {
+      // An error ocurred
+      // ...
+      return false;
+    });
+};
+
+export const sendVerificationEmail = async (): Promise<boolean> => {
+  await sendEmailVerification(auth.currentUser!)
+    .then(() => {
+      // Email verification sent!
+      // ...
+      return true;
+    })
+    .catch((error) => {
+      console.log(error);
       return false;
     });
 
   return false;
 };
 
-const addNewUserToDB = async (user: User) => {
-  const usersRef = doc(db, "users", user.id);
-  await setDoc(usersRef, user, {
+//firestore
+export const addNewUserToDB = async (userData: UserData, userId: string) => {
+  const usersRef = doc(db, "users", userId);
+  await setDoc(usersRef, userData, {
     merge: true,
   });
 };
 
-const fetchUserFromDB = async (userId: string): Promise<User> => {
+export const fetchUserDataFromDB = async (
+  userId: string
+): Promise<UserData> => {
   try {
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return docSnap.data() as User;
+      return docSnap.data() as UserData;
     } else {
       console.log("User not found in the database");
       throw new Error("User not found in the database");
@@ -258,10 +284,7 @@ export const getSignUpErrorMessage = (error: any): string => {
   }
 };
 
-export const testUser: User = {
-  id: "ssydd",
-  name: "Test User",
-  email: "Test email",
+export const testUser: UserData = {
   plan: "Basic",
   paymentMethodSelected: false,
   activeWebsites: [
@@ -369,5 +392,4 @@ export const testUser: User = {
       websiteUrl: "testuser@webtechafrica.com",
     },
   ],
-  photoUrl: null,
 };

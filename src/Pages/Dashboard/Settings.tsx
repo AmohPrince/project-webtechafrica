@@ -13,6 +13,8 @@ const Settings = () => {
     "personal-information" | "password"
   >("personal-information");
 
+  console.log(userCredential);
+
   return (
     <div className="w-2/3 mx-auto mt-5 bg-white">
       <div className="flex font-semibold text-sm cursor-pointer">
@@ -95,7 +97,7 @@ const Settings = () => {
             </div>
           </div>
           <p className="text-sm text-gray-400 mt-5">
-            This account was created on {user?.metadata.creationTime}
+            This account was created on {user?.createdAt}
           </p>
           <PrimaryButton text="Update details" className="ml-auto w-1/4 mt-5" />
         </div>

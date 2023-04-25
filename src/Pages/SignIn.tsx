@@ -4,30 +4,37 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
+import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
+import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import {
   getSignInErrorMessage,
   redirectResult,
-  resetPassword,
+  // resetPassword,
   signInWithEmailAndPassword,
   signInWithGoogle,
 } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
-import { PopUp, PopUpInfo, ToolTip } from "./SignUp";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 type Inputs = {
   email: string;
   password: string;
 };
 
+//Todo learn how to use different identity providers in firebase
+
 const SignIn = () => {
+  const { setUserCredential } = useAuth();
   const navigate = useNavigate();
-  const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  // const passwordRef = useRef<HTMLInputElement>(null);
+  const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
+
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
   const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
   const [popUp, setPopUp] = useState<PopUpInfo>({
@@ -35,17 +42,16 @@ const SignIn = () => {
     text: null,
     type: null,
   });
-  const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setPopUp({ showing: true, text: text, type: type });
     setTimeout(() => {
-      setPopUp({
-        showing: false,
-        text: null,
-        type: null,
-      });
       if (type === "success") {
+        setPopUp({
+          showing: false,
+          text: null,
+          type: null,
+        });
         navigate("/dashboard");
       }
     }, 3000);
@@ -61,16 +67,23 @@ const SignIn = () => {
         userCredentials.email,
         userCredentials.password
       )
-        .then((user) => {
-          setUser(user);
+        .then((userCredential) => {
+          setUserCredential(userCredential);
           if (rememberFor30DaysCheckBox.current?.checked) {
-            localStorage.setItem("lastSignInDate", new Date().toISOString());
+            localStorage.setItem(
+              LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
+              new Date().toISOString()
+            );
           }
           setSigningInWithEmail(false);
-          showPopUp("success", user.name);
+          showPopUp("success", userCredential.user.displayName ?? "user");
         })
         .catch((err) => {
           showPopUp("error", getSignInErrorMessage(err));
+          // if (err.code === "auth/wrong-password") {
+          //   const passwordRefStyle = passwordRef.current?.style;
+          //   passwordRefStyle?.setProperty("border", "red");
+          // }
           setSigningInWithEmail(false);
         });
     }, 3000);
@@ -80,39 +93,38 @@ const SignIn = () => {
   const googleSignIn = async () => {
     setSigningInWithGoogle(true);
     try {
-      const user = await signInWithGoogle();
-      setUser(user);
-      localStorage.setItem("lastSignInDate", new Date().toISOString());
-      showPopUp("success", user.name);
+      const userCredential = await signInWithGoogle();
+      setUserCredential(userCredential);
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
+        new Date().toISOString()
+      );
+      showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
       showPopUp("error", getSignInErrorMessage(err));
     }
     setSigningInWithGoogle(false);
   };
 
-  const [showForgotPasswordEmailError, setShowForgotPasswordEmailError] =
-    useState(false);
-
-  const emailRef = useRef<HTMLInputElement>(null);
-
   const handlePasswordReset = async () => {
-    if (errors.email) {
-      setShowForgotPasswordEmailError(true);
-    } else {
-      setShowForgotPasswordEmailError(false);
-      await resetPassword(emailRef!.current!.value);
-    }
+    // if (errors.email) {
+    //   setShowForgotPasswordEmailError(true);
+    // } else {
+    //   setShowForgotPasswordEmailError(false);
+    //   await resetPassword(emailRef!.current!.value);
+    // }
+    console.log("resetting password!!");
   };
 
   useEffect(() => {
     const getRedirectResult = async () => {
       setSigningInWithGoogle(true);
       await redirectResult()
-        .then((res) => {
-          if (res) {
-            setUser(res);
+        .then((userCredential) => {
+          if (userCredential) {
+            setUserCredential(userCredential);
             localStorage.setItem("lastSignInDate", new Date().toISOString());
-            showPopUp("success", res.name);
+            showPopUp("success", userCredential.user.displayName ?? "user");
           }
         })
         .catch((err) => {
@@ -126,7 +138,6 @@ const SignIn = () => {
 
   return (
     <div className="h-screen flex relative">
-      {popUp.showing && <PopUp popUpInfo={popUp} />}
       <img
         src={
           "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -136,12 +147,19 @@ const SignIn = () => {
       />
       <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack">
         <LogoTab logoColor={LogoColor.primary} />
-        <p className="font-semibold text-3xl mt-[7%] dark:text-white">
-          Welcome back
-        </p>
-        <p className="font-normal text-base text-gray-400">
-          Welcome back please enter your details
-        </p>
+
+        {popUp.showing ? (
+          <PopUp popUpInfo={popUp} />
+        ) : (
+          <>
+            <p className="font-semibold text-3xl mt-[7%] dark:text-white">
+              Welcome back
+            </p>
+            <p className="font-normal text-base text-gray-400">
+              Welcome back please enter your details
+            </p>
+          </>
+        )}
         <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
           <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
           <div className="relative">
@@ -150,9 +168,6 @@ const SignIn = () => {
             )}
             {errors.email?.type === "pattern" && (
               <ToolTip text="Email is not valid" />
-            )}
-            {errors.email && showForgotPasswordEmailError && (
-              <ToolTip text="We need a valid email to reset your password" />
             )}
             <input
               type="email"
@@ -163,16 +178,13 @@ const SignIn = () => {
                 // eslint-disable-next-line no-useless-escape
                 pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
               })}
-              ref={emailRef}
             />
           </div>
           <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
             Password
           </p>
           <div className="relative">
-            {errors.password && !showForgotPasswordEmailError && (
-              <ToolTip text="Password is required" />
-            )}
+            {errors.password && <ToolTip text="Password is required" />}
             <input
               type="password"
               className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
@@ -180,6 +192,7 @@ const SignIn = () => {
               {...register("password", {
                 required: true,
               })}
+              // ref={passwordRef}
             />
           </div>
           <div className="flex items-center mt-5 mb-6">

@@ -13,7 +13,7 @@ export const Cards = ({
     React.SetStateAction<"cards" | "payment-methods" | "transactions">
   >;
 }) => {
-  const { user } = useAuth();
+  const { userData } = useAuth();
   const { setDashBoardTitleInfo } = useContext(globalData);
 
   useEffect(() => {
@@ -27,8 +27,8 @@ export const Cards = ({
     <div className="flex flex-col w-full sm:w-1/4">
       <div className="w-full bg-white rounded-xl border pb-4 flex flex-col">
         <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
-        {user?.cards ? (
-          user.cards.map((card) => <CardInfo card={card} />)
+        {userData?.cards ? (
+          userData.cards.map((card) => <CardInfo card={card} />)
         ) : (
           <p className="text-sm text-gray-500 text-center mx-4 my-4">
             You’ve not added any payment method yet

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   faArrowRightFromBracket,
-  faEllipsis,
+  faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
@@ -11,6 +11,7 @@ import DashboardOption from "./DashboardOption";
 import LogoTab from "./LogoTab";
 import HamburgerMenu from "./HamburgerMenu";
 import { signOut } from "../Firebase/firebase";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 const DashBoardSideBar = ({
   showingSmallScreenMenu,
@@ -26,6 +27,9 @@ const DashBoardSideBar = ({
     setLoading(true);
     setTimeout(async () => {
       await signOut();
+      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
+        localStorage.removeItem("key")
+      );
       navigate("/");
       setLoading(false);
     }, 3000);
@@ -64,11 +68,8 @@ const DashBoardSideBar = ({
         onClick={handleLogOut}
       >
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
-        {loading ? (
-          <FontAwesomeIcon icon={faEllipsis} />
-        ) : (
-          <p className="font-semibold ml-3">Log out</p>
-        )}
+        <p className="font-semibold ml-3">Log out</p>
+        {loading && <FontAwesomeIcon icon={faCircleNotch} spin />}
       </div>
     </div>
   );

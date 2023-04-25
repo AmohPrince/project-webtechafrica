@@ -1,30 +1,25 @@
-import { faCaretDown, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   createUserWithEmailAndPassword,
+  getSignUpErrorMessage,
   redirectResult,
   signInWithGoogle,
-  testUser,
 } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
+import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
+import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 
 type Inputs = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-};
-
-export type PopUpInfo = {
-  showing: boolean;
-  text: null | string;
-  type: null | "success" | "error";
 };
 
 export const SignUp = () => {
@@ -43,7 +38,7 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { setUser } = useAuth();
+  const { setUserCredential } = useAuth();
   const redirect = useNavigate();
 
   const showPopUp = (type: "success" | "error", text: string) => {
@@ -74,10 +69,10 @@ export const SignUp = () => {
           firstName: data.firstName,
           lastName: data.lastName,
         })
-          .then((user) => {
-            setUser(user);
+          .then((userCredential) => {
+            setUserCredential(userCredential);
             setCreatingUserWithEmail(false);
-            showPopUp("success", user.name);
+            showPopUp("success", userCredential.user.displayName ?? "user");
           })
           .catch((error) => {
             setCreatingUserWithEmail(false);
@@ -90,9 +85,9 @@ export const SignUp = () => {
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
-      const user = await signInWithGoogle();
-      setUser(user);
-      showPopUp("success", user.name);
+      const userCredential = await signInWithGoogle();
+      setUserCredential(userCredential);
+      showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
       showPopUp("error", getSignUpErrorMessage(err.message));
     }
@@ -103,11 +98,10 @@ export const SignUp = () => {
     const getRedirectResult = async () => {
       setCreatingUserWithGoogle(true);
       await redirectResult()
-        .then((res) => {
-          if (res) {
-            // setUser(res);
-            setUser(testUser);
-            showPopUp("success", res.name);
+        .then((userCredential) => {
+          if (userCredential) {
+            setUserCredential(userCredential);
+            showPopUp("success", userCredential.user.displayName ?? "user");
           }
         })
         .catch((err) => {
@@ -232,53 +226,4 @@ export const SignUp = () => {
       </div>
     </div>
   );
-};
-
-export const ToolTip = ({ text }: { text: string }) => {
-  return (
-    <div className="absolute -top-2 p-1 left-1/2 -translate-x-1/2 -translate-y-full text-center rounded-sm text-white text-xs bg-bgSignupPage">
-      <p>{text}</p>
-      <FontAwesomeIcon
-        icon={faCaretDown}
-        className="absolute left-1/2 -translate-x-1/2 text-bgSignupPage"
-      />
-    </div>
-  );
-};
-
-export const PopUp = ({ popUpInfo }: { popUpInfo: PopUpInfo }) => {
-  return (
-    <div
-      className={`absolute top-4 left-1/2 bg-white rounded-sm py-2 px-3 shadow-sm text-sm -translate-x-1/2 overflow-x-hidden ${
-        popUpInfo.type === "success"
-          ? "border-b shadow-green-500"
-          : "border shadow-red-500"
-      }`}
-    >
-      <p>
-        {popUpInfo.type === "success"
-          ? "Hello " + popUpInfo.text + "!"
-          : popUpInfo.text}
-      </p>
-      <div className="h-[2px] transition" />
-    </div>
-  );
-};
-
-export const getSignUpErrorMessage = (error: any): string => {
-  if (error.code === "auth/account-exists-with-different-credential") {
-    return "An account with this email already exists. Try signing in with a different method.";
-  } else if (error.code === "auth/popup-closed-by-user") {
-    return "The sign-up popup was closed before authentication could complete. Please try again.";
-  } else if (error.code === "auth/cancelled-popup-request") {
-    return "The sign-up popup was cancelled before authentication could complete. Please try again.";
-  } else if (error.code === "auth/email-already-in-use") {
-    return "An account with this email already exists. Please use a different email address.";
-  } else if (error.code === "auth/invalid-email") {
-    return "The email address you entered is not valid. Please check your email and try again.";
-  } else if (error.code === "auth/weak-password") {
-    return "Your password is too weak. Please choose a stronger password.";
-  } else {
-    return "An error occurred. Please try again later. " + error.code;
-  }
 };

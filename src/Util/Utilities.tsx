@@ -71,3 +71,9 @@ export const getCardTypeIcon = (type: string): string | undefined => {
     return assets.mastercard;
   }
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  USER_CREDENTIAL: "user-credential",
+  LAST_SIGN_IN_DATE: "last-sign-in-date",
+  USER_DATA: "user-data",
+};

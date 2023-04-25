@@ -5,7 +5,7 @@ import SinglePayment from "./SinglePayment";
 import { SinglePaymentSmallScreen } from "./SinglePaymentSmallScreen";
 
 const Transactions = ({ type }: { type: "Upcoming" | "Past" }) => {
-  const { user } = useAuth();
+  const { userData } = useAuth();
   const { setDashBoardTitleInfo } = useContext(globalData);
 
   useEffect(() => {
@@ -29,19 +29,19 @@ const Transactions = ({ type }: { type: "Upcoming" | "Past" }) => {
           <p className="w-1/5">Billing date</p>
         </div>
         {type === "Upcoming"
-          ? user?.upcomingTransactions?.map((transaction) => (
+          ? userData?.upcomingTransactions?.map((transaction) => (
               <SinglePayment transaction={transaction} />
             ))
-          : user?.pastTransactions?.map((transaction) => (
+          : userData?.pastTransactions?.map((transaction) => (
               <SinglePayment transaction={transaction} />
             ))}
       </div>
       <div className="sm:hidden">
         {type === "Upcoming"
-          ? user?.upcomingTransactions?.map((transaction) => (
+          ? userData?.upcomingTransactions?.map((transaction) => (
               <SinglePaymentSmallScreen transaction={transaction} />
             ))
-          : user?.pastTransactions?.map((transaction) => (
+          : userData?.pastTransactions?.map((transaction) => (
               <SinglePaymentSmallScreen transaction={transaction} />
             ))}
       </div>

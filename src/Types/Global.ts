@@ -13,12 +13,8 @@ export type BlogArticleType = {
   conclusions?: string[];
 };
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
+export type UserData = {
   plan: "basic" | "premium" | string; // Either basic or premium but basic by default.
-  photoUrl: string | null; //For people with a profile picture this field exists. For those with no picture it doesn't exist.
   paymentMethodSelected: boolean; // whether or not the use has selected a payment method. false by default
   activeWebsites?: ActiveWebsite[]; //list of the users active websites.
   devWebsites?: DevWebsite[]; //list of the users dev websites. This are websites currently in development.

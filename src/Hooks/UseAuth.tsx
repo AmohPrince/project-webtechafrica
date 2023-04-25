@@ -1,22 +1,30 @@
 import { UserCredential } from "firebase/auth";
 import React from "react";
-// import { auth } from "../Firebase/firebase";
-import { User } from "../Types/Global";
+import { UserData } from "../Types/Global";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
 
 export function useAuth(): {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  userData: UserData | null;
+  setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
   userCredential: UserCredential | null;
   setUserCredential: React.Dispatch<
     React.SetStateAction<UserCredential | null>
   >;
 } {
-  const [user, setUser] = useLocalStorage<User | null>(null, "user-data");
+  const [userData, setUserData] = useLocalStorage<UserData | null>(
+    null,
+    LOCAL_STORAGE_KEYS.USER_DATA
+  );
   const [userCredential, setUserCredential] =
-    useLocalStorage<UserCredential | null>(null, "user-credential");
+    useLocalStorage<UserCredential | null>(
+      null,
+      LOCAL_STORAGE_KEYS.USER_CREDENTIAL
+    );
 
-  const lastSavedDate: string | null = localStorage.getItem("lastSignInDate");
+  const lastSavedDate: string | null = localStorage.getItem(
+    LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE
+  );
 
   if (lastSavedDate) {
     const lastSignInDateInMilliSeconds: number = new Date(
@@ -29,13 +37,13 @@ export function useAuth(): {
       differenceInMilliSeconds / (1000 * 60 * 60 * 24);
     if (differenceInDays >= 30) {
       // It's been 30 days or more since the last sign-in
-      setUser(null);
+      setUserData(null);
     }
   }
 
   return {
-    user,
-    setUser,
+    userData,
+    setUserData,
     userCredential,
     setUserCredential,
   };

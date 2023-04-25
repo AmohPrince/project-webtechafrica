@@ -1,9 +1,5 @@
-import React, { useContext, useState } from "react";
-import { globalData } from "../../Pages/DashBoard";
-import {
-  NewWebsiteSelections,
-  PendingVerificationWebsite,
-} from "../../Types/Global";
+import React, { useState } from "react";
+import { NewWebsiteSelections } from "../../Types/Global";
 import { SecondaryButton } from "../SecondaryButton";
 import { ThemeBox } from "../ThemeBox";
 
@@ -15,7 +11,6 @@ const NewWebsiteReview = ({
   showConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { setMutableUserObject } = useContext(globalData);
   const completeWebsiteBuildingProcess = () => {
     setIsLoading(true);
     //TODO
@@ -24,30 +19,7 @@ const NewWebsiteReview = ({
     //This is just simulation
     setTimeout(() => {
       setIsLoading(false);
-      setMutableUserObject((prev) => {
-        const newWebsite: PendingVerificationWebsite = {
-          id: "fakeId",
-          url: selections.domainName!,
-          hasShop: true,
-          decisionDeadline: "24th June 2021",
-        };
-
-        return {
-          ...prev,
-          id: prev!.id ?? "",
-          name: prev?.name ?? "",
-          email: prev?.email ?? "",
-          plan: prev?.plan ?? "basic",
-          paymentMethodSelected: prev?.paymentMethodSelected ?? false,
-          photoUrl: null,
-          pendingVerificationWebsites: [
-            ...(prev?.pendingVerificationWebsites
-              ? prev?.pendingVerificationWebsites!
-              : []),
-            newWebsite,
-          ],
-        };
-      });
+      console.log(selections);
       showConfirmationModal(true);
     }, 3000);
   };

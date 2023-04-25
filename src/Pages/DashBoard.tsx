@@ -19,23 +19,18 @@ export const globalData = createContext<{
       sub: string;
     }>
   >;
-  mutableUserObject: User | null;
-  setMutableUserObject: React.Dispatch<React.SetStateAction<User | null>>;
 }>({
   setDashBoardTitleInfo: () => {},
-  mutableUserObject: null,
-  setMutableUserObject: () => {},
 });
 
 const DashBoard = () => {
-  const { userData } = useAuth();
+  const { userData, userCredential } = useAuth();
+  const user = userCredential?.user;
   const redirect = useNavigate();
   const [dashBoardTitleInfo, setDashBoardTitleInfo] = useState({
     h1: "Active Websites",
     sub: "test",
   });
-
-  const [mutableUserObject, setMutableUserObject] = useState(user);
 
   useEffect(() => {
     if (userData) {
@@ -75,9 +70,9 @@ const DashBoard = () => {
               className="w-3 h-3 text-gray-400 cursor-pointer hover:text-primaryOne transition-all"
             />
             <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer w-1/2 sm:w-auto">
-              {user?.photoUrl ? (
+              {user?.photoURL ? (
                 <img
-                  src={user.photoUrl}
+                  src={user.photoURL}
                   alt="profile"
                   className="h-7 w-7 object-cover rounded-full mr-3"
                 />
@@ -85,7 +80,7 @@ const DashBoard = () => {
                 <FontAwesomeIcon icon={faUser} className="mr-3" />
               )}
               <p className="text-[10px] sm:text-sm font-bold mr-2 sm:mr-7">
-                {user?.name}
+                {user?.displayName}
               </p>
               <FontAwesomeIcon
                 icon={faCaretDown}
@@ -102,8 +97,6 @@ const DashBoard = () => {
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,
-            mutableUserObject,
-            setMutableUserObject,
           }}
         >
           <Outlet />
