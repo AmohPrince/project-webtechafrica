@@ -11,8 +11,10 @@ import {
   signInWithRedirect,
   updateEmail,
   updatePassword,
+  updateProfile,
   UserCredential,
 } from "firebase/auth";
+import { getStorage, ref } from "firebase/storage";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
@@ -32,11 +34,16 @@ const firebaseConfig = {
   measurementId: "G-HP7VRMT9JW",
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
-export const auth = getAuth(firebaseApp);
-export const analytics = getAnalytics(firebaseApp);
-export const db = getFirestore(firebaseApp);
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const analytics = getAnalytics(firebaseApp);
+const db = getFirestore(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
+const storage = getStorage();
+const storageRef = ref(storage);
+const profilePicturesRef = ref(storage, "profile-pictures");
+
+//TODO learn how to upload files to cloud firestore
 
 export const signInWithGoogle = async (): Promise<UserCredential> => {
   if (window.innerWidth < 768) {
@@ -196,6 +203,44 @@ export const sendVerificationEmail = async (): Promise<boolean> => {
     });
 
   return false;
+};
+
+// https://firebase.google.com/docs/auth/web/manage-users#update_a_users_profile
+export const updateUserDisplayName = async (
+  displayName: string
+): Promise<boolean> => {
+  return updateProfile(auth.currentUser!, {
+    displayName,
+  })
+    .then(() => {
+      // displayName updated!
+      // ...
+      return true;
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+      console.log(error);
+      return false;
+    });
+};
+
+// https://firebase.google.com/docs/auth/web/manage-users#update_a_users_profile
+export const updateUserProfilePicture = async (url: string) => {
+  return updateProfile(auth.currentUser!, {
+    photoURL: url,
+  })
+    .then(() => {
+      // displayName updated!
+      // ...
+      return true;
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+      console.log(error);
+      return false;
+    });
 };
 
 //firestore

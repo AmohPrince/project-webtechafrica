@@ -1,10 +1,16 @@
 import { faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { User } from "firebase/auth";
 import React, { useState } from "react";
 import PasswordInput from "../../Components/Dashboard/Payments/Settings/PasswordInput";
 import { SettingsInput } from "../../Components/Dashboard/Payments/Settings/SettingsInput";
 import PrimaryButton from "../../Components/PrimaryButton";
 import { useAuth } from "../../Hooks/UseAuth";
+import { formatDateFromTimestamp } from "../../Util/Utilities";
+
+type UserWithCreatedAt = User & {
+  createdAt: string;
+};
 
 const Settings = () => {
   const { userCredential } = useAuth();
@@ -97,7 +103,10 @@ const Settings = () => {
             </div>
           </div>
           <p className="text-sm text-gray-400 mt-5">
-            This account was created on {user?.createdAt}
+            This account was created on{" "}
+            {formatDateFromTimestamp(
+              parseInt((user as UserWithCreatedAt)?.createdAt)
+            )}
           </p>
           <PrimaryButton text="Update details" className="ml-auto w-1/4 mt-5" />
         </div>

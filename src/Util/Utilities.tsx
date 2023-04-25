@@ -72,6 +72,33 @@ export const getCardTypeIcon = (type: string): string | undefined => {
   }
 };
 
+export const formatDateFromTimestamp = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const day = date.toLocaleDateString("en-GB", {
+    month: "long",
+    year: "numeric",
+  });
+  const ordinal = getOrdinalSuffix(date.getDate());
+  return `${ordinal} ${day}`;
+};
+
+function getOrdinalSuffix(day: number): string {
+  if (day > 3 && day < 21) {
+    return `${day}th`;
+  } else {
+    switch (day % 10) {
+      case 1:
+        return `${day}st`;
+      case 2:
+        return `${day}nd`;
+      case 3:
+        return `${day}rd`;
+      default:
+        return `${day}th`;
+    }
+  }
+}
+
 export const LOCAL_STORAGE_KEYS = {
   USER_CREDENTIAL: "user-credential",
   LAST_SIGN_IN_DATE: "last-sign-in-date",
