@@ -1,10 +1,11 @@
-import { faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PasswordInput from "../../Components/Dashboard/Payments/Settings/PasswordInput";
 import { SettingsInput } from "../../Components/Dashboard/Payments/Settings/SettingsInput";
 import PrimaryButton from "../../Components/PrimaryButton";
+import { uploadUserProfilePicture } from "../../Firebase/storage";
 import { useAuth } from "../../Hooks/UseAuth";
 import { formatDateFromTimestamp } from "../../Util/Utilities";
 
@@ -14,12 +15,41 @@ type UserWithCreatedAt = User & {
 
 const Settings = () => {
   const { userCredential } = useAuth();
+  const fileInput = useRef<HTMLInputElement>(null);
+  const profilePictureRef = useRef<HTMLImageElement>(null);
   const user = userCredential?.user;
   const [activeTab, setActiveTab] = useState<
     "personal-information" | "password"
   >("personal-information");
 
-  console.log(userCredential);
+  const [isUploadingUserProfilePic, setIsUploadingUserProfilePic] =
+    useState(false);
+  const [userProfilePicture, setUserProfilePicture] = useState<
+    string | null | undefined
+  >(user?.photoURL);
+
+  const handleChangingUserProfile = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsUploadingUserProfilePic(true);
+    const url = await uploadUserProfilePicture(
+      e.target.files![0],
+      userCredential!.user.uid
+    )
+      .then((url) => {
+        setIsUploadingUserProfilePic(false);
+        return url;
+      })
+      .catch((err) => {
+        console.error(err);
+        return null;
+      });
+    setUserProfilePicture(url);
+  };
+
+  const handleClick = () => {
+    fileInput.current?.click();
+  };
 
   return (
     <div className="w-2/3 mx-auto mt-5 bg-white">
@@ -49,11 +79,12 @@ const Settings = () => {
         <div className="p-5 flex flex-col">
           {/* profile picture */}
           <div className="h-20 w-20 mx-auto relative">
-            {user?.photoURL ? (
+            {userProfilePicture ? (
               <img
-                src={user.photoURL}
-                alt={user.displayName + "`s profile picture"}
+                src={userProfilePicture}
+                alt={user?.displayName + "`s profile picture"}
                 className="z-0 h-full w-full rounded-full"
+                ref={profilePictureRef}
               />
             ) : (
               <div className="p-5 bg-black h-full w-full rounded-full">
@@ -63,7 +94,25 @@ const Settings = () => {
                 />
               </div>
             )}
-            <div className="rounded-full w-7 h-7 bg-white flex shadow-sm shadow-primaryOne justify-center items-center cursor-pointer absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/3">
+            {isUploadingUserProfilePic && (
+              <div className="h-1/4 w-1/4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  spin
+                  className="text-white h-full"
+                />
+              </div>
+            )}
+            <div
+              className="rounded-full w-7 h-7 bg-white flex shadow-sm shadow-primaryOne justify-center items-center cursor-pointer absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/3"
+              onClick={handleClick}
+            >
+              <input
+                type="file"
+                hidden
+                onChange={handleChangingUserProfile}
+                ref={fileInput}
+              />
               <FontAwesomeIcon icon={faCamera} className="text-primaryOne" />
             </div>
           </div>

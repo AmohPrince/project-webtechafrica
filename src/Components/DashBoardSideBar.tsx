@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import {
-  faArrowRightFromBracket,
-  faCircleNotch,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router";
+import React from "react";
 import { Link } from "react-router-dom";
 import { LogoColor } from "../Assets/assets";
 import DashboardOption from "./DashboardOption";
 import LogoTab from "./LogoTab";
 import HamburgerMenu from "./HamburgerMenu";
-import { signOut } from "../Firebase/firebase";
-import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 const DashBoardSideBar = ({
   showingSmallScreenMenu,
@@ -20,21 +12,6 @@ const DashBoardSideBar = ({
   showingSmallScreenMenu: boolean;
   setShowingSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-
-  const handleLogOut = () => {
-    setLoading(true);
-    setTimeout(async () => {
-      await signOut();
-      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
-        localStorage.removeItem("key")
-      );
-      navigate("/");
-      setLoading(false);
-    }, 3000);
-  };
-
   const shouldBeHidden =
     showingSmallScreenMenu !== true && window.innerWidth < 768;
 
@@ -61,16 +38,8 @@ const DashBoardSideBar = ({
         <DashboardOption name="pending-verification" />
         <DashboardOption name="payments" />
         <DashboardOption name="new-website" />
-        <DashboardOption name="settings" />
       </div>
-      <div
-        className="flex bottom-10 absolute items-center py-3 px-4 w-full cursor-pointer hover:bg-primaryOne transition-all hover:text-white rounded-l-lg"
-        onClick={handleLogOut}
-      >
-        <FontAwesomeIcon icon={faArrowRightFromBracket} />
-        <p className="font-semibold ml-3">Log out</p>
-        {loading && <FontAwesomeIcon icon={faCircleNotch} spin />}
-      </div>
+      <DashboardOption name="settings" className="absolute bottom-10 w-full" />
     </div>
   );
 };

@@ -11,7 +11,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
 
-const DashboardOption = ({ name }: { name: string }) => {
+const DashboardOption = ({
+  name,
+  className,
+}: {
+  name: string;
+  className?: string;
+}) => {
   const { pathname } = useLocation();
   const lastPathNameSegment = getLastPathSegment(pathname);
 
@@ -19,7 +25,7 @@ const DashboardOption = ({ name }: { name: string }) => {
     <Link
       className={`flex items-center py-3 px-4 ${
         lastPathNameSegment === name && "bg-primaryOne rounded-l-lg"
-      } transition-all cursor-pointer`}
+      } transition-all cursor-pointer ${className}`}
       to={name}
     >
       <DashboardOptionLogo

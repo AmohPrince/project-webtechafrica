@@ -1,6 +1,8 @@
 import {
+  faArrowRightFromBracket,
   faBell,
   faCaretDown,
+  faCircleNotch,
   faMagnifyingGlass,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +12,9 @@ import { Outlet, useNavigate } from "react-router";
 import DashBoardSideBar from "../Components/DashBoardSideBar";
 import DashBoardTitle from "../Components/DashBoardTitle";
 import HamburgerMenu from "../Components/HamburgerMenu";
+import { signOut } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
@@ -24,7 +28,7 @@ export const globalData = createContext<{
 });
 
 const DashBoard = () => {
-  const { userData, userCredential } = useAuth();
+  const { userCredential } = useAuth();
   const user = userCredential?.user;
   const redirect = useNavigate();
   const [dashBoardTitleInfo, setDashBoardTitleInfo] = useState({
@@ -33,7 +37,7 @@ const DashBoard = () => {
   });
 
   useEffect(() => {
-    if (userData) {
+    if (userCredential) {
       redirect("/dashboard/active-websites");
     } else {
       redirect("/sign-in");
@@ -42,6 +46,22 @@ const DashBoard = () => {
   }, []);
 
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
+  const [isShowingLogOutButton, setIsShowingLogOutButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    setLoading(true);
+    setTimeout(async () => {
+      await signOut();
+      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
+        localStorage.removeItem(key)
+      );
+      navigate("/");
+      setLoading(false);
+    }, 3000);
+  };
 
   return (
     <div className="flex sm:w-screen min-h-screen sm:h-[100dvh] overflow-hidden">
@@ -69,7 +89,10 @@ const DashBoard = () => {
               icon={faBell}
               className="w-3 h-3 text-gray-400 cursor-pointer hover:text-primaryOne transition-all"
             />
-            <div className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer w-1/2 sm:w-auto">
+            <div
+              className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer w-1/2 sm:w-auto relative"
+              onClick={() => setIsShowingLogOutButton((prev) => !prev)}
+            >
               {user?.photoURL ? (
                 <img
                   src={user.photoURL}
@@ -84,8 +107,24 @@ const DashBoard = () => {
               </p>
               <FontAwesomeIcon
                 icon={faCaretDown}
-                className="text-gray-400 w-3 h-3 ml-0 sm:ml-3"
+                className={`"text-gray-400 w-3 h-3 ml-0 sm:ml-3 ${
+                  isShowingLogOutButton && "rotate-180"
+                } transition-all`}
               />
+              {isShowingLogOutButton && (
+                <div
+                  className="bg-white rounded absolute right-0 left-0 mt-2 top-full text-red-600 font-semibold flex items-center justify-center gap-x-2 px-3 py-2 text-sm border-red-500"
+                  onClick={handleLogOut}
+                >
+                  <p>Log out</p>
+
+                  {loading ? (
+                    <FontAwesomeIcon icon={faCircleNotch} spin />
+                  ) : (
+                    <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

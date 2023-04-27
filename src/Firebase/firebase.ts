@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import {
   deleteUser,
   getAuth,
@@ -14,8 +14,8 @@ import {
   updateProfile,
   UserCredential,
 } from "firebase/auth";
-import { getStorage, ref } from "firebase/storage";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
   signInWithEmailAndPassword as signInUserFnFromFirebase,
@@ -36,14 +36,12 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
-const analytics = getAnalytics(firebaseApp);
-const db = getFirestore(firebaseApp);
+// const analytics = getAnalytics(firebaseApp);
+export const db = getFirestore(firebaseApp);
+export const storage = getStorage();
 const googleAuthProvider = new GoogleAuthProvider();
-const storage = getStorage();
-const storageRef = ref(storage);
-const profilePicturesRef = ref(storage, "profile-pictures");
-
-//TODO learn how to upload files to cloud firestore
+// const storageRef = ref(storage);
+// const profilePicturesRef = ref(storage, "profile-pictures");
 
 export const signInWithGoogle = async (): Promise<UserCredential> => {
   if (window.innerWidth < 768) {
@@ -241,33 +239,6 @@ export const updateUserProfilePicture = async (url: string) => {
       console.log(error);
       return false;
     });
-};
-
-//firestore
-export const addNewUserToDB = async (userData: UserData, userId: string) => {
-  const usersRef = doc(db, "users", userId);
-  await setDoc(usersRef, userData, {
-    merge: true,
-  });
-};
-
-export const fetchUserDataFromDB = async (
-  userId: string
-): Promise<UserData> => {
-  try {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      return docSnap.data() as UserData;
-    } else {
-      console.log("User not found in the database");
-      throw new Error("User not found in the database");
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
 };
 
 export const getSignInErrorMessage = (err: any): string => {

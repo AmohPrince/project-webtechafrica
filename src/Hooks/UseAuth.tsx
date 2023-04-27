@@ -1,17 +1,25 @@
 import { UserCredential } from "firebase/auth";
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
 
-export function useAuth(): {
+const authContext = createContext<AuthContext>(null as any);
+
+type AuthContext = {
   userData: UserData | null;
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
   userCredential: UserCredential | null;
   setUserCredential: React.Dispatch<
     React.SetStateAction<UserCredential | null>
   >;
-} {
+};
+
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [userData, setUserData] = useLocalStorage<UserData | null>(
     null,
     LOCAL_STORAGE_KEYS.USER_DATA
@@ -41,10 +49,18 @@ export function useAuth(): {
     }
   }
 
-  return {
-    userData,
-    setUserData,
-    userCredential,
-    setUserCredential,
-  };
-}
+  return (
+    <authContext.Provider
+      value={{
+        userData,
+        setUserData,
+        userCredential,
+        setUserCredential,
+      }}
+    >
+      {children}
+    </authContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(authContext);
