@@ -12,6 +12,7 @@ import {
   updateEmail,
   updatePassword,
   updateProfile,
+  // updatePhoneNumber,
   UserCredential,
 } from "firebase/auth";
 import { getStorage } from "firebase/storage";
@@ -174,6 +175,10 @@ export const updateUserPassword = async (
       return false;
     });
 };
+
+// export const updateUserPhoneNumber = async ():Promise<boolean> => {
+//   return updatePhoneNumber(auth.currentUser , )
+// }
 
 export const deleteAccount = async (): Promise<boolean> => {
   return deleteUser(auth.currentUser!)

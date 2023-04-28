@@ -6,7 +6,7 @@ import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
-import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
+import { SubmitButton } from "../Components/SubmitButton";
 import {
   getSignInErrorMessage,
   redirectResult,
@@ -212,11 +212,12 @@ const SignIn = () => {
               Forgot password
             </p>
           </div>
-          <SignInOrSignUpButton
+          <SubmitButton
             disabled={Object.keys(errors).length !== 0}
             icon={faCircleNotch}
             isLoading={signingInWithEmail}
             text="Sign In"
+            className="w-full"
           />
         </form>
         <div

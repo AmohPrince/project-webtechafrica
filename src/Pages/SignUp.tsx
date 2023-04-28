@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
-import SignInOrSignUpButton from "../Components/SignInOrSignUpButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   createUserWithEmailAndPassword,
@@ -14,6 +13,7 @@ import {
 import { useAuth } from "../Hooks/UseAuth";
 import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
+import { SubmitButton } from "../Components/SubmitButton";
 
 type Inputs = {
   firstName: string;
@@ -196,11 +196,12 @@ export const SignUp = () => {
               })}
             />
           </div>
-          <SignInOrSignUpButton
+          <SubmitButton
             disabled={Object.keys(errors).length !== 0}
             icon={faGear}
             isLoading={creatingUserWithEmail}
             text="Create Account"
+            className="w-full"
           />
         </form>
         <div

@@ -2,33 +2,52 @@ import { faCamera, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "firebase/auth";
 import React, { useRef, useState } from "react";
-import PasswordInput from "../../Components/Dashboard/Payments/Settings/PasswordInput";
-import { SettingsInput } from "../../Components/Dashboard/Payments/Settings/SettingsInput";
-import PrimaryButton from "../../Components/PrimaryButton";
+import { useForm } from "react-hook-form";
+import { PasswordEditor } from "../../Components/Dashboard/Settings/PasswordEditor";
+import { SettingsInput } from "../../Components/Dashboard/Settings/SettingsInput";
+import { ToolTip } from "../../Components/SignInOrSignUp/ToolTip";
+import { SubmitButton } from "../../Components/SubmitButton";
+import {
+  updateUserDisplayName,
+  updateUserEmailAddress,
+} from "../../Firebase/firebase";
 import { uploadUserProfilePicture } from "../../Firebase/storage";
 import { useAuth } from "../../Hooks/UseAuth";
 import { formatDateFromTimestamp } from "../../Util/Utilities";
+
+export type Inputs = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+};
 
 type UserWithCreatedAt = User & {
   createdAt: string;
 };
 
 const Settings = () => {
-  const { userCredential } = useAuth();
+  const { userCredential, setUserCredential } = useAuth();
   const fileInput = useRef<HTMLInputElement>(null);
   const profilePictureRef = useRef<HTMLImageElement>(null);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Inputs>();
+
   const user = userCredential?.user;
+
+  console.log(userCredential);
+
   const [activeTab, setActiveTab] = useState<
     "personal-information" | "password"
   >("personal-information");
-
   const [isUploadingUserProfilePic, setIsUploadingUserProfilePic] =
     useState(false);
-  const [userProfilePicture, setUserProfilePicture] = useState<
-    string | null | undefined
-  >(user?.photoURL);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChangingUserProfile = async (
+  const handleChangingUserProfilePicture = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setIsUploadingUserProfilePic(true);
@@ -44,11 +63,52 @@ const Settings = () => {
         console.error(err);
         return null;
       });
-    setUserProfilePicture(url);
+
+    setUserCredential((userCredential) => {
+      return {
+        ...userCredential,
+        user: {
+          ...userCredential?.user,
+          photoURL: url,
+          emailVerified: userCredential!.user.emailVerified,
+          isAnonymous: userCredential!.user.isAnonymous,
+          metadata: userCredential!.user.metadata,
+          providerData: userCredential!.user.providerData,
+          refreshToken: userCredential!.user.refreshToken,
+          tenantId: userCredential!.user.tenantId,
+          delete: userCredential!.user.delete,
+          getIdToken: userCredential!.user.getIdToken,
+          getIdTokenResult: userCredential!.user.getIdTokenResult,
+          reload: userCredential!.user.reload,
+          toJSON: userCredential!.user.toJSON,
+          displayName: userCredential!.user.displayName,
+          email: userCredential!.user.email,
+          phoneNumber: userCredential!.user.phoneNumber,
+          providerId: userCredential!.user.providerId,
+          uid: userCredential!.user.uid,
+        },
+        providerId: userCredential!.providerId,
+        operationType: userCredential!.operationType,
+      };
+    });
   };
 
   const handleClick = () => {
     fileInput.current?.click();
+  };
+
+  const handleUpdateUserInformation = async (inputData: Inputs) => {
+    try {
+      setIsLoading(true);
+      await updateUserDisplayName(
+        inputData.firstName + " " + inputData.lastName
+      );
+      await updateUserEmailAddress(inputData.email);
+      //TODO learn how to update user phone number
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -76,12 +136,12 @@ const Settings = () => {
         </p>
       </div>
       {activeTab === "personal-information" ? (
-        <div className="p-5 flex flex-col">
+        <div className="p-5">
           {/* profile picture */}
           <div className="h-20 w-20 mx-auto relative">
-            {userProfilePicture ? (
+            {user?.photoURL ? (
               <img
-                src={userProfilePicture}
+                src={user.photoURL}
                 alt={user?.displayName + "`s profile picture"}
                 className="z-0 h-full w-full rounded-full"
                 ref={profilePictureRef}
@@ -110,81 +170,96 @@ const Settings = () => {
               <input
                 type="file"
                 hidden
-                onChange={handleChangingUserProfile}
+                onChange={handleChangingUserProfilePicture}
                 ref={fileInput}
               />
               <FontAwesomeIcon icon={faCamera} className="text-primaryOne" />
             </div>
           </div>
-          <p className="text-xl font-bold">Personal information</p>
-          {/* first name and last name  */}
-          <div className="flex mt-5 gap-x-2">
-            <div className="w-1/2">
-              <p className="text-base font-medium">First Name</p>
-              <p className="text-xs font-medium text-gray-400 my-1">
-                Enter your first name here
-              </p>
-              <SettingsInput type="text" />
+          <form
+            onSubmit={handleSubmit(handleUpdateUserInformation)}
+            className="flex flex-col"
+          >
+            <p className="text-xl font-bold">Personal information</p>
+            {/* first name and last name  */}
+            <div className="flex mt-5 gap-x-2">
+              <div className="w-1/2">
+                <p className="text-base font-medium">First Name</p>
+                <p className="text-xs font-medium text-gray-400 my-1">
+                  Enter your first name here
+                </p>
+                <SettingsInput
+                  type="text"
+                  regParam="firstName"
+                  register={register}
+                />
+              </div>
+              <div className="w-1/2">
+                <p className="text-base font-medium">Last Name</p>
+                <p className="text-xs font-medium text-gray-400 my-1">
+                  Enter your last name here
+                </p>
+                <SettingsInput
+                  type="text"
+                  regParam="lastName"
+                  register={register}
+                />
+              </div>
             </div>
-            <div className="w-1/2">
-              <p className="text-base font-medium">Last Name</p>
-              <p className="text-xs font-medium text-gray-400 my-1">
-                Enter your last name here
-              </p>
-              <SettingsInput type="text" />
+            {/* email address and phone number */}
+            <div className="flex mt-5 gap-x-2">
+              <div className="w-1/2">
+                <p className="text-base font-medium">Email address</p>
+                <p className="text-xs font-medium text-gray-400 my-1">
+                  Enter your email address here
+                </p>
+                <div className="relative w-full">
+                  {errors.email && (
+                    <ToolTip text="Email is invalid or incomplete" />
+                  )}
+                  <SettingsInput
+                    type="email"
+                    regParam="email"
+                    register={register}
+                    // eslint-disable-next-line no-useless-escape
+                    pattern={/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/}
+                  />
+                </div>
+              </div>
+              <div className="w-1/2">
+                <p className="text-base font-medium">Phone number</p>
+                <p className="text-xs font-medium text-gray-400 my-1">
+                  Enter your phone number here
+                </p>
+                <div className="relative w-full">
+                  {errors.phoneNumber && (
+                    <ToolTip text="Enter a valid phone number in international format (+254...)" />
+                  )}
+                  <SettingsInput
+                    type="tel"
+                    regParam="phoneNumber"
+                    register={register}
+                    pattern={/^\+(?:[0-9] ?){6,14}[0-9]$/}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          {/* email address and phone number */}
-          <div className="flex mt-5 gap-x-2">
-            <div className="w-1/2">
-              <p className="text-base font-medium">Email address</p>
-              <p className="text-xs font-medium text-gray-400 my-1">
-                Enter your email address here
-              </p>
-              <SettingsInput type="email" />
-            </div>
-            <div className="w-1/2">
-              <p className="text-base font-medium">Phone number</p>
-              <p className="text-xs font-medium text-gray-400 my-1">
-                Enter your phone number here
-              </p>
-              <SettingsInput type="tel" />
-            </div>
-          </div>
-          <p className="text-sm text-gray-400 mt-5">
-            This account was created on{" "}
-            {formatDateFromTimestamp(
-              parseInt((user as UserWithCreatedAt)?.createdAt)
-            )}
-          </p>
-          <PrimaryButton text="Update details" className="ml-auto w-1/4 mt-5" />
+            <p className="text-sm text-gray-400 mt-5">
+              This account was created on{" "}
+              {formatDateFromTimestamp(
+                parseInt((user as UserWithCreatedAt)?.createdAt)
+              )}
+            </p>
+            <SubmitButton
+              disabled={Object.keys(errors).length !== 0}
+              isLoading={isLoading}
+              text="Update details"
+              className="ml-auto mt-5 w-1/4"
+            />
+          </form>
         </div>
       ) : (
-        <div className="p-5 w-1/2 mx-auto flex flex-col">
-          <p className="text-xl font-bold mt-4">Password</p>
-          <div className="w-full mt-4">
-            <p className="text-base font-medium">Current password</p>
-            <p className="text-xs font-medium text-gray-400 my-1">
-              This is the current password of this account
-            </p>
-            <PasswordInput />
-          </div>
-          <div className="w-full mt-4">
-            <p className="text-base font-medium">New password</p>
-            <p className="text-xs font-medium text-gray-400 my-1">
-              Enter your new password here
-            </p>
-            <PasswordInput />
-          </div>
-          <div className="w-full mt-4">
-            <p className="text-base font-medium">Re-Enter your password here</p>
-            <p className="text-xs font-medium text-gray-400 my-1">
-              Re-Enter your new password here
-            </p>
-            <PasswordInput />
-          </div>
-          <PrimaryButton text="Reset Password" className="mt-4 ml-auto" />
-        </div>
+        <PasswordEditor />
       )}
     </div>
   );
