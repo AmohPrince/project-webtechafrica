@@ -14,7 +14,6 @@ import DashBoardTitle from "../Components/DashBoardTitle";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { signOut } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";
-import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
@@ -28,8 +27,7 @@ export const globalData = createContext<{
 });
 
 const DashBoard = () => {
-  const { userCredential } = useAuth();
-  const user = userCredential?.user;
+  const { user } = useAuth();
   const redirect = useNavigate();
   const [dashBoardTitleInfo, setDashBoardTitleInfo] = useState({
     h1: "Active Websites",
@@ -37,7 +35,7 @@ const DashBoard = () => {
   });
 
   useEffect(() => {
-    if (userCredential) {
+    if (user) {
       redirect("/dashboard/active-websites");
     } else {
       console.log("we hit here!");
@@ -56,9 +54,6 @@ const DashBoard = () => {
     setLoading(true);
     setTimeout(async () => {
       await signOut();
-      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
-        localStorage.removeItem(key)
-      );
       navigate("/");
       setLoading(false);
     }, 3000);

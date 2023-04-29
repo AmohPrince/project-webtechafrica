@@ -72,7 +72,12 @@ export const getCardTypeIcon = (type: string): string | undefined => {
   }
 };
 
-export const formatDateFromTimestamp = (timestamp: number): string => {
+export const formatDateFromTimestamp = (
+  timestamp: string | undefined
+): string => {
+  if (!timestamp) {
+    return "unknown date";
+  }
   const date = new Date(timestamp);
   const day = date.toLocaleDateString("en-GB", {
     month: "long",
@@ -100,7 +105,7 @@ function getOrdinalSuffix(day: number): string {
 }
 
 export const LOCAL_STORAGE_KEYS = {
-  USER_CREDENTIAL: "user-credential",
+  USER: "user",
   LAST_SIGN_IN_DATE: "last-sign-in-date",
   USER_DATA: "user-data",
 };

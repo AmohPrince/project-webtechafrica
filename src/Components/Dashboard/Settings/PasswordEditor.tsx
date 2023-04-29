@@ -10,7 +10,7 @@ export const PasswordEditor = () => {
   const newPasswordRef = useRef<HTMLInputElement>(null);
   const [passwordMismatchError, setPasswordMismatchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { userCredential } = useAuth();
+  const { user } = useAuth();
 
   const onReEnterPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const areTheSamePassword = newPasswordRef.current?.value === e.target.value;
@@ -30,7 +30,7 @@ export const PasswordEditor = () => {
 
   return (
     <>
-      {userCredential?.providerId === "google.com" ? (
+      {user?.providerId === "google.com" ? (
         <div className="p-5 w-1/2 mx-auto text-center mt-5">
           <p>
             You signed in using your google account and therefore have no

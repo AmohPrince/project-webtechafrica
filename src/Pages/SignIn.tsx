@@ -10,11 +10,9 @@ import { SubmitButton } from "../Components/SubmitButton";
 import {
   getSignInErrorMessage,
   redirectResult,
-  // resetPassword,
   signInWithEmailAndPassword,
   signInWithGoogle,
 } from "../Firebase/firebase";
-import { useAuth } from "../Hooks/UseAuth";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 type Inputs = {
@@ -25,7 +23,7 @@ type Inputs = {
 //Todo learn how to use different identity providers in firebase
 
 const SignIn = () => {
-  const { setUserCredential } = useAuth();
+  // const { setUserCredential } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -68,7 +66,6 @@ const SignIn = () => {
         userCredentials.password
       )
         .then((userCredential) => {
-          setUserCredential(userCredential);
           if (rememberFor30DaysCheckBox.current?.checked) {
             localStorage.setItem(
               LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
@@ -94,7 +91,6 @@ const SignIn = () => {
     setSigningInWithGoogle(true);
     try {
       const userCredential = await signInWithGoogle();
-      setUserCredential(userCredential);
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
         new Date().toISOString()
@@ -123,8 +119,11 @@ const SignIn = () => {
       await redirectResult()
         .then((userCredential) => {
           if (userCredential) {
-            setUserCredential(userCredential);
-            localStorage.setItem("lastSignInDate", new Date().toISOString());
+            // setUserCredential(userCredential);
+            localStorage.setItem(
+              LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
+              new Date().toISOString()
+            );
             showPopUp("success", userCredential.user.displayName ?? "user");
           }
         })

@@ -1,20 +1,15 @@
-import { UserCredential } from "firebase/auth";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React, { createContext, useContext } from "react";
-import { auth } from "../Firebase/firebase";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
-import { useUpdateLogger } from "./useUpdateLogger";
 
 const authContext = createContext<AuthContext>(null as any);
 
 type AuthContext = {
   userData: UserData | null;
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
-  userCredential: UserCredential | null;
-  setUserCredential: React.Dispatch<
-    React.SetStateAction<UserCredential | null>
-  >;
+  user: User | null;
 };
 
 export const AuthContextProvider = ({
@@ -26,11 +21,10 @@ export const AuthContextProvider = ({
     null,
     LOCAL_STORAGE_KEYS.USER_DATA
   );
-  const [userCredential, setUserCredential] =
-    useLocalStorage<UserCredential | null>(
-      null,
-      LOCAL_STORAGE_KEYS.USER_CREDENTIAL
-    );
+  const [user, setUser] = useLocalStorage<User | null>(
+    null,
+    LOCAL_STORAGE_KEYS.USER
+  );
 
   const lastSavedDate: string | null = localStorage.getItem(
     LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE
@@ -51,16 +45,17 @@ export const AuthContextProvider = ({
     }
   }
 
-  //TODO figure out why tf currentUser is null;
-  useUpdateLogger(auth.currentUser, "currentUser");
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    setUser(user);
+  });
 
   return (
     <authContext.Provider
       value={{
         userData,
         setUserData,
-        userCredential,
-        setUserCredential,
+        user,
       }}
     >
       {children}

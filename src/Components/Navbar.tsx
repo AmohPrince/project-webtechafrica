@@ -8,7 +8,7 @@ import { Logo } from "./Logo";
 const Navbar = () => {
   const { pathname } = useLocation();
   const basePath = getBaseUrl(pathname);
-  const { userCredential } = useAuth();
+  const { user } = useAuth();
 
   return (
     <section className="flex justify-between items-center z-10 relative">
@@ -74,7 +74,7 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        {userCredential ? (
+        {user ? (
           <Link
             className={`bg-white px-4 rounded-full ml-10 font-semibold flex items-center ${
               basePath !== "/" && "bg-primaryOne text-white"

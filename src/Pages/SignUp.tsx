@@ -10,7 +10,6 @@ import {
   redirectResult,
   signInWithGoogle,
 } from "../Firebase/firebase";
-import { useAuth } from "../Hooks/UseAuth";
 import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
@@ -38,7 +37,6 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { setUserCredential } = useAuth();
   const redirect = useNavigate();
 
   const showPopUp = (type: "success" | "error", text: string) => {
@@ -63,30 +61,24 @@ export const SignUp = () => {
   //sign up with email and password
   const signUpWithEmailAndPassword: SubmitHandler<Inputs> = (data: Inputs) => {
     setCreatingUserWithEmail(true);
-    setTimeout(
-      () =>
-        createUserWithEmailAndPassword(data.email, data.password, {
-          firstName: data.firstName,
-          lastName: data.lastName,
-        })
-          .then((userCredential) => {
-            setUserCredential(userCredential);
-            setCreatingUserWithEmail(false);
-            showPopUp("success", userCredential.user.displayName ?? "user");
-          })
-          .catch((error) => {
-            setCreatingUserWithEmail(false);
-            showPopUp("error", getSignUpErrorMessage(error));
-          }),
-      3000
-    );
+    createUserWithEmailAndPassword(data.email, data.password, {
+      firstName: data.firstName,
+      lastName: data.lastName,
+    })
+      .then((userCredential) => {
+        setCreatingUserWithEmail(false);
+        showPopUp("success", userCredential.user.displayName ?? "user");
+      })
+      .catch((error) => {
+        setCreatingUserWithEmail(false);
+        showPopUp("error", getSignUpErrorMessage(error));
+      });
   };
 
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
       const userCredential = await signInWithGoogle();
-      setUserCredential(userCredential);
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
       showPopUp("error", getSignUpErrorMessage(err.message));
@@ -100,7 +92,6 @@ export const SignUp = () => {
       await redirectResult()
         .then((userCredential) => {
           if (userCredential) {
-            setUserCredential(userCredential);
             showPopUp("success", userCredential.user.displayName ?? "user");
           }
         })

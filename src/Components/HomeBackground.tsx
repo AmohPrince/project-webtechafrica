@@ -53,7 +53,7 @@ const HomeBackground = () => {
             ry="361.677"
             transform="matrix(0.920144 -0.39158 0.361103 0.932526 831.005 104.64)"
             fill="url(#paint1_linear_1_4514)"
-            fillOpacity="0.44"
+            fill-opacity="0.44"
             style={{ mixBlendMode: "multiply" }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -80,8 +80,8 @@ const HomeBackground = () => {
             y2="693.723"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#684FFF" />
-            <stop offset="1" stop-color="#B871FE" />
+            <stop stopColor="#684FFF" />
+            <stop offset="1" stopColor="#B871FE" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_1_4514"
@@ -91,8 +91,8 @@ const HomeBackground = () => {
             y2="723.354"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#684FFF" />
-            <stop offset="1" stop-color="#FFF8F0" stop-opacity="0" />
+            <stop stopColor="#684FFF" />
+            <stop offset="1" stopColor="#FFF8F0" stopOpacity="0" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_1_4514"
@@ -102,8 +102,8 @@ const HomeBackground = () => {
             y2="579.642"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#684FFF" />
-            <stop offset="1" stop-color="#FFF8F0" stop-opacity="0" />
+            <stop stopColor="#684FFF" />
+            <stop offset="1" stopColor="#FFF8F0" stopOpacity="0" />
           </linearGradient>
         </defs>
       </motion.svg>

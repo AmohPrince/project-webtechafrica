@@ -1,6 +1,6 @@
 import { faCamera, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { User } from "firebase/auth";
+import { getAuth, updateCurrentUser } from "firebase/auth";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { PasswordEditor } from "../../Components/Dashboard/Settings/PasswordEditor";
@@ -22,12 +22,8 @@ export type Inputs = {
   phoneNumber: string;
 };
 
-type UserWithCreatedAt = User & {
-  createdAt: string;
-};
-
 const Settings = () => {
-  const { userCredential, setUserCredential } = useAuth();
+  const { user } = useAuth();
   const fileInput = useRef<HTMLInputElement>(null);
   const profilePictureRef = useRef<HTMLImageElement>(null);
   const {
@@ -36,23 +32,20 @@ const Settings = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const user = userCredential?.user;
-
   const [activeTab, setActiveTab] = useState<
     "personal-information" | "password"
   >("personal-information");
   const [isUploadingUserProfilePic, setIsUploadingUserProfilePic] =
     useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const auth = getAuth();
 
+  //This function is responsible for updating the user`s profile picture
   const handleChangingUserProfilePicture = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setIsUploadingUserProfilePic(true);
-    const url = await uploadUserProfilePicture(
-      e.target.files![0],
-      userCredential!.user.uid
-    )
+    await uploadUserProfilePicture(e.target.files![0], user!.uid)
       .then((url) => {
         setIsUploadingUserProfilePic(false);
         return url;
@@ -62,33 +55,7 @@ const Settings = () => {
         return null;
       });
 
-    setUserCredential((userCredential) => {
-      return {
-        ...userCredential,
-        user: {
-          ...userCredential?.user,
-          photoURL: url,
-          emailVerified: userCredential!.user.emailVerified,
-          isAnonymous: userCredential!.user.isAnonymous,
-          metadata: userCredential!.user.metadata,
-          providerData: userCredential!.user.providerData,
-          refreshToken: userCredential!.user.refreshToken,
-          tenantId: userCredential!.user.tenantId,
-          delete: userCredential!.user.delete,
-          getIdToken: userCredential!.user.getIdToken,
-          getIdTokenResult: userCredential!.user.getIdTokenResult,
-          reload: userCredential!.user.reload,
-          toJSON: userCredential!.user.toJSON,
-          displayName: userCredential!.user.displayName,
-          email: userCredential!.user.email,
-          phoneNumber: userCredential!.user.phoneNumber,
-          providerId: userCredential!.user.providerId,
-          uid: userCredential!.user.uid,
-        },
-        providerId: userCredential!.providerId,
-        operationType: userCredential!.operationType,
-      };
-    });
+    updateCurrentUser(auth, user);
   };
 
   const handleClick = () => {
@@ -244,9 +211,7 @@ const Settings = () => {
             </div>
             <p className="text-sm text-gray-400 mt-5">
               This account was created on{" "}
-              {formatDateFromTimestamp(
-                parseInt((user as UserWithCreatedAt)?.createdAt)
-              )}
+              {formatDateFromTimestamp(user?.metadata.creationTime)}
             </p>
             <SubmitButton
               disabled={Object.keys(errors).length !== 0}

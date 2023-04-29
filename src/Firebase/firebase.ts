@@ -120,7 +120,9 @@ export const redirectResult = async (): Promise<UserCredential | null> => {
 export const signOut = async () => {
   await signOutFnFromFirebase(auth)
     .then((res) => {
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.USER_CREDENTIAL);
+      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
+        localStorage.removeItem(key)
+      );
     })
     .catch((err) => {
       console.log(err);
