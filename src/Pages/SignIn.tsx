@@ -52,6 +52,7 @@ const SignIn = () => {
           text: null,
           type: null,
         });
+        navigate("/dashboard");
       }
     }, 3000);
   };
@@ -98,8 +99,7 @@ const SignIn = () => {
         LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
         new Date().toISOString()
       );
-      //fetch user data then redirect
-      navigate("/dashboard");
+      //TODO fetch user data then redirect
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
       showPopUp("error", getSignInErrorMessage(err));

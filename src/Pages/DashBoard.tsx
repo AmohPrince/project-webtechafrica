@@ -40,6 +40,7 @@ const DashBoard = () => {
     if (userCredential) {
       redirect("/dashboard/active-websites");
     } else {
+      console.log("we hit here!");
       redirect("/sign-in");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
