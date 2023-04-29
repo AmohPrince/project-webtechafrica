@@ -26,16 +26,28 @@ const PlanSelector = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
+  useEffect(() => {
+    if (selections.websiteType.type === "E-commerce websites") {
+      setSelections((prev) => {
+        return {
+          ...prev,
+          plan: "Premium",
+        };
+      });
+      setSelected("Premium");
+    }
+  }, []);
+
   return (
     <div className="bg-white p-6">
       <div className="flex items-center justify-center">
         {selections.websiteType.type === "E-commerce websites" && (
-          <p>
+          <p className="hidden sm:block">
             The basic plan is not available for {selections.websiteType.type}
           </p>
         )}
         <SecondaryButton
-          text="Submit description"
+          text="Review and finish 🚀"
           style={{
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
@@ -45,9 +57,9 @@ const PlanSelector = ({
           disabled={isButtonDisabled}
         />
       </div>
-      <div className="flex py-4">
-        {selections.websiteType.type !== "E-commerce websites" && (
-          <div className="shadow-md py-6 px-6 w-1/3 rounded-xl">
+      <div className="sm:flex py-4">
+        {selections.websiteType.type !== "E-commerce websites" ? (
+          <div className="shadow-md py-6 px-6 w-full sm:w-1/3 rounded-xl">
             <p className="font-bold text-lg">Basic</p>
             <p className="font-medium text-sm">Perfect for beginners</p>
             <p className="text-xl font-semibold mt-3 mb-4">
@@ -89,8 +101,12 @@ const PlanSelector = ({
               </p>
             </div>
           </div>
+        ) : (
+          <p className="block sm:hidden">
+            The basic plan is not available for {selections.websiteType.type}
+          </p>
         )}
-        <div className="shadow-md py-6 px-6 w-1/3 ml-5 border border-primaryOne rounded-xl">
+        <div className="shadow-md py-6 px-6 w-full sm:w-1/3 sm:ml-5 mt-5 sm:mt-0 border border-primaryOne rounded-xl">
           <p className="font-bold text-lg">Advanced</p>
           <p className="font-medium text-sm">
             Perfect for professionals and business
@@ -105,7 +121,7 @@ const PlanSelector = ({
             className={`w-full hover:scale-100 ${
               selected === "Premium"
                 ? "bg-gray-400 rounded-md hover:bg-gray-400"
-                : ""
+                : "bg-primaryOne"
             }`}
             onClick={() => {
               setSelections((prev) => {

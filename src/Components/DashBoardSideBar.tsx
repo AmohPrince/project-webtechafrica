@@ -17,10 +17,12 @@ const DashBoardSideBar = ({
 
   return (
     <div
-      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 relative ${
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${
         shouldBeHidden ? "hidden" : ""
       } ${
-        window.innerWidth > 768 ? "block" : "w-5/6 fixed top-0 left-0 bottom-0"
+        window.innerWidth > 768
+          ? "block relative"
+          : "w-5/6 fixed top-0 left-0 bottom-0"
       }`}
     >
       <div className="flex justify-between items-center mb-5">

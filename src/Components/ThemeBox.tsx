@@ -37,6 +37,7 @@ export const ThemeBox = ({
           <div
             style={{ backgroundColor: color }}
             className={`h-5 w-5 rounded-full ${i !== 0 ? "-ml-1" : ""}`}
+            key={i}
           />
         ))}
       </div>

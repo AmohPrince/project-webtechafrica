@@ -38,8 +38,6 @@ const Settings = () => {
 
   const user = userCredential?.user;
 
-  console.log(userCredential);
-
   const [activeTab, setActiveTab] = useState<
     "personal-information" | "password"
   >("personal-information");

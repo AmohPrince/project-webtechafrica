@@ -13,8 +13,7 @@ const NewWebsiteReview = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const completeWebsiteBuildingProcess = () => {
     setIsLoading(true);
-    //TODO
-    //submit to server. after the post call is completed update the state objects holding the pending verification websites
+    //TODO submit to server. after the post call is completed update the state objects holding the pending verification websites
     //submitToServer(selections, user);
     //This is just simulation
     setTimeout(() => {
@@ -43,12 +42,12 @@ const NewWebsiteReview = ({
         <p className="font-semibold mt-5">Description</p>
         <p className="break-words">{selections.websiteDescription}</p>
       </div>
-      <div className="flex justify-between w-2/3">
-        <div>
+      <div className="flex justify-between flex-wrap w-full sm:w-2/3">
+        <div className="w-1/2 sm:w-auto">
           <p className="mt-5 text-sm text-gray-400">Plan</p>
           <p className="font-semibold">{selections.plan}</p>
         </div>
-        <div>
+        <div className="w-1/2 sm:w-auto">
           <p className="mt-5 text-sm text-gray-400">Content Style</p>
           {selections.userHasOwnContent ? (
             <p className="font-semibold">User generated</p>
@@ -56,11 +55,11 @@ const NewWebsiteReview = ({
             <p className="font-semibold">AI generated</p>
           )}
         </div>
-        <div>
+        <div className="w-1/2 sm:w-auto">
           <p className="mt-5 text-sm text-gray-400">Website Type</p>
           <p className="font-semibold">{selections.websiteType.type}</p>
         </div>
-        <div>
+        <div className="w-1/2 sm:w-auto">
           <p className="mt-5 text-sm text-gray-400">Website Domain</p>
           <p className="font-semibold">{selections.domainName}</p>
         </div>

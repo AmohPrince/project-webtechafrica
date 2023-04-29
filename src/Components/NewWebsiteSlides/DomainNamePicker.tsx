@@ -9,6 +9,7 @@ import { NewWebsiteSelections } from "../../Types/Global";
 import { getLighterColor } from "../../Util/Utilities";
 import PrimaryButton from "../PrimaryButton";
 import { SecondaryButton } from "../SecondaryButton";
+import { ToolTip } from "../SignInOrSignUp/ToolTip";
 
 const DomainNamePicker = ({
   selections,
@@ -50,12 +51,12 @@ const DomainNamePicker = ({
   };
 
   const handleDomainInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowDomainSearchResults(false);
     const isValidDomain = (e: string): boolean => {
       const extensions = [".com", ".org", ".online", ".shop", ".net", ".io"];
       return extensions.some((extension) => e.includes(extension));
     };
     setDomainNameInputValue(e.target.value.toLowerCase());
-
     setIsSearchButtonDisabled(!isValidDomain(e.target.value));
   };
 
@@ -67,63 +68,91 @@ const DomainNamePicker = ({
 
   return (
     <div className="bg-white p-6">
-      <div className="flex items-center justify-center">
-        <div>
+      <div className="sm:flex items-center justify-center">
+        <div className="flex justify-between items-center sm:block">
           <p className="font-bold text-xl">Find your domain</p>
-          <p className="mt-3">
+          <p className="mt-3 hidden sm:block">
             Search domain name availability using our domain checker tool. Type
             in your desired name and get instant results.
           </p>
+          <SecondaryButton
+            text="Pick plan"
+            style={{
+              backgroundColor: selections.theme.colors.primary,
+              color: selections.theme.colors.text,
+            }}
+            className="outline-none hover:scale-100 transition-all ml-auto"
+            onClick={() => setActiveStageId((prev) => prev + 1)}
+            disabled={isButtonDisabled}
+          />
         </div>
-        <SecondaryButton
-          text="Pick plan"
-          style={{
-            backgroundColor: selections.theme.colors.primary,
-            color: selections.theme.colors.text,
-          }}
-          className="outline-none hover:scale-100 transition-all ml-auto"
-          onClick={() => setActiveStageId((prev) => prev + 1)}
-          disabled={isButtonDisabled}
-        />
+        <div>
+          <p className="my-7 sm:hidden">
+            Search domain name availability using our domain checker tool. Type
+            in your desired name and get instant results.
+          </p>
+          <SecondaryButton
+            text="Pick plan"
+            style={{
+              backgroundColor: selections.theme.colors.primary,
+              color: selections.theme.colors.text,
+            }}
+            className="outline-none hover:scale-100 transition-all ml-auto hidden sm:block"
+            onClick={() => setActiveStageId((prev) => prev + 1)}
+            disabled={isButtonDisabled}
+          />
+        </div>
       </div>
       <div className="flex mt-5">
         <div className="flex-grow mr-5 relative">
-          <input
-            type="text"
-            className="w-full text-sm border rounded-md px-4 py-3 z-10 relative bg-transparent domain-name-input"
-            style={{
-              outlineColor: selections.theme.colors.primary,
-            }}
-            onChange={(e) => handleDomainInput(e)}
-            ref={domainInput}
-            onKeyDown={handleKeyDown}
-            onFocus={() =>
-              setPlaceHolderStyles({
-                top: 0,
-                zIndex: 20,
-                color: selections.theme.colors.primary,
-                fontWeight: 600,
-                paddingLeft: 6,
-                paddingRight: 6,
-              })
-            }
-            onBlur={(e) => {
-              if (e.target.value.length === 0) {
-                setPlaceHolderStyles(null);
-              } else {
+          <div className="relative">
+            {isSearchButtonDisabled && (
+              <ToolTip
+                text="A valid domain name includes a valid extension e.g .com"
+                className="right-0 w-1/2"
+                style={{
+                  backgroundColor: selections.theme.colors.primary,
+                  // color: selections.theme.colors.text,
+                }}
+              />
+            )}
+            <input
+              type="text"
+              className="w-full text-sm border rounded-md px-4 py-3 z-10 relative bg-transparent domain-name-input"
+              style={{
+                outlineColor: selections.theme.colors.primary,
+              }}
+              onChange={(e) => handleDomainInput(e)}
+              ref={domainInput}
+              onKeyDown={handleKeyDown}
+              onFocus={() =>
                 setPlaceHolderStyles({
-                  display: "none",
-                });
+                  top: 0,
+                  zIndex: 20,
+                  color: selections.theme.colors.primary,
+                  fontWeight: 600,
+                  paddingLeft: 6,
+                  paddingRight: 6,
+                })
               }
-            }}
-            value={domainNameInputValue}
-          />
-          <p
-            className="text-gray-500 text-sm absolute left-4 top-1/2 -translate-y-1/2 z-0 enter-your-design-name transition-all bg-white"
-            style={placeHolderStyles!}
-          >
-            Enter your desired domain name
-          </p>
+              onBlur={(e) => {
+                if (e.target.value.length === 0) {
+                  setPlaceHolderStyles(null);
+                } else {
+                  setPlaceHolderStyles({
+                    display: "none",
+                  });
+                }
+              }}
+              value={domainNameInputValue}
+            />
+            <p
+              className="text-gray-500 text-sm absolute left-4 top-1/2 -translate-y-1/2 z-0 enter-your-design-name transition-all bg-white"
+              style={placeHolderStyles!}
+            >
+              Enter your desired domain name
+            </p>
+          </div>
           <FontAwesomeIcon
             icon={faSearch}
             className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -157,7 +186,7 @@ const DomainNamePicker = ({
         <p>.io</p>
       </div>
       {showDomainSearchResults && (
-        <div className="border rounded-md p-4 w-1/4 mt-9">
+        <div className="border rounded-md p-4 w-1/2 sm:w-1/4 mt-9">
           <div className="flex items-center">
             <FontAwesomeIcon
               icon={faCircleCheck}

@@ -33,12 +33,13 @@ const SelectThemeSlide = ({
             onClick={() => setActiveStageId((prev) => prev + 1)}
           />
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
           {themes.map((theme) => (
             <ThemeBox
               theme={theme}
               activeThemeId={selections.theme.id}
               setSelections={setSelections}
+              key={theme.id}
             />
           ))}
         </div>

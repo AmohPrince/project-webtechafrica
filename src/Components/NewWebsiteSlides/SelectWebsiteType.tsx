@@ -29,7 +29,7 @@ const SelectWebsiteType = ({
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
           }}
-          className="outline-none hover:scale-100 transition-all duration-300"
+          className="outline-none hover:scale-100 transition-all duration-300 hidden sm:block"
           onClick={() => setActiveStageId((prev) => prev + 1)}
         />
       </div>
@@ -58,6 +58,17 @@ const SelectWebsiteType = ({
         ))}
       </select>
       <p>{activeWebsiteType.description}</p>
+      <SecondaryButton
+        text={
+          <DashboardButtonText text={`Pick ${selections.websiteType.type}`} />
+        }
+        style={{
+          backgroundColor: selections.theme.colors.primary,
+          color: selections.theme.colors.text,
+        }}
+        className="outline-none hover:scale-100 transition-all duration-300 block sm:hidden mt-5 mx-auto w-full"
+        onClick={() => setActiveStageId((prev) => prev + 1)}
+      />
     </div>
   );
 };
@@ -66,7 +77,7 @@ export default SelectWebsiteType;
 
 const DashboardButtonText = ({ text }: { text: string }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-max mx-auto">
       <p className="mr-2">{text}</p>
       <FontAwesomeIcon icon={faRocket} />
     </div>

@@ -54,7 +54,7 @@ export const UserWebsiteDescription = ({
           backgroundColor: selections.theme.colors.primary,
           color: selections.theme.colors.text,
         }}
-        className="outline-none hover:scale-100 transition-all ml-auto"
+        className="outline-none hover:scale-100 transition-all ml-auto w-full sm:w-auto"
         onClick={() => setActiveStageId((prev) => prev + 1)}
         disabled={isProgressButtonDisabled}
       />

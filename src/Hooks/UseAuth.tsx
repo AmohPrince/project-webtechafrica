@@ -1,8 +1,10 @@
 import { UserCredential } from "firebase/auth";
 import React, { createContext, useContext } from "react";
+import { auth } from "../Firebase/firebase";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
+import { useUpdateLogger } from "./useUpdateLogger";
 
 const authContext = createContext<AuthContext>(null as any);
 
@@ -48,6 +50,9 @@ export const AuthContextProvider = ({
       setUserData(null);
     }
   }
+
+  //TODO figure out why tf currentUser is null;
+  useUpdateLogger(auth.currentUser, "currentUser");
 
   return (
     <authContext.Provider

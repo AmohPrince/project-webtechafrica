@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import NoWebsite from "../Components/NoWebsite";
 import { globalData } from "./DashBoard";
-import { testUser } from "../Firebase/firebase";
 import { Website } from "../Components/Website";
+import { useAuth } from "../Hooks/UseAuth";
 
 const DevWebsitesPage = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);
-  const mutableUserObject = testUser;
-
+  const { userData } = useAuth();
   useEffect(() => {
     setDashBoardTitleInfo({
       h1: "Development Websites",
@@ -17,8 +16,8 @@ const DevWebsitesPage = () => {
 
   return (
     <div className="bg-white mt-4 py-4 px-6 flex flex-wrap justify-between gap-y-4">
-      {mutableUserObject?.devWebsites ? (
-        mutableUserObject.devWebsites.map((website, index) => (
+      {userData?.devWebsites ? (
+        userData.devWebsites.map((website, index) => (
           <Website website={website} key={index} />
         ))
       ) : (

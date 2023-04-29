@@ -6,7 +6,7 @@ import PrimaryButton from "./PrimaryButton";
 
 const Confirmation = ({ text }: { text: string }) => {
   return (
-    <div className="center-absolutely px-4 py-10 shadow-sm w-1/2 text-center border rounded-lg bg-white">
+    <div className="center-absolutely px-4 py-10 shadow-sm w-3/4 sm:w-1/2 text-center border rounded-lg bg-white">
       <FontAwesomeIcon
         icon={faRectangleXmark}
         className="right-4 top-4 absolute text-primaryOne w-5 h-5 cursor-pointer hover:text-primaryOneLight transition-all"

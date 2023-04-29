@@ -36,7 +36,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 // const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 export const storage = getStorage();
@@ -283,6 +283,8 @@ export const getSignInErrorMessage = (err: any): string => {
       break;
     default:
       errorMessage = err.message;
+
+    //TODO leverage chtGPT api to get a custom message for the default error message
   }
   return errorMessage;
 };
