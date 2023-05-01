@@ -1,3 +1,5 @@
+import { faCcPaypal, faCcVisa } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,29 +8,30 @@ import { AdvancedPricing } from "../Components/AdvancedPricing";
 import { BasicPricing } from "../Components/BasicPricing";
 import BlackIshButton from "../Components/BlackIshButton";
 import BlogArticle from "../Components/BlogArticle";
-import { FeaturesComponent } from "../Components/FeaturesComponent";
-import FreeTrial from "../Components/FreeTrial";
+import { FeaturesComponent } from "../Components/Home/FeaturesComponent";
+import FreeTrial from "../Components/Home/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
-import HomeBackground from "../Components/HomeBackground";
+import HomeBackground from "../Components/Home/HomeBackground";
 import {
   fadeAnimation,
   headContainerAnimation,
   headTextAnimation,
   slideAnimation,
 } from "../FramerMotion/motion";
-import Blogs from "../Json/Blogs.json";
+import blogs from "../Json/Blogs.json";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
 
   return (
-    <motion.div>
+    <motion.section>
       <HomeBackground />
+      {/* Build your audience and grow your brand online */}
       <motion.section
-        className="flex mt-[14%] justify-between relative"
+        className="flex flex-col sm:flex-row mt-[14%] justify-between relative"
         {...slideAnimation("left")}
       >
-        <motion.div className="w-[50%]" {...headContainerAnimation}>
+        <motion.div className="sm:w-[50%]" {...headContainerAnimation}>
           <motion.div {...headTextAnimation}>
             <h1 className="h1">
               Build your <br /> audience and grow <br /> your brand online
@@ -39,11 +42,11 @@ export const Home = () => {
             <br />
             fastest growing tech corporation.{" "}
           </motion.p>
-          <div className="flex text-sm">
+          <div className="flex text-sm justify-center sm:justify-start gap-x-3">
             <button className="bg-primaryOne text-white py-3 px-6 rounded-full">
               Get Started
             </button>
-            <button className="bg-gray-100 rounded-full pl-4 pr-1 ml-3 flex items-center font-bold">
+            <button className="bg-gray-100 rounded-full pl-4 pr-1 flex items-center font-bold">
               Watch Video
               <img
                 src={assets.PlayButton}
@@ -56,18 +59,26 @@ export const Home = () => {
         <motion.img
           src={assets.GraphScreenPng}
           alt="graph"
-          className="w-[50%] ml-11 object-cover absolute -right-12 -top-12"
+          className="w-3/4 sm:w-[50%] mx-auto mt-10 sm:mt-0 sm:ml-11 object-cover sm:absolute -right-12 -top-12"
           {...fadeAnimation}
         />
       </motion.section>
+      {/* features  */}
       <FeaturesComponent />
       <section className="mt-[6%] relative items-stretch">
-        <div className="w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-[50px]">
-          <div className="w-3/5">
-            <h3 className="h3">
-              Cheap and powerful websites for your business to <br /> ensure
-              people notice you online
-            </h3>
+        <div className="w-11/12 sm:w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-xl sm:rounded-[50px]">
+          <div className="w-full sm:w-3/5">
+            <div className="flex gap-x-2 items-start">
+              <h3 className="h3">
+                Cheap and powerful websites for your business to <br /> ensure
+                people notice you online
+              </h3>
+              <img
+                src={assets.Dashboard}
+                alt="dashboard"
+                className="w-1/3 sm:hidden"
+              />
+            </div>
             <p className="default-paragraph mt-6 mb-10 text-md">
               We have a team of expert designers and developers who work
               tirelessly to deliver top-notch designs and user experiences that
@@ -89,16 +100,17 @@ export const Home = () => {
         <img
           src={assets.Dashboard}
           alt="dashboard"
-          className="absolute top-1/2 -translate-y-1/2 -right-14 w-1/2 z-10"
+          className="hidden sm:inline absolute top-1/2 -translate-y-1/2 -right-14 w-1/2 z-10"
         />
         <div className="bg-primaryOne h-full w-1/4 absolute top-0 right-0 rounded-l-[50px] translate-x-full z-0" />
       </section>
+      {/* Work smarter, work faster.. */}
       <section className="text-center mt-[10%]">
         <GreyButton text="How we work" />
         <h2 className="h2 mt-8 mb-12">Work smarter, work faster..</h2>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-x-2">
           <button
-            className={`bg-gray-200 py-5 px-16 rounded-md ${
+            className={`bg-gray-200 py-5 sm:px-16 rounded-md ${
               activeButton === 1 ? "active" : ""
             }`}
             onClick={() => setActiveButton(1)}
@@ -106,7 +118,7 @@ export const Home = () => {
             01. Create account
           </button>
           <button
-            className={`bg-gray-200 py-5 px-10 rounded-md ${
+            className={`bg-gray-200 py-5 sm:px-10 rounded-md ${
               activeButton === 2 ? "active" : ""
             }`}
             onClick={() => setActiveButton(2)}
@@ -114,7 +126,7 @@ export const Home = () => {
             02. Call in or fill website application form
           </button>
           <button
-            className={`bg-gray-200 py-5 px-16 rounded-md ${
+            className={`bg-gray-200 py-5 sm:px-16 rounded-md ${
               activeButton === 3 ? "active" : ""
             }`}
             onClick={() => setActiveButton(3)}
@@ -123,8 +135,8 @@ export const Home = () => {
           </button>
         </div>
         {activeButton === 1 && (
-          <div className="px-[4%] pt-[5%] text-left flex items-start">
-            <div className="w-3/5">
+          <div className="px-[4%] pt-[5%] text-left sm:flex items-start">
+            <div className="w-full sm:w-3/5">
               <div className="flex items-center">
                 <img
                   src={assets.Person}
@@ -135,25 +147,41 @@ export const Home = () => {
                   Create your account <br />& start your work
                 </h3>
               </div>
-              <p className="default-paragraph my-5 w-[95%]">
-                Creating user accounts allows us to track your web development
-                process , payment information of individual users, making it
-                easier to identify and resolve any issues that may arise. This
-                also allows us better understand how users interact with their
-                sites, which can be used to improve the overall user experience.
-              </p>
+              <div className="flex gap-x-2 items-start my-5">
+                <p className="default-paragraph w-[95%]">
+                  Creating user accounts allows us to track your web development
+                  process , payment information of individual users, making it
+                  easier to identify and resolve any issues that may arise. This
+                  also allows us better understand how users interact with their
+                  sites, which can be used to improve the overall user
+                  experience.
+                </p>
+                <img
+                  src={assets.Accounts}
+                  alt="accounts glyph"
+                  className="sm:hidden w-2/5"
+                />
+              </div>
               <Link to="/sign-in">
                 <BlackIshButton text="Get started" />
               </Link>
             </div>
-            <img src={assets.Accounts} alt="account" className="w-2/5" />
+            <img
+              src={assets.Accounts}
+              alt="account"
+              className="hidden sm:inline w-2/5"
+            />
           </div>
         )}
         {activeButton === 2 && (
           <div className="px-[4%] pt-[5%] text-left flex items-start">
-            <img src={assets.BlueCard} alt="account" className="w-2/5 mr-3" />
+            <img
+              src={assets.BlueCard}
+              alt="account"
+              className="hidden sm:inline w-2/5 mr-3"
+            />
             <div className="flex justify-end flex-col">
-              <div className="flex items-center">
+              <div className="flex items-start sm:items-center">
                 <img
                   src={assets.Phone}
                   alt="Phone"
@@ -164,22 +192,30 @@ export const Home = () => {
                   more!
                 </h3>
               </div>
-              <p className="default-paragraph my-5">
-                We strongly encourage clients to reach out to us either by phone
-                or by filling out the form on our website. This will allow us to
-                gather all the necessary information to build the perfect
-                website tailored to your needs and preferences. Your input is
-                crucial in creating a website that meets your goals and exceeds
-                your expectations. So please don't hesitate to contact us, we
-                are here to help and guide you through the process.
-              </p>
+              <div className="flex items-start gap-x-2 my-5">
+                <p className="default-paragraph">
+                  We strongly encourage clients to reach out to us either by
+                  phone or by filling out the form on our website. This will
+                  allow us to gather all the necessary information to build the
+                  perfect website tailored to your needs and preferences. Your
+                  input is crucial in creating a website that meets your goals
+                  and exceeds your expectations. So please don't hesitate to
+                  contact us, we are here to help and guide you through the
+                  process.
+                </p>
+                <img
+                  src={assets.BlueCard}
+                  alt="account"
+                  className="sm:hidden w-2/5"
+                />
+              </div>
               <BlackIshButton text="Fill in form" />
             </div>
           </div>
         )}
         {activeButton === 3 && (
           <div className="px-[4%] pt-[5%] text-left flex items-start justify-between">
-            <div className="w-1/2">
+            <div className="sm:w-1/2">
               <div className="flex items-center">
                 <img
                   src={assets.Clock}
@@ -188,23 +224,31 @@ export const Home = () => {
                 />
                 <h3 className="h3">Sit back and watch the magic happen</h3>
               </div>
-              <p className="default-paragraph mt-4 mb-8">
-                Get ready to be amazed! With our unique system, clients can sit
-                back and watch as their website is built before their eyes.
-                Whether they choose to track their progress through a convenient
-                link or view it directly on their dashboards, you'll be able to
-                see the magic happen in real-time.
-              </p>
+              <div className="flex my-5 gap-x-2">
+                <p className="default-paragraph ">
+                  Get ready to be amazed! With our unique system, clients can
+                  sit back and watch as their website is built before their
+                  eyes. Whether they choose to track their progress through a
+                  convenient link or view it directly on their dashboards,
+                  you'll be able to see the magic happen in real-time.
+                </p>
+                <img
+                  src={assets.Magic}
+                  alt="account"
+                  className="sm:hidden w-2/5 object-cover"
+                />
+              </div>
               <BlackIshButton text="Get me a website  🚀" />
             </div>
             <img
               src={assets.Magic}
               alt="account"
-              className="w-2/5 ml-3 object-cover"
+              className="hidden sm:inline w-2/5 ml-3 object-cover"
             />
           </div>
         )}
       </section>
+      {/* Testimonial */}
       <section className="mt-[10%] bg-primaryOne text-white absolute right-0 left-0 text-center py-[8%] overflow-hidden">
         <p className="text-xs px-6 py-2 w-max mx-auto testimonial-title rounded-full">
           Testimonial
@@ -226,7 +270,7 @@ export const Home = () => {
         <img
           src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="Shirleen Annika"
-          className="rounded-full w-24 h-24 object-cover mx-auto mt-8 mb-4"
+          className="rounded-full w-24 h-24 object-cover mx-auto mt-8 mb-4 z-10 relative"
         />
         <p className="text-2xl font-semibold">Shirleen Annika</p>
         <p className="text-xs">Developer, South Africa</p>
@@ -247,9 +291,10 @@ export const Home = () => {
           className="absolute -top-3/4 -left-1/2 rotate-[270deg]"
         />
       </section>
-      <section className="flex justify-between mt-[97%] items-start">
-        <div className="w-[30%] text-left">
-          <GreyButton text="Pricing" className="mr-auto" />
+      {/* simple and flexible pricing */}
+      <section className="flex flex-col sm:flex-row gap-x-3 mt-[170%] sm:mt-[97%] items-start">
+        <div className="w-full sm:w-1/3 text-left mb-5">
+          <GreyButton text="Pricing" className="ml-auto sm:ml-0 mr-auto" />
           <h3 className="h3 mt-7 mb-6">
             Simple and <br />
             flexible pricing
@@ -258,38 +303,37 @@ export const Home = () => {
             Simplify your budgeting with our transparent and adaptable pricing
             options.
           </p>
-          <h4 className="h4 mt-3 mb-4">Accepted Payment Methods</h4>
-          <div className="bg-gray-50 flex justify-between py-1 px-2 rounded-md">
-            <img
-              src={assets.PayPal}
-              alt="Paypal"
-              className="w-1/3 object-cover h-[55px]"
+          <h4 className="h4 my-4">Accepted Payment Methods</h4>
+          <div className="bg-gray-50 flex py-2 px-2 rounded-md">
+            <FontAwesomeIcon
+              icon={faCcPaypal}
+              className="w-1/3 h-[55px] text-primaryOne"
             />
-            <img
-              src={assets.Visa}
-              alt="Visa"
-              className="w-1/3 object-cover h-[55px]"
-            />
-            <img
-              src={assets.Mpesa}
-              alt="Mpesa"
-              className="w-1/3 object-cover h-[55px]"
+            <FontAwesomeIcon
+              icon={faCcVisa}
+              className="w-1/3 h-[55px] text-primaryOne"
             />
           </div>
         </div>
-        <BasicPricing />
-        <AdvancedPricing />
+        <div className="flex justify-between gap-x-2">
+          <BasicPricing className="w-1/2" />
+          <AdvancedPricing className="w-1/2" />
+        </div>
       </section>
+      {/* free trial */}
       <FreeTrial />
+      {/* blogs */}
       <section className="mt-[10%]">
         <GreyButton text="Blog" />
-        <h3 className="h3">Most popular articles</h3>
-        <div className="flex justify-between">
-          {Blogs.slice(0, 2).map((article, index) => (
+        <h3 className="h3 text-center sm:text-left my-5 sm:my-0">
+          Most popular articles
+        </h3>
+        <div className="sm:flex justify-between gap-x-2">
+          {blogs.slice(0, 2).map((article, index) => (
             <BlogArticle article={article} key={index} />
           ))}
         </div>
       </section>
-    </motion.div>
+    </motion.section>
   );
 };

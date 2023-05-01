@@ -5,15 +5,15 @@ import LogoTab from "./LogoTab";
 
 const Footer = () => {
   return (
-    <>
-      <footer className="mt-[10%] border-y py-[9%] flex justify-between">
+    <footer>
+      <section className="mt-[10%] border-y py-[9%] flex justify-between">
         <div className="w-1/3">
           <LogoTab logoColor={LogoColor.primary} />
           <p className="default-paragraph mt-6 my-9">
             Get your website or web application on the cheap today with Africa's
             fastest growing tech corporation.
           </p>
-          <div className="flex items-start">
+          <div className="flex items-start mt-3 sm:mt-0">
             <img
               src={assets.Mail}
               alt="Mail"
@@ -95,7 +95,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </footer>
+      </section>
       <div className="flex justify-between mt-4 text-sm">
         <p className="text-secondaryFour">
           Copyright © WebTech Africa | Designed by Victorflow - Powered by
@@ -136,7 +136,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-    </>
+    </footer>
   );
 };
 

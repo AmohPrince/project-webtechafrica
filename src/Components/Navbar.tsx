@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LogoColor } from "../Assets/assets";
 import { useAuth } from "../Hooks/UseAuth";
 import { getBaseUrl } from "../Util/Utilities";
+import HamburgerMenu from "./HamburgerMenu";
 import { Logo } from "./Logo";
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
   const { user } = useAuth();
 
   return (
-    <section className="flex justify-between items-center z-10 relative">
+    <section className="flex justify-between items-center fixed right-0 left-0 py-6 px-2 sm:px-0 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent  z-50">
       <div className="flex">
         <Logo
           color={LogoColor.primary}
@@ -19,7 +20,7 @@ const Navbar = () => {
         />
         <h3 className="h3">WebTech Africa</h3>
       </div>
-      <div className="flex text-sm">
+      <div className="hidden sm:flex text-sm">
         <div
           className={`flex transition-all rounded-full px-9 py-3 ${
             basePath !== "/" ? "navbar-gray" : "text-white"
@@ -93,6 +94,9 @@ const Navbar = () => {
             Sign in
           </Link>
         )}
+      </div>
+      <div className="absolute right-0">
+        <HamburgerMenu location="menu" setShowingSmallScreenMenu={() => {}} />
       </div>
     </section>
   );

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { NewWebsiteSelections, WebsiteType } from "../../Types/Global";
-import website_types from "../../Json/WebsiteTypes.json";
-import { SecondaryButton } from "../SecondaryButton";
+import { WebsiteType } from "../../../Types/Global";
+import website_types from "../../../Json/WebsiteTypes.json";
+import { SecondaryButton } from "../../SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 
 const SelectWebsiteType = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const { selections, setSelections } = useNewWebsiteSelections();
+
   const [activeWebsiteType, setActiveWebsiteType] = useState<WebsiteType>(
     website_types[0]
   );
+
   return (
     <div className="px-6 py-6 bg-white">
       <div className="flex items-center justify-between">
@@ -48,10 +48,11 @@ const SelectWebsiteType = ({
         }}
         className="border-2 rounded-md cursor-pointer my-5 p-3 border-primaryOne outline-none"
       >
-        {website_types.map((type) => (
+        {website_types.map((type, i) => (
           <option
             value={type.type}
             className="rounded-sm border border-primaryOne"
+            key={i}
           >
             {type.type}
           </option>

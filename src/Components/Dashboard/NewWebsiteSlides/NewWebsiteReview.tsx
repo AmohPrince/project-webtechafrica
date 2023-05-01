@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { NewWebsiteSelections } from "../../Types/Global";
-import { SecondaryButton } from "../SecondaryButton";
-import { ThemeBox } from "../ThemeBox";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { SecondaryButton } from "../../SecondaryButton";
+import { ThemeBox } from "../../ThemeBox";
 
 const NewWebsiteReview = ({
-  selections,
   showConfirmationModal,
 }: {
-  selections: NewWebsiteSelections;
   showConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  //contexts
+  const { selections } = useNewWebsiteSelections();
+
+  //state variables
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const completeWebsiteBuildingProcess = () => {
     setIsLoading(true);
     //TODO submit to server. after the post call is completed update the state objects holding the pending verification websites
@@ -22,6 +25,7 @@ const NewWebsiteReview = ({
       showConfirmationModal(true);
     }, 3000);
   };
+
   return (
     <div className="bg-white p-6">
       <div className="flex items-center justify-center">

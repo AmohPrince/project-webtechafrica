@@ -98,10 +98,6 @@ code {
   background: #6850ff;
 }
 
-.email-input {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .faqs {
   width: inherit;
   margin-left: -20%;
@@ -126,4 +122,8 @@ input[type="number"]::-webkit-inner-spin-button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.free-trial {
+  background-image: url(../src/Assets/FreeTrial.svg);
 }

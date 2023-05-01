@@ -1,21 +1,18 @@
 import React from "react";
-import { ThemeBox } from "./ThemeBox";
-import ThemePreview from "./ThemePreview";
-import themes from "../Util/themes.json";
-import { NewWebsiteSelections } from "../Types/Global";
-import { SecondaryButton } from "./SecondaryButton";
+import { ThemeBox } from "../../ThemeBox";
+import ThemePreview from "../../ThemePreview";
+import themes from "../../../Util/themes.json";
+import { SecondaryButton } from "../../SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 
 const SelectThemeSlide = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const { setSelections, selections } = useNewWebsiteSelections();
   return (
     <div className="flex flex-col">
       <div className="bg-white px-6 py-6">

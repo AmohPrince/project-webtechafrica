@@ -1,36 +1,34 @@
-import {
-  faCircleCheck,
-  faSearch,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
-import { NewWebsiteSelections } from "../../Types/Global";
-import { getLighterColor } from "../../Util/Utilities";
-import PrimaryButton from "../PrimaryButton";
-import { SecondaryButton } from "../SecondaryButton";
-import { ToolTip } from "../SignInOrSignUp/ToolTip";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { checkDomainAvailability } from "../../../Util/cors";
+import { getLighterColor } from "../../../Util/Utilities";
+import { SecondaryButton } from "../../SecondaryButton";
+import { ToolTip } from "../../SignInOrSignUp/ToolTip";
+import { FoundDomain } from "./FoundDomain";
 
 const DomainNamePicker = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  //contexts
+  const { setSelections, selections } = useNewWebsiteSelections();
+
+  //state variables
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] =
     useState<boolean>(true);
   const [placeHolderStyles, setPlaceHolderStyles] =
     useState<React.CSSProperties | null>(null);
-  const [domainNameInputValue, setDomainNameInputValue] = useState<string>("");
-  const [showDomainSearchResults, setShowDomainSearchResults] =
-    useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [showToolTip, setShowToolTip] = useState(false);
+  const [failedToFindDomain, setFailedToFindDomain] = useState(false);
+  const [availableDomains, setAvailableDomains] = useState<string[]>([]);
 
   const domainInput = useRef<HTMLInputElement>(null);
+  const extensions = [".com", ".org", ".online", ".shop", ".net", ".io"];
 
   const buttonStyles = {
     backgroundColor: isSearchButtonDisabled
@@ -39,27 +37,53 @@ const DomainNamePicker = ({
     color: selections.theme.colors.text,
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     setIsLoading(true);
-    //TODO here is where i should validate the domain somehow
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowDomainSearchResults(true);
-    }, 2000);
+    setAvailableDomains([]);
+    extensions.forEach(async (extension) => {
+      const userUrl: string = domainInput.current!.value;
+      const noExtensionUrl = userUrl.split(".")[0];
+      const withExtensionUrl = noExtensionUrl + extension;
+      await checkDomainAvailability(withExtensionUrl)
+        .then((data) => {
+          if (Object.keys(data).length === 0) {
+            setAvailableDomains((prev) => [...prev, withExtensionUrl]);
+            setFailedToFindDomain(false);
+          } else {
+            setFailedToFindDomain(true);
+          }
+        })
+        .catch((err) => {
+          if (err.code !== "ERR_NETWORK") {
+            setAvailableDomains((prev) => [...prev, withExtensionUrl]);
+            setFailedToFindDomain(false);
+          } else {
+            setFailedToFindDomain(true);
+          }
+        });
+      if (extensions.indexOf(extension) === extensions.length - 1) {
+        setIsLoading(false);
+      }
+    });
   };
 
   const handleDomainInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShowDomainSearchResults(false);
     const isValidDomain = (e: string): boolean => {
-      const extensions = [".com", ".org", ".online", ".shop", ".net", ".io"];
       return extensions.some((extension) => e.includes(extension));
     };
-    setDomainNameInputValue(e.target.value.toLowerCase());
-    setIsSearchButtonDisabled(!isValidDomain(e.target.value));
+
+    const isValid = isValidDomain(e.target.value);
+
+    setIsSearchButtonDisabled(!isValid);
+
+    if (isValid || e.target.value === "") {
+      setShowToolTip(false);
+    } else {
+      setShowToolTip(true);
+    }
   };
 
+  //to prevent users from typing space
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === " ") {
       event.preventDefault();
@@ -68,13 +92,30 @@ const DomainNamePicker = ({
 
   return (
     <div className="bg-white p-6">
-      <div className="sm:flex items-center justify-center">
-        <div className="flex justify-between items-center sm:block">
+      {/* only appears on large screens */}
+      <div className="items-center justify-center hidden sm:flex">
+        <div>
           <p className="font-bold text-xl">Find your domain</p>
-          <p className="mt-3 hidden sm:block">
+          <p className="mt-3">
             Search domain name availability using our domain checker tool. Type
             in your desired name and get instant results.
           </p>
+        </div>
+        <SecondaryButton
+          text="Pick plan"
+          style={{
+            backgroundColor: selections.theme.colors.primary,
+            color: selections.theme.colors.text,
+          }}
+          className="outline-none hover:scale-100 transition-all ml-auto"
+          onClick={() => setActiveStageId((prev) => prev + 1)}
+          disabled={isButtonDisabled}
+        />
+      </div>
+      {/* only appears on small screens */}
+      <div className="sm:hidden">
+        <div className="flex justify-between items-center">
+          <p className="font-bold text-xl">Find your domain</p>
           <SecondaryButton
             text="Pick plan"
             style={{
@@ -86,33 +127,20 @@ const DomainNamePicker = ({
             disabled={isButtonDisabled}
           />
         </div>
-        <div>
-          <p className="my-7 sm:hidden">
-            Search domain name availability using our domain checker tool. Type
-            in your desired name and get instant results.
-          </p>
-          <SecondaryButton
-            text="Pick plan"
-            style={{
-              backgroundColor: selections.theme.colors.primary,
-              color: selections.theme.colors.text,
-            }}
-            className="outline-none hover:scale-100 transition-all ml-auto hidden sm:block"
-            onClick={() => setActiveStageId((prev) => prev + 1)}
-            disabled={isButtonDisabled}
-          />
-        </div>
+        <p className="my-5">
+          Search domain name availability using our domain checker tool. Type in
+          your desired name and get instant results.
+        </p>
       </div>
       <div className="flex mt-5">
         <div className="flex-grow mr-5 relative">
           <div className="relative">
-            {isSearchButtonDisabled && (
+            {showToolTip && (
               <ToolTip
                 text="A valid domain name includes a valid extension e.g .com"
-                className="right-0 w-1/2"
+                className="right-0 w-1/2 sm:w-max"
                 style={{
                   backgroundColor: selections.theme.colors.primary,
-                  // color: selections.theme.colors.text,
                 }}
               />
             )}
@@ -144,7 +172,7 @@ const DomainNamePicker = ({
                   });
                 }
               }}
-              value={domainNameInputValue}
+              // value={domainNameInputValue}
             />
             <p
               className="text-gray-500 text-sm absolute left-4 top-1/2 -translate-y-1/2 z-0 enter-your-design-name transition-all bg-white"
@@ -185,31 +213,24 @@ const DomainNamePicker = ({
         <p>.net</p>
         <p>.io</p>
       </div>
-      {showDomainSearchResults && (
-        <div className="border rounded-md p-4 w-1/2 sm:w-1/4 mt-9">
-          <div className="flex items-center">
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              className="mr-3 text-green-600"
+      <div className="flex gap-2 flex-wrap justify-center mt-4">
+        {failedToFindDomain ? (
+          <p>
+            Snap! Turns out {domainInput.current?.value} is taken. Lets give it
+            another try.
+          </p>
+        ) : (
+          availableDomains.map((domain, i) => (
+            <FoundDomain
+              domainName={domain}
+              selections={selections}
+              setIsButtonDisabled={setIsButtonDisabled}
+              setSelections={setSelections}
+              key={i}
             />
-            <p className="font-bold text-sm">{domainInput.current?.value}</p>
-          </div>
-          <PrimaryButton
-            text={selections.domainName === null ? "Select domain" : "Selected"}
-            className="w-full rounded-md mt-5 hover:scale-100 disabled:bg-gray-400 disabled:hover:bg-gray-400"
-            onClick={() => {
-              setSelections((prev) => {
-                return {
-                  ...prev,
-                  domainName: domainInput.current!.value,
-                };
-              });
-              setIsButtonDisabled(false);
-            }}
-            disabled={selections.domainName !== null}
-          />
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

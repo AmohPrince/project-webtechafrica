@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { assets } from "../Assets/assets";
-import { GreyButton } from "./GreyButton";
+import { assets } from "../../Assets/assets";
+import { GreyButton } from "../GreyButton";
 import { motion } from "framer-motion";
 
 export const FeaturesComponent = () => {
@@ -21,16 +21,16 @@ export const FeaturesComponent = () => {
         Powerful features to boost <br /> your productivity
       </motion.h1>
       <motion.div
-        className="flex justify-between"
+        className="sm:flex justify-between"
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, staggerChildren: 0.2 }}
       >
-        <motion.div className="text-center w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
+        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.SecurePlatform}
             alt="secure platform"
-            className="w-4/5 h-1/3"
+            className="w-4/5 h-1/3 mx-auto"
           />
           <h3 className="h4 mt-3">Secure platform</h3>
           <p className="default-paragraph my-6">
@@ -48,7 +48,7 @@ export const FeaturesComponent = () => {
             Learn More
           </Link>
         </motion.div>
-        <motion.div className="text-center w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
+        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.AdvancedAnalytics}
             alt="secure platform"
@@ -68,11 +68,11 @@ export const FeaturesComponent = () => {
             Learn More
           </Link>
         </motion.div>
-        <motion.div className="text-center w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
+        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.PowerfulAutomation}
             alt="secure platform"
-            className="w-4/5 ml-auto h-1/3"
+            className="w-4/5 mx-auto sm:ml-auto h-1/3"
           />
           <h3 className="h4 mt-3">Powerful automation</h3>
           <p className="default-paragraph my-6">

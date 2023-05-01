@@ -22,6 +22,7 @@ module.exports = {
         bgSignupPage: "#005dbf",
         bgSignInPage: "#7d6f20",
         menu: "#140527",
+        emailInput: "#ffffff33",
       },
     },
   },

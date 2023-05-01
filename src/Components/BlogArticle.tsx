@@ -4,7 +4,7 @@ import { BlogArticleType } from "../Types/Global";
 
 const BlogArticle = ({ article }: { article: BlogArticleType }) => {
   return (
-    <div className="rounded-3xl bg-gray-100 p-6 w-[49%] relative">
+    <div className="rounded-3xl bg-gray-100 p-6 w-full mb-10 sm:mb-0 sm:w-1/2 relative">
       <img
         src={article.img}
         alt="keyboard and earphones"

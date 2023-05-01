@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
-import { FeaturesComponent } from "../Components/FeaturesComponent";
-import FreeTrial from "../Components/FreeTrial";
+import { FeaturesComponent } from "../Components/Home/FeaturesComponent";
+import FreeTrial from "../Components/Home/FreeTrial";
 import { GreyButton } from "../Components/GreyButton";
 import { pageTransition } from "../FramerMotion/PageTransitions";
 

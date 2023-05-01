@@ -19,7 +19,7 @@ const PrimaryButton = ({
 }) => {
   return (
     <button
-      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight disabled:bg-primaryOneLight transition-all disabled:cursor-not-allowed ${className}`}
+      className={`bg-primaryOne rounded-full px-7 py-3 text-white text-sm font-medium hover:bg-primaryOneLight transition-all disabled:cursor-not-allowed ${className} disabled:bg-primaryOneLight`}
       onClick={onClick}
       style={style}
       disabled={disabled}

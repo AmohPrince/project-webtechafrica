@@ -1,19 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NewWebsiteSelections } from "../../Types/Global";
-import { SecondaryButton } from "../SecondaryButton";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { SecondaryButton } from "../../SecondaryButton";
 
 const UserHasOwnContent = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const userHasOwnContentRef = useRef<HTMLInputElement>(null);
   const automaticContentGenerationRef = useRef<HTMLInputElement>(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+
+  const { selections, setSelections } = useNewWebsiteSelections();
 
   useEffect(() => {
     setIsButtonDisabled(
@@ -32,8 +30,8 @@ const UserHasOwnContent = ({
         Do you have any content or would you like our AI to generate everything
         for you? You are allowed to change anything you want later
       </p>
-      <div className="sm:flex justify-between items-center my-5">
-        <div className="flex mb-2 sm:mb-0">
+      <div className="sm:flex justify-between sm:justify-start items-center my-5">
+        <div className="flex items-center mb-2 sm:mb-0">
           <input
             type="checkbox"
             onChange={(e) => {
@@ -50,7 +48,7 @@ const UserHasOwnContent = ({
           />
           <p>I have my own</p>
         </div>
-        <div className="flex">
+        <div className="flex items-center sm:ml-3">
           <input
             type="checkbox"
             className="mr-2 w-4 cursor-pointer h-4"

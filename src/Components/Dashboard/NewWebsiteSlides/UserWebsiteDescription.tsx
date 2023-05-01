@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { NewWebsiteSelections } from "../../Types/Global";
-import { SecondaryButton } from "../SecondaryButton";
+import React, { useState } from "react";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { SecondaryButton } from "../../SecondaryButton";
 
 export const UserWebsiteDescription = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [noOfCharacters, setNoOfCharacters] = useState<number>(0);
   const [isProgressButtonDisabled, setIsProgressButtonDisabled] =
-    useState(false);
+    useState(true);
 
-  useEffect(() => {
-    setIsProgressButtonDisabled(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { setSelections, selections } = useNewWebsiteSelections();
 
   return (
     <div className="py-5 px-6 bg-white flex flex-col">
@@ -61,12 +54,3 @@ export const UserWebsiteDescription = ({
     </div>
   );
 };
-
-// const DashboardButtonText = ({ text }: { text: string }) => {
-//   return (
-//     <div className="flex items-center">
-//       <p className="mr-2">{text}</p>
-//       <FontAwesomeIcon icon={faRocket} />
-//     </div>
-//   );
-// };

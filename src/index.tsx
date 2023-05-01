@@ -21,11 +21,12 @@ import { SignUp } from "./Pages/SignUp";
 import DashBoard from "./Pages/DashBoard";
 import ActiveWebsitesPage from "./Pages/ActiveWebsitesPage";
 import DevWebsitesPage from "./Pages/DevWebsitesPage";
-import WebsiteBuilderForm from "./Components/WebsiteBuilderForm";
+import WebsiteBuilderForm from "./Components/Dashboard/NewWebsiteSlides/WebsiteBuilderForm";
 import Payments from "./Pages/Payments";
 import { PendingVerificationsPage } from "./Pages/PendingVerificationsPage";
 import Settings from "./Pages/Dashboard/Settings";
 import { AuthContextProvider } from "./Hooks/UseAuth";
+import { SelectionsProvider } from "./Hooks/useNewWebsiteSelections";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -36,36 +37,41 @@ root.render(
     <AnimatePresence>
       <BrowserRouter>
         <AuthContextProvider>
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route element={<Home />} index />
-              <Route element={<About />} path="about-us" />
-              <Route element={<Features />} path="features" />
-              <Route element={<Pricing />} path="pricing" />
-              <Route element={<BasicPricingPage />} path="pricing/basic" />
-              <Route
-                element={<AdvancedPricingPage />}
-                path="pricing/advanced"
-              />
-              <Route element={<Blog />} path="blog" />
-              <Route element={<SingleBlog />} path="blog/:title" />
-              <Route element={<Contact />} path="contact" />
-              <Route path="*" element={<FourZeroFour />} />
-            </Route>
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/dashboard" element={<DashBoard />}>
-              <Route element={<ActiveWebsitesPage />} path="active-websites" />
-              <Route element={<DevWebsitesPage />} path="dev-websites" />
-              <Route element={<Payments />} path="payments" />
-              <Route element={<WebsiteBuilderForm />} path="new-website" />
-              <Route
-                element={<PendingVerificationsPage />}
-                path="pending-verification"
-              />
-              <Route element={<Settings />} path="settings" />
-            </Route>
-          </Routes>
+          <SelectionsProvider>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route element={<Home />} index />
+                <Route element={<About />} path="about-us" />
+                <Route element={<Features />} path="features" />
+                <Route element={<Pricing />} path="pricing" />
+                <Route element={<BasicPricingPage />} path="pricing/basic" />
+                <Route
+                  element={<AdvancedPricingPage />}
+                  path="pricing/advanced"
+                />
+                <Route element={<Blog />} path="blog" />
+                <Route element={<SingleBlog />} path="blog/:title" />
+                <Route element={<Contact />} path="contact" />
+                <Route path="*" element={<FourZeroFour />} />
+              </Route>
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/dashboard" element={<DashBoard />}>
+                <Route
+                  element={<ActiveWebsitesPage />}
+                  path="active-websites"
+                />
+                <Route element={<DevWebsitesPage />} path="dev-websites" />
+                <Route element={<Payments />} path="payments" />
+                <Route element={<WebsiteBuilderForm />} path="new-website" />
+                <Route
+                  element={<PendingVerificationsPage />}
+                  path="pending-verification"
+                />
+                <Route element={<Settings />} path="settings" />
+              </Route>
+            </Routes>
+          </SelectionsProvider>
         </AuthContextProvider>
       </BrowserRouter>
     </AnimatePresence>

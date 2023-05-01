@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { assets } from "../Assets/assets";
+import { assets } from "../../Assets/assets";
 
 const HomeBackground = () => {
   return (
-    <motion.div className="absolute top-0 right-0 w-screen h-screen">
+    <motion.div className="absolute top-0 right-0 w-screen h-screen hidden sm:block">
       <motion.svg
-        width="1386"
-        height="705"
         viewBox="0 0 1386 705"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

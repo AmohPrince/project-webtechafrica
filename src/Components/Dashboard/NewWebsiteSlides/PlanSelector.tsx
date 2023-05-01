@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import PrimaryButton from "../PrimaryButton";
+import PrimaryButton from "../../PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { NewWebsiteSelections } from "../../Types/Global";
-import { SecondaryButton } from "../SecondaryButton";
+import { SecondaryButton } from "../../SecondaryButton";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 
 const PlanSelector = ({
-  selections,
-  setSelections,
   setActiveStageId,
 }: {
-  selections: NewWebsiteSelections;
-  setSelections: React.Dispatch<React.SetStateAction<NewWebsiteSelections>>;
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [selected, setSelected] = useState<null | string>(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const { selections, setSelections } = useNewWebsiteSelections();
 
   useEffect(() => {
     if (selected) {
@@ -36,6 +34,7 @@ const PlanSelector = ({
       });
       setSelected("Premium");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
