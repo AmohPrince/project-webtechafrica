@@ -23,7 +23,6 @@ import {
   signOut as signOutFnFromFirebase,
 } from "firebase/auth";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
-import { UserData } from "../Types/Global";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -309,7 +308,7 @@ export const getSignUpErrorMessage = (error: any): string => {
   }
 };
 
-export const testUser: UserData = {
+export const testUser = {
   plan: "Basic",
   paymentMethodSelected: false,
   activeWebsites: [

@@ -27,6 +27,7 @@ import { PendingVerificationsPage } from "./Pages/PendingVerificationsPage";
 import Settings from "./Pages/Dashboard/Settings";
 import { AuthContextProvider } from "./Hooks/UseAuth";
 import { SelectionsProvider } from "./Hooks/useNewWebsiteSelections";
+import { ForgotPassword } from "./Pages/ForgotPassword";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -55,6 +56,10 @@ root.render(
                 <Route path="*" element={<FourZeroFour />} />
               </Route>
               <Route path="/sign-in" element={<SignIn />} />
+              <Route
+                path="/sign-in/forgot-password"
+                element={<ForgotPassword />}
+              />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/dashboard" element={<DashBoard />}>
                 <Route

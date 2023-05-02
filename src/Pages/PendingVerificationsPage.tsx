@@ -24,7 +24,7 @@ export const PendingVerificationsPage = () => {
             key={website.id}
           >
             <p className="font-semibold">{extractHostname(website.url)}</p>
-            <p>decision deadline: {website.decisionDeadline}</p>
+            <p>decision deadline: {formatDate(website.decisionDeadline)}</p>
           </div>
         ))
       ) : (
@@ -32,4 +32,22 @@ export const PendingVerificationsPage = () => {
       )}
     </div>
   );
+};
+
+const formatDate = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const dayOfMonth = date.getDate();
+  const monthName = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    date
+  );
+  const year = date.getFullYear();
+
+  return `${dayOfMonth}${getOrdinalSuffix(dayOfMonth)} ${monthName} ${year}`;
+};
+
+const getOrdinalSuffix = (n: number): string => {
+  const suffixes = ["th", "st", "nd", "rd"];
+  const lastDigit = n % 10;
+  const suffix = suffixes[lastDigit] || suffixes[0];
+  return suffix;
 };

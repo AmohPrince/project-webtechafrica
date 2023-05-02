@@ -53,7 +53,8 @@ export type DevWebsite = Website & {
 };
 
 export type PendingVerificationWebsite = Website & {
-  decisionDeadline: string; //The date by which a decision has to be made.
+  decisionDeadline: number; //The date by which a decision has to be made.
+  selections: NewWebsiteSelections;
 };
 
 export type Card = {

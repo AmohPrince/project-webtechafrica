@@ -109,3 +109,16 @@ export const LOCAL_STORAGE_KEYS = {
   LAST_SIGN_IN_DATE: "last-sign-in-date",
   USER_DATA: "user-data",
 };
+
+export const getTimestampForThreeDaysFromNow = (): number => {
+  // Get the current time as a timestamp
+  const currentTimeStamp = new Date().getTime();
+
+  // Calculate the timestamp for three days from now (in milliseconds)
+  const threeDaysInMilliseconds = 3 * 24 * 60 * 60 * 1000;
+  const timestampForThreeDaysFromNow =
+    currentTimeStamp + threeDaysInMilliseconds;
+
+  // Return the timestamp for three days from now
+  return timestampForThreeDaysFromNow;
+};

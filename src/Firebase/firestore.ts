@@ -2,8 +2,10 @@ import { UserData } from "../Types/Global";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-//firestore
-export const addNewUserToDB = async (userData: UserData, userId: string) => {
+export const addOrUpdateUserDataInDB = async (
+  userData: UserData | null,
+  userId: string
+) => {
   const usersRef = doc(db, "users", userId);
   await setDoc(usersRef, userData, {
     merge: true,
@@ -20,7 +22,6 @@ export const fetchUserDataFromDB = async (
     if (docSnap.exists()) {
       return docSnap.data() as UserData;
     } else {
-      console.log("User not found in the database");
       throw new Error("User not found in the database");
     }
   } catch (error) {

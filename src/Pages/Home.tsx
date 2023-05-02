@@ -257,14 +257,14 @@ export const Home = () => {
         <p className="text-7xl">“</p>
         <p className="w-3/4 mx-auto">
           I have to say, I was a bit skeptical at first about working with
-          WebVira for my website development needs. But I have to admit, I was
+          WebTech Africa for my website development needs. But I have to admit, I was
           blown away by the entire process. Not only was it incredibly
           cost-effective, but the speed at which my website was built was
-          nothing short of impressive. The team at WebVira was extremely
+          nothing short of impressive. The team at WebTech Africa was extremely
           professional and dedicated to ensuring that my website was exactly
           what I wanted. They were also very responsive to my questions and made
           sure that I was completely satisfied with the final product. I would
-          highly recommend WebVira to anyone looking for a reliable, efficient
+          highly recommend WebTech Africa to anyone looking for a reliable, efficient
           and cost-effective web development solution
         </p>
         <img

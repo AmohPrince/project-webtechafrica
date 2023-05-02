@@ -107,10 +107,9 @@ const DashBoard = () => {
                   isShowingLogOutButton && "rotate-180"
                 } transition-all`}
               />
-              {/* TODO find a way of styling this Log out button */}
               {isShowingLogOutButton && (
                 <div
-                  className="bg-white rounded absolute right-0 left-0 mt-2 top-full text-red-600 font-semibold flex items-center justify-center gap-x-2 px-3 py-2 text-sm border-red-500"
+                  className="bg-red-500 rounded absolute right-0 left-0 top-full text-white font-semibold flex items-center justify-center gap-x-2 px-3 py-2 text-sm border-red-500"
                   onClick={handleLogOut}
                 >
                   <p>Log out</p>

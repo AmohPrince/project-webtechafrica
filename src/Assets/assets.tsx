@@ -53,8 +53,11 @@ import payPalSm from "./paypalsm.svg";
 import mastercard from "./MasterCard.svg";
 import remote_design from "./remote_design.svg";
 import profile from "./profile.png";
+import forgot_password from "./Forgot password-bro.svg";
+// import forgot_password from "./forgot-password-not-css.svg";
 
 export const assets = {
+  forgot_password,
   remote_design,
   mastercard,
   payPalSm,

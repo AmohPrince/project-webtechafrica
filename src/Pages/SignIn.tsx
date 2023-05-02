@@ -1,4 +1,5 @@
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { UserCredential } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +14,11 @@ import {
   signInWithEmailAndPassword,
   signInWithGoogle,
 } from "../Firebase/firebase";
+import {
+  addOrUpdateUserDataInDB,
+  fetchUserDataFromDB,
+} from "../Firebase/firestore";
+import { useAuth } from "../Hooks/UseAuth";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 
 type Inputs = {
@@ -23,7 +29,7 @@ type Inputs = {
 //Todo learn how to use different identity providers in firebase
 
 const SignIn = () => {
-  // const { setUserCredential } = useAuth();
+  const { setUserData } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -56,34 +62,29 @@ const SignIn = () => {
   };
 
   //sign-in with email and password
-  const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = (
-    userCredentials: Inputs
+  const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = async (
+    inputs: Inputs
   ) => {
     setSigningInWithEmail(true);
-    setTimeout(() => {
-      signInWithEmailAndPassword(
-        userCredentials.email,
-        userCredentials.password
-      )
-        .then((userCredential) => {
-          if (rememberFor30DaysCheckBox.current?.checked) {
-            localStorage.setItem(
-              LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
-              new Date().toISOString()
-            );
-          }
-          setSigningInWithEmail(false);
-          showPopUp("success", userCredential.user.displayName ?? "user");
-        })
-        .catch((err) => {
-          showPopUp("error", getSignInErrorMessage(err));
-          // if (err.code === "auth/wrong-password") {
-          //   const passwordRefStyle = passwordRef.current?.style;
-          //   passwordRefStyle?.setProperty("border", "red");
-          // }
-          setSigningInWithEmail(false);
-        });
-    }, 3000);
+    try {
+      const userCredential: UserCredential = await signInWithEmailAndPassword(
+        inputs.email,
+        inputs.password
+      );
+      try {
+        const userData = await fetchUserDataFromDB(userCredential.user.uid);
+        setUserData(userData);
+      } catch (error) {
+        // If the fetchUserDataFromDB fails it implies the user doesn't exist and now we create one then fetch their data.
+        await addOrUpdateUserDataInDB(null, userCredential.user.uid);
+        const userData = await fetchUserDataFromDB(userCredential.user.uid);
+        setUserData(userData);
+      }
+      showPopUp("success", userCredential.user.displayName ?? "user");
+    } catch (error) {
+      showPopUp("error", getSignInErrorMessage(error));
+    }
+    setSigningInWithEmail(false);
   };
 
   //sign-in with google
@@ -91,26 +92,18 @@ const SignIn = () => {
     setSigningInWithGoogle(true);
     try {
       const userCredential = await signInWithGoogle();
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
-        new Date().toISOString()
-      );
-      //TODO fetch user data then redirect
+      try {
+        const userData = await fetchUserDataFromDB(userCredential.user.uid);
+        setUserData(userData);
+      } catch (error) {
+        // If the fetchUserDataFromDB fails it implies the user doesn't exist and now we create one.
+        addOrUpdateUserDataInDB(null, userCredential.user.uid);
+      }
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
       showPopUp("error", getSignInErrorMessage(err));
     }
     setSigningInWithGoogle(false);
-  };
-
-  const handlePasswordReset = async () => {
-    // if (errors.email) {
-    //   setShowForgotPasswordEmailError(true);
-    // } else {
-    //   setShowForgotPasswordEmailError(false);
-    //   await resetPassword(emailRef!.current!.value);
-    // }
-    console.log("resetting password!!");
   };
 
   useEffect(() => {
@@ -175,8 +168,7 @@ const SignIn = () => {
               className="py-3 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
               {...register("email", {
                 required: true,
-                // eslint-disable-next-line no-useless-escape
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
               })}
             />
           </div>
@@ -192,7 +184,6 @@ const SignIn = () => {
               {...register("password", {
                 required: true,
               })}
-              // ref={passwordRef}
             />
           </div>
           <div className="flex items-center mt-5 mb-6">
@@ -204,12 +195,12 @@ const SignIn = () => {
             <p className="text-sm font-medium dark:text-white">
               Remember for 30 days
             </p>
-            <p
+            <Link
+              to="/sign-in/forgot-password"
               className="font-medium text-sm ml-auto dark:text-white cursor-pointer"
-              onClick={handlePasswordReset}
             >
               Forgot password
-            </p>
+            </Link>
           </div>
           <SubmitButton
             disabled={Object.keys(errors).length !== 0}

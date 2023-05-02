@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
@@ -49,6 +49,15 @@ export const AuthContextProvider = ({
   onAuthStateChanged(auth, (user) => {
     setUser(user);
   });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
+        new Date().toISOString()
+      );
+    }
+  }, [user]);
 
   return (
     <authContext.Provider
