@@ -25,7 +25,6 @@ export const fetchUserDataFromDB = async (
       throw new Error("User not found in the database");
     }
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

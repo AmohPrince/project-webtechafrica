@@ -13,17 +13,30 @@ import {
 import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
+import { useLocalStorage } from "../Hooks/UseLocalStorage";
+import { Country, UserData } from "../Types/Global";
+import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
+import { fetchCountries } from "../Util/FetchCountries";
+import { UserCredential } from "firebase/auth";
+import { addOrUpdateUserDataInDB } from "../Firebase/firestore";
+import { useUpdateLogger } from "../Hooks/useUpdateLogger";
 
 type Inputs = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  phoneNumber: string;
+  country: string;
 };
 
 export const SignUp = () => {
   const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
   const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
+  const [countries, setCountries] = useLocalStorage<Country[] | null>(
+    null,
+    LOCAL_STORAGE_KEYS.USER
+  );
 
   const [popUp, setPopUp] = useState<PopUpInfo>({
     showing: false,
@@ -37,76 +50,94 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const redirect = useNavigate();
+  const navigate = useNavigate();
 
   const showPopUp = (type: "success" | "error", text: string) => {
-    setPopUp({
-      showing: true,
-      text: text,
-      type: type,
-    });
+    setCreatingUserWithEmail(false);
+    setCreatingUserWithGoogle(false);
+    setPopUp({ showing: true, text: text, type: type });
 
     setTimeout(() => {
-      setPopUp({
-        showing: false,
-        text: null,
-        type: null,
-      });
       if (type === "success") {
-        redirect("/dashboard");
+        setPopUp({
+          showing: false,
+          text: null,
+          type: null,
+        });
+        navigate("/dashboard");
       }
     }, 3000);
   };
 
   //sign up with email and password
-  const signUpWithEmailAndPassword: SubmitHandler<Inputs> = (data: Inputs) => {
-    setCreatingUserWithEmail(true);
-    createUserWithEmailAndPassword(data.email, data.password, {
-      firstName: data.firstName,
-      lastName: data.lastName,
-    })
-      .then((userCredential) => {
-        setCreatingUserWithEmail(false);
-        showPopUp("success", userCredential.user.displayName ?? "user");
-      })
-      .catch((error) => {
-        setCreatingUserWithEmail(false);
-        showPopUp("error", getSignUpErrorMessage(error));
-      });
+  const signUpWithEmailAndPassword: SubmitHandler<Inputs> = async (
+    data: Inputs
+  ) => {
+    try {
+      setCreatingUserWithEmail(true);
+      const userCredential: UserCredential =
+        await createUserWithEmailAndPassword(data.email, data.password, {
+          firstName: data.firstName,
+          lastName: data.lastName,
+        });
+
+      const newUserData: UserData = {
+        paymentMethodSelected: false,
+        plan: "basic",
+        phoneNumber: data.phoneNumber,
+        country: data.country,
+      };
+
+      await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
+      showPopUp("success", userCredential.user.displayName ?? "user");
+    } catch (error) {
+      const errorMessage = await getSignUpErrorMessage(error);
+      showPopUp("error", errorMessage);
+    }
   };
 
+  //sign up with google
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
       const userCredential = await signInWithGoogle();
+
+      const newUserData: UserData = {
+        paymentMethodSelected: false,
+        plan: "basic",
+      };
+
+      await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
-      showPopUp("error", getSignUpErrorMessage(err.message));
+      const errorMessage = await getSignUpErrorMessage(err);
+      showPopUp("error", errorMessage);
     }
-    setCreatingUserWithGoogle(false);
   };
 
   useEffect(() => {
     const getRedirectResult = async () => {
       setCreatingUserWithGoogle(true);
-      await redirectResult()
-        .then((userCredential) => {
-          if (userCredential) {
-            showPopUp("success", userCredential.user.displayName ?? "user");
-          }
-        })
-        .catch((err) => {
-          showPopUp("error", getSignUpErrorMessage(err));
-        });
+      try {
+        const userCredential: UserCredential | null = await redirectResult();
+        if (userCredential) {
+          showPopUp("success", userCredential.user.displayName ?? "user");
+        }
+      } catch (error) {
+        const errorMessage = await getSignUpErrorMessage(error);
+        showPopUp("error", errorMessage);
+      }
       setCreatingUserWithGoogle(false);
     };
     getRedirectResult();
+
+    fetchCountries().then((countries) => setCountries(countries));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useUpdateLogger(countries, "countries");
   return (
     <div className="h-screen flex relative z-0">
-      {popUp.showing && <PopUp popUpInfo={popUp} />}
       <img
         src={
           "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -114,15 +145,17 @@ export const SignUp = () => {
         alt="hand holding with icon"
         className="hidden sm:block h-full object-cover w-1/2"
       />
-      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack">
+      <div className="w-full sm:w-1/2 py-[10%] sm:py-[2%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
-        <p className="font-semibold text-3xl mt-[9%] dark:text-white">
+        {popUp.showing && <PopUp popUpInfo={popUp} />}
+        <p className="font-semibold text-3xl mt-[4%] dark:text-white">
           Create new account
         </p>
         <p className="font-normal text-base text-gray-400">
           Welcome back please enter your details
         </p>
         <form onSubmit={handleSubmit(signUpWithEmailAndPassword)}>
+          {/* lastName and firstName  */}
           <div className="flex gap-x-2">
             <div className="w-1/2">
               <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
@@ -153,6 +186,7 @@ export const SignUp = () => {
               </div>
             </div>
           </div>
+          {/* email */}
           <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
           <div className="relative">
             {errors.email?.type === "required" && (
@@ -167,10 +201,48 @@ export const SignUp = () => {
               className={`py-2 px-4 text-sm border w-full smooth dark:bg-transparent dark:text-white focus:outline-none`}
               {...register("email", {
                 required: true,
-                // eslint-disable-next-line no-useless-escape
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
               })}
             />
+          </div>
+          {/* country and phone number */}
+          <div className="flex gap-x-2">
+            <div className="w-1/2">
+              <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+                Phone Number
+              </p>
+              <div className="relative">
+                {errors.phoneNumber && <ToolTip text="Enter your first name" />}
+                <input
+                  type="tel"
+                  placeholder="Phone number"
+                  className="py-2 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+                  {...register("phoneNumber")}
+                />
+              </div>
+            </div>
+            <div className="w-1/2">
+              <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+                Country
+              </p>
+              <div className="relative">
+                <select
+                  className="text-sm py-2 px-4 border w-full rounded-sm"
+                  {...register("country")}
+                >
+                  {/* {countries &&
+                    countries
+                      .sort((countryA, countryB) =>
+                        countryA.name.common.localeCompare(countryB.name.common)
+                      )
+                      .map((country) => (
+                        <option value={country.name.official}>
+                          {country.name.common} ({country.cca2})
+                        </option>
+                      ))} */}
+                </select>
+              </div>
+            </div>
           </div>
           <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
             Password

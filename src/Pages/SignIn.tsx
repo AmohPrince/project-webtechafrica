@@ -19,14 +19,12 @@ import {
   fetchUserDataFromDB,
 } from "../Firebase/firestore";
 import { useAuth } from "../Hooks/UseAuth";
-import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
+import { UserData } from "../Types/Global";
 
 type Inputs = {
   email: string;
   password: string;
 };
-
-//Todo learn how to use different identity providers in firebase
 
 const SignIn = () => {
   const { setUserData } = useAuth();
@@ -48,6 +46,8 @@ const SignIn = () => {
   });
 
   const showPopUp = (type: "success" | "error", text: string) => {
+    setSigningInWithEmail(false);
+    setSigningInWithGoogle(false);
     setPopUp({ showing: true, text: text, type: type });
     setTimeout(() => {
       if (type === "success") {
@@ -71,18 +71,12 @@ const SignIn = () => {
         inputs.email,
         inputs.password
       );
-      try {
-        const userData = await fetchUserDataFromDB(userCredential.user.uid);
-        setUserData(userData);
-      } catch (error) {
-        // If the fetchUserDataFromDB fails it implies the user doesn't exist and now we create one then fetch their data.
-        await addOrUpdateUserDataInDB(null, userCredential.user.uid);
-        const userData = await fetchUserDataFromDB(userCredential.user.uid);
-        setUserData(userData);
-      }
+      const userData = await fetchUserDataFromDB(userCredential.user.uid);
+      setUserData(userData);
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (error) {
-      showPopUp("error", getSignInErrorMessage(error));
+      const signInErrorMessage = await getSignInErrorMessage(error);
+      showPopUp("error", signInErrorMessage);
     }
     setSigningInWithEmail(false);
   };
@@ -96,38 +90,39 @@ const SignIn = () => {
         const userData = await fetchUserDataFromDB(userCredential.user.uid);
         setUserData(userData);
       } catch (error) {
-        // If the fetchUserDataFromDB fails it implies the user doesn't exist and now we create one.
-        addOrUpdateUserDataInDB(null, userCredential.user.uid);
+        // if this fetchUserDataFromDB fails it implies no user so we create one
+        const newUserData: UserData = {
+          paymentMethodSelected: false,
+          plan: "basic",
+        };
+        await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
       }
       showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (err: any) {
-      showPopUp("error", getSignInErrorMessage(err));
+      const signInErrorMessage = await getSignInErrorMessage(err);
+      showPopUp("error", signInErrorMessage);
     }
-    setSigningInWithGoogle(false);
   };
 
   useEffect(() => {
     const getRedirectResult = async () => {
       setSigningInWithGoogle(true);
-      await redirectResult()
-        .then((userCredential) => {
-          if (userCredential) {
-            // setUserCredential(userCredential);
-            localStorage.setItem(
-              LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
-              new Date().toISOString()
-            );
-            showPopUp("success", userCredential.user.displayName ?? "user");
-          }
-        })
-        .catch((err) => {
-          showPopUp("error", getSignInErrorMessage(err));
-        });
+      try {
+        const userCredential: UserCredential | null = await redirectResult();
+        if (userCredential) {
+          showPopUp("success", userCredential.user.displayName ?? "user");
+        }
+      } catch (error) {
+        const signInErrorMessage = await getSignInErrorMessage(error);
+        showPopUp("error", signInErrorMessage);
+      }
       setSigningInWithGoogle(false);
     };
     getRedirectResult();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //TODO firebase security rules
 
   return (
     <div className="h-screen flex relative">
@@ -138,21 +133,15 @@ const SignIn = () => {
         alt="hand holding with icon"
         className="h-full object-cover hidden sm:block w-1/2"
       />
-      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack">
+      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
-
-        {popUp.showing ? (
-          <PopUp popUpInfo={popUp} />
-        ) : (
-          <>
-            <p className="font-semibold text-3xl mt-[7%] dark:text-white">
-              Welcome back
-            </p>
-            <p className="font-normal text-base text-gray-400">
-              Welcome back please enter your details
-            </p>
-          </>
-        )}
+        {popUp.showing && <PopUp popUpInfo={popUp} />}
+        <p className="font-semibold text-3xl mt-[4%] dark:text-white">
+          Welcome back
+        </p>
+        <p className="font-normal text-base text-gray-400">
+          Welcome back please enter your details
+        </p>
         <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
           <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
           <div className="relative">

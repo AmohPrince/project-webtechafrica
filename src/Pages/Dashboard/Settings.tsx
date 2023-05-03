@@ -11,6 +11,7 @@ import {
   updateUserDisplayName,
   updateUserEmailAddress,
 } from "../../Firebase/firebase";
+import { addOrUpdateUserDataInDB } from "../../Firebase/firestore";
 import { uploadUserProfilePicture } from "../../Firebase/storage";
 import { useAuth } from "../../Hooks/UseAuth";
 import { formatDateFromTimestamp } from "../../Util/Utilities";
@@ -23,7 +24,7 @@ export type Inputs = {
 };
 
 const Settings = () => {
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
   const fileInput = useRef<HTMLInputElement>(null);
   const profilePictureRef = useRef<HTMLImageElement>(null);
   const {
@@ -69,7 +70,13 @@ const Settings = () => {
         inputData.firstName + " " + inputData.lastName
       );
       await updateUserEmailAddress(inputData.email);
-      //TODO learn how to update user phone number
+      await addOrUpdateUserDataInDB(
+        {
+          ...userData!,
+          phoneNumber: inputData.phoneNumber,
+        },
+        user!.uid
+      );
       setIsLoading(false);
     } catch (error) {
       console.error(error);

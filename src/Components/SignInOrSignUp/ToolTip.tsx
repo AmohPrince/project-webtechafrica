@@ -12,7 +12,7 @@ export const ToolTip = ({
 }) => {
   return (
     <div
-      className={`absolute -top-2 py-1 px-2 -translate-y-full text-center rounded-sm text-white text-xs bg-bgSignupPage ${
+      className={`absolute -top-2 py-1 px-2 -translate-y-full text-center rounded-sm text-white text-xs bg-primaryOne ${
         className ? className : "left-1/2 -translate-x-1/2"
       }`}
       style={style}
@@ -20,7 +20,7 @@ export const ToolTip = ({
       <p>{text}</p>
       <FontAwesomeIcon
         icon={faCaretDown}
-        className="absolute -translate-x-1/2"
+        className={`absolute -translate-x-1/2 ${!style && "text-primaryOne"}`}
         style={{
           color: style?.backgroundColor,
         }}

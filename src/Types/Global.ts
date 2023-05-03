@@ -22,6 +22,8 @@ export type UserData = {
   cards?: Card[]; //list of user credit cards.
   pastTransactions?: Transaction[];
   upcomingTransactions?: Transaction[];
+  phoneNumber?: string;
+  country?: string;
 };
 
 export type Transaction = {

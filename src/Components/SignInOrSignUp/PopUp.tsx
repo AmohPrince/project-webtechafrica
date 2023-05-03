@@ -6,6 +6,7 @@ export type PopUpInfo = {
   type: null | "success" | "error";
 };
 
+//TODO Add close button
 export const PopUp = ({ popUpInfo }: { popUpInfo: PopUpInfo }) => {
   return (
     <motion.div

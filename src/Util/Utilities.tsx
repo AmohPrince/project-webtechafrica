@@ -108,6 +108,7 @@ export const LOCAL_STORAGE_KEYS = {
   USER: "user",
   LAST_SIGN_IN_DATE: "last-sign-in-date",
   USER_DATA: "user-data",
+  COUNTRIES: "countries",
 };
 
 export const getTimestampForThreeDaysFromNow = (): number => {
