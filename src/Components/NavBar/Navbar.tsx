@@ -105,7 +105,7 @@ const Navbar = () => {
           setShowingSmallScreenMenu={setShowingMenu}
         />
       </div>
-      {showingMenu && <SmallScreenMenu />}
+      {showingMenu && <SmallScreenMenu setShowingMenu={setShowingMenu} />}
     </nav>
   );
 };
