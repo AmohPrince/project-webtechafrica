@@ -122,10 +122,11 @@ const SignIn = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //TODO firebase security rules
-
   return (
     <div className="h-screen flex relative">
+      {popUp.showing && (
+        <PopUp popUpInfo={popUp} setPopUp={setPopUp} className="w-1/3" />
+      )}
       <img
         src={
           "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -135,7 +136,6 @@ const SignIn = () => {
       />
       <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
-        {popUp.showing && <PopUp popUpInfo={popUp} />}
         <p className="font-semibold text-3xl mt-[4%] dark:text-white">
           Welcome back
         </p>

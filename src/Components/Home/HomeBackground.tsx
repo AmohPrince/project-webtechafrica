@@ -51,7 +51,7 @@ const HomeBackground = () => {
             ry="361.677"
             transform="matrix(0.920144 -0.39158 0.361103 0.932526 831.005 104.64)"
             fill="url(#paint1_linear_1_4514)"
-            fill-opacity="0.44"
+            fillOpacity="0.44"
             style={{ mixBlendMode: "multiply" }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -65,7 +65,7 @@ const HomeBackground = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.6 }}
             fill="url(#paint2_linear_1_4514)"
-            fill-opacity="0.42"
+            fillOpacity="0.42"
             style={{ mixBlendMode: "multiply" }}
           />
         </g>

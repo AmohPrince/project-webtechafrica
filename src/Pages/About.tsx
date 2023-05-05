@@ -11,7 +11,7 @@ const About = () => {
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center mt-[8%]">
-          <h1 className="h2 mb-4">About our company</h1>
+          <h1 className="h3 sm:h2 mb-4">About our company</h1>
           <p className="default-paragraph bg-white">
             At our company, we specialize in providing comprehensive web
             development solutions for businesses of all sizes. From custom

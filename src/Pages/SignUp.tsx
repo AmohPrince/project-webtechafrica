@@ -19,7 +19,6 @@ import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { fetchCountries } from "../Util/FetchCountries";
 import { UserCredential } from "firebase/auth";
 import { addOrUpdateUserDataInDB } from "../Firebase/firestore";
-import { useUpdateLogger } from "../Hooks/useUpdateLogger";
 
 type Inputs = {
   firstName: string;
@@ -135,9 +134,11 @@ export const SignUp = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useUpdateLogger(countries, "countries");
   return (
     <div className="h-screen flex relative z-0">
+      {popUp.showing && (
+        <PopUp popUpInfo={popUp} setPopUp={setPopUp} className="w-1/3" />
+      )}
       <img
         src={
           "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -147,7 +148,6 @@ export const SignUp = () => {
       />
       <div className="w-full sm:w-1/2 py-[10%] sm:py-[2%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
-        {popUp.showing && <PopUp popUpInfo={popUp} />}
         <p className="font-semibold text-3xl mt-[4%] dark:text-white">
           Create new account
         </p>
@@ -230,7 +230,7 @@ export const SignUp = () => {
                   className="text-sm py-2 px-4 border w-full rounded-sm"
                   {...register("country")}
                 >
-                  {/* {countries &&
+                  {Array.isArray(countries) &&
                     countries
                       .sort((countryA, countryB) =>
                         countryA.name.common.localeCompare(countryB.name.common)
@@ -239,7 +239,7 @@ export const SignUp = () => {
                         <option value={country.name.official}>
                           {country.name.common} ({country.cca2})
                         </option>
-                      ))} */}
+                      ))}
                 </select>
               </div>
             </div>

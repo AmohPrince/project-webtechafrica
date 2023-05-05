@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LogoColor } from "../Assets/assets";
-import { useAuth } from "../Hooks/UseAuth";
-import { getBaseUrl } from "../Util/Utilities";
-import HamburgerMenu from "./HamburgerMenu";
-import { Logo } from "./Logo";
+import { LogoColor } from "../../Assets/assets";
+import { useAuth } from "../../Hooks/UseAuth";
+import { getBaseUrl } from "../../Util/Utilities";
+import HamburgerMenu from "../HamburgerMenu";
+import { Logo } from "../Logo";
+import { SmallScreenMenu } from "./SmallScreenMenu";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const basePath = getBaseUrl(pathname);
   const { user } = useAuth();
+  const [showingMenu, setShowingMenu] = useState(false);
 
   return (
-    <section className="flex justify-between items-center fixed right-0 left-0 py-6 px-2 sm:px-0 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent  z-50">
-      <div className="flex">
+    <nav
+      className={`flex justify-between items-center fixed right-0 left-0 py-6 px-2 sm:px-0 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent z-50`}
+    >
+      <div className="flex items-center">
         <Logo
           color={LogoColor.primary}
           className="w-[60px] h-[40px] object-cover"
         />
-        <h3 className="h3">WebTech Africa</h3>
+        <h3 className="h4 sm:h3">WebTech Africa</h3>
       </div>
       <div className="hidden sm:flex text-sm">
         <div
@@ -77,8 +81,8 @@ const Navbar = () => {
         </div>
         {user ? (
           <Link
-            className={`bg-white px-4 rounded-full ml-10 font-semibold flex items-center ${
-              basePath !== "/" && "bg-primaryOne text-white"
+            className={`px-4 rounded-full ml-10 font-semibold flex items-center ${
+              basePath === "/" ? "bg-white" : "bg-primaryOne text-white"
             }`}
             to="/dashboard"
           >
@@ -96,9 +100,13 @@ const Navbar = () => {
         )}
       </div>
       <div className="absolute right-0">
-        <HamburgerMenu location="menu" setShowingSmallScreenMenu={() => {}} />
+        <HamburgerMenu
+          location="menu"
+          setShowingSmallScreenMenu={setShowingMenu}
+        />
       </div>
-    </section>
+      {showingMenu && <SmallScreenMenu />}
+    </nav>
   );
 };
 

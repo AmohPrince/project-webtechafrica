@@ -33,7 +33,7 @@ export const Home = () => {
       >
         <motion.div className="sm:w-[50%]" {...headContainerAnimation}>
           <motion.div {...headTextAnimation}>
-            <h1 className="h1">
+            <h1 className="h2 sm:h1">
               Build your <br /> audience and grow <br /> your brand online
             </h1>
           </motion.div>
@@ -57,7 +57,7 @@ export const Home = () => {
           </div>
         </motion.div>
         <motion.img
-          src={assets.GraphScreenPng}
+          src={assets.GraphScreen}
           alt="graph"
           className="w-3/4 sm:w-[50%] mx-auto mt-10 sm:mt-0 sm:ml-11 object-cover sm:absolute -right-12 -top-12"
           {...fadeAnimation}
@@ -68,17 +68,10 @@ export const Home = () => {
       <section className="mt-[6%] relative items-stretch">
         <div className="w-11/12 sm:w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-xl sm:rounded-[50px]">
           <div className="w-full sm:w-3/5">
-            <div className="flex gap-x-2 items-start">
-              <h3 className="h3">
-                Cheap and powerful websites for your business to <br /> ensure
-                people notice you online
-              </h3>
-              <img
-                src={assets.Dashboard}
-                alt="dashboard"
-                className="w-1/3 sm:hidden"
-              />
-            </div>
+            <h3 className="h3">
+              Cheap and powerful websites for your business to <br /> ensure
+              people notice you online
+            </h3>
             <p className="default-paragraph mt-6 mb-10 text-md">
               We have a team of expert designers and developers who work
               tirelessly to deliver top-notch designs and user experiences that
@@ -147,21 +140,13 @@ export const Home = () => {
                   Create your account <br />& start your work
                 </h3>
               </div>
-              <div className="flex gap-x-2 items-start my-5">
-                <p className="default-paragraph w-[95%]">
-                  Creating user accounts allows us to track your web development
-                  process , payment information of individual users, making it
-                  easier to identify and resolve any issues that may arise. This
-                  also allows us better understand how users interact with their
-                  sites, which can be used to improve the overall user
-                  experience.
-                </p>
-                <img
-                  src={assets.Accounts}
-                  alt="accounts glyph"
-                  className="sm:hidden w-2/5"
-                />
-              </div>
+              <p className="default-paragraph w-[95%] my-5">
+                Creating user accounts allows us to track your web development
+                process , payment information of individual users, making it
+                easier to identify and resolve any issues that may arise. This
+                also allows us better understand how users interact with their
+                sites, which can be used to improve the overall user experience.
+              </p>
               <Link to="/sign-in">
                 <BlackIshButton text="Get started" />
               </Link>
@@ -192,23 +177,15 @@ export const Home = () => {
                   more!
                 </h3>
               </div>
-              <div className="flex items-start gap-x-2 my-5">
-                <p className="default-paragraph">
-                  We strongly encourage clients to reach out to us either by
-                  phone or by filling out the form on our website. This will
-                  allow us to gather all the necessary information to build the
-                  perfect website tailored to your needs and preferences. Your
-                  input is crucial in creating a website that meets your goals
-                  and exceeds your expectations. So please don't hesitate to
-                  contact us, we are here to help and guide you through the
-                  process.
-                </p>
-                <img
-                  src={assets.BlueCard}
-                  alt="account"
-                  className="sm:hidden w-2/5"
-                />
-              </div>
+              <p className="default-paragraph my-5">
+                We strongly encourage clients to reach out to us either by phone
+                or by filling out the form on our website. This will allow us to
+                gather all the necessary information to build the perfect
+                website tailored to your needs and preferences. Your input is
+                crucial in creating a website that meets your goals and exceeds
+                your expectations. So please don't hesitate to contact us, we
+                are here to help and guide you through the process.
+              </p>
               <BlackIshButton text="Fill in form" />
             </div>
           </div>
@@ -248,7 +225,7 @@ export const Home = () => {
           </div>
         )}
       </section>
-      {/* Testimonial */}
+      {/* Testimonial TODO really fix this stuff to not use absolute positioning */}
       <section className="mt-[10%] bg-primaryOne text-white absolute right-0 left-0 text-center py-[8%] overflow-hidden">
         <p className="text-xs px-6 py-2 w-max mx-auto testimonial-title rounded-full">
           Testimonial
@@ -257,15 +234,15 @@ export const Home = () => {
         <p className="text-7xl">“</p>
         <p className="w-3/4 mx-auto">
           I have to say, I was a bit skeptical at first about working with
-          WebTech Africa for my website development needs. But I have to admit, I was
-          blown away by the entire process. Not only was it incredibly
+          WebTech Africa for my website development needs. But I have to admit,
+          I was blown away by the entire process. Not only was it incredibly
           cost-effective, but the speed at which my website was built was
           nothing short of impressive. The team at WebTech Africa was extremely
           professional and dedicated to ensuring that my website was exactly
           what I wanted. They were also very responsive to my questions and made
           sure that I was completely satisfied with the final product. I would
-          highly recommend WebTech Africa to anyone looking for a reliable, efficient
-          and cost-effective web development solution
+          highly recommend WebTech Africa to anyone looking for a reliable,
+          efficient and cost-effective web development solution
         </p>
         <img
           src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

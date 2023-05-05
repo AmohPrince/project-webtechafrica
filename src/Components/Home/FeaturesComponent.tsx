@@ -6,26 +6,17 @@ import { motion } from "framer-motion";
 
 export const FeaturesComponent = () => {
   return (
-    <motion.section
-      className="mt-[12%]"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-    >
+    <motion.section className="mt-[12%]">
       <GreyButton text="Features" />
       <motion.h1
-        className="h2 text-center my-5"
+        className="h3 sm:h2 text-center my-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
         Powerful features to boost <br /> your productivity
       </motion.h1>
-      <motion.div
-        className="sm:flex justify-between"
-        initial={{ opacity: 0, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, staggerChildren: 0.2 }}
-      >
+      <motion.div className="sm:flex justify-between">
         <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <img
             src={assets.SecurePlatform}
