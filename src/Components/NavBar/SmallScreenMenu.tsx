@@ -16,7 +16,7 @@ export const SmallScreenMenu = ({
 }: {
   setShowingMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const pages = ["Home", "About", "Features", "Pricing", "Blog", "Contact"];
+  const pages = ["home", "about-us", "features", "pricing", "blog", "contact"];
 
   return (
     <motion.div
@@ -37,7 +37,7 @@ export const SmallScreenMenu = ({
           className="playfair"
           onClick={() => setShowingMenu(false)}
         >
-          {page}
+          {page.split("-").map((t) => t.toLowerCase() + " ")}
         </Link>
       ))}
       <div className="flex w-1/3 justify-between items-center mx-auto mt-20 playfair">

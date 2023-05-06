@@ -2,6 +2,13 @@ import React from "react";
 import { assets, LogoColor } from "../Assets/assets";
 import { Link } from "react-router-dom";
 import LogoTab from "./LogoTab";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
@@ -96,43 +103,48 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <div className="flex justify-between mt-4 text-sm">
+      <div className="flex justify-between mt-4 text-sm flex-col sm:flex-row items-center gap-y-4 sm:gap-y-0">
         <p className="text-secondaryFour">
           Copyright © WebTech Africa | Designed by Victorflow - Powered by
           Vercel
         </p>
-        <div className="flex items-center">
-          <a
-            href="fix-me"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-6"
-          >
-            <img src={assets.facebook} alt="facebook" />
+        <div className="flex items-center gap-x-6">
+          {/* TODO twitter account */}
+          <a href="fix-me" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon
+              icon={faFacebook}
+              className="hover:text-primaryOne"
+            />
           </a>
           <a
-            href="fix-me"
+            href="https://www.facebook.com/profile.php?id=100092227747488"
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-6 mt-1"
           >
-            <img src={assets.twitter} alt="facebook" />
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="hover:text-primaryOne"
+            />
           </a>
           <a
             href="https://www.linkedin.com/company/webtech-africa/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-6"
           >
-            <img src={assets.linkedIn} alt="facebook" />
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              className="hover:text-primaryOne"
+            />
           </a>
           <a
             href="https://www.instagram.com/webtechafrica/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-6 mt-1"
           >
-            <img src={assets.instagram} alt="facebook" />
+            <FontAwesomeIcon
+              icon={faInstagram}
+              className="hover:text-primaryOne"
+            />
           </a>
         </div>
       </div>

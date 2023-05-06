@@ -11,7 +11,7 @@ const About = () => {
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center mt-[8%]">
-          <h1 className="h3 sm:h2 mb-4">About our company</h1>
+          <h1 className="h3 sm:h2 mb-8 mt-8 sm:mb-4">About our company</h1>
           <p className="default-paragraph bg-white">
             At our company, we specialize in providing comprehensive web
             development solutions for businesses of all sizes. From custom
@@ -36,8 +36,13 @@ const About = () => {
             />
           </div>
           <div className="flex justify-between">
-            <h3 className="h3 whitespace-nowrap mr-9">What we do</h3>
+            <h3 className="h3 whitespace-nowrap mr-9 hidden sm:block">
+              What we do
+            </h3>
             <div className="text-left">
+              <h3 className="h4 my-3 whitespace-nowrap mr-9 block sm:hidden text-center">
+                What we do
+              </h3>
               <p className="default-paragraph">
                 Our custom website design and development service will create a
                 unique and professional website tailored to your business needs.
@@ -60,26 +65,26 @@ const About = () => {
             </div>
           </div>
         </section>
-        <section className="bg-gray-50 rounded-[40px] py-14 px-12 flex justify-between mt-[10%]">
-          <div>
+        <section className="bg-gray-50 rounded-md sm:rounded-[40px] py-14 px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:sm:w-auto gap-y-5">
+          <div className="w-1/4">
             <p className="text-5xl font-extrabold">
-              100<span className="text-primaryOne">M</span>
+              100<span className="text-primaryOne"> M</span>
             </p>
             <p className="font-semibold text-xl">Client Satisfaction</p>
           </div>
-          <div>
+          <div className="w-1/4">
             <p className="text-5xl font-extrabold">
               24<span className="text-primaryOne"> h</span>
             </p>
             <p className="font-semibold text-xl">Expert Support Team</p>
           </div>
-          <div>
+          <div className="w-1/4">
             <p className="text-5xl font-extrabold">
               72<span className="text-primaryOne"> k+</span>
             </p>
             <p className="font-semibold text-xl">Sales Count</p>
           </div>
-          <div>
+          <div className="w-1/4">
             <p className="text-5xl font-extrabold">
               335<span className="text-primaryOne"> +</span>
             </p>
@@ -109,7 +114,7 @@ const About = () => {
           <img
             src="https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="yellow tie"
-            className="w-2/5 object-cover rounded-2xl"
+            className="w-1/5 sm:w-2/5 object-cover rounded-2xl"
           />
         </section>
         <section className="mt-[10%]">
@@ -118,8 +123,8 @@ const About = () => {
             The story and values behind <br />
             our company
           </h2>
-          <div className="flex flex-wrap mt-[1%] gap-8 text-xs">
-            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-[48%]">
+          <div className="flex flex-wrap mt-[1%] gap-4 text-xs">
+            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
               <img src={assets.Bulb} alt="Bulb" className="mr-4 w-16 h-20" />
               <div>
                 <h4 className="h4">Innovation</h4>
@@ -130,7 +135,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-[48%]">
+            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
               <img
                 src={assets.teamwork}
                 alt="Bulb"
@@ -145,7 +150,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-[48%]">
+            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
               <img src={assets.Award} alt="Bulb" className="mr-4 w-16 h-20" />
               <div>
                 <h4 className="h4">Excellence</h4>
@@ -155,7 +160,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-[48%]">
+            <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
               <img src={assets.Paper} alt="Bulb" className="mr-4 w-16 h-20" />
               <div>
                 <h4 className="h4">Responsibility</h4>
