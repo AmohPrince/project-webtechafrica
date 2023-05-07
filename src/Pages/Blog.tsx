@@ -11,7 +11,7 @@ const Blog = () => {
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="mt-[10%] text-center">
-          <h1 className="h1">News & Articles</h1>
+          <h1 className="h2 sm:h1">News & Articles</h1>
           <p className="default-paragraph">
             Stay informed and up-to-date with our collection of informative news
             and informative articles.

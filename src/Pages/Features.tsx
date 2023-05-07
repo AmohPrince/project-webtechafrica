@@ -13,8 +13,8 @@ const Features = () => {
     <motion.div variants={pageTransition}>
       <CircleBackGround />
       <section className="mt-[10%]">
-        <h1 className="h1 text-center">Features</h1>
-        <p className="default-paragraph text-center w-1/2 mx-auto mt-5">
+        <h1 className="h2 sm:h1 text-center">Features</h1>
+        <p className="default-paragraph text-center w-3/4 sm:w-1/2 mx-auto mt-5">
           We offer advanced analytics capabilities to monitor website engagement
           and manage ads effectively, ensuring the growth of your brand.
         </p>
@@ -22,11 +22,11 @@ const Features = () => {
       <FeaturesComponent />
       <section className="border-t mt-[8%] pt-[8%]">
         <GreyButton text="One Platform" />
-        <h2 className="h2 text-center mt-8">
+        <h2 className="h3 sm:h2 text-center mt-8">
           One platform to rule <br /> them all
         </h2>
-        <div className="flex justify-between">
-          <div className="text-center w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
+        <div className="sm:flex justify-between">
+          <div className="text-center sm:w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
             <img
               src={assets.allInOne}
               alt="secure platform"
@@ -41,7 +41,7 @@ const Features = () => {
               Learn More
             </Link>
           </div>
-          <div className="text-center w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
+          <div className="text-center sm:w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
             <img
               src={assets.advancedCharts}
               alt="secure platform"
@@ -56,7 +56,7 @@ const Features = () => {
               Learn More
             </Link>
           </div>
-          <div className="text-center w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
+          <div className="text-center sm:w-1/3 pb-12 pt-16 px-6 rounded-[40px] hover:bg-gray-50 transition-all">
             <img
               src={assets.Magic}
               alt="secure platform"

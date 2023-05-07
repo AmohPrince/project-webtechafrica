@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import Billed from "./Billed";
 
 export const BasicPricing = ({ className }: { className: string }) => {
+  //TODO find out how this looks on small screens
   return (
     <div
       className={`py-12 px-4 sm:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
     >
       <div className="flex justify-between items-center">
-        <h3 className="text-3xl sm:text-4xl font-extrabold">Basic</h3>
+        <h3 className="text-2xl sm:text-4xl font-extrabold">Basic</h3>
         <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
           Save 30%
         </p>

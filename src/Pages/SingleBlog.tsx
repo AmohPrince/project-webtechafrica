@@ -37,9 +37,12 @@ const SingleBlog = () => {
             <span className="text-black">Post : </span>
             {article.date}{" "}
           </p>
-          <div className="flex flex-wrap gap-1">
-            {article.categories.map((category) => (
-              <p className="text-white px-6 py-3 rounded-full text-xs bg-primaryOne">
+          <div className="flex flex-wrap gap-1 justify-end">
+            {article.categories.map((category, i) => (
+              <p
+                className="text-white px-3 sm:px-6 py-3 rounded-full text-xs bg-primaryOne w-full sm:w-auto"
+                key={i}
+              >
                 {category}
               </p>
             ))}

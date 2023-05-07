@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
+import PrimaryButton from "../PrimaryButton";
 import { Wave } from "./Wave";
 
 export const SmallScreenMenu = ({
@@ -20,7 +21,7 @@ export const SmallScreenMenu = ({
 
   return (
     <motion.div
-      className="fixed top-0 right-0 left-0 bottom-0 w-screen h-screen bg-white text-primaryOne font-semibold text-center gap-y-4 pt-[30%] flex flex-col playfair"
+      className="fixed top-0 right-0 left-0 bottom-0 w-screen h-[100dvh] bg-white text-primaryOne font-semibold text-center gap-y-4 pt-[30%] flex flex-col playfair"
       initial={{ y: -1000 }}
       animate={{ y: 0 }}
       exit={{ y: -1000, transition: { delay: 0.5 } }}
@@ -28,18 +29,22 @@ export const SmallScreenMenu = ({
     >
       <FontAwesomeIcon
         icon={faSquareXmark}
-        className="absolute top-10 right-10 h-10 w-10"
+        className="absolute top-5 right-5 h-10 w-10"
         onClick={() => setShowingMenu(false)}
       />
-      {pages.map((page) => (
+      {pages.map((page, i) => (
         <Link
-          to={page === "Home" ? "/" : page}
+          to={page === "home" ? "/" : page}
           className="playfair"
           onClick={() => setShowingMenu(false)}
+          key={i}
         >
           {page.split("-").map((t) => t.toLowerCase() + " ")}
         </Link>
       ))}
+      <Link to="/dashboard" className="mt-10">
+        <PrimaryButton text="Dashboard 🚀" />
+      </Link>
       <div className="flex w-1/3 justify-between items-center mx-auto mt-20 playfair">
         <a href="https://www.facebook.com/profile.php?id=100092227747488">
           <FontAwesomeIcon icon={faFacebook} />

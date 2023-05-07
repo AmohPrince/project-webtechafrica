@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
+  //TODO doesn't look that good on small screens
   return (
     <footer>
       <section className="mt-[10%] border-y py-[9%] flex justify-between">

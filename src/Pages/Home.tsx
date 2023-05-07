@@ -226,7 +226,7 @@ export const Home = () => {
         )}
       </section>
       {/* Testimonial TODO really fix this stuff to not use absolute positioning */}
-      <section className="mt-[10%] bg-primaryOne text-white absolute right-0 left-0 text-center py-[8%] overflow-hidden">
+      <section className="mt-[10%] bg-primaryOne text-white text-center py-[8%] overflow-hidden w-full">
         <p className="text-xs px-6 py-2 w-max mx-auto testimonial-title rounded-full">
           Testimonial
         </p>
@@ -269,7 +269,7 @@ export const Home = () => {
         />
       </section>
       {/* simple and flexible pricing */}
-      <section className="flex flex-col sm:flex-row gap-x-3 mt-[170%] sm:mt-[97%] items-start">
+      <section className="flex flex-col sm:flex-row gap-x-3 items-start mt-[10%]">
         <div className="w-full sm:w-1/3 text-left mb-5">
           <GreyButton text="Pricing" className="ml-auto sm:ml-0 mr-auto" />
           <h3 className="h3 mt-7 mb-6">

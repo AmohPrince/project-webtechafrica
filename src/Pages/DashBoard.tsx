@@ -9,8 +9,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import DashBoardSideBar from "../Components/DashBoardSideBar";
-import DashBoardTitle from "../Components/DashBoardTitle";
+import DashBoardSideBar from "../Components/Dashboard/DashBoardSideBar";
+import DashBoardTitle from "../Components/Dashboard/DashBoardTitle";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { signOut } from "../Firebase/firebase";
 import { useAuth } from "../Hooks/UseAuth";

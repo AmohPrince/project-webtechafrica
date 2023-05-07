@@ -21,23 +21,27 @@ const Contact = () => {
         className="absolute right-0 z-0 w-1/3"
       />
       <div className="mt-[10%] relative z-10">
-        <h1 className="h1 text-center">Get in touch today!</h1>
-        <div className="flex justify-between mt-10 items-center w-3/4 mx-auto text-sm">
-          <div className="flex rounded-[28px] items-center p-6 w-[49%] shadow-xl border bg-white">
-            <img src={assets.MailLarge} alt="Mail" className="w-12 h-12" />
-            <p className="font-semibold mx-3">Mail Us</p>
-            <p className="text-secondaryFour ml-auto">
-              customercare@webtechafrica.com
-            </p>
+        <h1 className="h2 sm:h1 text-center">Get in touch today!</h1>
+        <div className="flex justify-between mt-10 items-stretch sm:items-center w-11/12 sm:w-3/4 mx-auto text-sm gap-x-4">
+          <div className="flex rounded-[28px] justify-between items-center p-4 sm:p-6 w-1/2 shadow-xl border bg-white">
+            <img src={assets.MailLarge} alt="Mail" className="w-12 h-12 mr-2" />
+            <div className="sm:flex">
+              <p className="font-semibold sm:mr-2">Mail Us</p>
+              <p className="text-secondaryFour ml-auto">
+                customercare@webtechafrica.com
+              </p>
+            </div>
           </div>
-          <div className="flex rounded-[28px] items-center p-6 bg-white w-[49%] shadow-xl border">
-            <img src={assets.Phone} alt="Mail" className="w-12 h-12" />
-            <p className="font-semibold ml-3">Call Us</p>
-            <p className="text-secondaryFour ml-auto">+254 7194 280 19</p>
+          <div className="flex rounded-[28px] items-center justify-between p-4 sm:p-6 bg-white w-1/2 shadow-xl border">
+            <img src={assets.Phone} alt="Mail" className="w-12 h-12 mr-2" />
+            <div className="sm:flex">
+              <p className="font-semibold mr-2">Call Us</p>
+              <p className="text-secondaryFour ml-auto">+254 7194 280 19</p>
+            </div>
           </div>
         </div>
         <form
-          className="rounded-3xl bg-white px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
+          className="rounded-3xl bg-white px-10 sm:px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
           onSubmit={handleFormSubmit}
         >
           <div className="w-[48%]">
@@ -92,11 +96,11 @@ const Contact = () => {
           </button>
         </form>
         <section className="mt-[10%]">
-          <h3 className="h3 w-3/4 text-center mx-auto">
+          <h3 className="h3 sm:w-3/4 text-center mx-auto">
             We help small businesses with big hearts find clients they didn't
             even know they had.
           </h3>
-          <div className="w-1/4 flex flex-col items-center border rounded-3xl py-9 mx-auto mt-10 shadow-xl">
+          <div className="w-1/2 sm:w-1/4 flex flex-col items-center border rounded-3xl py-9 mx-auto mt-10 shadow-xl">
             <Location color="#FAD5E9" />
             <h4 className="font-bold h4 text-base mt-3">Nairobi</h4>
             <p className="default-paragraph text-center text-sm">
@@ -112,7 +116,7 @@ const Contact = () => {
           <h3 className="h3 text-white text-center mb-10">
             Frequently Asked Questions
           </h3>
-          <div className="w-1/2 mx-auto">
+          <div className="w-2/3 sm:w-1/2 mx-auto">
             {Faqs.map((faq, i) => (
               <Faq answer={faq.answer} question={faq.Question} key={i} />
             ))}

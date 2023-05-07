@@ -14,9 +14,11 @@ import { Link, useLocation } from "react-router-dom";
 const DashboardOption = ({
   name,
   className,
+  onClick,
 }: {
   name: string;
   className?: string;
+  onClick: () => void;
 }) => {
   const { pathname } = useLocation();
   const lastPathNameSegment = getLastPathSegment(pathname);
@@ -27,6 +29,7 @@ const DashboardOption = ({
         lastPathNameSegment === name && "bg-primaryOne rounded-l-lg"
       } transition-all cursor-pointer ${className}`}
       to={name}
+      onClick={onClick}
     >
       <DashboardOptionLogo
         isActive={lastPathNameSegment === name}

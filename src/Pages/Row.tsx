@@ -11,7 +11,7 @@ const Row = ({
   advanced?: boolean;
 }) => {
   return (
-    <div className="bg-white flex justify-between text-secondaryFour py-5 px-14 text-sm">
+    <div className="bg-white flex justify-between text-secondaryFour py-5 px-7 sm:px-14 text-sm">
       <p className="w-1/3">{text}</p>
       {basic ? (
         <div className="w-1/4">
