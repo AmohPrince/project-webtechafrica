@@ -1,7 +1,7 @@
 import { faCcPaypal, faCcVisa } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../Assets/assets";
 import { AdvancedPricing } from "../Components/AdvancedPricing";
@@ -28,7 +28,7 @@ export const Home = () => {
       <HomeBackground />
       {/* Build your audience and grow your brand online */}
       <motion.section
-        className="flex flex-col sm:flex-row mt-[14%] justify-between relative"
+        className="flex flex-col sm:flex-row mt-[14%] justify-between item-start relative mx-[5%] sm:mx-[12%]"
         {...slideAnimation("left")}
       >
         <motion.div className="sm:w-[50%]" {...headContainerAnimation}>
@@ -65,7 +65,7 @@ export const Home = () => {
       </motion.section>
       {/* features  */}
       <FeaturesComponent />
-      <section className="mt-[6%] relative items-stretch">
+      <section className="mt-[6%] relative items-stretch mx-[5%] sm:mx-[12%]">
         <div className="w-11/12 sm:w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-xl sm:rounded-[50px]">
           <div className="w-full sm:w-3/5">
             <h3 className="h3">
@@ -98,7 +98,7 @@ export const Home = () => {
         <div className="bg-primaryOne h-full w-1/4 absolute top-0 right-0 rounded-l-[50px] translate-x-full z-0" />
       </section>
       {/* Work smarter, work faster.. */}
-      <section className="text-center mt-[10%]">
+      <section className="text-center mt-[10%] px-[5%] sm:px-[12%]">
         <GreyButton text="How we work" />
         <h2 className="h2 mt-8 mb-12">Work smarter, work faster..</h2>
         <div className="flex justify-between gap-x-2">
@@ -225,8 +225,8 @@ export const Home = () => {
           </div>
         )}
       </section>
-      {/* Testimonial TODO really fix this stuff to not use absolute positioning */}
-      <section className="mt-[10%] bg-primaryOne text-white text-center py-[8%] overflow-hidden w-full">
+      {/* Testimonial */}
+      <section className="mt-[10%] bg-primaryOne text-white text-center py-[8%] overflow-hidden relative">
         <p className="text-xs px-6 py-2 w-max mx-auto testimonial-title rounded-full">
           Testimonial
         </p>
@@ -269,7 +269,7 @@ export const Home = () => {
         />
       </section>
       {/* simple and flexible pricing */}
-      <section className="flex flex-col sm:flex-row gap-x-3 items-start mt-[10%]">
+      <section className="flex flex-col sm:flex-row gap-x-3 items-start mt-[10%] px-[5%] sm:px-[12%]">
         <div className="w-full sm:w-1/3 text-left mb-5">
           <GreyButton text="Pricing" className="ml-auto sm:ml-0 mr-auto" />
           <h3 className="h3 mt-7 mb-6">
@@ -300,7 +300,7 @@ export const Home = () => {
       {/* free trial */}
       <FreeTrial />
       {/* blogs */}
-      <section className="mt-[10%]">
+      <section className="mt-[10%] px-[5%] sm:px-[12%]">
         <GreyButton text="Blog" />
         <h3 className="h3 text-center sm:text-left my-5 sm:my-0">
           Most popular articles

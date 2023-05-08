@@ -3,7 +3,7 @@ import { assets } from "../../Assets/assets";
 
 const FreeTrial = () => {
   return (
-    <section className="py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl">
+    <section className="py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl mx-[5%] sm:mx-[12%]">
       <div className="w-full sm:w-1/2">
         <h2 className="h2">
           Start your free trial <br />

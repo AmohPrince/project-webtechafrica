@@ -11,9 +11,10 @@ const Contact = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(e.target.value);
+    //TODO submit to my email
   };
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div variants={pageTransition} className="px-[5%] sm:px-[12%]">
       <CircleBackGround />
       <img
         src={assets.contactBlob}

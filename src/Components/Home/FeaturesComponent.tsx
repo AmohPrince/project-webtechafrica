@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export const FeaturesComponent = () => {
   return (
-    <motion.section className="mt-[12%]">
+    <motion.section className="mt-[12%] px-[5%] sm:px-[12%]">
       <GreyButton text="Features" />
       <motion.h1
         className="h3 sm:h2 text-center my-5"

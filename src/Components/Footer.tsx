@@ -13,7 +13,7 @@ import {
 const Footer = () => {
   //TODO doesn't look that good on small screens
   return (
-    <footer>
+    <footer className="px-[5%] sm:px-[12%]">
       <section className="mt-[10%] border-y py-[9%] flex justify-between">
         <div className="w-1/3">
           <LogoTab logoColor={LogoColor.primary} />

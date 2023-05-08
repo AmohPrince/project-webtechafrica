@@ -7,7 +7,7 @@ import { pageTransition } from "../FramerMotion/PageTransitions";
 
 const About = () => {
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div variants={pageTransition} className="px-[5%] sm:px-[12%]">
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center mt-[8%]">
@@ -65,7 +65,7 @@ const About = () => {
             </div>
           </div>
         </section>
-        <section className="bg-gray-50 rounded-md sm:rounded-[40px] py-14 px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:sm:w-auto gap-y-5">
+        <section className="bg-gray-50 rounded-md sm:rounded-[40px] py-7 sm:py-14 px-6 sm:px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:sm:w-auto gap-y-5">
           <div className="w-1/4">
             <p className="text-5xl font-extrabold">
               100<span className="text-primaryOne"> M</span>

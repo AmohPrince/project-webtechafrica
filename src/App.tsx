@@ -6,7 +6,7 @@ import Navbar from "./Components/NavBar/Navbar";
 
 function App() {
   return (
-    <div className="px-[5%] sm:px-[12%] relative py-14 w-screen overflow-x-hidden">
+    <div className="relative py-14 w-screen overflow-x-hidden">
       <AnimatePresence>
         <Navbar />
         <Outlet />

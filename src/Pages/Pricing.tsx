@@ -11,7 +11,7 @@ import Row from "./Row";
 
 const Pricing = () => {
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div variants={pageTransition} className="px-[5%] sm:px-[12%]">
       <CircleBackGround />
       <section className="mt-[8%]">
         <h1 className="h2 sm:h1 text-center">Pricing</h1>
@@ -23,9 +23,9 @@ const Pricing = () => {
           best plan that will meet their budget and deliver optimal results.
         </p>
       </section>
-      <div className="mt-10 flex justify-between sm:w-2/3 mx-auto gap-x-4">
-        <BasicPricing className="w-1/2" />
-        <AdvancedPricing className="w-1/2" />
+      <div className="mt-10 sm:flex justify-between sm:w-2/3 mx-auto gap-x-4">
+        <BasicPricing className="sm:w-1/2 mb-7" />
+        <AdvancedPricing className="sm:w-1/2" />
       </div>
       <section className="mt-[8%]">
         <h4 className="h4 mb-12 text-center">Compare pricing packages</h4>

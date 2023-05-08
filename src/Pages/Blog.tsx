@@ -7,7 +7,7 @@ import blogs from "../Json/Blogs.json";
 
 const Blog = () => {
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div variants={pageTransition} className="px-[5%] sm:px-[12%]">
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="mt-[10%] text-center">

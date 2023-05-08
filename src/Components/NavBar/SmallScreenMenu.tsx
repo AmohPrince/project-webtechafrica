@@ -21,7 +21,7 @@ export const SmallScreenMenu = ({
 
   return (
     <motion.div
-      className="fixed top-0 right-0 left-0 bottom-0 w-screen h-[100dvh] bg-white text-primaryOne font-semibold text-center gap-y-4 pt-[30%] flex flex-col playfair"
+      className="fixed top-0 right-0 left-0 bottom-0 w-screen h-[100dvh] bg-white text-primaryOne font-semibold text-center gap-y-4 pt-[30%] flex flex-col playfair small-screen-menu"
       initial={{ y: -1000 }}
       animate={{ y: 0 }}
       exit={{ y: -1000, transition: { delay: 0.5 } }}

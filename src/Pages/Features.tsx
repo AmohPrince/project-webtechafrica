@@ -10,7 +10,7 @@ import { pageTransition } from "../FramerMotion/PageTransitions";
 
 const Features = () => {
   return (
-    <motion.div variants={pageTransition}>
+    <motion.div variants={pageTransition} className="px-[5%] sm:px-[12%]">
       <CircleBackGround />
       <section className="mt-[10%]">
         <h1 className="h2 sm:h1 text-center">Features</h1>
