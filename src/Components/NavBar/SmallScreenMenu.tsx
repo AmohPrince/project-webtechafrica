@@ -29,14 +29,21 @@ export const SmallScreenMenu = ({
     >
       <FontAwesomeIcon
         icon={faSquareXmark}
-        className="absolute top-5 right-5 h-10 w-10"
+        className="absolute top-4 right-4 h-10 w-10"
         onClick={() => setShowingMenu(false)}
       />
       {pages.map((page, i) => (
         <Link
           to={page === "home" ? "/" : page}
           className="playfair"
-          onClick={() => setShowingMenu(false)}
+          onClick={() => {
+            setShowingMenu(false);
+            window.scroll({
+              behavior: "smooth",
+              left: 0,
+              top: 0,
+            });
+          }}
           key={i}
         >
           {page.split("-").map((t) => t.toLowerCase() + " ")}

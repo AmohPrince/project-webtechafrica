@@ -14,8 +14,8 @@ const Footer = () => {
   //TODO doesn't look that good on small screens
   return (
     <footer className="px-[5%] sm:px-[12%]">
-      <section className="mt-[10%] border-y py-[9%] flex justify-between">
-        <div className="w-1/3">
+      <section className="mt-[10%] border-y py-[9%] flex-col-reverse sm:flex-row flex justify-between">
+        <div className="sm:w-1/3 mt-5 sm:mt-0">
           <LogoTab logoColor={LogoColor.primary} />
           <p className="default-paragraph mt-6 my-9">
             Get your website or web application on the cheap today with Africa's
@@ -45,62 +45,64 @@ const Footer = () => {
             <p className="text-secondaryFour">+254 7194 280 19</p>{" "}
           </div>
         </div>
-        <div className="w-1/4">
-          <h4 className="h4 border-b pb-8 w-full mb-3">Pages</h4>
-          <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
-            <Link
-              to="/"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about-us"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              About
-            </Link>
-            <Link
-              to="/features"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Features
-            </Link>
-            <Link
-              to="/pricing"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Pricing
-            </Link>
-            <Link
-              to="/blog"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Blog
-            </Link>
+        <div className="flex sm:w-1/2 gap-x-4">
+          <div className="w-1/2">
+            <h4 className="h4 border-b pb-8 w-full mb-3">Pages</h4>
+            <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
+              <Link
+                to="/"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Home
+              </Link>
+              <Link
+                to="/about-us"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                About
+              </Link>
+              <Link
+                to="/features"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Features
+              </Link>
+              <Link
+                to="/pricing"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/blog"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Blog
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="w-1/4">
-          <h4 className="h4 border-b pb-8 w-full mb-3">Utility Pages</h4>
-          <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
-            <Link
-              to="/blog/learn"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Learn
-            </Link>
-            <Link
-              to="/contact"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              Contact us
-            </Link>
-            <Link
-              to="/contact#faqs"
-              className="hover:text-primaryOne transition-all hover:font-semibold"
-            >
-              FAQS
-            </Link>
+          <div className="w-1/2">
+            <h4 className="h4 border-b pb-8 w-full mb-3">Utility Pages</h4>
+            <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
+              <Link
+                to="/blog/learn"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Learn
+              </Link>
+              <Link
+                to="/contact"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                Contact us
+              </Link>
+              <Link
+                to="/contact#faqs"
+                className="hover:text-primaryOne transition-all hover:font-semibold"
+              >
+                FAQS
+              </Link>
+            </div>
           </div>
         </div>
       </section>

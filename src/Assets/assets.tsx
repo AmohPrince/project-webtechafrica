@@ -43,7 +43,6 @@ import allInOne from "./AllInOne.svg";
 import advancedCharts from "./AdvancedCharts.svg";
 import womanWritingCode from "./womanwritingcode.svg";
 import manSlidingImages from "./manslidingimages.svg";
-import contactBlob from "./ContactBlob.svg";
 import MailLarge from "./MailLarge.svg";
 import google from "./Google.svg";
 import GraphScreenPng from "./GraphScreenPNG.png";
@@ -66,7 +65,6 @@ export const assets = {
   GraphScreenPng,
   google,
   MailLarge,
-  contactBlob,
   manSlidingImages,
   womanWritingCode,
   advancedCharts,

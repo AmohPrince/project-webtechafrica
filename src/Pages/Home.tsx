@@ -130,13 +130,13 @@ export const Home = () => {
         {activeButton === 1 && (
           <div className="px-[4%] pt-[5%] text-left sm:flex items-start">
             <div className="w-full sm:w-3/5">
-              <div className="flex items-center">
+              <div className="flex items-start sm:items-center">
                 <img
                   src={assets.Person}
                   alt="person"
                   className="w-16 h-16 mr-5"
                 />
-                <h3 className="h3">
+                <h3 className="h4 sm:h3">
                   Create your account <br />& start your work
                 </h3>
               </div>
@@ -172,7 +172,7 @@ export const Home = () => {
                   alt="Phone"
                   className="mr-3 w-16 h-16"
                 />
-                <h3 className="h3">
+                <h3 className="h4 sm:h3">
                   Call in or fill out our simple web info form and let us know
                   more!
                 </h3>
@@ -193,13 +193,15 @@ export const Home = () => {
         {activeButton === 3 && (
           <div className="px-[4%] pt-[5%] text-left flex items-start justify-between">
             <div className="sm:w-1/2">
-              <div className="flex items-center">
+              <div className="flex items-start sm:items-center">
                 <img
                   src={assets.Clock}
                   alt="Phone"
                   className="mr-3 w-16 h-16"
                 />
-                <h3 className="h3">Sit back and watch the magic happen</h3>
+                <h3 className="h4 sm:h3">
+                  Sit back and watch the magic happen
+                </h3>
               </div>
               <div className="flex my-5 gap-x-2">
                 <p className="default-paragraph ">
@@ -292,9 +294,9 @@ export const Home = () => {
             />
           </div>
         </div>
-        <div className="flex justify-between gap-x-2">
-          <BasicPricing className="w-1/2" />
-          <AdvancedPricing className="w-1/2" />
+        <div className="sm:flex justify-between gap-x-2 w-full">
+          <BasicPricing className="sm:w-1/2 mb-5 sm:mb-0" />
+          <AdvancedPricing className="sm:w-1/2" />
         </div>
       </section>
       {/* free trial */}

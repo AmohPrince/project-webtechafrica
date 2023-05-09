@@ -15,8 +15,8 @@ const Faq = ({ question, answer }: { question: string; answer: string }) => {
       onClick={() => setShowAnswer((prev) => !prev)}
     >
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg">{question}</p>
-        <div className="w-9 h-9 rounded-full bg-primaryOne"></div>
+        <p className="font-semibold text-lg mr-2">{question}</p>
+        <div className="w-5 sm:w-9 h-5 sm:h-9 rounded-full bg-primaryOne"></div>
       </div>
       {showAnswer && (
         <motion.p

@@ -67,25 +67,25 @@ const About = () => {
         </section>
         <section className="bg-gray-50 rounded-md sm:rounded-[40px] py-7 sm:py-14 px-6 sm:px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:sm:w-auto gap-y-5">
           <div className="w-1/4">
-            <p className="text-5xl font-extrabold">
+            <p className="text-2xl sm:text-5xl font-extrabold">
               100<span className="text-primaryOne"> M</span>
             </p>
             <p className="font-semibold text-xl">Client Satisfaction</p>
           </div>
           <div className="w-1/4">
-            <p className="text-5xl font-extrabold">
+            <p className="text-2xl sm:text-5xl font-extrabold">
               24<span className="text-primaryOne"> h</span>
             </p>
             <p className="font-semibold text-xl">Expert Support Team</p>
           </div>
           <div className="w-1/4">
-            <p className="text-5xl font-extrabold">
+            <p className="text-2xl sm:text-5xl font-extrabold">
               72<span className="text-primaryOne"> k+</span>
             </p>
             <p className="font-semibold text-xl">Sales Count</p>
           </div>
           <div className="w-1/4">
-            <p className="text-5xl font-extrabold">
+            <p className="text-2xl sm:text-5xl font-extrabold">
               335<span className="text-primaryOne"> +</span>
             </p>
             <p className="font-semibold text-xl">Client Worldwide</p>
