@@ -10,7 +10,6 @@ const PayPalInput = () => {
     fetchCountries().then((res) => setCountries(res));
   }, []);
 
-  // todo well fix payments
   return (
     <div className="px-5">
       <p className="mt-2 text-sm font-semibold">Select Country</p>

@@ -1,72 +1,26 @@
-import React, { useState } from "react";
-import { uid } from "uid";
-import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
-import { useAuth } from "../../../Hooks/UseAuth";
+import React from "react";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
-import { UserData } from "../../../Types/Global";
 import { SecondaryButton } from "../../SecondaryButton";
 import { ThemeBox } from "../../ThemeBox";
-import Confirmation from "../../Confirmation";
-import { getTimestampForThreeDaysFromNow } from "../../../Util/Utilities";
 
 const NewWebsiteReview = ({
-  showConfirmationModal,
+  setActiveStageId,
 }: {
-  showConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  //contexts
   const { selections } = useNewWebsiteSelections();
-  const { user, userData } = useAuth();
-
-  //state variables
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errorOccurred, setErrorOccurred] = useState(false);
-
-  const completeWebsiteBuildingProcess = async () => {
-    setIsLoading(true);
-    const randomId = uid(10);
-
-    const updatedUserData: UserData = {
-      ...userData!,
-      pendingVerificationWebsites: [
-        ...(userData!.pendingVerificationWebsites
-          ? userData!.pendingVerificationWebsites
-          : []),
-        {
-          decisionDeadline: getTimestampForThreeDaysFromNow(),
-          hasShop: false,
-          id: randomId,
-          url: selections.domainName!,
-          shopUrl: undefined,
-          selections: selections,
-        },
-      ],
-    };
-
-    try {
-      await addOrUpdateUserDataInDB(updatedUserData, user!.uid);
-      showConfirmationModal(true);
-    } catch (error) {
-      setErrorOccurred(true);
-    }
-    setIsLoading(false);
-  };
 
   return (
     <div className="bg-white p-6">
-      {errorOccurred && (
-        <Confirmation text="An error occurred! But don`t worry we have stored everything for you so that you dont have to make your selections again." />
-      )}
       <div className="flex items-center justify-center">
         <SecondaryButton
-          text="Complete 🚀"
+          text="Subscribe 🚀"
           style={{
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
           }}
           className="outline-none hover:scale-100 transition-all ml-auto"
-          onClick={() => completeWebsiteBuildingProcess()}
-          isLoading={isLoading}
+          onClick={() => setActiveStageId(7)}
         />
       </div>
       <p className="font-semibold mt-5 mb-2">Theme</p>

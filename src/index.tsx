@@ -28,6 +28,7 @@ import Settings from "./Pages/Dashboard/Settings";
 import { AuthContextProvider } from "./Hooks/UseAuth";
 import { SelectionsProvider } from "./Hooks/useNewWebsiteSelections";
 import { ForgotPassword } from "./Pages/ForgotPassword";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -35,51 +36,58 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AnimatePresence>
-      <BrowserRouter>
-        <AuthContextProvider>
-          <SelectionsProvider>
-            <Routes>
-              <Route path="/" element={<App />}>
-                <Route element={<Home />} index />
-                <Route element={<About />} path="about-us" />
-                <Route element={<Features />} path="features" />
-                <Route element={<Pricing />} path="pricing" />
-                <Route element={<BasicPricingPage />} path="pricing/basic" />
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
+      }}
+    >
+      <AnimatePresence>
+        <BrowserRouter>
+          <AuthContextProvider>
+            <SelectionsProvider>
+              <Routes>
+                <Route path="/" element={<App />}>
+                  <Route element={<Home />} index />
+                  <Route element={<About />} path="about-us" />
+                  <Route element={<Features />} path="features" />
+                  <Route element={<Pricing />} path="pricing" />
+                  <Route element={<BasicPricingPage />} path="pricing/basic" />
+                  <Route
+                    element={<AdvancedPricingPage />}
+                    path="pricing/advanced"
+                  />
+                  <Route element={<Blog />} path="blog" />
+                  <Route element={<SingleBlog />} path="blog/:title" />
+                  <Route element={<Contact />} path="contact" />
+                  <Route path="*" element={<FourZeroFour />} />
+                </Route>
+                <Route path="/sign-in" element={<SignIn />} />
                 <Route
-                  element={<AdvancedPricingPage />}
-                  path="pricing/advanced"
+                  path="/sign-in/forgot-password"
+                  element={<ForgotPassword />}
                 />
-                <Route element={<Blog />} path="blog" />
-                <Route element={<SingleBlog />} path="blog/:title" />
-                <Route element={<Contact />} path="contact" />
-                <Route path="*" element={<FourZeroFour />} />
-              </Route>
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route
-                path="/sign-in/forgot-password"
-                element={<ForgotPassword />}
-              />
-              <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/dashboard" element={<DashBoard />}>
-                <Route
-                  element={<ActiveWebsitesPage />}
-                  path="active-websites"
-                />
-                <Route element={<DevWebsitesPage />} path="dev-websites" />
-                <Route element={<Payments />} path="payments" />
-                <Route element={<WebsiteBuilderForm />} path="new-website" />
-                <Route
-                  element={<PendingVerificationsPage />}
-                  path="pending-verification"
-                />
-                <Route element={<Settings />} path="settings" />
-              </Route>
-            </Routes>
-          </SelectionsProvider>
-        </AuthContextProvider>
-      </BrowserRouter>
-    </AnimatePresence>
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/dashboard" element={<DashBoard />}>
+                  <Route
+                    element={<ActiveWebsitesPage />}
+                    path="active-websites"
+                  />
+                  <Route element={<DevWebsitesPage />} path="dev-websites" />
+                  <Route element={<Payments />} path="payments" />
+                  <Route element={<WebsiteBuilderForm />} path="new-website" />
+                  <Route
+                    element={<PendingVerificationsPage />}
+                    path="pending-verification"
+                  />
+                  <Route element={<Settings />} path="settings" />
+                </Route>
+              </Routes>
+            </SelectionsProvider>
+          </AuthContextProvider>
+        </BrowserRouter>
+      </AnimatePresence>
+    </PayPalScriptProvider>
   </React.StrictMode>
 );
 

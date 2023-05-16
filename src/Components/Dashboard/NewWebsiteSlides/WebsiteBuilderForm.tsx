@@ -9,6 +9,7 @@ import DomainNamePicker from "./DomainNamePicker";
 import { globalData } from "../../../Pages/DashBoard";
 import Confirmation from "../../Confirmation";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { PayPalSubscriber } from "./PayPalSubscriber";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);
@@ -23,37 +24,6 @@ const WebsiteBuilderForm = () => {
       sub: "Lets get you hooked up with a website!",
     });
   }, [setDashBoardTitleInfo]);
-
-  const stages = [
-    {
-      stage: "Theme",
-      buttonText: "Pick " + selections.theme.name,
-    },
-    {
-      stage: "Website Type",
-      buttonText: "Pick " + selections.websiteType.type,
-    },
-    {
-      stage: "Website Description",
-      buttonText: "Submit description",
-    },
-    {
-      stage: "Got any content?",
-      buttonText: "Pick Domain",
-    },
-    {
-      stage: "Pick Domain",
-      buttonText: "Pick a plan",
-    },
-    {
-      stage: "Plan",
-      buttonText: "Review and Finish",
-    },
-    {
-      stage: "Review",
-      buttonText: "Complete",
-    },
-  ];
 
   return (
     <div className="relative w-full pt-4">
@@ -78,8 +48,11 @@ const WebsiteBuilderForm = () => {
         <DomainNamePicker setActiveStageId={setStageIndex} />
       )}
       {stageIndex === 5 && <PlanSelector setActiveStageId={setStageIndex} />}
-      {stageIndex === stages.length - 1 && (
-        <NewWebsiteReview showConfirmationModal={showConfirmationModal} />
+      {stageIndex === 6 && (
+        <NewWebsiteReview setActiveStageId={setStageIndex} />
+      )}
+      {stageIndex === 7 && (
+        <PayPalSubscriber showConfirmationModal={showConfirmationModal} />
       )}
     </div>
   );
