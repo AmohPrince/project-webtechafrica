@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import NoWebsite from "../Components/NoWebsite";
 import { globalData } from "./DashBoard";
-import { Website } from "../Components/Website";
+import { Website } from "../Components/Dashboard/Website";
 import { useAuth } from "../Hooks/UseAuth";
+import NoWebsite from "../Components/Dashboard/NoWebsite";
 
 const DevWebsitesPage = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);

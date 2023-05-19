@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { SecondaryButton } from "./SecondaryButton";
+import { SecondaryButton } from "../SecondaryButton";
 
 const NoWebsite = ({ text }: { text: string }) => {
   return (

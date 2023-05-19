@@ -25,10 +25,6 @@ const DashBoardSideBar = ({
           ? "block relative"
           : "w-5/6 fixed top-0 left-0 bottom-0"
       }`}
-      initial={{ x: -1000 }}
-      animate={{ x: 0 }}
-      // exit={{ y: -1000, transition: { delay: 0.5 } }}
-      transition={{ duration: 0.5, type: "tween" }}
     >
       <div className="flex justify-between items-center mb-5">
         <Link to="/">

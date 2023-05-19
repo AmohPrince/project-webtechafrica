@@ -1,6 +1,7 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React, { createContext, useContext } from "react";
 import { UserData } from "../Types/Global";
+import { testUserData } from "../Util/testdata";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
 
@@ -25,7 +26,6 @@ export const AuthContextProvider = ({
     null,
     LOCAL_STORAGE_KEYS.USER
   );
-
   const lastSavedDate: string | null = localStorage.getItem(
     LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE
   );
@@ -40,12 +40,12 @@ export const AuthContextProvider = ({
     const differenceInDays: number =
       differenceInMilliSeconds / (1000 * 60 * 60 * 24);
     if (differenceInDays >= 30) {
-      // It's been 30 days or more since the last sign-in
       setUserData(null);
     }
   }
 
   const auth = getAuth();
+
   onAuthStateChanged(auth, (user) => {
     setUser(user);
     localStorage.setItem(
@@ -57,7 +57,7 @@ export const AuthContextProvider = ({
   return (
     <authContext.Provider
       value={{
-        userData,
+        userData: testUserData,
         setUserData,
         user,
       }}

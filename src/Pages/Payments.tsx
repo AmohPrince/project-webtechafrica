@@ -82,22 +82,21 @@ const Payments = () => {
         )}
       </div>
       <div className="hidden sm:flex justify-between w-full gap-x-2">
-        {showPaymentMethodsModalLargeScreen ? (
+        {showPaymentMethodsModalLargeScreen && (
           <PaymentsModal
             setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
           />
-        ) : (
-          <div className="flex-grow">
-            <div>
-              <p className="font-semibold mb-2">Upcoming payments</p>
-              <Transactions type="Upcoming" />
-            </div>
-            <div>
-              <p className="font-semibold mb-2">Past payments</p>
-              <Transactions type="Past" />
-            </div>
-          </div>
         )}
+        <div className="flex-grow">
+          <div>
+            <p className="font-semibold mb-2">Upcoming payments</p>
+            <Transactions type="Upcoming" />
+          </div>
+          <div>
+            <p className="font-semibold mb-2">Past payments</p>
+            <Transactions type="Past" />
+          </div>
+        </div>
         <Cards
           setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
           setActiveSmallScreenTab={setActiveSmallScreenTab}

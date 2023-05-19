@@ -29,13 +29,16 @@ export const PaymentsModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className={`flex-grow bg-white rounded-xl ${className}`}>
+    <div
+      className={`flex-grow bg-white rounded-xl ${className} absolute center-absolutely border-primaryOne border-2 z-10 transition-all`}
+    >
       <div className="py-3 px-5 border-b flex justify-between items-center">
         <p className="font-semibold">Payment</p>
         <FontAwesomeIcon
           icon={faXmark}
           onClick={() => setShowPaymentMethodsModal(false)}
-          className="cursor-pointer hidden sm:block"
+          className="cursor-pointer hidden sm:block text-white bg-primaryOne py-1 px-[6px] rounded-full"
+          size="xs"
         />
       </div>
       <div className="px-5 py-2">

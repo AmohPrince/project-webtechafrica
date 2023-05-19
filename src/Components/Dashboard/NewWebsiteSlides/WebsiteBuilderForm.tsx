@@ -7,9 +7,8 @@ import UserHasOwnContent from "./UserHasOwnContent";
 import NewWebsiteReview from "./NewWebsiteReview";
 import DomainNamePicker from "./DomainNamePicker";
 import { globalData } from "../../../Pages/DashBoard";
-import Confirmation from "../../Confirmation";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
-import { PayPalSubscriber } from "./PayPalSubscriber";
+import Confirmation from "../Confirmation";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);
@@ -49,10 +48,7 @@ const WebsiteBuilderForm = () => {
       )}
       {stageIndex === 5 && <PlanSelector setActiveStageId={setStageIndex} />}
       {stageIndex === 6 && (
-        <NewWebsiteReview setActiveStageId={setStageIndex} />
-      )}
-      {stageIndex === 7 && (
-        <PayPalSubscriber showConfirmationModal={showConfirmationModal} />
+        <NewWebsiteReview showConfirmationModal={showConfirmationModal} />
       )}
     </div>
   );

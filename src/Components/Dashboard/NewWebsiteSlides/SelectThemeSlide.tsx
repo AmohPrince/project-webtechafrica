@@ -1,11 +1,11 @@
 import React from "react";
-import { ThemeBox } from "../../ThemeBox";
-import ThemePreview from "../../ThemePreview";
+import { ThemeBox } from "../ThemeBox";
 import themes from "../../../Util/themes.json";
 import { SecondaryButton } from "../../SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import ThemePreview from "../ThemePreview";
 
 const SelectThemeSlide = ({
   setActiveStageId,

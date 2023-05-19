@@ -1,8 +1,8 @@
 import React from "react";
-import { ActiveWebsite, DevWebsite } from "../Types/Global";
-import { extractHostname } from "../Util/Utilities";
-import PrimaryButton from "./PrimaryButton";
-import { SecondaryButton } from "./SecondaryButton";
+import { ActiveWebsite, DevWebsite } from "../../Types/Global";
+import { extractHostname } from "../../Util/Utilities";
+import PrimaryButton from "../PrimaryButton";
+import { SecondaryButton } from "../SecondaryButton";
 
 export const Website = ({
   website,
