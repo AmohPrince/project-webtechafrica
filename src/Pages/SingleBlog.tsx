@@ -10,7 +10,7 @@ const SingleBlog = () => {
   )!;
 
   return (
-    <section className="mt-12">
+    <section className="mt-12 mx-[5%] sm:mx-[12%]">
       <img
         src={article.img}
         alt={title}

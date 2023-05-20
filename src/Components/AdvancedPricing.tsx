@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PRICES } from "../App";
+import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
 
 export const AdvancedPricing = ({ className }: { className: string }) => {
@@ -16,9 +18,11 @@ export const AdvancedPricing = ({ className }: { className: string }) => {
       </div>
       <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
         <p className="font-extrabold text-4xl mb-4">
-          kes.1499 <span className="text-sm">/ month</span>
+          Ksh. {PRICES.advanced} <span className="text-sm">/ month</span>
         </p>
-        <Billed text="Billed as Ksh 15,599 per year" />
+        <Billed
+          text={`Billed as Ksh. ${getYearly(PRICES.advanced)} per year`}
+        />
       </div>
       <div className="text-secondaryFour">
         <p>
@@ -46,9 +50,9 @@ export const AdvancedPricing = ({ className }: { className: string }) => {
           online
         </p>
       </div>
-      <Link to="/pricing/advanced">
+      <Link to="/pricing/advanced" onClick={scrollToTop}>
         <button className="py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white hover:bg-primaryTwoLight">
-          Get Started
+          Learn more
         </button>
       </Link>
     </div>

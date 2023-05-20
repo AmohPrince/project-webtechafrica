@@ -9,9 +9,9 @@ import {
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { scrollToTop } from "../Util/Utilities";
 
 const Footer = () => {
-  //TODO doesn't look that good on small screens
   return (
     <footer className="px-[5%] sm:px-[12%]">
       <section className="mt-[10%] border-y py-[9%] flex-col-reverse sm:flex-row flex justify-between">
@@ -52,30 +52,35 @@ const Footer = () => {
               <Link
                 to="/"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
+                onClick={scrollToTop}
               >
                 Home
               </Link>
               <Link
                 to="/about-us"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
+                onClick={scrollToTop}
               >
                 About
               </Link>
               <Link
                 to="/features"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
+                onClick={scrollToTop}
               >
                 Features
               </Link>
               <Link
                 to="/pricing"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
+                onClick={scrollToTop}
               >
                 Pricing
               </Link>
               <Link
                 to="/blog"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
+                onClick={scrollToTop}
               >
                 Blog
               </Link>

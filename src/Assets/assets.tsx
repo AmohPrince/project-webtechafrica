@@ -12,7 +12,6 @@ import PersonWithPlusIcon from "./PersonWithPlusIcon.svg";
 import Phone from "./Phone.svg";
 import PlusIcon from "./PlusIcon.svg";
 import Rocket from "./Rocket.svg";
-import Tick from "./Tick.svg";
 import Wallets from "./Wallets.svg";
 import BackGround from "./TopRightBackground.svg";
 import PlayButton from "./PlayButton.svg";
@@ -108,7 +107,6 @@ export const assets = {
   Phone,
   PlusIcon,
   Rocket,
-  Tick,
   Wallets,
   profile,
 };

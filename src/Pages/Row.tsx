@@ -1,3 +1,5 @@
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { assets } from "../Assets/assets";
 
@@ -15,7 +17,11 @@ const Row = ({
       <p className="w-1/3">{text}</p>
       {basic ? (
         <div className="w-1/4">
-          <img src={assets.Tick} alt="check" className="w-5 h-5 mx-auto" />
+          <FontAwesomeIcon
+            icon={faCircleCheck}
+            style={{ color: "#25b636" }}
+            className="w-5 h-5 mx-auto"
+          />
         </div>
       ) : (
         <div className="w-1/4">
@@ -24,7 +30,11 @@ const Row = ({
       )}
       {advanced ? (
         <div className="w-1/4">
-          <img src={assets.Tick} alt="check" className="w-5 h-5 mx-auto" />
+          <FontAwesomeIcon
+            icon={faCircleCheck}
+            style={{ color: "#25b636" }}
+            className="w-5 h-5 mx-auto"
+          />
         </div>
       ) : (
         <div className="w-1/4">

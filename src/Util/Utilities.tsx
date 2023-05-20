@@ -123,3 +123,15 @@ export const getTimestampForThreeDaysFromNow = (): number => {
   // Return the timestamp for three days from now
   return timestampForThreeDaysFromNow;
 };
+
+export const getYearly = (amount: number) => {
+  return ((80 / 100) * (amount * 12)).toFixed(0);
+};
+
+export const scrollToTop = () => {
+  window.scroll({
+    behavior: "smooth",
+    left: 0,
+    top: 0,
+  });
+};

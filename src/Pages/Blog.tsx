@@ -17,7 +17,7 @@ const Blog = () => {
             and informative articles.
           </p>
         </section>
-        <section className="flex justify-between flex-wrap mt-10">
+        <section className="flex justify-between mt-10 gap-x-4">
           {blogs.map((blog, i) => (
             <BlogArticle article={blog} key={i} />
           ))}

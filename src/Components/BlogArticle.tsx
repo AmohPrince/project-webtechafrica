@@ -14,7 +14,7 @@ const BlogArticle = ({ article }: { article: BlogArticleType }) => {
       <h4 className="h4">{article.title}</h4>
       <p className="default-paragraph my-4">{article.preText}</p>
       <Link
-        to={article.title}
+        to={`/blog/${article.title}`}
         className="absolute bottom-4 text-primaryOne text-sm underline font-semibold"
       >
         Read More
