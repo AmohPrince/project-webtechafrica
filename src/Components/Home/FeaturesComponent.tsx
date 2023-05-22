@@ -4,9 +4,9 @@ import { assets } from "../../Assets/assets";
 import { GreyButton } from "../GreyButton";
 import { motion } from "framer-motion";
 
-export const FeaturesComponent = () => {
+export const FeaturesComponent = ({ className }: { className?: string }) => {
   return (
-    <motion.section className="mt-[12%] px-[5%] sm:px-[12%]">
+    <motion.section className={`mt-[12%] ${className}`}>
       <GreyButton text="Features" />
       <motion.h1
         className="h3 sm:h2 text-center my-5"
@@ -35,7 +35,10 @@ export const FeaturesComponent = () => {
       reliable and safe environment for you to conduct online
       transactions and exchange important information with us. */}
           </p>
-          <Link to="/features" className="underline font-semibold">
+          <Link
+            to="/features#secure-platform"
+            className="underline font-semibold"
+          >
             Learn More
           </Link>
         </motion.div>
@@ -55,7 +58,10 @@ export const FeaturesComponent = () => {
       more informed business decisions based on data trends, user
       behavior and many more. */}
           </p>
-          <Link to="/features" className="underline font-semibold">
+          <Link
+            to="/features#advanced-analytics"
+            className="underline font-semibold"
+          >
             Learn More
           </Link>
         </motion.div>
@@ -77,7 +83,10 @@ export const FeaturesComponent = () => {
       with the ability to scale operations, and to focus on more
       strategic and creative activities. */}
           </p>
-          <Link to="/features" className="underline font-semibold">
+          <Link
+            to="/features#powerful-automation"
+            className="underline font-semibold"
+          >
             Learn More
           </Link>
         </motion.div>

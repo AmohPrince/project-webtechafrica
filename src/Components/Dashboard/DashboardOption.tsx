@@ -23,10 +23,14 @@ const DashboardOption = ({
   const { pathname } = useLocation();
   const lastPathNameSegment = getLastPathSegment(pathname);
 
+  const isPurpleBg =
+    lastPathNameSegment === name ||
+    (pathname === "/dashboard" && name === "active-websites");
+
   return (
     <Link
       className={`flex items-center py-3 px-4 ${
-        lastPathNameSegment === name && "bg-primaryOne rounded-l-lg"
+        isPurpleBg && "bg-primaryOne rounded-l-lg"
       } transition-all cursor-pointer ${className}`}
       to={name}
       onClick={onClick}

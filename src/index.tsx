@@ -71,7 +71,13 @@ root.render(
                 <Route path="/dashboard" element={<DashBoard />}>
                   <Route
                     element={<ActiveWebsitesPage />}
+                    // path="active-websites"
+                    index
+                  />
+                  <Route
+                    element={<ActiveWebsitesPage />}
                     path="active-websites"
+                    index
                   />
                   <Route element={<DevWebsitesPage />} path="dev-websites" />
                   <Route element={<Payments />} path="payments" />

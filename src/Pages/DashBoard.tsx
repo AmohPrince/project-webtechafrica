@@ -35,10 +35,7 @@ const DashBoard = () => {
   });
 
   useEffect(() => {
-    if (user) {
-      redirect("/dashboard/active-websites");
-    } else {
-      console.log("we hit here!");
+    if (!user) {
       redirect("/sign-in");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

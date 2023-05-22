@@ -19,9 +19,11 @@ import {
   slideAnimation,
 } from "../FramerMotion/motion";
 import blogs from "../Json/Blogs.json";
+import { useAuth } from "../Hooks/UseAuth";
 
 export const Home = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
+  const { user } = useAuth();
 
   return (
     <motion.section>
@@ -37,23 +39,38 @@ export const Home = () => {
               Build your <br /> audience and grow <br /> your brand online
             </h1>
           </motion.div>
-          <motion.p className="text-gray-500 mt-4 mb-7">
-            Get your website or web application on the cheap today with Africa's{" "}
+          <motion.p className="text-gray-500 mt-4 mb-7 bg-white">
+            Leverage the power of AI to create insanely beautiful websites that
+            will spear head your business to the top of its specific
             <br />
+            niche. Let the worlds best developers and UI/UX designers rebrand
+            your online presence for the maximization of profits with africa's
             fastest growing tech corporation.{" "}
           </motion.p>
-          <div className="flex text-sm justify-center sm:justify-start gap-x-3">
-            <button className="bg-primaryOne text-white py-3 px-6 rounded-full">
-              Get Started
-            </button>
-            <button className="bg-gray-100 rounded-full pl-4 pr-1 flex items-center font-bold">
-              Watch Video
-              <img
-                src={assets.PlayButton}
-                alt="play"
-                className="h-9 w-9 ml-3"
-              />
-            </button>
+          <div className="flex text-sm justify-center sm:justify-start gap-x-3 items-center">
+            <Link
+              to={`${
+                user ? "/dashboard/new-website" : "/sign-in/?source=get-started"
+              }`}
+            >
+              <button className="bg-primaryOne text-white py-3 px-6 rounded-full hover:bg-primaryOneLight transition-all">
+                Get Started
+              </button>
+            </Link>
+            {/* TODO Create Video! Not now but it would be really cool */}
+            <Link
+              to="/blog"
+              className="bg-gray-100 rounded-full pl-3 pr-1 py-1 font-bold"
+            >
+              <button className="flex items-center">
+                <p>Read our blog</p>
+                <img
+                  src={assets.PlayButton}
+                  alt="play"
+                  className="h-9 w-9 ml-3"
+                />
+              </button>
+            </Link>
           </div>
         </motion.div>
         <motion.img
@@ -64,7 +81,7 @@ export const Home = () => {
         />
       </motion.section>
       {/* features  */}
-      <FeaturesComponent />
+      <FeaturesComponent className="px-[5%] sm:px-[12%]" />
       <section className="mt-[6%] relative items-stretch mx-[5%] sm:mx-[12%]">
         <div className="w-11/12 sm:w-4/5 bg-gray-50 py-[8%] pl-[5%] rounded-xl sm:rounded-[50px]">
           <div className="w-full sm:w-3/5">
@@ -147,8 +164,8 @@ export const Home = () => {
                 also allows us better understand how users interact with their
                 sites, which can be used to improve the overall user experience.
               </p>
-              <Link to="/sign-in">
-                <BlackIshButton text="Get started" />
+              <Link to="/sign-up">
+                <BlackIshButton text="Create account" />
               </Link>
             </div>
             <img
@@ -186,7 +203,16 @@ export const Home = () => {
                 your expectations. So please don't hesitate to contact us, we
                 are here to help and guide you through the process.
               </p>
-              <BlackIshButton text="Fill in form" />
+              <Link
+                to={`${
+                  user
+                    ? "/dashboard/new-website"
+                    : "/sign-in/?source=get-started"
+                }`}
+                className="ml-auto"
+              >
+                <BlackIshButton text="Create a website now !" />
+              </Link>
             </div>
           </div>
         )}
@@ -217,7 +243,16 @@ export const Home = () => {
                   className="sm:hidden w-2/5 object-cover"
                 />
               </div>
-              <BlackIshButton text="Get me a website  🚀" />
+              <Link
+                to={`${
+                  user
+                    ? "/dashboard/new-website"
+                    : "/sign-in/?source=get-started"
+                }`}
+                className="ml-auto"
+              >
+                <BlackIshButton text="Get me a website  🚀" />
+              </Link>
             </div>
             <img
               src={assets.Magic}

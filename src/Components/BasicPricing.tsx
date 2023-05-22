@@ -5,7 +5,6 @@ import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
 
 export const BasicPricing = ({ className }: { className: string }) => {
-  //TODO find out how this looks on small screens
   return (
     <div
       className={`py-12 px-4 sm:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
@@ -23,6 +22,7 @@ export const BasicPricing = ({ className }: { className: string }) => {
         <Billed text={`Billed as Ksh ${getYearly(PRICES.basic)} per year`} />
       </div>
       <div className="text-secondaryFour">
+        {/* TODO do not hardcode this features. use the feature array on App.tsx to create a single point of reference */}
         <p>
           <span className="font-semibold text-black">Unlimited</span> customer
           support

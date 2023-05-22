@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { assets } from "../../Assets/assets";
 
 const FreeTrial = () => {
+  const [email, setEmail] = useState<string>("");
   return (
     <section className="py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl mx-[5%] sm:mx-[12%]">
       <div className="w-full sm:w-1/2">
@@ -11,17 +13,22 @@ const FreeTrial = () => {
         </h2>
         <p>
           Unleash the true potential of your business with our one month free
-          trial, start today and see the difference!
+          trial, get the second month of your basic subscription for free! start
+          today and see the difference!
         </p>
-        <div className="flex gap-x-2 mt-8 justify-between">
+        <div className="flex gap-x-2 mt-8 justify-between items-center">
           <input
             type="email"
             className="bg-emailInput py-3 px-8 focus:outline-none rounded-full placeholder:text-white w-3/4 sm:w-auto"
             placeholder="your email here..."
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <button className="text-xs bg-white px-7 text-primaryOne rounded-full font-bold">
-            Get started
-          </button>
+          <Link
+            to={`/sign-up/?email=${email}`}
+            className="text-xs bg-white px-7 py-4 text-primaryOne rounded-full font-bold"
+          >
+            <button type="submit">Create account</button>
+          </Link>
         </div>
       </div>
       <img

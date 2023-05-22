@@ -1,6 +1,6 @@
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -14,11 +14,12 @@ import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
 import { useLocalStorage } from "../Hooks/UseLocalStorage";
-import { Country, UserData } from "../Types/Global";
+import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
-import { fetchCountries } from "../Util/FetchCountries";
+import { Country, fetchCountries } from "../Util/FetchCountries";
 import { UserCredential } from "firebase/auth";
 import { addOrUpdateUserDataInDB } from "../Firebase/firestore";
+import { Wave } from "../Components/NavBar/Wave";
 
 type Inputs = {
   firstName: string;
@@ -50,6 +51,10 @@ export const SignUp = () => {
   } = useForm<Inputs>();
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const emailParam = searchParams.get("email");
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setCreatingUserWithEmail(false);
@@ -203,6 +208,7 @@ export const SignUp = () => {
                 required: true,
                 pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
               })}
+              defaultValue={emailParam!}
             />
           </div>
           {/* country and phone number */}
@@ -288,6 +294,7 @@ export const SignUp = () => {
           </Link>
         </p>
       </div>
+      <Wave />
     </div>
   );
 };

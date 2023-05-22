@@ -7,11 +7,10 @@ export const testUserData: UserData = {
     {
       id: "randomId",
       url: "https://testuser.webtechafrica.com/",
-      hasShop: true,
-      shopUrl: "https://testuser.webtechafrica.com/shop",
       websiteScreenShot:
         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
       plan: "Basic",
+      createdAt: 1682234423660,
     },
   ],
   devWebsites: [
@@ -19,26 +18,28 @@ export const testUserData: UserData = {
       id: "tastjs",
       url: "https://testuser.webtechafrica.com/",
       expectedCompletionDate: "24th January",
-      hasShop: true,
-      shopUrl: "https://testuser.webtechafrica.com/shop",
       websiteScreenShot:
         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
+      plan: "Basic",
+      createdAt: 1682234423660,
     },
     {
       id: "Trsfsf",
       expectedCompletionDate: "28th February",
       url: "https://testuser.webtechafrica.com/",
-      hasShop: false,
       websiteScreenShot:
         "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
+      plan: "premium",
+      createdAt: 1682234423660,
     },
   ],
   pendingVerificationWebsites: [
     {
       id: "sgukkb",
-      hasShop: true,
       url: "https://www.website.com",
       decisionDeadline: new Date().getTime(),
+      plan: "Basic",
+      createdAt: 1682234423660,
       selections: {
         domainName: "website.com",
         plan: "Basic",

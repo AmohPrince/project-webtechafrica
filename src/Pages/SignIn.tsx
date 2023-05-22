@@ -2,9 +2,10 @@ import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { UserCredential } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
+import { Wave } from "../Components/NavBar/Wave";
 import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
@@ -34,7 +35,11 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  // const passwordRef = useRef<HTMLInputElement>(null);
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const sourceParam = searchParams.get("source");
+
   const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
 
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
@@ -137,10 +142,12 @@ const SignIn = () => {
       <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
         <p className="font-semibold text-3xl mt-[4%] dark:text-white">
-          Welcome back
+          {sourceParam === "get-started" ? "Welcome!" : "Welcome back"}
         </p>
         <p className="font-normal text-base text-gray-400">
-          Welcome back please enter your details
+          {sourceParam === "get-started"
+            ? "How about we sign you in first."
+            : "Welcome back please enter your details"}
         </p>
         <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
           <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
@@ -220,6 +227,7 @@ const SignIn = () => {
           </Link>
         </p>
       </div>
+      <Wave />
     </div>
   );
 };

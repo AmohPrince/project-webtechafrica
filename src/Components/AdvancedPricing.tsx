@@ -5,7 +5,6 @@ import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
 
 export const AdvancedPricing = ({ className }: { className: string }) => {
-  //TODO find out how this looks on small screens
   return (
     <div
       className={`py-12 px-4 sm:px-8 rounded-2xl text-center bg-gray-100 ${className}`}

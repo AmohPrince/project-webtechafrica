@@ -33,11 +33,11 @@ const NewWebsiteReview = ({
           : []),
         {
           decisionDeadline: getTimestampForThreeDaysFromNow(),
-          hasShop: false,
           id: randomId,
           url: selections.domainName!,
-          shopUrl: undefined,
           selections: selections,
+          plan: selections.plan!,
+          createdAt: new Date().getTime(),
         },
       ],
     };
