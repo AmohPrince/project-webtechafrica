@@ -2,7 +2,7 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { ActiveWebsite, DevWebsite } from "../../Types/Global";
-import { extractHostname } from "../../Util/Utilities";
+import { extractHostname, formatDate } from "../../Util/Utilities";
 import PrimaryButton from "../PrimaryButton";
 
 export const Website = ({
@@ -11,8 +11,6 @@ export const Website = ({
   website: DevWebsite | ActiveWebsite;
 }) => {
   const isDevWebsite = "expectedCompletionDate" in website;
-
-  console.log(website);
 
   return (
     <div className="border w-full sm:w-[49%] bg-white p-4 sm:p-6 rounded-2xl">
@@ -34,6 +32,11 @@ export const Website = ({
           <p>Website Id: {website.id}</p>
           <p>Plan: {website.plan} </p>
           <p>Created at :{formatDate(website.createdAt)}</p>
+          {isDevWebsite && (
+            <div className="rounded-md bg-lightGreen text-green-600 text-center w-max py-2 px-4 text-xs">
+              In Development
+            </div>
+          )}
         </div>
         <PrimaryButton
           text={isDevWebsite ? "preview" : "view"}
@@ -47,22 +50,4 @@ export const Website = ({
       />
     </div>
   );
-};
-
-const formatDate = (timestamp: number): string => {
-  const date = new Date(timestamp);
-  const day = date.getDate();
-  const month = date.toLocaleString("en-US", { month: "long" });
-  const year = date.getFullYear();
-
-  let daySuffix = "th";
-  if (day === 1 || day === 21 || day === 31) {
-    daySuffix = "st";
-  } else if (day === 2 || day === 22) {
-    daySuffix = "nd";
-  } else if (day === 3 || day === 23) {
-    daySuffix = "rd";
-  }
-
-  return `${day}${daySuffix} ${month} ${year}`;
 };

@@ -29,14 +29,14 @@ export const testUserData: UserData = {
       url: "https://testuser.webtechafrica.com/",
       websiteScreenShot:
         "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
-      plan: "premium",
+      plan: "Premium",
       createdAt: 1682234423660,
     },
   ],
   pendingVerificationWebsites: [
     {
       id: "sgukkb",
-      url: "https://www.website.com",
+      url: "website.com",
       decisionDeadline: new Date().getTime(),
       plan: "Basic",
       createdAt: 1682234423660,
@@ -60,8 +60,9 @@ export const testUserData: UserData = {
         userHasOwnContent: false,
         websiteDescription: "svvysvtjstvs",
         websiteType: {
-          description: "ssyysvst",
-          type: "basic",
+          type: "E-commerce websites",
+          description:
+            "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy.",
         },
       },
     },
@@ -71,6 +72,66 @@ export const testUserData: UserData = {
       endsIn: "5353",
       expiryDate: "04/2023",
       type: "MasterCard",
+    },
+  ],
+  pastTransactions: [
+    {
+      amount: "4500",
+      billingDate: 1682234423660,
+      card: {
+        endsIn: "5353",
+        expiryDate: "04/2023",
+        type: "MasterCard",
+      },
+      currencyCode: "Ksh",
+      lastPaymentDate: 1682234423660,
+      lastPaymentTime: 1682234423660,
+      plan: "Basic",
+      websiteUrl: "website.com",
+    },
+    {
+      amount: "4500",
+      billingDate: 1682234423660,
+      card: {
+        endsIn: "5353",
+        expiryDate: "04/2023",
+        type: "MasterCard",
+      },
+      currencyCode: "Ksh",
+      lastPaymentDate: 1682234423660,
+      lastPaymentTime: 1682234423660,
+      plan: "Basic",
+      websiteUrl: "website.com",
+    },
+  ],
+  upcomingTransactions: [
+    {
+      amount: "4500",
+      billingDate: 1682234423660,
+      card: {
+        endsIn: "5353",
+        expiryDate: "04/2023",
+        type: "MasterCard",
+      },
+      currencyCode: "Ksh",
+      lastPaymentDate: 1682234423660,
+      lastPaymentTime: 1682234423660,
+      plan: "Basic",
+      websiteUrl: "website.com",
+    },
+    {
+      amount: "4500",
+      billingDate: 1682234423660,
+      card: {
+        endsIn: "5353",
+        expiryDate: "04/2023",
+        type: "MasterCard",
+      },
+      currencyCode: "Ksh",
+      lastPaymentDate: 1682234423660,
+      lastPaymentTime: 1682234423660,
+      plan: "Basic",
+      websiteUrl: "website.com",
     },
   ],
 };

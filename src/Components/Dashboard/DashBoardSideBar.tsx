@@ -7,24 +7,15 @@ import HamburgerMenu from "../HamburgerMenu";
 import { motion } from "framer-motion";
 
 const DashBoardSideBar = ({
-  showingSmallScreenMenu,
   setShowingSmallScreenMenu,
+  className,
 }: {
-  showingSmallScreenMenu: boolean;
   setShowingSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  className: string;
 }) => {
-  const shouldBeHidden =
-    showingSmallScreenMenu !== true && window.innerWidth < 768;
-
   return (
     <motion.div
-      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${
-        shouldBeHidden ? "hidden" : ""
-      } ${
-        window.innerWidth > 768
-          ? "block relative"
-          : "w-5/6 fixed top-0 left-0 bottom-0"
-      }`}
+      className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${className}`}
     >
       <div className="flex justify-between items-center mb-5">
         <Link to="/">

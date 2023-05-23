@@ -28,11 +28,11 @@ export type UserData = {
 
 export type Transaction = {
   websiteUrl: string;
-  plan: string;
+  plan: "Basic" | "Premium";
   currencyCode: string;
-  lastPaymentDate: string;
-  lastPaymentTime: string;
-  billingDate: string;
+  lastPaymentDate: number;
+  lastPaymentTime: number;
+  billingDate: number;
   amount: string;
   card: Card;
 };
@@ -40,7 +40,7 @@ export type Transaction = {
 export type Website = {
   id: string;
   url: string;
-  plan: string;
+  plan: "Basic" | "Premium";
   createdAt: number;
 };
 
@@ -91,5 +91,5 @@ export type NewWebsiteSelections = {
   domainName: string | null;
   websiteDescription: string | null;
   userHasOwnContent: boolean | null;
-  plan: string | null;
+  plan: "Basic" | "Premium" | null;
 };

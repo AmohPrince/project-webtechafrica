@@ -1,6 +1,10 @@
 import React from "react";
 import { Transaction } from "../../../Types/Global";
-import { getCardTypeIcon } from "../../../Util/Utilities";
+import {
+  formatDate,
+  formatTime,
+  getCardTypeIcon,
+} from "../../../Util/Utilities";
 
 export const SinglePaymentSmallScreen = ({
   transaction,
@@ -12,7 +16,6 @@ export const SinglePaymentSmallScreen = ({
       <p className="text-gray-400 text-sm">Website url</p>
       <p className="font-semibold">{transaction.websiteUrl}</p>
       <p className="text-gray-400 text-sm">Plan: {transaction.plan}</p>
-
       <div className="flex justify-between mt-2">
         <div>
           <p className="text-gray-400 text-sm">Card Used</p>
@@ -26,9 +29,9 @@ export const SinglePaymentSmallScreen = ({
         </div>
         <div className="w-1/3">
           <p className="text-gray-400 text-sm">Last Payment</p>
-          <p>{transaction.lastPaymentDate}</p>
+          <p>{formatDate(transaction.lastPaymentDate)}</p>
           <p className="text-gray-400 text-sm">
-            at {transaction.lastPaymentTime}
+            at {formatTime(transaction.lastPaymentTime)}
           </p>
         </div>
       </div>
@@ -41,7 +44,7 @@ export const SinglePaymentSmallScreen = ({
         </div>
         <div className="w-1/3">
           <p className="text-gray-400 text-sm">Billing Date</p>
-          <p className="font-semibold">{transaction.billingDate}</p>
+          <p className="font-semibold">{formatDate(transaction.billingDate)}</p>
         </div>
       </div>
     </div>

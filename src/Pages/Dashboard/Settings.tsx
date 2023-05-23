@@ -83,8 +83,6 @@ const Settings = () => {
     }
   };
 
-  console.log(user);
-
   return (
     <div className="w-2/3 mx-auto mt-5 bg-white">
       <div className="flex font-semibold text-sm cursor-pointer">

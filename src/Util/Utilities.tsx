@@ -135,3 +135,39 @@ export const scrollToTop = () => {
     top: 0,
   });
 };
+
+export const formatDate = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  let daySuffix = "th";
+  if (day === 1 || day === 21 || day === 31) {
+    daySuffix = "st";
+  } else if (day === 2 || day === 22) {
+    daySuffix = "nd";
+  } else if (day === 3 || day === 23) {
+    daySuffix = "rd";
+  }
+
+  return `${day}${daySuffix} ${month} ${year}`;
+};
+
+export const formatTime = (timestamp: number): string => {
+  // Convert timestamp to milliseconds
+  var date = new Date(timestamp);
+
+  // Extract time components
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+
+  // Pad single-digit hours and minutes with leading zeros if necessary
+  var formattedHours = hours < 10 ? "0" + hours : hours;
+  var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+  // Construct the time string in "HH:MM" format
+  var time = formattedHours + ":" + formattedMinutes;
+
+  return time;
+};
