@@ -27,7 +27,9 @@ const BasicPricingPage = () => {
                 style={{ color: "#25b636" }}
                 className="w-5 h-5 mr-5"
               />
-              <p className="default-paragraph">{features}</p>
+              <p className="default-paragraph">
+                {features.replace(/<\/?sp>|,/g, "")}
+              </p>
             </div>
           ))}
         </div>
@@ -59,7 +61,7 @@ const BasicPricingPage = () => {
             <div className="flex items-center mb-5">
               <p className="default-paragraph">
                 <span className="text-black font-semibold">0{i + 1}</span>.{" "}
-                {feature}
+                {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             </div>
           ))}

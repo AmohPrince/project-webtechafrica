@@ -15,8 +15,8 @@ const AdvancedPricingPage = () => {
       <CircleBackGround />
       <section className="z-10 mt-[8%] relative flex flex-col sm:flex-row justify-between w-full">
         <div className="border-b pb-5 w-full sm:w-1/2">
-          <h1 className="h2">Advanced Plan</h1>
-          <p className="default-paragraph mb-7">
+          <h1 className="h2">Premium Plan</h1>
+          <p className="default-paragraph mb-7 bg-white">
             Unleash your online potential with the advanced package! This
             comprehensive plan goes above and beyond the basic option by
             delivering a fully customized e-commerce platform for you to sell
@@ -31,7 +31,9 @@ const AdvancedPricingPage = () => {
                 style={{ color: "#25b636" }}
                 className="w-5 h-5 mr-5"
               />
-              <p className="default-paragraph">{feature}</p>
+              <p className="default-paragraph">
+                {feature.replace(/<\/?sp>/g, "")}
+              </p>
             </div>
           ))}
         </div>
@@ -64,7 +66,7 @@ const AdvancedPricingPage = () => {
             {BASIC_FEATURES.map((feature, i) => (
               <p className="default-paragraph mb-5">
                 <span className="text-black font-semibold">0{i + 1}</span>.
-                {feature}
+                {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             ))}
           </div>

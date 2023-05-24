@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BlogArticleType } from "../Types/Global";
+import { scrollToTop } from "../Util/Utilities";
 
 const BlogArticle = ({ article }: { article: BlogArticleType }) => {
   return (
@@ -16,6 +17,7 @@ const BlogArticle = ({ article }: { article: BlogArticleType }) => {
       <Link
         to={`/blog/${article.title}`}
         className="absolute bottom-4 text-primaryOne text-sm underline font-semibold"
+        onClick={scrollToTop}
       >
         Read More
       </Link>

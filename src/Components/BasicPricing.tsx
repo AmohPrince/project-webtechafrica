@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PRICES } from "../App";
+import { BASIC_FEATURES, PRICES } from "../App";
 import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
+import { FeatureString } from "./FeatureString";
 
 export const BasicPricing = ({ className }: { className: string }) => {
   return (
@@ -21,20 +22,17 @@ export const BasicPricing = ({ className }: { className: string }) => {
         </p>
         <Billed text={`Billed as Ksh ${getYearly(PRICES.basic)} per year`} />
       </div>
-      <div className="text-secondaryFour">
-        {/* TODO do not hardcode this features. use the feature array on App.tsx to create a single point of reference */}
-        <p>
-          <span className="font-semibold text-black">Unlimited</span> customer
-          support
-        </p>
-        <p>Hosting</p>
-        <p>Custom domain name</p>
-        <p>
-          Complete{" "}
-          <span className="font-semibold text-black">
-            website design and development
-          </span>
-        </p>
+      <div className="text-secondaryFour flex flex-col items-center">
+        {BASIC_FEATURES.map((feature) => {
+          const str = feature.split(",");
+          return (
+            <div className="flex whitespace-nowrap">
+              {str.map((str) => (
+                <FeatureString feature={str} source="Basic" />
+              ))}
+            </div>
+          );
+        })}
       </div>
       <Link to="/pricing/basic" onClick={scrollToTop}>
         <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange">

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PRICES } from "../App";
+import { PREMIUM_FEATURES, PRICES } from "../App";
 import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
+import { FeatureString } from "./FeatureString";
 
 export const AdvancedPricing = ({ className }: { className: string }) => {
   return (
@@ -23,31 +24,17 @@ export const AdvancedPricing = ({ className }: { className: string }) => {
           text={`Billed as Ksh. ${getYearly(PRICES.advanced)} per year`}
         />
       </div>
-      <div className="text-secondaryFour">
-        <p>
-          <span className="font-semibold text-primaryOne">Unlimited</span>{" "}
-          customer support
-        </p>
-        <p>Hosting</p>
-        <p>Custom domain name</p>
-        <p>
-          Complete{" "}
-          <span className="font-semibold text-primaryOne">
-            website design and development
-          </span>
-        </p>
-        <p>Social media management</p>
-        <p>Custom Ads management</p>
-        <p>
-          Fully <span className="font-semibold text-primaryOne"> designed</span>{" "}
-          and <span className="font-semibold text-primaryOne"> deployed</span>{" "}
-          web shop
-        </p>
-        <p>Payments covered!</p>
-        <p>
-          <span className="font-semibold text-primaryOne"> Sell</span> products
-          online
-        </p>
+      <div className="text-secondaryFour flex flex-col items-center">
+        {PREMIUM_FEATURES.map((feature) => {
+          const str = feature.split(",");
+          return (
+            <div className="flex">
+              {str.map((str) => (
+                <FeatureString feature={str} source="Premium" />
+              ))}
+            </div>
+          );
+        })}
       </div>
       <Link to="/pricing/advanced" onClick={scrollToTop}>
         <button className="py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white hover:bg-primaryTwoLight">

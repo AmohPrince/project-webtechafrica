@@ -10,22 +10,22 @@ export const PRICES = {
 };
 
 export const PREMIUM_FEATURES = [
+  "<sp>Unlimited, customer support",
   "Custom domain name",
   "Hosting",
-  "Unlimited customer support",
-  "Completed website design and development",
+  "<sp>Completed, website, <sp>design and development",
   "Social media management",
   "Custom Ads management",
-  "Sell products online",
-  "Fully designed and deployed web shop",
+  "<sp>Sell, products online",
+  "Fully, <sp>designed, and, <sp>deployed, web shop",
   "Payments covered!",
 ];
 
 export const BASIC_FEATURES = [
-  "Unlimited customer support",
+  "<sp>Unlimited, customer support",
   "Hosting",
   "Custom domain name",
-  "Complete website design and development",
+  "Complete, <sp>website design and development",
 ];
 
 function App() {

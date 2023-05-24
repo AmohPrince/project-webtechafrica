@@ -30,7 +30,7 @@ export const Home = () => {
       <HomeBackground />
       {/* Build your audience and grow your brand online */}
       <motion.section
-        className="flex flex-col sm:flex-row mt-[14%] justify-between item-start relative mx-[5%] sm:mx-[12%]"
+        className="flex flex-col sm:flex-row mt-[9%] justify-between item-start relative mx-[5%] sm:mx-[12%]"
         {...slideAnimation("left")}
       >
         <motion.div className="sm:w-[50%]" {...headContainerAnimation}>
