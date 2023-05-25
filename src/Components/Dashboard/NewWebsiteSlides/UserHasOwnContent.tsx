@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 import { SecondaryButton } from "../../SecondaryButton";
 
@@ -9,20 +9,8 @@ const UserHasOwnContent = ({
 }) => {
   const userHasOwnContentRef = useRef<HTMLInputElement>(null);
   const automaticContentGenerationRef = useRef<HTMLInputElement>(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const { selections, setSelections } = useNewWebsiteSelections();
-
-  useEffect(() => {
-    setIsButtonDisabled(
-      automaticContentGenerationRef.current?.checked === false &&
-        userHasOwnContentRef.current?.checked === false
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    userHasOwnContentRef.current?.checked,
-    automaticContentGenerationRef.current?.checked,
-  ]);
 
   return (
     <div className="bg-white p-6">
@@ -74,7 +62,7 @@ const UserHasOwnContent = ({
         }}
         className="outline-none hover:scale-100 transition-all ml-auto w-full sm:w-auto mt-5 sm:mt-0"
         onClick={() => setActiveStageId((prev) => prev + 1)}
-        disabled={isButtonDisabled}
+        disabled={selections.userHasOwnContent === null}
       />
     </div>
   );

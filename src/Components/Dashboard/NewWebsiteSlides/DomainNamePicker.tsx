@@ -102,14 +102,14 @@ const DomainNamePicker = ({
           </p>
         </div>
         <SecondaryButton
-          text="Pick plan"
+          text="Pick plan ✈"
           style={{
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
           }}
           className="outline-none hover:scale-100 transition-all ml-auto"
           onClick={() => setActiveStageId((prev) => prev + 1)}
-          disabled={isButtonDisabled}
+          disabled={selections.domainName === null}
         />
       </div>
       {/* only appears on small screens */}

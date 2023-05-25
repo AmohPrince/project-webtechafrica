@@ -14,7 +14,7 @@ export const ToolTip = ({
     <div
       className={`absolute -top-2 py-1 px-2 -translate-y-full text-center rounded-sm text-white text-xs bg-primaryOne ${
         className ? className : "left-1/2 -translate-x-1/2"
-      }`}
+      } ${className}`}
       style={style}
     >
       <p>{text}</p>

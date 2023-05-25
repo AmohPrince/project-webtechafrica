@@ -8,9 +8,6 @@ export const UserWebsiteDescription = ({
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [noOfCharacters, setNoOfCharacters] = useState<number>(0);
-  const [isProgressButtonDisabled, setIsProgressButtonDisabled] =
-    useState(true);
-
   const { setSelections, selections } = useNewWebsiteSelections();
 
   return (
@@ -25,15 +22,12 @@ export const UserWebsiteDescription = ({
         onChange={(e) => {
           setNoOfCharacters(e.target.value.length);
           if (e.target.value.length >= 250) {
-            setIsProgressButtonDisabled(false);
             setSelections((prev) => {
               return {
                 ...prev,
                 websiteDescription: e.target.value,
               };
             });
-          } else {
-            setIsProgressButtonDisabled(true);
           }
         }}
         style={{
@@ -49,7 +43,7 @@ export const UserWebsiteDescription = ({
         }}
         className="outline-none hover:scale-100 transition-all ml-auto w-full sm:w-auto"
         onClick={() => setActiveStageId((prev) => prev + 1)}
-        disabled={isProgressButtonDisabled}
+        disabled={selections.websiteDescription === null}
       />
     </div>
   );

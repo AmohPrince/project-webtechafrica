@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from "react";
-import PrimaryButton from "../../PrimaryButton";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { SecondaryButton } from "../../SecondaryButton";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { PurpleButton } from "./PurpleButton";
+import { BASIC_FEATURES, PREMIUM_FEATURES, PRICES } from "../../../App";
 
 const PlanSelector = ({
   setActiveStageId,
 }: {
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const [selected, setSelected] = useState<null | string>(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
   const { selections, setSelections } = useNewWebsiteSelections();
-
-  useEffect(() => {
-    if (selected) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected]);
 
   useEffect(() => {
     if (selections.websiteType.type === "E-commerce websites") {
@@ -32,7 +21,6 @@ const PlanSelector = ({
           plan: "Premium",
         };
       });
-      setSelected("Premium");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,7 +41,7 @@ const PlanSelector = ({
           }}
           className="outline-none hover:scale-100 transition-all ml-auto"
           onClick={() => setActiveStageId((prev) => prev + 1)}
-          disabled={isButtonDisabled}
+          disabled={selections.plan === null}
         />
       </div>
       <div className="sm:flex py-4">
@@ -62,15 +50,13 @@ const PlanSelector = ({
             <p className="font-bold text-lg">Basic</p>
             <p className="font-medium text-sm">Perfect for beginners</p>
             <p className="text-xl font-semibold mt-3 mb-4">
-              kes.899/<span className="text-gray-400 text-sm">monthly</span>{" "}
+              Ksh. {PRICES.basic}/
+              <span className="text-gray-400 text-sm">monthly</span>{" "}
             </p>
-            <PrimaryButton
-              text={selected === "Basic" ? "Basic it is 🤝" : "Choose Basic"}
-              className={`hover:scale-100 w-full transition-all ${
-                selected === "Basic"
-                  ? "bg-gray-400 rounded-md hover:bg-gray-400"
-                  : ""
-              }`}
+            <PurpleButton
+              text={
+                selections.plan === "Basic" ? "Basic it is 🤝" : "Choose Basic"
+              }
               onClick={() => {
                 setSelections((prev) => {
                   return {
@@ -78,26 +64,20 @@ const PlanSelector = ({
                     plan: "Basic",
                   };
                 });
-                setSelected("Basic");
               }}
+              className={`${
+                selections.plan === "Basic"
+                  ? "bg-gray-400 rounded-md hover:bg-gray-400"
+                  : "bg-primaryOne"
+              }`}
             />
             <div className="mt-5">
-              <p className="text-sm flex items-center">
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                Unlimited customer support
-              </p>
-              <p className="text-sm flex items-center">
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                Hosting
-              </p>
-              <p className="text-sm flex items-center">
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                Custom domain name
-              </p>
-              <p className="text-sm flex items-center">
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                Complete website design and development
-              </p>
+              {BASIC_FEATURES.map((feature) => (
+                <p className="text-sm flex items-center">
+                  <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                  {feature.replace(/<\/?sp>/g, "")}
+                </p>
+              ))}
             </div>
           </div>
         ) : (
@@ -111,17 +91,15 @@ const PlanSelector = ({
             Perfect for professionals and business
           </p>
           <p className="text-xl font-semibold mt-3 mb-4">
-            kes.5700/<span className="text-gray-400 text-sm">monthly</span>{" "}
+            Ksh. {PRICES.advanced}/
+            <span className="text-gray-400 text-sm">monthly</span>{" "}
           </p>
-          <PrimaryButton
+          <PurpleButton
             text={
-              selected === "Premium" ? "Premium it is 🤝" : "Choose Premium"
+              selections.plan === "Premium"
+                ? "Premium it is 🤝"
+                : "Choose Premium"
             }
-            className={`w-full hover:scale-100 ${
-              selected === "Premium"
-                ? "bg-gray-400 rounded-md hover:bg-gray-400"
-                : "bg-primaryOne"
-            }`}
             onClick={() => {
               setSelections((prev) => {
                 return {
@@ -129,46 +107,20 @@ const PlanSelector = ({
                   plan: "Premium",
                 };
               });
-              setSelected("Premium");
             }}
+            className={`w-full ${
+              selections.plan === "Premium"
+                ? "bg-gray-400 rounded-md hover:bg-gray-400 transition-all"
+                : "bg-primaryOne"
+            }`}
           />
           <div className="mt-5">
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Unlimited customer support
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Hosting
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Custom domain name
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Complete website design and development
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Social media management
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Custom Ads management
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Fully designed and deployed web shop
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Payments covered!
-            </p>
-            <p className="text-sm flex items-center">
-              <FontAwesomeIcon icon={faCheck} className="mr-2" />
-              Sell products online
-            </p>
+            {PREMIUM_FEATURES.map((feature) => (
+              <p className="text-sm flex items-center">
+                <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                {feature.replace(/<\/?sp>/g, "")}
+              </p>
+            ))}
           </div>
         </div>
       </div>
