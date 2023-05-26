@@ -1,6 +1,7 @@
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useContext, useEffect, useState } from "react";
 import { assets } from "../../../Assets/assets";
 import { globalData } from "../../../Pages/DashBoard";
@@ -53,7 +54,7 @@ export const PaymentsModal = ({
             onClick={() => setSelectingPaymentMethod("credit-card")}
           >
             <img src={assets.creditCard} alt="credit card" />
-            <p className="text-xs ml-2 font-medium">Credit/Debit Card</p>
+            <p className="text-xs ml-2 font-medium">Credit or Debit Card</p>
           </div>
           <div
             className={`border-primaryOne p-2 border rounded-sm flex items-center cursor-pointer ${
@@ -71,11 +72,21 @@ export const PaymentsModal = ({
           </div>
         </div>
       </div>
-      {selectingPaymentMethod === "credit-card" ? (
-        <CreditCardInput />
-      ) : (
-        <PayPalInput />
-      )}
+      <PayPalScriptProvider
+        options={{
+          "client-id":
+            "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
+          "data-user-id-token":
+            "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
+          components: "hosted-fields,buttons",
+        }}
+      >
+        {selectingPaymentMethod === "credit-card" ? (
+          <CreditCardInput />
+        ) : (
+          <PayPalInput />
+        )}
+      </PayPalScriptProvider>
     </div>
   );
 };

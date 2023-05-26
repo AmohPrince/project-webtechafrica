@@ -28,7 +28,7 @@ import Settings from "./Pages/Dashboard/Settings";
 import { AuthContextProvider } from "./Hooks/UseAuth";
 import { SelectionsProvider } from "./Hooks/useNewWebsiteSelections";
 import { ForgotPassword } from "./Pages/ForgotPassword";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { GlobalDataProvider } from "./Hooks/useGlobalData";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -36,14 +36,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <PayPalScriptProvider
-      options={{
-        "client-id":
-          "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
-      }}
-    >
-      <AnimatePresence>
-        <BrowserRouter>
+    <AnimatePresence>
+      <BrowserRouter>
+        <GlobalDataProvider>
           <AuthContextProvider>
             <SelectionsProvider>
               <Routes>
@@ -91,9 +86,9 @@ root.render(
               </Routes>
             </SelectionsProvider>
           </AuthContextProvider>
-        </BrowserRouter>
-      </AnimatePresence>
-    </PayPalScriptProvider>
+        </GlobalDataProvider>
+      </BrowserRouter>
+    </AnimatePresence>
   </React.StrictMode>
 );
 

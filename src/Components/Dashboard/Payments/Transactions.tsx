@@ -29,20 +29,20 @@ const Transactions = ({ type }: { type: "Upcoming" | "Past" }) => {
           <p className="w-1/5">Billing date</p>
         </div>
         {type === "Upcoming"
-          ? userData?.upcomingTransactions?.map((transaction) => (
-              <SinglePayment transaction={transaction} />
+          ? userData?.upcomingTransactions?.map((transaction, i) => (
+              <SinglePayment transaction={transaction} key={i} />
             ))
-          : userData?.pastTransactions?.map((transaction) => (
-              <SinglePayment transaction={transaction} />
+          : userData?.pastTransactions?.map((transaction, i) => (
+              <SinglePayment transaction={transaction} key={i} />
             ))}
       </div>
       <div className="sm:hidden">
         {type === "Upcoming"
-          ? userData?.upcomingTransactions?.map((transaction) => (
-              <SinglePaymentSmallScreen transaction={transaction} />
+          ? userData?.upcomingTransactions?.map((transaction, i) => (
+              <SinglePaymentSmallScreen transaction={transaction} key={i} />
             ))
-          : userData?.pastTransactions?.map((transaction) => (
-              <SinglePaymentSmallScreen transaction={transaction} />
+          : userData?.pastTransactions?.map((transaction, i) => (
+              <SinglePaymentSmallScreen transaction={transaction} key={i} />
             ))}
       </div>
     </>

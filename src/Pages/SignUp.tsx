@@ -10,16 +10,14 @@ import {
   redirectResult,
   signInWithGoogle,
 } from "../Firebase/firebase";
-import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
-import { useLocalStorage } from "../Hooks/UseLocalStorage";
 import { UserData } from "../Types/Global";
-import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
-import { Country, fetchCountries } from "../Util/FetchCountries";
 import { UserCredential } from "firebase/auth";
 import { addOrUpdateUserDataInDB } from "../Firebase/firestore";
 import { Wave } from "../Components/NavBar/Wave";
+import { useGlobalData } from "../Hooks/useGlobalData";
+import { PopUp } from "../Components/SignInOrSignUp/PopUp";
 
 type Inputs = {
   firstName: string;
@@ -33,16 +31,7 @@ type Inputs = {
 export const SignUp = () => {
   const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
   const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
-  const [countries, setCountries] = useLocalStorage<Country[] | null>(
-    null,
-    LOCAL_STORAGE_KEYS.USER
-  );
-
-  const [popUp, setPopUp] = useState<PopUpInfo>({
-    showing: false,
-    text: null,
-    type: null,
-  });
+  const { countries } = useGlobalData();
 
   const {
     register,
@@ -50,20 +39,21 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const { setPopUpInfo, popUpInfo } = useGlobalData();
   const navigate = useNavigate();
-
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   const emailParam = searchParams.get("email");
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setCreatingUserWithEmail(false);
     setCreatingUserWithGoogle(false);
-    setPopUp({ showing: true, text: text, type: type });
+    setPopUpInfo({ showing: true, text: text, type: type });
 
     setTimeout(() => {
       if (type === "success") {
-        setPopUp({
+        setPopUpInfo({
           showing: false,
           text: null,
           type: null,
@@ -134,15 +124,17 @@ export const SignUp = () => {
       setCreatingUserWithGoogle(false);
     };
     getRedirectResult();
-
-    fetchCountries().then((countries) => setCountries(countries));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="h-screen flex relative z-0">
-      {popUp.showing && (
-        <PopUp popUpInfo={popUp} setPopUp={setPopUp} className="w-1/3" />
+      {popUpInfo.showing && (
+        <PopUp
+          popUpInfo={popUpInfo}
+          setPopUp={setPopUpInfo}
+          className="w-1/3"
+        />
       )}
       <img
         src={
@@ -242,7 +234,10 @@ export const SignUp = () => {
                         countryA.name.common.localeCompare(countryB.name.common)
                       )
                       .map((country) => (
-                        <option value={country.name.official}>
+                        <option
+                          value={country.name.official}
+                          key={country.name.common}
+                        >
                           {country.name.common} ({country.cca2})
                         </option>
                       ))}

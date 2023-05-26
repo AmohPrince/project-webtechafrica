@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import { Wave } from "../Components/NavBar/Wave";
-import { PopUpInfo, PopUp } from "../Components/SignInOrSignUp/PopUp";
+import { PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
 import {
@@ -20,6 +20,7 @@ import {
   fetchUserDataFromDB,
 } from "../Firebase/firestore";
 import { useAuth } from "../Hooks/UseAuth";
+import { useGlobalData } from "../Hooks/useGlobalData";
 import { UserData } from "../Types/Global";
 
 type Inputs = {
@@ -44,19 +45,16 @@ const SignIn = () => {
 
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
   const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
-  const [popUp, setPopUp] = useState<PopUpInfo>({
-    showing: false,
-    text: null,
-    type: null,
-  });
+
+  const { popUpInfo, setPopUpInfo } = useGlobalData();
 
   const showPopUp = (type: "success" | "error", text: string) => {
     setSigningInWithEmail(false);
     setSigningInWithGoogle(false);
-    setPopUp({ showing: true, text: text, type: type });
+    setPopUpInfo({ showing: true, text: text, type: type });
     setTimeout(() => {
       if (type === "success") {
-        setPopUp({
+        setPopUpInfo({
           showing: false,
           text: null,
           type: null,
@@ -129,8 +127,12 @@ const SignIn = () => {
 
   return (
     <div className="h-screen flex relative">
-      {popUp.showing && (
-        <PopUp popUpInfo={popUp} setPopUp={setPopUp} className="w-1/3" />
+      {popUpInfo.showing && (
+        <PopUp
+          popUpInfo={popUpInfo}
+          setPopUp={setPopUpInfo}
+          className="w-1/3"
+        />
       )}
       <img
         src={

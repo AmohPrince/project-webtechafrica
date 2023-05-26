@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router";
 import { DashboardNavbar } from "../Components/Dashboard/DashboardNavbar";
 import DashBoardSideBar from "../Components/Dashboard/DashBoardSideBar";
 import DashBoardTitle from "../Components/Dashboard/DashBoardTitle";
+import { PopUp, PopUpInfo } from "../Components/SignInOrSignUp/PopUp";
 import { useAuth } from "../Hooks/UseAuth";
 
 export const globalData = createContext<{
@@ -12,8 +13,10 @@ export const globalData = createContext<{
       sub: string;
     }>
   >;
+  setPopUpInfo: React.Dispatch<React.SetStateAction<PopUpInfo>>;
 }>({
   setDashBoardTitleInfo: () => {},
+  setPopUpInfo: () => {},
 });
 
 const DashBoard = () => {
@@ -32,9 +35,17 @@ const DashBoard = () => {
   }, []);
 
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
+  const [popUpInfo, setPopUpInfo] = useState<PopUpInfo>({
+    showing: false,
+    text: "An error occurred",
+    type: "error",
+  });
 
   return (
     <div className="flex sm:w-screen overflow-x-hidden overflow-y-auto">
+      {popUpInfo.showing && (
+        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
+      )}
       <DashBoardSideBar
         setShowingSmallScreenMenu={setShowingSmallScreenMenu}
         className="hidden sm:block relative"
@@ -59,6 +70,7 @@ const DashBoard = () => {
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,
+            setPopUpInfo,
           }}
         >
           <Outlet />
