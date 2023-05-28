@@ -1,11 +1,13 @@
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useContext, useEffect, useState } from "react";
 import { assets } from "../../../Assets/assets";
+import { usePaypal } from "../../../Hooks/usePayPal";
 import { globalData } from "../../../Pages/DashBoard";
-import CreditCardInput from "./CreditCardInput";
+import { isSmallScreen } from "../../../Util/Utilities";
+import { CreditCardInput } from "./CreditCardInput";
 import PayPalInput from "./PayPalInput";
 
 export const PaymentsModal = ({
@@ -19,19 +21,19 @@ export const PaymentsModal = ({
     useState("credit-card");
 
   const { setDashBoardTitleInfo } = useContext(globalData);
+  const { clientTokenResponse, errors, isLoading } = usePaypal();
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
+    if (isSmallScreen()) {
       setDashBoardTitleInfo({
         h1: "Payments",
         sub: "Add your preferred payment method",
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setDashBoardTitleInfo]);
   return (
     <div
-      className={`flex-grow bg-white rounded-xl ${className} absolute center-absolutely border-primaryOne border-2 z-10 transition-all`}
+      className={`flex flex-col flex-grow bg-white rounded-xl ${className} absolute center-absolutely border-primaryOne border-2 z-10 transition-all`}
     >
       <div className="py-3 px-5 border-b flex justify-between items-center">
         <p className="font-semibold">Payment</p>
@@ -72,21 +74,33 @@ export const PaymentsModal = ({
           </div>
         </div>
       </div>
-      <PayPalScriptProvider
-        options={{
-          "client-id":
-            "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
-          "data-user-id-token":
-            "ASZizx-MZVuW6_EhVic9QPHF_n9NGzmUaA-zYxlo2W1vEEdrnWHSyD4h4PfC1IbZRxF2v2oF7LXgRXW2",
-          components: "hosted-fields,buttons",
-        }}
-      >
-        {selectingPaymentMethod === "credit-card" ? (
-          <CreditCardInput />
-        ) : (
-          <PayPalInput />
-        )}
-      </PayPalScriptProvider>
+      {isLoading ? (
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="w-5 h-5 mx-auto my-5"
+        />
+      ) : errors.length > 0 ? (
+        <p>An error occurred </p>
+      ) : (
+        clientTokenResponse && (
+          <PayPalScriptProvider
+            options={{
+              "client-id": process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT_ID!,
+              components: "buttons,hosted-fields",
+              "data-client-token": clientTokenResponse.client_token,
+              intent: "capture",
+              vault: false,
+            }}
+          >
+            {selectingPaymentMethod === "credit-card" ? (
+              <CreditCardInput />
+            ) : (
+              <PayPalInput />
+            )}
+          </PayPalScriptProvider>
+        )
+      )}
     </div>
   );
 };
