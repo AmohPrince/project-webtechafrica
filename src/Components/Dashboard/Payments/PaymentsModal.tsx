@@ -31,6 +31,7 @@ export const PaymentsModal = ({
       });
     }
   }, [setDashBoardTitleInfo]);
+
   return (
     <div
       className={`flex flex-col flex-grow bg-white rounded-xl ${className} absolute center-absolutely border-primaryOne border-2 z-10 transition-all`}
@@ -81,25 +82,29 @@ export const PaymentsModal = ({
           className="w-5 h-5 mx-auto my-5"
         />
       ) : errors.length > 0 ? (
-        <p>An error occurred </p>
+        <p className="mx-auto my-5 text-sm">An error occurred </p>
+      ) : clientTokenResponse ? (
+        <PayPalScriptProvider
+          options={{
+            "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID!,
+            components: "buttons,hosted-fields",
+            "data-client-token": clientTokenResponse.client_token,
+            intent: "capture",
+            vault: false,
+          }}
+        >
+          {selectingPaymentMethod === "credit-card" ? (
+            <CreditCardInput />
+          ) : (
+            <PayPalInput />
+          )}
+        </PayPalScriptProvider>
       ) : (
-        clientTokenResponse && (
-          <PayPalScriptProvider
-            options={{
-              "client-id": process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT_ID!,
-              components: "buttons,hosted-fields",
-              "data-client-token": clientTokenResponse.client_token,
-              intent: "capture",
-              vault: false,
-            }}
-          >
-            {selectingPaymentMethod === "credit-card" ? (
-              <CreditCardInput />
-            ) : (
-              <PayPalInput />
-            )}
-          </PayPalScriptProvider>
-        )
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="w-5 h-5 mx-auto my-5"
+        />
       )}
     </div>
   );

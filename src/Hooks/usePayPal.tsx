@@ -118,8 +118,8 @@ const getClientToken = async (
 
 const getAccessToken = async (): Promise<string> => {
   const paypalApiUrl = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
-  const clientId = process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT_ID;
-  const secret = process.env.REACT_APP_PAYPAL_SANDBOX_SECRET;
+  const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
+  const secret = process.env.REACT_APP_PAYPAL_SECRET;
 
   const requestBody = "grant_type=client_credentials";
   const authString = `${clientId}:${secret}`;

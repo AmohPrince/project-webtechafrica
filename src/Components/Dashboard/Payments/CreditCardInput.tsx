@@ -5,20 +5,7 @@ import {
   usePayPalHostedFields,
 } from "@paypal/react-paypal-js";
 
-const CUSTOM_FIELD_STYLE = {
-  border: "1px solid #606060",
-  boxShadow: "2px 2px 10px 2px rgba(0,0,0,0.1)",
-};
-const INVALID_COLOR = {
-  color: "#dc3545",
-};
-
-// Example of custom component to handle form submit
-const SubmitPayment = ({
-  customStyle,
-}: {
-  customStyle: React.CSSProperties;
-}) => {
+const SubmitPayment = () => {
   const [paying, setPaying] = useState(false);
   const cardHolderName = useRef<HTMLInputElement>(null);
   const hostedField = usePayPalHostedFields();
@@ -73,7 +60,6 @@ const SubmitPayment = ({
           id="card-holder"
           ref={cardHolderName}
           className="card-field"
-          style={{ ...customStyle, outline: "none" }}
           type="text"
           placeholder="Full name"
         />
@@ -98,51 +84,44 @@ export const CreditCardInput = () => {
     >
       <p>
         Card Number
-        <span style={INVALID_COLOR}>*</span>
+        <span>*</span>
       </p>
       <PayPalHostedField
-        id="card-number" // Unique ID for card number field
+        id="card-number"
         className="card-field"
         hostedFieldType="number"
         options={{
-          selector: "#card-number", // Unique selector for card number field
+          selector: "#card-number",
           placeholder: "4111 1111 1111 1111",
         }}
       />
       <p>
-        CVV<span style={INVALID_COLOR}>*</span>
+        CVV<span>*</span>
       </p>
       <PayPalHostedField
-        id="cvv" // Unique ID for CVV field
+        id="cvv"
         className="card-field"
-        style={CUSTOM_FIELD_STYLE}
         hostedFieldType="cvv"
         options={{
-          selector: "#cvv", // Unique selector for CVV field
+          selector: "#cvv",
           placeholder: "123",
           maskInput: true,
         }}
       />
       <p>
         Expiration Date
-        <span style={INVALID_COLOR}>*</span>
+        <span>*</span>
       </p>
       <PayPalHostedField
-        id="expiration-date" // Unique ID for expiration date field
+        id="expiration-date"
         className="card-field"
-        style={CUSTOM_FIELD_STYLE}
         hostedFieldType="expirationDate"
         options={{
-          selector: "#expiration-date-field", // Unique selector for expiration date field
+          selector: "#expiration-date-field",
           placeholder: "MM/YYYY",
         }}
       />
-      <SubmitPayment
-        customStyle={{
-          border: "1px solid #606060",
-          boxShadow: "2px 2px 10px 2px rgba(0,0,0,0.1)",
-        }}
-      />
+      <SubmitPayment />
     </PayPalHostedFieldsProvider>
   );
 };
