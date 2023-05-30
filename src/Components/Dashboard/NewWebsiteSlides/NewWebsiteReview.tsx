@@ -38,6 +38,7 @@ const NewWebsiteReview = ({
           selections: selections,
           plan: selections.plan!,
           createdAt: new Date().getTime(),
+          stage: "In Review",
         },
       ],
     };

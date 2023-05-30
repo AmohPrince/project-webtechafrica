@@ -11,6 +11,7 @@ export const testUserData: UserData = {
         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
       plan: "Basic",
       createdAt: 1682234423660,
+      stage: "Deployed",
     },
   ],
   devWebsites: [
@@ -22,6 +23,7 @@ export const testUserData: UserData = {
         "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/08/Empire-Flippers-an-online-business-marketplace.webp",
       plan: "Basic",
       createdAt: 1682234423660,
+      stage: "Development",
     },
     {
       id: "Trsfsf",
@@ -31,6 +33,7 @@ export const testUserData: UserData = {
         "https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/602f2109a787c146dcbe2b66_601b1c1f7567a7399353fe47_traackr.jpeg",
       plan: "Premium",
       createdAt: 1682234423660,
+      stage: "Development",
     },
   ],
   pendingVerificationWebsites: [
@@ -58,13 +61,49 @@ export const testUserData: UserData = {
           },
         },
         userHasOwnContent: false,
-        websiteDescription: "svvysvtjstvs",
+        websiteDescription:
+          "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy.",
         websiteType: {
           type: "E-commerce websites",
           description:
             "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy.",
         },
       },
+      stage: "In Review",
+    },
+    {
+      id: "sgukkb",
+      url: "website.com",
+      decisionDeadline: new Date().getTime(),
+      plan: "Basic",
+      createdAt: 1682234423660,
+      selections: {
+        domainName: "website.com",
+        plan: "Basic",
+        theme: {
+          id: "dark",
+          name: "Dark",
+          colors: {
+            primary: "#ff5277",
+            secondary: "#43a9a3",
+            text: "#ffffff",
+            border: "#2d2d2d",
+            background: "#0e141b",
+            primaryOffset: "#ff2957",
+            textOffset: "#818a91",
+            backgroundOffset: "#252526",
+          },
+        },
+        userHasOwnContent: false,
+        websiteDescription:
+          "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy.",
+        websiteType: {
+          type: "E-commerce websites",
+          description:
+            "An E-commerce website is an online platform where businesses can sell their products or services. These websites have a catalog of products, a shopping cart system, and a checkout process. They also feature secure payment gateways, customer reviews, ratings, and recommendations. Personalized accounts, wish lists, and subscription services may also be available. E-commerce websites can be owned by a single retailer or can serve as a platform for multiple vendors. Popular examples include Amazon, eBay, and Etsy.",
+        },
+      },
+      stage: "Reviewed",
     },
   ],
   cards: [

@@ -16,7 +16,7 @@ export const PendingVerificationsPage = () => {
   }, [setDashBoardTitleInfo]);
 
   return (
-    <div className="bg-white mt-4 py-4 px-6 flex flex-wrap justify-between gap-y-4">
+    <div className="bg-white mt-4 py-4 px-6 flex flex-col gap-y-4">
       {userData?.pendingVerificationWebsites ? (
         userData?.pendingVerificationWebsites.map((website) => (
           <PendingVerificationWebsite website={website} key={website.id} />

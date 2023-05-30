@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { ActiveWebsite, DevWebsite } from "../../Types/Global";
 import { extractHostname, formatDate } from "../../Util/Utilities";
+import { WebsiteStage } from "./WebsiteStage";
 
 export const Website = ({
   website,
@@ -24,11 +25,7 @@ export const Website = ({
                 onClick={() => window.open(website.url)}
               />
             </div>
-            {isDevWebsite && (
-              <div className="rounded-md bg-lightGreen text-green-600 text-center w-max py-2 px-4 text-xs">
-                In Development
-              </div>
-            )}
+            {isDevWebsite && <WebsiteStage stage={website.stage} />}
           </div>
           {isDevWebsite && (
             <p>

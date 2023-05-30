@@ -47,12 +47,11 @@ const DashBoardSideBar = ({
           name="new-website"
           onClick={() => setShowingSmallScreenMenu(false)}
         />
+        <DashboardOption
+          name="settings"
+          onClick={() => setShowingSmallScreenMenu(false)}
+        />
       </div>
-      <DashboardOption
-        name="settings"
-        className="absolute bottom-10 w-full"
-        onClick={() => setShowingSmallScreenMenu(false)}
-      />
     </motion.div>
   );
 };

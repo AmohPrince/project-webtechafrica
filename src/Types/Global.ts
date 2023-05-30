@@ -37,11 +37,18 @@ export type Transaction = {
   card: Card;
 };
 
+export type WebsiteStage =
+  | "In Review"
+  | "Reviewed"
+  | "Development"
+  | "Deployed";
+
 export type Website = {
   id: string;
   url: string;
   plan: "Basic" | "Premium";
   createdAt: number;
+  stage: WebsiteStage;
 };
 
 export type ActiveWebsite = Website & {

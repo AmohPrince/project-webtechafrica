@@ -26,6 +26,7 @@ module.exports = {
         lightOrange: "#fff1e5",
         lightGreen: "#D9FFE9",
         magloOrange: "#F2994A",
+        black3: "#797979",
       },
     },
   },

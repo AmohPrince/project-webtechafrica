@@ -62,12 +62,7 @@ const Payments = () => {
             setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
           />
         )}
-        {activeSmallScreenTab === "cards" && (
-          <Cards
-            setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
-            setActiveSmallScreenTab={setActiveSmallScreenTab}
-          />
-        )}
+        {activeSmallScreenTab === "cards" && <Cards />}
         {activeSmallScreenTab === "transactions" && (
           <>
             <p className="font-semibold mb-2">Upcoming payments</p>
@@ -97,10 +92,7 @@ const Payments = () => {
             <Transactions type="Past" />
           </div>
         </div>
-        <Cards
-          setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
-          setActiveSmallScreenTab={setActiveSmallScreenTab}
-        />
+        <Cards />
       </div>
     </div>
   );

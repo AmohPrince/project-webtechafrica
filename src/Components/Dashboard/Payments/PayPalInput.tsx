@@ -61,10 +61,10 @@ const PayPalInput = () => {
             type: "error",
           })
         }
-        style={{
-          tagline: true,
-          layout: "horizontal",
-        }}
+        // style={{
+        //   tagline: true,
+        //   layout: "horizontal",
+        // }}
       />
     </div>
   );
