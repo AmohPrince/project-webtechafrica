@@ -17,8 +17,9 @@ export const PaymentsModal = ({
   setShowPaymentMethodsModal: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
 }) => {
-  const [selectingPaymentMethod, setSelectingPaymentMethod] =
-    useState("credit-card");
+  const [selectingPaymentMethod, setSelectingPaymentMethod] = useState<
+    "credit-card" | "paypal"
+  >("credit-card");
 
   const { setDashBoardTitleInfo } = useContext(globalData);
   const { clientTokenResponse, errors, isLoading } = usePaypal();

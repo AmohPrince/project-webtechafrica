@@ -81,6 +81,7 @@ export const CreditCardInput = () => {
       createOrder={() => {
         return Promise.resolve("Test");
       }}
+      notEligibleError={<p>notEligibleError</p>}
     >
       <p>
         Card Number
