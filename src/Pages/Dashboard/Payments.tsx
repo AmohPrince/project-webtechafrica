@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 // import { useAuth } from "../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
-import { PaymentsModal } from "../Components/Dashboard/Payments/PaymentsModal";
-import { Cards } from "../Components/Dashboard/Payments/Cards";
-import Transactions from "../Components/Dashboard/Payments/Transactions";
+import { PaymentsModal } from "../../Components/Dashboard/Payments/PaymentsModal";
+import { Cards } from "../../Components/Dashboard/Payments/Cards";
+import Transactions from "../../Components/Dashboard/Payments/Transactions";
 
 const Payments = () => {
   // const { user } = useAuth();

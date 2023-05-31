@@ -1,72 +1,96 @@
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React, { useContext } from "react";
-import { globalData } from "../../../Pages/DashBoard";
+import { usePaypal } from "../../../Hooks/usePayPal";
+import { globalData } from "../../../Pages/Dashboard/DashBoard";
 
 const PayPalInput = () => {
-  const { setPopUpInfo } = useContext(globalData);
+  const { showNotification } = useContext(globalData);
+  const { clientTokenResponse, errors, isLoading } = usePaypal();
   return (
-    <div className="px-5">
-      <p className="mt-2 text-sm font-semibold">Paypal connection</p>
-      <p className="text-xs text-gray-500">
-        This is just to link your account. You are not going to charged.
-      </p>
-      <PayPalButtons
-        className="mt-6 playfair mx-auto"
-        onApprove={(data: any, actions): Promise<void> => {
-          console.log(data, "onApproveData");
-          // actions.restart();
-          // capture is for capturing for later withdrawal.
-          // actions.order
-          //   ?.capture()
-          //   .then((captured) => console.log(captured, "Captured"));
-          actions.order?.get().then((get) => {
-            console.log(get, "get");
-            //add paypal to user database
-            if (get.status === "APPROVED") {
-              setPopUpInfo({
-                showing: true,
-                text: `You successfully connected your paypal account!`,
-                type: "success",
-              });
-            }
-          });
-          return Promise.resolve();
-        }}
-        createOrder={(data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: "0.01",
-                  currency_code: "USD",
-                },
-              },
-            ],
-            // application_context: ,
-            // payer ,
-            // intent: "AUTHORIZE",
-          });
-        }}
-        onError={(err: Record<string, unknown>) =>
-          setPopUpInfo({
-            showing: true,
-            text: err.message as string,
-            type: "error",
-          })
-        }
-        onCancel={(err: Record<string, unknown>) =>
-          setPopUpInfo({
-            showing: true,
-            text: "You just cancelled the paypal connection",
-            type: "error",
-          })
-        }
-        // style={{
-        //   tagline: true,
-        //   layout: "horizontal",
-        // }}
-      />
-    </div>
+    <>
+      {isLoading ? (
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="w-5 h-5 mx-auto my-5"
+        />
+      ) : errors ? (
+        <p className="mx-auto my-5 text-sm">
+          An error occurred loading paypal{" "}
+        </p>
+      ) : clientTokenResponse ? (
+        <PayPalScriptProvider
+          options={{
+            "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID!,
+            components: "buttons,hosted-fields",
+            "data-client-token": clientTokenResponse.client_token,
+            intent: "capture",
+            vault: false,
+          }}
+        >
+          <div>
+            <p className="mt-2 text-sm font-semibold">Paypal</p>
+            <p className="text-xs text-gray-500">
+              You can pay with your paypal account but no worries if you dont
+              have a paypal account! You can pay with your credit card by
+              clicking on the Debit or Credit Card option.You can pay regardless
+              of whether or not you have a paypal account!
+            </p>
+            <PayPalButtons
+              className="mt-6 playfair mx-auto"
+              onApprove={(data: any, actions): Promise<void> => {
+                console.log(data, "onApproveData");
+                // actions.restart();
+                // capture is for capturing for later withdrawal.
+                // actions.order
+                //   ?.capture()
+                //   .then((captured) => console.log(captured, "Captured"));
+                actions.order?.get().then((get) => {
+                  console.log(get, "get");
+                  //add paypal to user database
+                  if (get.status === "APPROVED") {
+                    showNotification(
+                      "Payment was successful, somebody is now working on your website!",
+                      "success"
+                    );
+                  }
+                });
+                return Promise.resolve();
+              }}
+              createOrder={(data, actions) => {
+                console.log(data);
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "0.01",
+                        currency_code: "USD",
+                      },
+                    },
+                  ],
+                  // application_context: ,
+                  // payer ,
+                  // intent: "AUTHORIZE",
+                });
+              }}
+              onError={(err: Record<string, unknown>) =>
+                showNotification(err.message as string, "error")
+              }
+              onCancel={(err: Record<string, unknown>) => {
+                showNotification(
+                  "You cancelled the paypal transaction",
+                  "error"
+                );
+              }}
+            />
+          </div>
+        </PayPalScriptProvider>
+      ) : (
+        <p>TF</p>
+      )}
+    </>
   );
 };
 

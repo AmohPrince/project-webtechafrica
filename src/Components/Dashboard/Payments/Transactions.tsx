@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useAuth } from "../../../Hooks/UseAuth";
-import { globalData } from "../../../Pages/DashBoard";
+import { globalData } from "../../../Pages/Dashboard/DashBoard";
 import SinglePayment from "./SinglePayment";
 import { SinglePaymentSmallScreen } from "./SinglePaymentSmallScreen";
 

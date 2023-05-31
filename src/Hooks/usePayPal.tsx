@@ -16,14 +16,15 @@ export const usePaypal = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [clientTokenResponse, setClientTokenResponse] =
     useState<ClientTokenResponse | null>(null);
-  const [errors, setErrors] = useState<any[]>([]);
+  const [errors, setErrors] = useState<any>(null);
 
   const fetchClientToken = async () => {
+    setIsLoading(true);
     try {
       const token = await getClientToken();
       setClientTokenResponse(token);
     } catch (err) {
-      setErrors((prevErrors) => [...prevErrors, err]);
+      setErrors(err);
     } finally {
       setIsLoading(false);
     }

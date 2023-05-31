@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { DashboardNavbar } from "../Components/Dashboard/DashboardNavbar";
-import DashBoardSideBar from "../Components/Dashboard/DashBoardSideBar";
-import DashBoardTitle from "../Components/Dashboard/DashBoardTitle";
-import { PopUp, PopUpInfo } from "../Components/SignInOrSignUp/PopUp";
-import { useAuth } from "../Hooks/UseAuth";
+import { DashboardNavbar } from "../../Components/Dashboard/DashboardNavbar";
+import DashBoardSideBar from "../../Components/Dashboard/DashBoardSideBar";
+import DashBoardTitle from "../../Components/Dashboard/DashBoardTitle";
+import { PopUp, PopUpInfo } from "../../Components/SignInOrSignUp/PopUp";
+import { useAuth } from "../../Hooks/UseAuth";
 
 export const globalData = createContext<{
   setDashBoardTitleInfo: React.Dispatch<
@@ -13,11 +13,8 @@ export const globalData = createContext<{
       sub: string;
     }>
   >;
-  setPopUpInfo: React.Dispatch<React.SetStateAction<PopUpInfo>>;
-}>({
-  setDashBoardTitleInfo: () => {},
-  setPopUpInfo: () => {},
-});
+  showNotification: (message: string, type: "error" | "success") => void;
+}>(null as any);
 
 const DashBoard = () => {
   const { user } = useAuth();
@@ -40,6 +37,14 @@ const DashBoard = () => {
     text: "An error occurred",
     type: "error",
   });
+
+  const showNotification = (message: string, type: "error" | "success") => {
+    setPopUpInfo({
+      showing: true,
+      text: message,
+      type: type,
+    });
+  };
 
   return (
     <div className="flex sm:w-screen overflow-x-hidden overflow-y-auto">
@@ -70,7 +75,7 @@ const DashBoard = () => {
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,
-            setPopUpInfo,
+            showNotification,
           }}
         >
           <Outlet />

@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import SelectThemeSlide from "./SelectThemeSlide";
-import PlanSelector from "./PlanSelector";
-import SelectWebsiteType from "./SelectWebsiteType";
-import { UserWebsiteDescription } from "./UserWebsiteDescription";
-import UserHasOwnContent from "./UserHasOwnContent";
-import NewWebsiteReview from "./NewWebsiteReview";
-import DomainNamePicker from "./DomainNamePicker";
-import { globalData } from "../../../Pages/DashBoard";
-import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
-import Confirmation from "../Confirmation";
-import { StageSwitch } from "./StageSwitch";
+import SelectThemeSlide from "../../Components/Dashboard/NewWebsiteSlides/SelectThemeSlide";
+import PlanSelector from "../../Components/Dashboard/NewWebsiteSlides/PlanSelector";
+import SelectWebsiteType from "../../Components/Dashboard/NewWebsiteSlides/SelectWebsiteType";
+import { UserWebsiteDescription } from "../../Components/Dashboard/NewWebsiteSlides/UserWebsiteDescription";
+import UserHasOwnContent from "../../Components/Dashboard/NewWebsiteSlides/UserHasOwnContent";
+import NewWebsiteReview from "../../Components/Dashboard/NewWebsiteSlides/NewWebsiteReview";
+import DomainNamePicker from "../../Components/Dashboard/NewWebsiteSlides/DomainNamePicker";
+import { globalData } from "./DashBoard";
+import { useNewWebsiteSelections } from "../../Hooks/useNewWebsiteSelections";
+import Confirmation from "../../Components/Dashboard/Confirmation";
+import { StageSwitch } from "../../Components/Dashboard/NewWebsiteSlides/StageSwitch";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);

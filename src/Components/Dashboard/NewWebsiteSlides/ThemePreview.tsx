@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme } from "../../Types/Global";
+import { Theme } from "../../../Types/Global";
 import LVLogo from "./LVLogo";
 
 const ThemePreview = ({ theme }: { theme: Theme }) => {

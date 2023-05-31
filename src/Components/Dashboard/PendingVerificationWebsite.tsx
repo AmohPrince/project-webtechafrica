@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { PendingVerificationWebsite as PendingVerificationWebsiteType } from "../../Types/Global";
 import { formatDate } from "../../Util/Utilities";
+import PrimaryButton from "../PrimaryButton";
+import { PaymentsModal } from "./Payments/PaymentsModal";
 import { ThemeBox } from "./ThemeBox";
 import { WebsiteStage } from "./WebsiteStage";
 
@@ -9,11 +11,21 @@ export const PendingVerificationWebsite = ({
 }: {
   website: PendingVerificationWebsiteType;
 }) => {
+  const [isShowingPaymentsModal, setIsShowingPaymentsModal] = useState(false);
+
   return (
     <div className="border w-full bg-white p-4 sm:p-6 rounded-2xl font-semibold">
-      <WebsiteStage stage={website.stage} />
+      <div className="flex items-center justify-between">
+        <WebsiteStage stage={website.stage} />
+        {website.stage === "Reviewed" && (
+          <PrimaryButton
+            text="Subscribe"
+            onClick={() => setIsShowingPaymentsModal(true)}
+          />
+        )}
+      </div>
       <p>Website type description</p>
-      <p className="text-gray-500 text-sm my-5">
+      <p className="text-gray-500 text-sm my-4">
         {website.selections.websiteDescription}
       </p>
       <p className="my-2">Theme</p>
@@ -43,6 +55,9 @@ export const PendingVerificationWebsite = ({
           <p>{website.selections.websiteType.type}</p>
         </div>
       </div>
+      {isShowingPaymentsModal && (
+        <PaymentsModal setShowPaymentMethodsModal={setIsShowingPaymentsModal} />
+      )}
     </div>
   );
 };

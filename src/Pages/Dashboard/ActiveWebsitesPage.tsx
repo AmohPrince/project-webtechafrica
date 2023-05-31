@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import NoWebsite from "../Components/Dashboard/NoWebsite";
-import { Website } from "../Components/Dashboard/Website";
-import { useAuth } from "../Hooks/UseAuth";
+import NoWebsite from "../../Components/Dashboard/NoWebsite";
+import { Website } from "../../Components/Dashboard/Website";
+import { useAuth } from "../../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
 
 const ActiveWebsitesPage = () => {

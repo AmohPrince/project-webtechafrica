@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { useAuth } from "../Hooks/UseAuth";
+import { useAuth } from "../../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
-import { PendingVerificationWebsite } from "../Components/Dashboard/PendingVerificationWebsite";
-import NoWebsite from "../Components/Dashboard/NoWebsite";
+import { PendingVerificationWebsite } from "../../Components/Dashboard/PendingVerificationWebsite";
+import NoWebsite from "../../Components/Dashboard/NoWebsite";
 
 export const PendingVerificationsPage = () => {
   const { userData } = useAuth();

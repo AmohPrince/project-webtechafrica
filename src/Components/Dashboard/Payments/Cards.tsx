@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useAuth } from "../../../Hooks/UseAuth";
-import { globalData } from "../../../Pages/DashBoard";
+import { globalData } from "../../../Pages/Dashboard/DashBoard";
 import { CardInfo } from "./CardInfo";
 
 export const Cards = () => {
