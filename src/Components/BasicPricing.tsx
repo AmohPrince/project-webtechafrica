@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BASIC_FEATURES, PRICES } from "../App";
+import { BASIC_FEATURES } from "../App";
+import { useGlobalData } from "../Hooks/useGlobalData";
 import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
 import { FeatureString } from "./FeatureString";
 
 export const BasicPricing = ({ className }: { className: string }) => {
+  const { price } = useGlobalData();
+
   return (
     <div
       className={`py-12 px-4 sm:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
@@ -18,17 +21,22 @@ export const BasicPricing = ({ className }: { className: string }) => {
       </div>
       <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
         <p className="font-extrabold text-4xl mb-4">
-          Ksh. {PRICES.basic} <span className="text-sm">/ month</span>
+          {price.basic} {price.currency}{" "}
+          <span className="text-sm">/ month</span>
         </p>
-        <Billed text={`Billed as Ksh ${getYearly(PRICES.basic)} per year`} />
+        <Billed
+          text={`Billed as ${getYearly(price.basic)} ${
+            price.currency
+          } per year`}
+        />
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
         {BASIC_FEATURES.map((feature) => {
           const str = feature.split(",");
           return (
-            <div className="flex whitespace-nowrap">
+            <div className="flex whitespace-nowrap" key={feature}>
               {str.map((str) => (
-                <FeatureString feature={str} source="Basic" />
+                <FeatureString feature={str} source="Basic" key={str} />
               ))}
             </div>
           );

@@ -43,12 +43,6 @@ export const PaymentsModal = ({
           size="xs"
         />
       </div>
-      <p className="text-sm text-gray-500">
-        Congratulations for getting this far! Your money will be fully refunded
-        if by chance you do not like what will be created for you! Get your 2nd
-        month for free i.e you are getting two months for the price of one right
-        now! So what are you waiting for lets get started!
-      </p>
       <div className="py-2">
         <p className="text-sm font-semibold">Select payment method</p>
         <div className="flex gap-x-4 sm:gap-x-2 mt-2">

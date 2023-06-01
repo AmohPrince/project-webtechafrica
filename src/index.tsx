@@ -15,7 +15,6 @@ import Blog from "./Pages/Blog";
 import SingleBlog from "./Pages/SingleBlog";
 import Contact from "./Pages/Contact";
 import FourZeroFour from "./Pages/FourZeroFour";
-import { AnimatePresence } from "framer-motion";
 import SignIn from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import DashBoard from "./Pages/Dashboard/DashBoard";
@@ -36,59 +35,57 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AnimatePresence>
-      <BrowserRouter>
-        <GlobalDataProvider>
-          <AuthContextProvider>
-            <SelectionsProvider>
-              <Routes>
-                <Route path="/" element={<App />}>
-                  <Route element={<Home />} index />
-                  <Route element={<About />} path="about-us" />
-                  <Route element={<Features />} path="features" />
-                  <Route element={<Pricing />} path="pricing" />
-                  <Route element={<BasicPricingPage />} path="pricing/basic" />
-                  <Route
-                    element={<AdvancedPricingPage />}
-                    path="pricing/advanced"
-                  />
-                  <Route element={<Blog />} path="blog" />
-                  <Route element={<SingleBlog />} path="blog/:title" />
-                  <Route element={<Contact />} path="contact" />
-                  <Route path="*" element={<FourZeroFour />} />
-                </Route>
-                <Route path="/sign-in" element={<SignIn />} />
+    <BrowserRouter>
+      <GlobalDataProvider>
+        <AuthContextProvider>
+          <SelectionsProvider>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route element={<Home />} index />
+                <Route element={<About />} path="about-us" />
+                <Route element={<Features />} path="features" />
+                <Route element={<Pricing />} path="pricing" />
+                <Route element={<BasicPricingPage />} path="pricing/basic" />
                 <Route
-                  path="/sign-in/forgot-password"
-                  element={<ForgotPassword />}
+                  element={<AdvancedPricingPage />}
+                  path="pricing/advanced"
                 />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/dashboard" element={<DashBoard />}>
-                  <Route
-                    element={<ActiveWebsitesPage />}
-                    // path="active-websites"
-                    index
-                  />
-                  <Route
-                    element={<ActiveWebsitesPage />}
-                    path="active-websites"
-                    index
-                  />
-                  <Route element={<DevWebsitesPage />} path="dev-websites" />
-                  <Route element={<Payments />} path="payments" />
-                  <Route element={<WebsiteBuilderForm />} path="new-website" />
-                  <Route
-                    element={<PendingVerificationsPage />}
-                    path="pending-verification"
-                  />
-                  <Route element={<Settings />} path="settings" />
-                </Route>
-              </Routes>
-            </SelectionsProvider>
-          </AuthContextProvider>
-        </GlobalDataProvider>
-      </BrowserRouter>
-    </AnimatePresence>
+                <Route element={<Blog />} path="blog" />
+                <Route element={<SingleBlog />} path="blog/:title" />
+                <Route element={<Contact />} path="contact" />
+                <Route path="*" element={<FourZeroFour />} />
+              </Route>
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route
+                path="/sign-in/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/dashboard" element={<DashBoard />}>
+                <Route
+                  element={<ActiveWebsitesPage />}
+                  // path="active-websites"
+                  index
+                />
+                <Route
+                  element={<ActiveWebsitesPage />}
+                  path="active-websites"
+                  index
+                />
+                <Route element={<DevWebsitesPage />} path="dev-websites" />
+                <Route element={<Payments />} path="payments" />
+                <Route element={<WebsiteBuilderForm />} path="new-website" />
+                <Route
+                  element={<PendingVerificationsPage />}
+                  path="pending-verification"
+                />
+                <Route element={<Settings />} path="settings" />
+              </Route>
+            </Routes>
+          </SelectionsProvider>
+        </AuthContextProvider>
+      </GlobalDataProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -1,15 +1,9 @@
-import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/NavBar/Navbar";
 import { PopUp } from "./Components/SignInOrSignUp/PopUp";
 import { useGlobalData } from "./Hooks/useGlobalData";
-
-export const PRICES = {
-  basic: 3999,
-  advanced: 9499,
-};
 
 export const PREMIUM_FEATURES = [
   "<sp>Unlimited, customer support",
@@ -41,11 +35,9 @@ function App() {
           className="w-1/3"
         />
       )}
-      <AnimatePresence>
-        <Navbar />
-        <Outlet />
-        <Footer />
-      </AnimatePresence>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </div>
   );
 }

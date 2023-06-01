@@ -2,14 +2,16 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
-import { BASIC_FEATURES, PREMIUM_FEATURES, PRICES } from "../App";
+import { BASIC_FEATURES, PREMIUM_FEATURES } from "../App";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
 import { useAuth } from "../Hooks/UseAuth";
+import { useGlobalData } from "../Hooks/useGlobalData";
 import { scrollToTop } from "../Util/Utilities";
 
 const BasicPricingPage = () => {
   const { user } = useAuth();
+  const { price } = useGlobalData();
   return (
     <section className="mx-[5%] sm:mx-[12%]">
       <CircleBackGround />
@@ -36,12 +38,13 @@ const BasicPricingPage = () => {
         <div className="rounded-[30px] bg-secondaryOne px-10 py-9 w-full mt-5 sm:mt-0 sm:w-[45%]">
           <h2 className="h3">So how much will it cost me?</h2>
           <p className="default-paragraph mb-8">
-            The basic plan currently goes for as little as Ksh {PRICES.basic} /
-            month. This is inclusive of everything listed in the basic plan. All
-            you have is sit and watch
+            The basic plan currently goes for as little as {price.currency}{" "}
+            {price.basic} / month. This is inclusive of everything listed in the
+            basic plan. All you have is sit and watch
           </p>
           <p className="font-bold text-5xl">
-            Ksh {PRICES.basic} <span className="text-base">/ month</span>
+            {price.currency} {price.basic}{" "}
+            <span className="text-base">/ month</span>
           </p>
           <Link to={user ? "/dashboard/new-website" : "/sign-in"}>
             <button className="rounded-full w-full text-xs text-white bg-primaryOne py-4 mt-5 hover:bg-orangeText transition-all hover:scale-110">

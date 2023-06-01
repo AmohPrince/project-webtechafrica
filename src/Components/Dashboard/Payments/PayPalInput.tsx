@@ -27,7 +27,7 @@ const PayPalInput = () => {
             components: "buttons,hosted-fields",
             "data-client-token": clientTokenResponse.client_token,
             intent: "capture",
-            vault: false,
+            vault: true,
           }}
         >
           <div>
@@ -59,26 +59,25 @@ const PayPalInput = () => {
                 });
                 return Promise.resolve();
               }}
-              createOrder={(data, actions) => {
+              createSubscription={(data, actions) => {
                 console.log(data);
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "0.01",
-                        currency_code: "USD",
-                      },
-                    },
-                  ],
-                  // application_context: ,
-                  // payer ,
-                  // intent: "AUTHORIZE",
-                });
+                return actions.subscription
+                  .create({
+                    plan_id: "P-3RX065706M3469222L5IFM4I",
+                  })
+                  .then((orderId) => {
+                    // Your code here after create the order
+                    return orderId;
+                  });
               }}
-              onError={(err: Record<string, unknown>) =>
-                showNotification(err.message as string, "error")
-              }
-              onCancel={(err: Record<string, unknown>) => {
+              style={{
+                label: "subscribe",
+              }}
+              onError={(err: Record<string, unknown>) => {
+                console.log(err);
+                showNotification("An error might have occurred :-(", "error");
+              }}
+              onCancel={(_err: Record<string, unknown>) => {
                 showNotification(
                   "You cancelled the paypal transaction",
                   "error"

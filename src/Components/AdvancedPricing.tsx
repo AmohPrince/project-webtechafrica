@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PREMIUM_FEATURES, PRICES } from "../App";
+import { PREMIUM_FEATURES } from "../App";
+import { useGlobalData } from "../Hooks/useGlobalData";
 import { getYearly, scrollToTop } from "../Util/Utilities";
 import Billed from "./Billed";
 import { FeatureString } from "./FeatureString";
 
 export const AdvancedPricing = ({ className }: { className: string }) => {
+  const { price } = useGlobalData();
   return (
     <div
       className={`py-12 px-4 sm:px-8 rounded-2xl text-center bg-gray-100 ${className}`}
@@ -18,19 +20,22 @@ export const AdvancedPricing = ({ className }: { className: string }) => {
       </div>
       <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
         <p className="font-extrabold text-4xl mb-4">
-          Ksh. {PRICES.advanced} <span className="text-sm">/ month</span>
+          {price.advanced} {price.currency}{" "}
+          <span className="text-sm">/ month</span>
         </p>
         <Billed
-          text={`Billed as Ksh. ${getYearly(PRICES.advanced)} per year`}
+          text={`Billed as ${getYearly(price.advanced)}  ${
+            price.currency
+          } per year`}
         />
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
         {PREMIUM_FEATURES.map((feature) => {
           const str = feature.split(",");
           return (
-            <div className="flex">
+            <div className="flex" key={feature}>
               {str.map((str) => (
-                <FeatureString feature={str} source="Premium" />
+                <FeatureString feature={str} source="Premium" key={str} />
               ))}
             </div>
           );

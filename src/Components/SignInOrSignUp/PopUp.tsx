@@ -19,7 +19,7 @@ export const PopUp = ({
 }) => {
   return (
     <motion.div
-      className={`border font-medium rounded-sm py-3 px-3 shadow-sm text-sm text-center mt-5 flex items-center absolute top-0 right-0 z-10 ${
+      className={`border font-medium rounded-sm py-3 px-3 shadow-sm text-sm text-center mt-5 flex items-center absolute top-0 right-0 z-50 ${
         popUpInfo.type === "success"
           ? "border-green-500 bg-green-50"
           : "border-red-500 bg-red-50"

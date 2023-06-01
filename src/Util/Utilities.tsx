@@ -171,3 +171,7 @@ export const formatTime = (timestamp: number): string => {
 
   return time;
 };
+
+export const toTheNearestHundredth = (num: number): number => {
+  return Math.ceil(num / 100) * 100;
+};

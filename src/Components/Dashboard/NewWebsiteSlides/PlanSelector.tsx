@@ -4,7 +4,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { SecondaryButton } from "../../SecondaryButton";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 import { PurpleButton } from "./PurpleButton";
-import { BASIC_FEATURES, PREMIUM_FEATURES, PRICES } from "../../../App";
+import { BASIC_FEATURES, PREMIUM_FEATURES } from "../../../App";
+import { useGlobalData } from "../../../Hooks/useGlobalData";
 
 const PlanSelector = ({
   setActiveStageId,
@@ -12,6 +13,7 @@ const PlanSelector = ({
   setActiveStageId: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const { selections, setSelections } = useNewWebsiteSelections();
+  const { price } = useGlobalData();
 
   useEffect(() => {
     if (selections.websiteType.type === "E-commerce websites") {
@@ -50,7 +52,7 @@ const PlanSelector = ({
             <p className="font-bold text-lg">Basic</p>
             <p className="font-medium text-sm">Perfect for beginners</p>
             <p className="text-xl font-semibold mt-3 mb-4">
-              Ksh. {PRICES.basic}/
+              {price.basic + " " + price.currency}/{" "}
               <span className="text-gray-400 text-sm">monthly</span>{" "}
             </p>
             <PurpleButton
@@ -65,11 +67,12 @@ const PlanSelector = ({
                   };
                 });
               }}
-              className={`${
+              className={`w-full ${
                 selections.plan === "Basic"
                   ? "bg-gray-400 rounded-md hover:bg-gray-400"
                   : "bg-primaryOne"
               }`}
+              disabled={selections.plan === "Basic"}
             />
             <div className="mt-5">
               {BASIC_FEATURES.map((feature) => (
@@ -91,7 +94,7 @@ const PlanSelector = ({
             Perfect for professionals and business
           </p>
           <p className="text-xl font-semibold mt-3 mb-4">
-            Ksh. {PRICES.advanced}/
+            {price.advanced + " " + price.currency}/
             <span className="text-gray-400 text-sm">monthly</span>{" "}
           </p>
           <PurpleButton
@@ -113,6 +116,7 @@ const PlanSelector = ({
                 ? "bg-gray-400 rounded-md hover:bg-gray-400 transition-all"
                 : "bg-primaryOne"
             }`}
+            disabled={selections.plan === "Premium"}
           />
           <div className="mt-5">
             {PREMIUM_FEATURES.map((feature) => (
