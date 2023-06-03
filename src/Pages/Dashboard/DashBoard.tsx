@@ -24,12 +24,12 @@ const DashBoard = () => {
     sub: "test",
   });
 
-  useEffect(() => {
-    if (!user) {
-      redirect("/sign-in");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //TODO uncomment this code before production
+  // useEffect(() => {
+  //   if (!user) {
+  //     redirect("/sign-in");
+  //   }
+  // }, []);
 
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
   const [popUpInfo, setPopUpInfo] = useState<PopUpInfo>({

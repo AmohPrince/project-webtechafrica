@@ -1,17 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 // import { useAuth } from "../Hooks/UseAuth";
 import { globalData } from "./DashBoard";
-import { PaymentsModal } from "../../Components/Dashboard/Payments/PaymentsModal";
 import { Cards } from "../../Components/Dashboard/Payments/Cards";
 import Transactions from "../../Components/Dashboard/Payments/Transactions";
 
 const Payments = () => {
   // const { user } = useAuth();
-  const [
-    showPaymentMethodsModalLargeScreen,
-    setShowPaymentMethodsModalLargeScreen,
-  ] = useState<boolean>(false);
-
   const [activeSmallScreenTab, setActiveSmallScreenTab] = useState<
     "payment-methods" | "cards" | "transactions"
   >("transactions");
@@ -29,7 +23,7 @@ const Payments = () => {
     <div className="flex flex-col sm:flex-row justify-between items-start gap-x-5 px-4 py-3 sm:bg-white sm:p-6 mt-4">
       <div className="text-sm flex justify-between mx-auto gap-x-4 mb-5 sm:hidden w-full">
         <button
-          className={`px-3 py-2 border border-primaryOne rounded-[4px] ${
+          className={`w-1/2 px-3 py-2 border border-primaryOne rounded-[4px] ${
             activeSmallScreenTab === "transactions" &&
             "bg-primaryOne shadow-md text-white"
           } `}
@@ -38,16 +32,7 @@ const Payments = () => {
           Transactions
         </button>
         <button
-          className={`px-3 py-2 border border-primaryOne font-semibold rounded-[4px] ${
-            activeSmallScreenTab === "payment-methods" &&
-            "bg-primaryOne shadow-md text-white"
-          }`}
-          onClick={() => setActiveSmallScreenTab("payment-methods")}
-        >
-          Payment methods
-        </button>
-        <button
-          className={`px-3 py-2 border border-primaryOne font-semibold rounded-[4px] ${
+          className={`w-1/2 px-3 py-2 border border-primaryOne font-semibold rounded-[4px] ${
             activeSmallScreenTab === "cards" &&
             "bg-primaryOne shadow-md text-white"
           }`}
@@ -57,11 +42,6 @@ const Payments = () => {
         </button>
       </div>
       <div className="sm:hidden w-full">
-        {activeSmallScreenTab === "payment-methods" && (
-          <PaymentsModal
-            setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
-          />
-        )}
         {activeSmallScreenTab === "cards" && <Cards />}
         {activeSmallScreenTab === "transactions" && (
           <>
@@ -77,11 +57,6 @@ const Payments = () => {
         )}
       </div>
       <div className="hidden sm:flex justify-between w-full gap-x-2">
-        {showPaymentMethodsModalLargeScreen && (
-          <PaymentsModal
-            setShowPaymentMethodsModal={setShowPaymentMethodsModalLargeScreen}
-          />
-        )}
         <div className="flex-grow">
           <div>
             <p className="font-semibold mb-2">Upcoming payments</p>

@@ -60,7 +60,7 @@ const PayPalInput = () => {
                 return Promise.resolve();
               }}
               createSubscription={(data, actions) => {
-                console.log(data);
+                console.log(data, " createSubscriptionData");
                 return actions.subscription
                   .create({
                     plan_id: "P-3RX065706M3469222L5IFM4I",
@@ -70,14 +70,12 @@ const PayPalInput = () => {
                     return orderId;
                   });
               }}
-              style={{
-                label: "subscribe",
-              }}
               onError={(err: Record<string, unknown>) => {
-                console.log(err);
+                console.log(err, "onErrorError");
                 showNotification("An error might have occurred :-(", "error");
               }}
-              onCancel={(_err: Record<string, unknown>) => {
+              onCancel={(err: Record<string, unknown>) => {
+                console.log(err, "onCancelError");
                 showNotification(
                   "You cancelled the paypal transaction",
                   "error"
