@@ -35,7 +35,7 @@ export const PaymentsModal = ({
       className={`flex flex-col flex-grow bg-white rounded-xl absolute center-absolutely border-primaryOne border-2 z-10 transition-all px-5 pb-2 w-1/2 ${className}`}
     >
       <div className="py-3 border-b flex justify-between items-center">
-        <p className="font-semibold">Create your subscription</p>
+        <p className="font-semibold">Payments</p>
         <FontAwesomeIcon
           icon={faXmark}
           onClick={() => setShowPaymentMethodsModal(false)}

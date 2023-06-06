@@ -2,12 +2,26 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React, { useContext } from "react";
+import { DEFAULT_PRICE } from "../../../Hooks/useGlobalData";
 import { usePaypal } from "../../../Hooks/usePayPal";
 import { globalData } from "../../../Pages/Dashboard/DashBoard";
 
 const PayPalInput = () => {
   const { showNotification } = useContext(globalData);
   const { clientTokenResponse, errors, isLoading } = usePaypal();
+
+  const createOrder = async () => {
+    try {
+      const response = await fetch("localhost:3000/create-order");
+      console.log(response);
+      const orderId = await response.json();
+      return orderId;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  };
+
   return (
     <>
       {isLoading ? (
@@ -59,17 +73,7 @@ const PayPalInput = () => {
                 });
                 return Promise.resolve();
               }}
-              createSubscription={(data, actions) => {
-                console.log(data, " createSubscriptionData");
-                return actions.subscription
-                  .create({
-                    plan_id: "P-3RX065706M3469222L5IFM4I",
-                  })
-                  .then((orderId) => {
-                    // Your code here after create the order
-                    return orderId;
-                  });
-              }}
+              createOrder={createOrder}
               onError={(err: Record<string, unknown>) => {
                 console.log(err, "onErrorError");
                 showNotification("An error might have occurred :-(", "error");

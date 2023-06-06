@@ -130,11 +130,7 @@ export const SignUp = () => {
   return (
     <div className="h-screen flex relative z-0">
       {popUpInfo.showing && (
-        <PopUp
-          popUpInfo={popUpInfo}
-          setPopUp={setPopUpInfo}
-          className="w-1/3"
-        />
+        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
       )}
       <img
         src={
@@ -144,7 +140,18 @@ export const SignUp = () => {
         className="hidden sm:block h-full object-cover w-1/2"
       />
       <div className="w-full sm:w-1/2 py-[10%] sm:py-[2%] px-[5%] h-full dark:bg-magloBlack relative">
-        <LogoTab logoColor={LogoColor.primary} />
+        <div className="flex justify-between items-center">
+          <LogoTab logoColor={LogoColor.primary} />
+          <p className="text-sm text-gray-400 text-center">
+            Already have an account?{" "}
+            <Link
+              className="cursor-pointer dark:text-white text-primaryOne"
+              to="/sign-in"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
         <p className="font-semibold text-3xl mt-[4%] dark:text-white">
           Create new account
         </p>
@@ -279,15 +286,6 @@ export const SignUp = () => {
           />
           <p className="font-medium ml-2 text-gray-600">Sign up with google</p>
         </div>
-        <p className="text-sm text-gray-400 text-center">
-          Already have an account?{" "}
-          <Link
-            className="cursor-pointer dark:text-white text-bgSignInPage"
-            to="/sign-in"
-          >
-            Sign in
-          </Link>
-        </p>
       </div>
       <Wave />
     </div>

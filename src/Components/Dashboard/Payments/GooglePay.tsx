@@ -1,6 +1,12 @@
 import GooglePayButton from "@google-pay/button-react";
+import { useContext } from "react";
+import { useGlobalData } from "../../../Hooks/useGlobalData";
+import { globalData } from "../../../Pages/Dashboard/DashBoard";
 
 export const GooglePay = () => {
+  const { showNotification } = useContext(globalData);
+  const { price } = useGlobalData();
+
   return (
     <>
       <p className="mt-2 text-sm font-semibold">G-PAY</p>
@@ -9,7 +15,7 @@ export const GooglePay = () => {
         secure!
       </p>
       <GooglePayButton
-        environment="TEST"
+        environment="PRODUCTION"
         paymentRequest={{
           apiVersion: 2,
           apiVersionMinor: 0,
@@ -30,13 +36,13 @@ export const GooglePay = () => {
             },
           ],
           merchantInfo: {
-            merchantId: "12345678901234567890",
-            merchantName: "Demo Merchant",
+            merchantId: "BCR2DN4TRLJKV6IB",
+            merchantName: "WebTech Africa",
           },
           transactionInfo: {
             totalPriceStatus: "FINAL",
             totalPriceLabel: "Total",
-            totalPrice: "100.00",
+            totalPrice: price.basic.toString(),
             currencyCode: "USD",
             countryCode: "US",
           },
@@ -45,6 +51,12 @@ export const GooglePay = () => {
           console.log("load payment data", paymentRequest);
         }}
         buttonSizeMode="fill"
+        onCancel={() =>
+          showNotification("You cancelled the GPay subscription", "error")
+        }
+        onError={() =>
+          showNotification("An error might have occurred :-(", "error")
+        }
       />
     </>
   );

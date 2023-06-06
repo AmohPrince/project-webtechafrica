@@ -19,7 +19,7 @@ export const PendingVerificationWebsite = ({
         <WebsiteStage stage={website.stage} />
         {website.stage === "Reviewed" && (
           <PrimaryButton
-            text="Subscribe"
+            text="Pay 🚀"
             onClick={() => setIsShowingPaymentsModal(true)}
           />
         )}

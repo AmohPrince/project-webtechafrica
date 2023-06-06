@@ -128,11 +128,7 @@ const SignIn = () => {
   return (
     <div className="h-screen flex relative">
       {popUpInfo.showing && (
-        <PopUp
-          popUpInfo={popUpInfo}
-          setPopUp={setPopUpInfo}
-          className="w-1/3"
-        />
+        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
       )}
       <img
         src={
