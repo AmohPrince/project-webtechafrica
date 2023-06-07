@@ -76,7 +76,8 @@ const getClientToken = async (): Promise<ClientTokenResponse> => {
 };
 
 const getAccessToken = async (): Promise<string> => {
-  const paypalApiUrl = `${baseURL}/v1/oauth2/token`;
+  const paypalApiUrl = `${baseURL}
+  `;
   const clientId = process.env.REACT_APP_PAYPAL_CLIENT_ID;
   const secret = process.env.REACT_APP_PAYPAL_SECRET;
 
