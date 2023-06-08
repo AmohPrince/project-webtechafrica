@@ -8,9 +8,7 @@ const PayPalInput = () => {
 
   const createOrder = async () => {
     try {
-      const response = await fetch("http://localhost:5000/create-order", {
-        method: "POST",
-        body: JSON.stringify(DEFAULT_PRICE.basic),
+      const response = await fetch("http://localhost:8080/create-order", {
         headers: {
           "Content-Type": "application/json",
         },

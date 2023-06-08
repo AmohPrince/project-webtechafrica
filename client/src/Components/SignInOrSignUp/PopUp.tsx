@@ -1,6 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export type PopUpInfo = {
   showing: boolean;
@@ -17,6 +18,18 @@ export const PopUp = ({
   setPopUp: React.Dispatch<React.SetStateAction<PopUpInfo>>;
   className?: string;
 }) => {
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setPopUp({
+        showing: false,
+        text: "An error occurred",
+        type: "error",
+      });
+    }, 3000);
+
+    return clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <motion.div
       className={`border font-medium rounded-sm py-3 px-3 shadow-sm text-sm text-center mt-5 flex items-center absolute top-0 right-0 z-50 ${
