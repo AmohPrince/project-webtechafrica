@@ -32,8 +32,8 @@ public class Paypal {
     }
 
 
-    public String getAccessToken() {
-        String paypalApiUrl = baseURL;
+    public PayPalAccessToken getAccessToken() {
+        String paypalApiUrl = baseURL + "/v1/oauth2/token";
         String clientId = environment.getProperty("PAYPAL_CLIENT_ID");
         String secret = environment.getProperty("PAYPAL_SECRET");
 
@@ -51,13 +51,13 @@ public class Paypal {
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(bodyMap, headers);
 
-
         ResponseEntity<Map<String, Object>> response = restTemplate.exchange(paypalApiUrl, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<>() {
         });
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            Map<String, Object> responseData = response.getBody();
-            return (String) responseData.get("access_token");
+            var responseBody = response.getBody();
+            System.out.println(responseBody);
+            return new PayPalAccessToken((String) responseBody.get("access_token"), (Integer) responseBody.get("expires_in"));
         } else {
             System.err.println("Error retrieving access token: " + response.getStatusCode());
             throw new RuntimeException("Error retrieving access token");
@@ -65,23 +65,26 @@ public class Paypal {
     }
 
 
-    public ClientToken getClientToken() {
-        String paypalApiUrl = baseURL + "/v1/identity/generate-token";
-
-        String accessToken = getAccessToken();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(accessToken);
-
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<ClientToken> response = restTemplate.exchange(
-                paypalApiUrl,
-                HttpMethod.POST,
-                entity,
-                ClientToken.class
-        );
-        return response.getBody();
-    }
+//    public ClientToken getClientToken() {
+//        String paypalApiUrl = baseURL + "/v1/identity/generate-token";
+//
+//        String accessToken = getAccessToken();
+//        System.out.println(accessToken);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setBearerAuth(accessToken);
+//
+//        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+//
+//        ResponseEntity<ClientToken> response = restTemplate.exchange(
+//                paypalApiUrl,
+//                HttpMethod.POST,
+//                entity,
+//                ClientToken.class
+//        );
+//        System.out.println(response.getBody());
+//        return response.getBody();
+//    }
 }
 

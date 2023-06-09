@@ -6,20 +6,18 @@ import { globalData } from "../../../Pages/Dashboard/DashBoard";
 const PayPalInput = () => {
   const { showNotification } = useContext(globalData);
 
-  const createOrder = async () => {
+  const createOrder = async (): Promise<string> => {
     try {
       const response = await fetch("http://localhost:8080/create-order", {
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "no-cors",
       });
-      console.log(response);
-      const orderId = await response.json();
+      const orderId = await response.text();
       return orderId;
     } catch (err) {
       console.error(err);
-      return null;
+      throw new Error("error");
     }
   };
 
