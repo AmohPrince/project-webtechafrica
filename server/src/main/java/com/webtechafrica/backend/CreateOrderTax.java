@@ -1,0 +1,42 @@
+package com.webtechafrica.backend;
+
+public class CreateOrderTax {
+    private String currency_code;
+
+    /**
+     * The three-character ISO-4217 currency code that identifies the currency.
+     * <p>
+     * Required: true
+     */
+    public String getCurrencyCode() {
+        return currency_code;
+    }
+
+    public void setCurrencyCode(String currency_code) {
+        this.currency_code = currency_code;
+    }
+
+    private String value;
+
+    /**
+     * The value, which might be:
+     * - An integer for currencies like JPY that are not typically fractional.
+     * - A decimal fraction for currencies like TND that are subdivided into thousandths.
+     * For the required number of decimal places for a currency code, see Currency Codes.
+     * <p>
+     * Required: true
+     */
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public CreateOrderTax(String currency_code, String value) {
+        this.currency_code = currency_code;
+        this.value = value;
+    }
+}
+
