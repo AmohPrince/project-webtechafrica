@@ -24,12 +24,12 @@ const DashBoard = () => {
     sub: "test",
   });
 
-  //TODO uncomment this code before production
-  // useEffect(() => {
-  //   if (!user) {
-  //     redirect("/sign-in");
-  //   }
-  // }, []);
+  //TODO uncomment / comment this code before production
+  useEffect(() => {
+    if (!user) {
+      redirect("/sign-in");
+    }
+  }, []);
 
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
   const [popUpInfo, setPopUpInfo] = useState<PopUpInfo>({
