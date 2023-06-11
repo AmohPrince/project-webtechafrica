@@ -14,6 +14,11 @@ public class PurchaseUnit {
         this.amount = amount;
     }
 
+    public PurchaseUnit(CreateOrderAmount amount, Payee payee) {
+        this.amount = amount;
+        this.payee = payee;
+    }
+
     public PurchaseUnit(CreateOrderAmount amount, String reference_id, String description) {
         this.amount = amount;
         this.reference_id = reference_id;

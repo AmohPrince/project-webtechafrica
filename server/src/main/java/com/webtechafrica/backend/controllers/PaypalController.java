@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,28 +29,32 @@ public class PaypalController {
         this.payPalAccessToken = paypal.getAccessToken();
     }
 
-    @GetMapping("/create-order")
-    public String createOrder() {
+    @PostMapping("/create-order")
+    public String createOrder(@RequestBody Price price) {
         String url = environment.getProperty("paypalAPIUrl") + "/v2/checkout/orders";
 
+        // headers
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.set("Authorization", "Bearer " + payPalAccessToken.getAccessToken());
         httpHeaders.set("Prefer", "return=representation");
 
-        CreateOrderAmount createOrderAmount = new CreateOrderAmount("USD", "100");
+        // creating the order
+        CreateOrderAmount createOrderAmount = new CreateOrderAmount("USD", Integer.toString(price.getPrice()));
         PurchaseUnit purchase_unit = new PurchaseUnit(createOrderAmount);
         PurchaseUnit[] purchase_units = new PurchaseUnit[]{purchase_unit};
         CreateOrderRequestBody createOrderRequestBody = new CreateOrderRequestBody(purchase_units, "CAPTURE");
 
+        // http entity
         HttpEntity<String> requestEntity = new HttpEntity<>(gson.toJson(createOrderRequestBody), httpHeaders);
+
+        //response entity
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             var responseBody = response.getBody();
-            JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
-            System.out.println(jsonObject.get("id").getAsString());
-            return jsonObject.get("id").getAsString();
+            JsonObject responseAsJSON = gson.fromJson(responseBody, JsonObject.class);
+            return responseAsJSON.get("id").getAsString();
         } else {
             System.out.println("API call failed with status code: " + response.getStatusCode());
             return null;

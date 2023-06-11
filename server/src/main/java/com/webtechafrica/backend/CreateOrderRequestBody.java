@@ -2,12 +2,12 @@ package com.webtechafrica.backend;
 
 public class CreateOrderRequestBody {
     private PurchaseUnit[] purchase_units;
+    private String intent;
 
     public CreateOrderRequestBody(PurchaseUnit[] purchase_units, String intent) {
         this.purchase_units = purchase_units;
         this.intent = intent;
     }
-
 
     /**
      * An array of purchase units. Each purchase unit establishes a contract between a payer and the payee.
@@ -22,9 +22,7 @@ public class CreateOrderRequestBody {
     public void setPurchaseUnits(PurchaseUnit[] purchaseUnits) {
         this.purchase_units = purchaseUnits;
     }
-
-    private String intent;
-
+    
     /**
      * The intent to either capture payment immediately or authorize a payment for an order after order creation.
      * <p>
