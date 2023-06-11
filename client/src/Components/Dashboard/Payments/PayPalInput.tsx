@@ -12,6 +12,10 @@ const PayPalInput = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        method: "POST",
+        body: JSON.stringify({
+          price: DEFAULT_PRICE.basic,
+        }),
       });
       const orderId = await response.text();
       return orderId;

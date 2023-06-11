@@ -80,16 +80,16 @@ const Navbar = () => {
               Contact
             </Link>
           </div>
-          <Link
+          {/* <Link
             className={`px-4 rounded-full ml-10 font-semibold flex items-center ${
               basePath === "/" ? "bg-white" : "bg-primaryOne text-white"
             }`}
             to="/dashboard"
           >
             My Dashboard 🚀
-          </Link>
-          {/* TODO uncomment this code before production */}
-          {/* {user ? (
+          </Link> */}
+          {/* TODO uncomment / comment this code before production */}
+          {user ? (
             <Link
               className={`px-4 rounded-full ml-10 font-semibold flex items-center ${
                 basePath === "/" ? "bg-white" : "bg-primaryOne text-white"
@@ -107,7 +107,7 @@ const Navbar = () => {
             >
               Sign in
             </Link>
-          )} */}
+          )}
         </div>
         <div className="absolute right-0">
           <HamburgerMenu

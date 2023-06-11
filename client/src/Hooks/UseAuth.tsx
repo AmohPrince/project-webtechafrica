@@ -58,7 +58,7 @@ export const AuthContextProvider = ({
   return (
     <authContext.Provider
       value={{
-        userData: testUserData,
+        userData,
         setUserData,
         user,
       }}
