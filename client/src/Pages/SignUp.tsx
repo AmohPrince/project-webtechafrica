@@ -17,7 +17,7 @@ import { UserCredential } from "firebase/auth";
 import { addOrUpdateUserDataInDB } from "../Firebase/firestore";
 import { Wave } from "../Components/NavBar/Wave";
 import { useGlobalData } from "../Hooks/useGlobalData";
-import { PopUp } from "../Components/SignInOrSignUp/PopUp";
+import { PopUpInfoType } from "../Components/SignInOrSignUp/PopUp";
 
 type Inputs = {
   firstName: string;
@@ -39,25 +39,19 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { setPopUpInfo, popUpInfo } = useGlobalData();
+  const { showNotification } = useGlobalData();
   const navigate = useNavigate();
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
   const emailParam = searchParams.get("email");
 
-  const showPopUp = (type: "success" | "error", text: string) => {
+  const showPopUp = (type: PopUpInfoType, text: string) => {
     setCreatingUserWithEmail(false);
     setCreatingUserWithGoogle(false);
-    setPopUpInfo({ showing: true, text: text, type: type });
-
+    showNotification(text, type);
     setTimeout(() => {
       if (type === "success") {
-        setPopUpInfo({
-          showing: false,
-          text: null,
-          type: null,
-        });
         navigate("/dashboard");
       }
     }, 3000);
@@ -129,9 +123,6 @@ export const SignUp = () => {
 
   return (
     <div className="h-screen flex relative z-0">
-      {popUpInfo.showing && (
-        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
-      )}
       <img
         src={
           "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"

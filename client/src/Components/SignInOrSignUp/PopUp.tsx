@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
+export type PopUpInfoType = null | "success" | "error";
+
 export type PopUpInfo = {
   showing: boolean;
   text: null | string;
-  type: null | "success" | "error";
+  type: PopUpInfoType;
 };
 
 export const PopUp = ({
@@ -22,12 +24,12 @@ export const PopUp = ({
     const id = setTimeout(() => {
       setPopUp({
         showing: false,
-        text: "An error occurred",
-        type: "error",
+        text: null,
+        type: null,
       });
     }, 3000);
 
-    return clearTimeout(id);
+    return () => clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -39,7 +41,8 @@ export const PopUp = ({
       } ${className}`}
       initial={{ x: 1000, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.3, type: "spring" }}
+      transition={{ duration: 0.5, type: "keyframes" }}
+      exit={{ x: 1000, opacity: 0 }}
     >
       <FontAwesomeIcon
         icon={faXmark}
@@ -52,11 +55,7 @@ export const PopUp = ({
           })
         }
       />
-      <p>
-        {popUpInfo.type === "success"
-          ? "Hello " + popUpInfo.text + "!"
-          : popUpInfo.text}
-      </p>
+      <p>{popUpInfo.text}</p>
       <div className="h-[2px] transition" />
     </motion.div>
   );

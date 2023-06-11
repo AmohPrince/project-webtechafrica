@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 function getDefaultValue<T>(key: string, initialValue: T | null): T | null {
   const storedValue: string | null = localStorage.getItem(key);
-
   if (storedValue) {
     return JSON.parse(storedValue);
   }

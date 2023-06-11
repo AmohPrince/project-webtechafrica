@@ -18,7 +18,7 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  //TODO fix me
+  //TODO fix me before production
   const [userData, setUserData] = useLocalStorage<UserData | null>(
     null,
     LOCAL_STORAGE_KEYS.USER_DATA
@@ -58,7 +58,7 @@ export const AuthContextProvider = ({
   return (
     <authContext.Provider
       value={{
-        userData,
+        userData: testUserData,
         setUserData,
         user,
       }}

@@ -1,10 +1,8 @@
 import GooglePayButton from "@google-pay/button-react";
-import { useContext } from "react";
 import { useGlobalData } from "../../../Hooks/useGlobalData";
-import { globalData } from "../../../Pages/Dashboard/DashBoard";
 
 export const GooglePay = () => {
-  const { showNotification } = useContext(globalData);
+  const { showNotification } = useGlobalData();
   const { price } = useGlobalData();
 
   return (

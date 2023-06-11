@@ -6,7 +6,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets, LogoColor } from "../Assets/assets";
 import LogoTab from "../Components/LogoTab";
 import { Wave } from "../Components/NavBar/Wave";
-import { PopUp } from "../Components/SignInOrSignUp/PopUp";
 import { ToolTip } from "../Components/SignInOrSignUp/ToolTip";
 import { SubmitButton } from "../Components/SubmitButton";
 import {
@@ -46,23 +45,7 @@ const SignIn = () => {
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
   const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
 
-  const { popUpInfo, setPopUpInfo } = useGlobalData();
-
-  const showPopUp = (type: "success" | "error", text: string) => {
-    setSigningInWithEmail(false);
-    setSigningInWithGoogle(false);
-    setPopUpInfo({ showing: true, text: text, type: type });
-    setTimeout(() => {
-      if (type === "success") {
-        setPopUpInfo({
-          showing: false,
-          text: null,
-          type: null,
-        });
-        navigate("/dashboard");
-      }
-    }, 3000);
-  };
+  const { showNotification } = useGlobalData();
 
   //sign-in with email and password
   const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = async (
@@ -76,10 +59,14 @@ const SignIn = () => {
       );
       const userData = await fetchUserDataFromDB(userCredential.user.uid);
       setUserData(userData);
-      showPopUp("success", userCredential.user.displayName ?? "user");
+      showNotification(
+        `Hello ${userCredential.user.displayName ?? "user"}!`,
+        "success"
+      );
+      navigate("/dashboard");
     } catch (error) {
       const signInErrorMessage = await getSignInErrorMessage(error);
-      showPopUp("error", signInErrorMessage);
+      showNotification(signInErrorMessage, "error");
     }
     setSigningInWithEmail(false);
   };
@@ -100,10 +87,14 @@ const SignIn = () => {
         };
         await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
       }
-      showPopUp("success", userCredential.user.displayName ?? "user");
+      showNotification(
+        `Hello ${userCredential.user.displayName ?? "user"}!`,
+        "success"
+      );
+      navigate("/dashboard");
     } catch (err: any) {
       const signInErrorMessage = await getSignInErrorMessage(err);
-      showPopUp("error", signInErrorMessage);
+      showNotification(signInErrorMessage, "error");
     }
   };
 
@@ -113,11 +104,15 @@ const SignIn = () => {
       try {
         const userCredential: UserCredential | null = await redirectResult();
         if (userCredential) {
-          showPopUp("success", userCredential.user.displayName ?? "user");
+          showNotification(
+            `Hello ${userCredential.user.displayName ?? "user"}!`,
+            "success"
+          );
+          navigate("/dashboard");
         }
       } catch (error) {
         const signInErrorMessage = await getSignInErrorMessage(error);
-        showPopUp("error", signInErrorMessage);
+        showNotification(signInErrorMessage, "error");
       }
       setSigningInWithGoogle(false);
     };
@@ -127,9 +122,6 @@ const SignIn = () => {
 
   return (
     <div className="h-screen flex relative">
-      {popUpInfo.showing && (
-        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
-      )}
       <img
         src={
           "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

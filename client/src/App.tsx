@@ -2,8 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/NavBar/Navbar";
-import { PopUp } from "./Components/SignInOrSignUp/PopUp";
-import { useGlobalData } from "./Hooks/useGlobalData";
 
 export const PREMIUM_FEATURES = [
   "<sp>Unlimited, customer support",
@@ -25,16 +23,8 @@ export const BASIC_FEATURES = [
 ];
 
 function App() {
-  const { popUpInfo, setPopUpInfo } = useGlobalData();
   return (
     <div className="relative py-14 w-screen overflow-x-hidden">
-      {popUpInfo.showing && (
-        <PopUp
-          popUpInfo={popUpInfo}
-          setPopUp={setPopUpInfo}
-          className="w-1/3"
-        />
-      )}
       <Navbar />
       <Outlet />
       <Footer />

@@ -1,10 +1,9 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import React, { useContext } from "react";
-import { DEFAULT_PRICE } from "../../../Hooks/useGlobalData";
-import { globalData } from "../../../Pages/Dashboard/DashBoard";
+import React from "react";
+import { DEFAULT_PRICE, useGlobalData } from "../../../Hooks/useGlobalData";
 
 const PayPalInput = () => {
-  const { showNotification } = useContext(globalData);
+  const { showNotification } = useGlobalData();
 
   const createOrder = async (): Promise<string> => {
     try {
@@ -17,8 +16,7 @@ const PayPalInput = () => {
           price: DEFAULT_PRICE.basic,
         }),
       });
-      const orderId = await response.text();
-      return orderId;
+      return await response.text();
     } catch (err) {
       console.error(err);
       throw new Error("error");
