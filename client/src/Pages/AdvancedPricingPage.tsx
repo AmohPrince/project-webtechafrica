@@ -66,7 +66,7 @@ const AdvancedPricingPage = () => {
                 className="w-5 h-5 mr-5"
               />
               <p className="default-paragraph">
-                {feature.replace(/<\/?sp>/g, "")}
+                {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             </div>
           ))}
