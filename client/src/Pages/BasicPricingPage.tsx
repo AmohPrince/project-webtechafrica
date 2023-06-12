@@ -22,7 +22,7 @@ const BasicPricingPage = () => {
             The basic plan offers the basic but powerful services that ensures
             you get yourself a website online.
           </p>
-          {BASIC_FEATURES.map((features) => (
+          {BASIC_FEATURES.map((feature) => feature.text).map((features) => (
             <div className="flex items-center mb-5">
               <FontAwesomeIcon
                 icon={faCircleCheck}
@@ -60,11 +60,13 @@ const BasicPricingPage = () => {
             The advanced plan package offers more, for example social media
             management and the ability to sell products online. Sounds like you?
           </p>
-          {PREMIUM_FEATURES.map((feature, i) => (
-            <div className="flex items-center mb-5">
+          {PREMIUM_FEATURES.map((feature) => feature.text).map((feature, i) => (
+            <div className="flex items-center mb-5" key={i}>
               <p className="default-paragraph">
-                <span className="text-black font-semibold">0{i + 1}</span>.{" "}
-                {feature.replace(/<\/?sp>|,/g, "")}
+                <span className="text-black font-semibold">
+                  {(i + 1).toString().padStart(2, "0")}
+                </span>
+                . {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             </div>
           ))}

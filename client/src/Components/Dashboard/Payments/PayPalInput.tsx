@@ -1,11 +1,15 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
+import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
+import { useAuth } from "../../../Hooks/UseAuth";
 import { DEFAULT_PRICE, useGlobalData } from "../../../Hooks/useGlobalData";
+import { Transaction } from "../../../Types/Global";
 
-const PayPalInput = () => {
+const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
   const { showNotification } = useGlobalData();
+  const { user, userData } = useAuth();
 
-  const createOrder = async (): Promise<string> => {
+  const createOrder = async (data: any, actions: any): Promise<string> => {
     try {
       const response = await fetch("http://localhost:8080/create-order", {
         headers: {
@@ -20,6 +24,36 @@ const PayPalInput = () => {
     } catch (err) {
       console.error(err);
       throw new Error("error");
+    }
+  };
+
+  const onApprove = async (data: any, actions: any) => {
+    const get = await actions.order.get();
+    if (get.status === "APPROVED") {
+      const newTransaction: Transaction = {
+        id: get.id,
+        amount: get.purchase_units[0].amount.value,
+        billingDate: get.create_time,
+        card: "Paypal",
+        currencyCode: get.purchase_units[0].amount.currency_code!,
+        lastPaymentDate: get.create_time,
+        lastPaymentTime: get.create_time,
+        plan: "Basic",
+        websiteUrl: websiteURL,
+      };
+      await addOrUpdateUserDataInDB(
+        {
+          ...userData!,
+          pastTransactions: userData?.pastTransactions
+            ? [...userData.pastTransactions, newTransaction]
+            : [newTransaction],
+        },
+        user!.uid
+      );
+      showNotification(
+        "Payment was successful, somebody is now working on your website!",
+        "success"
+      );
     }
   };
 
@@ -42,34 +76,14 @@ const PayPalInput = () => {
         </p>
         <PayPalButtons
           className="mt-6 playfair mx-auto"
-          onApprove={(data: any, actions): Promise<void> => {
-            console.log(data, "onApproveData");
-            // actions.restart();
-            // capture is for capturing for later withdrawal.
-            // actions.order
-            //   ?.capture()
-            //   .then((captured) => console.log(captured, "Captured"));
-            actions.order?.get().then((get) => {
-              console.log(get, "get");
-              //add paypal to user database
-              if (get.status === "APPROVED") {
-                showNotification(
-                  "Payment was successful, somebody is now working on your website!",
-                  "success"
-                );
-              }
-            });
-            return Promise.resolve();
-          }}
+          onApprove={onApprove}
           createOrder={createOrder}
-          onError={(err: Record<string, unknown>) => {
-            console.log(err, "onErrorError");
-            showNotification("An error might have occurred :-(", "error");
-          }}
-          onCancel={(err: Record<string, unknown>) => {
-            console.log(err, "onCancelError");
-            showNotification("You cancelled the paypal transaction", "error");
-          }}
+          onError={(err: Record<string, unknown>) =>
+            showNotification("An error might have occurred :-(", "error")
+          }
+          onCancel={(err: Record<string, unknown>) =>
+            showNotification("You cancelled the paypal transaction", "error")
+          }
         />
       </div>
     </PayPalScriptProvider>

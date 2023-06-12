@@ -115,6 +115,7 @@ export const testUserData: UserData = {
   ],
   pastTransactions: [
     {
+      id: "gcgc",
       amount: "4500",
       billingDate: 1682234423660,
       card: {
@@ -129,6 +130,7 @@ export const testUserData: UserData = {
       websiteUrl: "website.com",
     },
     {
+      id: "gcgc",
       amount: "4500",
       billingDate: 1682234423660,
       card: {
@@ -145,6 +147,7 @@ export const testUserData: UserData = {
   ],
   upcomingTransactions: [
     {
+      id: "gcgc",
       amount: "4500",
       billingDate: 1682234423660,
       card: {
@@ -159,6 +162,7 @@ export const testUserData: UserData = {
       websiteUrl: "website.com",
     },
     {
+      id: "gcgc",
       amount: "4500",
       billingDate: 1682234423660,
       card: {

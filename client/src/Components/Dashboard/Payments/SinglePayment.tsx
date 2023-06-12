@@ -15,7 +15,11 @@ const SinglePayment = ({ transaction }: { transaction: Transaction }) => {
           at {formatTime(transaction.lastPaymentTime)}
         </p>
       </div>
-      <p className="w-1/5">Debit xxxx xxxx {transaction.card.endsIn}</p>
+      {transaction.card === "Paypal" ? (
+        <p>Paypal</p>
+      ) : (
+        <p className="w-1/5">Debit xxxx xxxx {transaction.card.endsIn}</p>
+      )}
       <p className="w-[10%]">
         {transaction.currencyCode} {transaction.amount}
       </p>

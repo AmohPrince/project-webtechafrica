@@ -56,7 +56,10 @@ export const PendingVerificationWebsite = ({
         </div>
       </div>
       {isShowingPaymentsModal && (
-        <PaymentsModal setShowPaymentMethodsModal={setIsShowingPaymentsModal} />
+        <PaymentsModal
+          setShowPaymentMethodsModal={setIsShowingPaymentsModal}
+          websiteURL={website.url}
+        />
       )}
     </div>
   );

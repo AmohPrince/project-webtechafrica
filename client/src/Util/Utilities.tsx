@@ -136,7 +136,7 @@ export const scrollToTop = () => {
   });
 };
 
-export const formatDate = (timestamp: number): string => {
+export const formatDate = (timestamp: string | number): string => {
   const date = new Date(timestamp);
   const day = date.getDate();
   const month = date.toLocaleString("en-US", { month: "long" });
@@ -154,7 +154,7 @@ export const formatDate = (timestamp: number): string => {
   return `${day}${daySuffix} ${month} ${year}`;
 };
 
-export const formatTime = (timestamp: number): string => {
+export const formatTime = (timestamp: string | number): string => {
   // Convert timestamp to milliseconds
   var date = new Date(timestamp);
 

@@ -24,17 +24,19 @@ export type UserData = {
   upcomingTransactions?: Transaction[];
   phoneNumber?: string;
   country?: string;
+  isInPremiumWaitList?: boolean;
 };
 
 export type Transaction = {
+  id: string;
   websiteUrl: string;
   plan: "Basic" | "Premium";
   currencyCode: string;
-  lastPaymentDate: number;
-  lastPaymentTime: number;
-  billingDate: number;
+  lastPaymentDate: string | number;
+  lastPaymentTime: string | number;
+  billingDate: string | number;
   amount: string;
-  card: Card;
+  card: Card | "Paypal";
 };
 
 export type WebsiteStage =

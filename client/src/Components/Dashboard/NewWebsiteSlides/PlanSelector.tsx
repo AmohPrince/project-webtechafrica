@@ -75,7 +75,7 @@ const PlanSelector = ({
               disabled={selections.plan === "Basic"}
             />
             <div className="mt-5">
-              {BASIC_FEATURES.map((feature) => (
+              {BASIC_FEATURES.map((feature) => feature.text).map((feature) => (
                 <p className="text-sm flex items-center">
                   <FontAwesomeIcon icon={faCheck} className="mr-2" />
                   {feature.replace(/<\/?sp>/g, "")}
@@ -119,7 +119,7 @@ const PlanSelector = ({
             disabled={selections.plan === "Premium"}
           />
           <div className="mt-5">
-            {PREMIUM_FEATURES.map((feature) => (
+            {PREMIUM_FEATURES.map((feature) => feature.text).map((feature) => (
               <p className="text-sm flex items-center">
                 <FontAwesomeIcon icon={faCheck} className="mr-2" />
                 {feature.replace(/<\/?sp>/g, "")}

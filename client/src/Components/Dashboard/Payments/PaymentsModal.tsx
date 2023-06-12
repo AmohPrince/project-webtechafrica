@@ -11,9 +11,11 @@ import PayPalInput from "./PayPalInput";
 export const PaymentsModal = ({
   setShowPaymentMethodsModal,
   className,
+  websiteURL,
 }: {
   setShowPaymentMethodsModal: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
+  websiteURL: string;
 }) => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] = useState<
     "credit-card" | "paypal"
@@ -76,7 +78,7 @@ export const PaymentsModal = ({
       {selectingPaymentMethod === "credit-card" ? (
         <GooglePay />
       ) : (
-        <PayPalInput />
+        <PayPalInput websiteURL={websiteURL} />
       )}
     </div>
   );

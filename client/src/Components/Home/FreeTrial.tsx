@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../../Assets/assets";
 
-const FreeTrial = () => {
+const FreeTrial = ({ className }: { className?: string }) => {
   const [email, setEmail] = useState<string>("");
   return (
-    <section className="py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl mx-[5%] sm:mx-[12%]">
+    <section
+      className={`py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl ${className}`}
+    >
       <div className="w-full sm:w-1/2">
         <h2 className="h2">
           Start your free trial <br />

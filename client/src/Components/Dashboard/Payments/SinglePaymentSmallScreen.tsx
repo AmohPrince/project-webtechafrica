@@ -19,13 +19,22 @@ export const SinglePaymentSmallScreen = ({
       <div className="flex justify-between mt-2">
         <div>
           <p className="text-gray-400 text-sm">Card Used</p>
-          <p className="font-semibold">
-            Debit xxxx xxxx {transaction.card.endsIn}
-          </p>
-          <div className="flex">
-            <img src={getCardTypeIcon(transaction.card.type)} alt="Card icon" />
-            <p>{transaction.card.type}</p>
-          </div>
+          {transaction.card === "Paypal" ? (
+            <p>Paypal</p>
+          ) : (
+            <>
+              <p className="font-semibold">
+                Debit xxxx xxxx {transaction.card.endsIn}
+              </p>
+              <div className="flex">
+                <img
+                  src={getCardTypeIcon(transaction.card.type)}
+                  alt="Card icon"
+                />
+                <p>{transaction.card.type}</p>
+              </div>
+            </>
+          )}
         </div>
         <div className="w-1/3">
           <p className="text-gray-400 text-sm">Last Payment</p>
