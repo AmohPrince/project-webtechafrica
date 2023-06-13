@@ -10,7 +10,11 @@ const urls = {
   production: "https://api-m.paypal.com",
 };
 
-const baseURL = urls.sandbox;
+let baseURL = urls.sandbox;
+
+if (process.env.REACT_APP_IN_PRODUCTION === "true") {
+  baseURL = urls.production;
+}
 
 export const usePaypal = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

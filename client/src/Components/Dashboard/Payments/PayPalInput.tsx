@@ -11,15 +11,18 @@ const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
 
   const createOrder = async (data: any, actions: any): Promise<string> => {
     try {
-      const response = await fetch("http://localhost:8080/create-order", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          price: DEFAULT_PRICE.basic,
-        }),
-      });
+      const response = await fetch(
+        "https://webtechafrica.herokuapp.com/create-order",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({
+            price: DEFAULT_PRICE.basic,
+          }),
+        }
+      );
       return await response.text();
     } catch (err) {
       console.error(err);
