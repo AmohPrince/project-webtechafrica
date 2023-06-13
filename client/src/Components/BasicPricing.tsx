@@ -31,7 +31,7 @@ export const BasicPricing = ({ className }: { className: string }) => {
         />
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
-        {BASIC_FEATURES.map((feature) => {
+        {BASIC_FEATURES.map((feature) => feature.text).map((feature) => {
           const str = feature.split(",");
           return (
             <div className="flex whitespace-nowrap" key={feature}>

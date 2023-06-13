@@ -1,10 +1,8 @@
 import GooglePayButton from "@google-pay/button-react";
-import { useContext } from "react";
 import { useGlobalData } from "../../../Hooks/useGlobalData";
-import { globalData } from "../../../Pages/Dashboard/DashBoard";
 
 export const GooglePay = () => {
-  const { showNotification } = useContext(globalData);
+  const { showNotification } = useGlobalData();
   const { price } = useGlobalData();
 
   return (
@@ -15,7 +13,8 @@ export const GooglePay = () => {
         secure!
       </p>
       <GooglePayButton
-        environment="PRODUCTION"
+        // environment="PRODUCTION"
+        environment="TEST"
         paymentRequest={{
           apiVersion: 2,
           apiVersionMinor: 0,
@@ -49,6 +48,10 @@ export const GooglePay = () => {
         }}
         onLoadPaymentData={(paymentRequest) => {
           console.log("load payment data", paymentRequest);
+          showNotification(
+            "Success! someone is working on your website.",
+            "success"
+          );
         }}
         buttonSizeMode="fill"
         onCancel={() =>

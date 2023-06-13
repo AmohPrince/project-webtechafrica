@@ -11,9 +11,11 @@ import PayPalInput from "./PayPalInput";
 export const PaymentsModal = ({
   setShowPaymentMethodsModal,
   className,
+  websiteURL,
 }: {
   setShowPaymentMethodsModal: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
+  websiteURL: string;
 }) => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] = useState<
     "credit-card" | "paypal"
@@ -33,6 +35,10 @@ export const PaymentsModal = ({
   return (
     <div
       className={`flex flex-col flex-grow bg-white rounded-xl absolute center-absolutely border-primaryOne border-2 z-10 transition-all px-5 pb-2 w-1/2 ${className}`}
+      // initial={{ y: -1000 }}
+      // animate={{ y: 0 }}
+      // exit={{ y: -1000 }}
+      // transition={{ duration: 0.5, type: "spring" }}
     >
       <div className="py-3 border-b flex justify-between items-center">
         <p className="font-semibold">Payments</p>
@@ -76,7 +82,7 @@ export const PaymentsModal = ({
       {selectingPaymentMethod === "credit-card" ? (
         <GooglePay />
       ) : (
-        <PayPalInput />
+        <PayPalInput websiteURL={websiteURL} />
       )}
     </div>
   );

@@ -59,7 +59,7 @@ const NewWebsiteReview = ({
         <Confirmation text="An error occurred! But don`t worry we have stored everything for you so that you dont have to make your selections again." />
       )}
       <SecondaryButton
-        text="Complete 🚀"
+        text="Submit 🚀"
         style={{
           backgroundColor: selections.theme.colors.primary,
           color: selections.theme.colors.text,

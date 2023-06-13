@@ -3,7 +3,6 @@ import { Outlet, useNavigate } from "react-router";
 import { DashboardNavbar } from "../../Components/Dashboard/DashboardNavbar";
 import DashBoardSideBar from "../../Components/Dashboard/DashBoardSideBar";
 import DashBoardTitle from "../../Components/Dashboard/DashBoardTitle";
-import { PopUp, PopUpInfo } from "../../Components/SignInOrSignUp/PopUp";
 import { useAuth } from "../../Hooks/UseAuth";
 
 export const globalData = createContext<{
@@ -13,7 +12,6 @@ export const globalData = createContext<{
       sub: string;
     }>
   >;
-  showNotification: (message: string, type: "error" | "success") => void;
 }>(null as any);
 
 const DashBoard = () => {
@@ -29,28 +27,13 @@ const DashBoard = () => {
     if (!user) {
       redirect("/sign-in");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
-  const [popUpInfo, setPopUpInfo] = useState<PopUpInfo>({
-    showing: false,
-    text: "An error occurred",
-    type: "error",
-  });
-
-  const showNotification = (message: string, type: "error" | "success") => {
-    setPopUpInfo({
-      showing: true,
-      text: message,
-      type: type,
-    });
-  };
 
   return (
     <div className="flex sm:w-screen overflow-x-hidden overflow-y-auto">
-      {popUpInfo.showing && (
-        <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
-      )}
       <DashBoardSideBar
         setShowingSmallScreenMenu={setShowingSmallScreenMenu}
         className="hidden sm:block relative"
@@ -75,7 +58,6 @@ const DashBoard = () => {
         <globalData.Provider
           value={{
             setDashBoardTitleInfo,
-            showNotification,
           }}
         >
           <Outlet />

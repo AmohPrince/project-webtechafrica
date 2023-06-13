@@ -1,6 +1,11 @@
 import axios from "axios";
+import { AnimatePresence } from "framer-motion";
 import { createContext, useContext, useEffect, useState } from "react";
-import { PopUpInfo } from "../Components/SignInOrSignUp/PopUp";
+import {
+  PopUp,
+  PopUpInfo,
+  PopUpInfoType,
+} from "../Components/SignInOrSignUp/PopUp";
 import { Country, fetchCountries } from "../Util/FetchCountries";
 import { LOCAL_STORAGE_KEYS, toTheNearestHundredth } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
@@ -9,7 +14,7 @@ type GlobalData = {
   countries: Country[] | null;
   isLoading: boolean;
   popUpInfo: PopUpInfo;
-  setPopUpInfo: React.Dispatch<React.SetStateAction<PopUpInfo>>;
+  showNotification: (message: string, type: PopUpInfoType) => void;
   price: Price;
 };
 
@@ -49,6 +54,14 @@ export const GlobalDataProvider = ({
   });
 
   const [price, setPrice] = useState<Price>(DEFAULT_PRICE);
+
+  const showNotification = (message: string, type: PopUpInfoType) => {
+    setPopUpInfo({
+      showing: true,
+      text: message,
+      type: type,
+    });
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -99,10 +112,15 @@ export const GlobalDataProvider = ({
         countries,
         isLoading,
         popUpInfo,
-        setPopUpInfo,
+        showNotification,
         price,
       }}
     >
+      <AnimatePresence>
+        {popUpInfo.showing && (
+          <PopUp popUpInfo={popUpInfo} setPopUp={setPopUpInfo} />
+        )}
+      </AnimatePresence>
       {children}
     </globalDataContext.Provider>
   );

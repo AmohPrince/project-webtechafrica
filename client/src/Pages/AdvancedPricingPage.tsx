@@ -1,19 +1,51 @@
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faCircleNotch,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BASIC_FEATURES, PREMIUM_FEATURES } from "../App";
 import { assets } from "../Assets/assets";
 import { CircleBackGround } from "../Components/CircleBackGround";
+import { WaitListModal } from "../Components/WaitListModal";
+import { addEmailToWaitList } from "../Firebase/firestore";
 import { useAuth } from "../Hooks/UseAuth";
 import { useGlobalData } from "../Hooks/useGlobalData";
 import { scrollToTop } from "../Util/Utilities";
 
 const AdvancedPricingPage = () => {
   const { user } = useAuth();
-  const { price } = useGlobalData();
+  const { price, showNotification } = useGlobalData();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowingEmailModal, setIsShowingEmailModal] = useState(false);
+
+  const handleJoiningWaitlist = async () => {
+    if (user) {
+      setIsLoading(true);
+      try {
+        await addEmailToWaitList(user.email!);
+        showNotification(
+          "You successfully joined the premium waitlist!",
+          "success"
+        );
+      } catch (error) {
+        console.error(error);
+        showNotification("An error occurred!", "error");
+      }
+      setIsLoading(false);
+    } else {
+      setIsShowingEmailModal(true);
+    }
+  };
   return (
     <section className="mx-[5%] sm:mx-[12%]">
+      <AnimatePresence>
+        {isShowingEmailModal && (
+          <WaitListModal setIsShowingEmailModal={setIsShowingEmailModal} />
+        )}
+      </AnimatePresence>
       <CircleBackGround />
       <section className="z-10 mt-[8%] relative flex flex-col sm:flex-row justify-between w-full">
         <div className="border-b pb-5 w-full sm:w-1/2">
@@ -26,7 +58,7 @@ const AdvancedPricingPage = () => {
             via a unique link, and we've got you covered for payments. Ready for
             the full rundown of all the advanced features?
           </p>
-          {PREMIUM_FEATURES.map((feature) => (
+          {PREMIUM_FEATURES.map((feature) => feature.text).map((feature) => (
             <div className="flex items-center mb-5">
               <FontAwesomeIcon
                 icon={faCircleCheck}
@@ -34,7 +66,7 @@ const AdvancedPricingPage = () => {
                 className="w-5 h-5 mr-5"
               />
               <p className="default-paragraph">
-                {feature.replace(/<\/?sp>/g, "")}
+                {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             </div>
           ))}
@@ -51,11 +83,16 @@ const AdvancedPricingPage = () => {
             {price.currency} {price.advanced}{" "}
             <span className="text-base">/ month</span>
           </p>
-          <Link to={user ? "/dashboard/new-website" : "/sign-in"}>
-            <button className="rounded-full w-full text-xs text-white bg-orangeText py-4 mt-5 hover:bg-primaryOne transition-all hover:scale-110">
-              Get me a website 🚀
-            </button>
-          </Link>
+          <button
+            className="rounded-full w-full text-xs text-white bg-orangeText py-4 mt-5 hover:bg-primaryOne transition-all hover:scale-110"
+            onClick={handleJoiningWaitlist}
+          >
+            {isLoading ? (
+              <FontAwesomeIcon icon={faCircleNotch} spin />
+            ) : (
+              "Join the waitlist 🚀"
+            )}
+          </button>
         </div>
       </section>
       <section className="mt-[8%] flex justify-between flex-col sm:flex-row">
@@ -67,10 +104,12 @@ const AdvancedPricingPage = () => {
             at the basic plan below
           </p>
           <div>
-            {BASIC_FEATURES.map((feature, i) => (
-              <p className="default-paragraph mb-5">
-                <span className="text-black font-semibold">0{i + 1}</span>.
-                {feature.replace(/<\/?sp>|,/g, "")}
+            {BASIC_FEATURES.map((feature) => feature.text).map((feature, i) => (
+              <p className="default-paragraph mb-5" key={i}>
+                <span className="text-black font-semibold">
+                  {(i + 1).toString().padStart(2, "0")}
+                </span>
+                . {feature.replace(/<\/?sp>|,/g, "")}
               </p>
             ))}
           </div>

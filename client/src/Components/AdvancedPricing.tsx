@@ -30,7 +30,7 @@ export const AdvancedPricing = ({ className }: { className: string }) => {
         />
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
-        {PREMIUM_FEATURES.map((feature) => {
+        {PREMIUM_FEATURES.map((feature) => feature.text).map((feature) => {
           const str = feature.split(",");
           return (
             <div className="flex" key={feature}>

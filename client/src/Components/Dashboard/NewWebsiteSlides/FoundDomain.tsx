@@ -1,5 +1,6 @@
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 import React from "react";
 import { NewWebsiteSelections } from "../../../Types/Global";
 import PrimaryButton from "../../PrimaryButton";
@@ -17,7 +18,12 @@ export const FoundDomain = ({
 }) => {
   const isSelected = domainName === selections.domainName;
   return (
-    <div className="border rounded-md p-4 w-1/2 sm:w-1/4">
+    <motion.div
+      className="border rounded-md p-4 w-1/2 sm:w-1/4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, type: "tween" }}
+    >
       <div className="flex items-center">
         <FontAwesomeIcon icon={faCircleCheck} className="mr-3 text-green-600" />
         <p className="font-bold text-sm">{domainName}</p>
@@ -36,6 +42,6 @@ export const FoundDomain = ({
         }}
         disabled={isSelected}
       />
-    </div>
+    </motion.div>
   );
 };

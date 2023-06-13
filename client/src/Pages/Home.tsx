@@ -335,7 +335,7 @@ export const Home = () => {
         </div>
       </section>
       {/* free trial */}
-      <FreeTrial />
+      <FreeTrial className="mx-[5%] sm:mx-[12%]" />
       {/* blogs */}
       <section className="mt-[10%] px-[5%] sm:px-[12%]">
         <GreyButton text="Blog" />

@@ -18,7 +18,6 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  //TODO fix me
   const [userData, setUserData] = useLocalStorage<UserData | null>(
     null,
     LOCAL_STORAGE_KEYS.USER_DATA

@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LogoColor } from "../../Assets/assets";
@@ -14,9 +15,9 @@ const Navbar = () => {
   const [showingMenu, setShowingMenu] = useState(false);
 
   return (
-    <div className="px-[5%] sm:px-[12%]">
+    <div className="px-[5%] sm:px-[12%] bg-white">
       <nav
-        className={`flex justify-between items-center fixed right-0 left-0 py-6 px-2 sm:px-0 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent z-50`}
+        className={`flex justify-between items-center fixed right-0 left-0 py-6 px-2 sm:px-0 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent z-40`}
       >
         <div className="flex items-center">
           <Logo
@@ -100,7 +101,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link
-              className={`bg-white px-8 rounded-full ml-10 font-semibold flex items-center ${
+              className={`px-8 rounded-full ml-10 font-semibold flex items-center ${
                 basePath === "/" ? "bg-white" : "bg-primaryOne text-white"
               }`}
               to="/sign-in"
@@ -115,7 +116,9 @@ const Navbar = () => {
             setShowingSmallScreenMenu={setShowingMenu}
           />
         </div>
-        {showingMenu && <SmallScreenMenu setShowingMenu={setShowingMenu} />}
+        <AnimatePresence>
+          {showingMenu && <SmallScreenMenu setShowingMenu={setShowingMenu} />}
+        </AnimatePresence>
       </nav>
     </div>
   );

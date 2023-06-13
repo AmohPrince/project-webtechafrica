@@ -27,6 +27,7 @@ module.exports = {
         lightGreen: "#D9FFE9",
         magloOrange: "#F2994A",
         black3: "#797979",
+        pageBgGrey: "#f5f5f5",
       },
     },
   },
