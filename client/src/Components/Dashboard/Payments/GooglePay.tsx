@@ -13,7 +13,8 @@ export const GooglePay = () => {
         secure!
       </p>
       <GooglePayButton
-        environment="PRODUCTION"
+        // environment="PRODUCTION"
+        environment="TEST"
         paymentRequest={{
           apiVersion: 2,
           apiVersionMinor: 0,
@@ -47,6 +48,10 @@ export const GooglePay = () => {
         }}
         onLoadPaymentData={(paymentRequest) => {
           console.log("load payment data", paymentRequest);
+          showNotification(
+            "Success! someone is working on your website.",
+            "success"
+          );
         }}
         buttonSizeMode="fill"
         onCancel={() =>

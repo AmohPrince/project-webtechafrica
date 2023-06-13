@@ -1,5 +1,6 @@
 import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AnimatePresence } from "framer-motion";
 import React, { useRef, useState } from "react";
 import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 import { checkDomainAvailability } from "../../../Util/cors";
@@ -44,25 +45,17 @@ const DomainNamePicker = ({
       const userUrl: string = domainInput.current!.value;
       const noExtensionUrl = userUrl.split(".")[0];
       const withExtensionUrl = noExtensionUrl + extension;
-      await checkDomainAvailability(withExtensionUrl)
-        .then((data) => {
-          if (Object.keys(data).length === 0) {
-            setAvailableDomains((prev) => [...prev, withExtensionUrl]);
-            setFailedToFindDomain(false);
-          } else {
-            setFailedToFindDomain(true);
-          }
-        })
-        .catch((err) => {
-          if (err.code !== "ERR_NETWORK") {
-            setAvailableDomains((prev) => [...prev, withExtensionUrl]);
-            setFailedToFindDomain(false);
-          } else {
-            setFailedToFindDomain(true);
-          }
-        });
+      const isAvailable = await checkDomainAvailability(withExtensionUrl);
+
+      if (isAvailable) {
+        setAvailableDomains((prev) => [...prev, withExtensionUrl]);
+      }
+
       if (extensions.indexOf(extension) === extensions.length - 1) {
         setIsLoading(false);
+        if (availableDomains.length === 0) {
+          setFailedToFindDomain(true);
+        }
       }
     });
   };
@@ -214,22 +207,24 @@ const DomainNamePicker = ({
         <p>.io</p>
       </div>
       <div className="flex gap-2 flex-wrap justify-center mt-4">
-        {failedToFindDomain ? (
-          <p>
-            Snap! Turns out {domainInput.current?.value} is taken. Lets give it
-            another try.
-          </p>
-        ) : (
-          availableDomains.map((domain, i) => (
-            <FoundDomain
-              domainName={domain}
-              selections={selections}
-              setIsButtonDisabled={setIsButtonDisabled}
-              setSelections={setSelections}
-              key={i}
-            />
-          ))
-        )}
+        <AnimatePresence>
+          {failedToFindDomain ? (
+            <p>
+              Snap! Turns out {domainInput.current?.value} is taken. Lets give
+              it another try.
+            </p>
+          ) : (
+            availableDomains.map((domain, i) => (
+              <FoundDomain
+                domainName={domain}
+                selections={selections}
+                setIsButtonDisabled={setIsButtonDisabled}
+                setSelections={setSelections}
+                key={i}
+              />
+            ))
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

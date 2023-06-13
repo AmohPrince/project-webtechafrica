@@ -1,7 +1,8 @@
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import { ToolTip } from "../../SignInOrSignUp/ToolTip";
+import React, { useEffect, useRef } from "react";
+import { useGlobalData } from "../../../Hooks/useGlobalData";
+import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
 
 export const StageSwitch = ({
   stageIndex,
@@ -12,13 +13,25 @@ export const StageSwitch = ({
 }: {
   stageIndex: number;
   setStageIndex: React.Dispatch<React.SetStateAction<number>>;
-  stage: string;
+  stage: { text: string; selectionsProp: string };
   numberOfStages: number;
   i: number;
 }) => {
-  const [isShowingToolTip, setIsShowingToolTip] = useState(false);
+  const { selections } = useNewWebsiteSelections();
+  const { showNotification } = useGlobalData();
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
   const isCurrentStage = stageIndex === i;
+
+  useEffect(() => {
+    stageRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  }, [isCurrentStage]);
+
+  // @ts-ignore
+  const previousStageValue = selections[stage.selectionsProp];
 
   return (
     <>
@@ -27,8 +40,13 @@ export const StageSwitch = ({
           stageIndex > i ? "cursor-not-allowed" : ""
         } ${isCurrentStage && "text-primaryOne font-semibold text-sm"}`}
         onClick={() => {
-          setStageIndex(i);
+          if (previousStageValue !== null) {
+            setStageIndex(i);
+          } else {
+            showNotification("Please complete previous stage", "error");
+          }
         }}
+        ref={stageRef}
       >
         {i < stageIndex ? (
           <FontAwesomeIcon
@@ -44,16 +62,10 @@ export const StageSwitch = ({
             <span className="absolute center-absolutely">{i + 1}</span>
           </p>
         )}
-        <p className="cursor-pointer">{stage}</p>
-        {isShowingToolTip && (
-          <ToolTip
-            text="complete previous"
-            className="text-white bg-menu rounded-md"
-          />
-        )}
+        <p className="cursor-pointer">{stage.text}</p>
       </div>
       {i !== numberOfStages - 1 && (
-        <div className="h-[1px] bg-gray-300 flex-1" />
+        <div className="h-[1px] bg-gray-300 flex-1 min-w-[30px] mx-2 sm:mx-0" />
       )}
     </>
   );

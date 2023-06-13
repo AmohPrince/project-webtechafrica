@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import React, { useRef, useState } from "react";
 import { addEmailToWaitList } from "../Firebase/firestore";
 import { useGlobalData } from "../Hooks/useGlobalData";
+import { Overlay } from "./Overlay";
 
 export const WaitListModal = ({
   setIsShowingEmailModal,
@@ -26,6 +27,7 @@ export const WaitListModal = ({
         "You successfully joined the premium waitlist!",
         "success"
       );
+      setIsShowingEmailModal(false);
     } catch (error) {
       showNotification("An error occurred", "error");
     }
@@ -33,13 +35,7 @@ export const WaitListModal = ({
   };
 
   return (
-    <motion.div
-      className="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-30"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, type: "tween" }}
-    >
+    <Overlay>
       <motion.div
         className="bg-white rounded-lg p-5 sm:w-1/3 w-11/12"
         initial={{ y: -1000 }}
@@ -84,6 +80,6 @@ export const WaitListModal = ({
           </p>
         </div>
       </motion.div>
-    </motion.div>
+    </Overlay>
   );
 };

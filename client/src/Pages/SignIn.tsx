@@ -91,7 +91,9 @@ const SignIn = () => {
         `Hello ${userCredential.user.displayName ?? "user"}!`,
         "success"
       );
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (err: any) {
       const signInErrorMessage = await getSignInErrorMessage(err);
       showNotification(signInErrorMessage, "error");

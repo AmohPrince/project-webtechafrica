@@ -1,4 +1,7 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -45,8 +48,12 @@ export const PopUp = ({
       exit={{ x: 1000, opacity: 0 }}
     >
       <FontAwesomeIcon
-        icon={faXmark}
-        className="cursor-pointer mr-3"
+        icon={
+          popUpInfo.type === "success" ? faCircleCheck : faCircleExclamation
+        }
+        className={`cursor-pointer mr-3 ${
+          popUpInfo.type === "success" ? "text-green-500" : "text-red-500"
+        }`}
         onClick={() =>
           setPopUp({
             showing: false,

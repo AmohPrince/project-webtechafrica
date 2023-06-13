@@ -25,14 +25,37 @@ const WebsiteBuilderForm = () => {
     });
   }, [setDashBoardTitleInfo]);
 
-  const stages = [
-    "Theme",
-    "Website Type",
-    "Website Description",
-    "Content Generation Type",
-    "Domain Finder",
-    "Plan (No Credit Card)",
-    "Finish",
+  const stages: { text: string; selectionsProp: string }[] = [
+    {
+      text: "Theme",
+      selectionsProp: "theme",
+    },
+    {
+      text: "Website Type",
+      selectionsProp: "theme",
+    },
+    {
+      text: "Website Description",
+      selectionsProp: "websiteType",
+    },
+
+    {
+      text: "Content Generation Type",
+      selectionsProp: "websiteDescription",
+    },
+
+    {
+      text: "Domain Finder",
+      selectionsProp: "userHasOwnContent",
+    },
+    {
+      selectionsProp: "domainName",
+      text: "Plan (No Credit Card)",
+    },
+    {
+      selectionsProp: "plan",
+      text: "Finish",
+    },
   ];
 
   return (
@@ -42,7 +65,7 @@ const WebsiteBuilderForm = () => {
           text={`Your website at ${selections.domainName} has been submitted for approval. Expect a response within one to three business days`}
         />
       )}
-      <div className="flex justify-between bg-white py-4 px-12 my-2 items-center text-xs">
+      <div className="flex justify-between bg-white py-4 px-12 my-2 items-center text-xs overflow-x-auto">
         {stages.map((stage, i) => (
           <StageSwitch
             i={i}
