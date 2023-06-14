@@ -74,8 +74,8 @@ const PlanSelector = ({
             disabled={selections.plan === "Basic"}
           />
           <div className="mt-5">
-            {BASIC_FEATURES.map((feature) => feature.text).map((feature) => (
-              <p className="text-sm flex items-center">
+            {BASIC_FEATURES.map((feature) => feature.text).map((feature, i) => (
+              <p className="text-sm flex items-center" key={i}>
                 <FontAwesomeIcon icon={faCheck} className="mr-2" />
                 {feature.replace(/<\/?sp>/g, "")}
               </p>

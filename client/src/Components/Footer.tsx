@@ -7,9 +7,9 @@ import {
   faFacebook,
   faInstagram,
   faLinkedin,
-  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { scrollToTop } from "../Util/Utilities";
+import { email } from "../App";
 
 const Footer = () => {
   return (
@@ -27,14 +27,12 @@ const Footer = () => {
               alt="Mail"
               className="w-6 h-6 object-cover mr-3"
             />
-            <div>
+            <p className="text-secondaryFour">{email}</p>
+            {/* <div>
               <p className="text-secondaryFour">
                 customercare@webtechafrica.com
               </p>
-              <p className="text-secondaryFour">
-                amosmachora@webtechafrica.com
-              </p>
-            </div>
+            </div> */}
           </div>
           <div className="flex items-start mt-3">
             <img
@@ -118,19 +116,19 @@ const Footer = () => {
         </p>
         <div className="flex items-center gap-x-6">
           {/* TODO twitter account */}
-          <a href="fix-me" target="_blank" rel="noopener noreferrer">
+          {/* <a href="fix-me" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               icon={faFacebook}
               className="hover:text-primaryOne"
             />
-          </a>
+          </a> */}
           <a
             href="https://www.facebook.com/profile.php?id=100092227747488"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FontAwesomeIcon
-              icon={faTwitter}
+              icon={faFacebook}
               className="hover:text-primaryOne"
             />
           </a>

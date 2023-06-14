@@ -41,7 +41,9 @@ const DomainNamePicker = ({
   const handleSearch = async () => {
     setIsLoading(true);
     setAvailableDomains([]);
-    extensions.forEach(async (extension) => {
+    for (let i = 0; i < extensions.length; i++) {
+      const extension = extensions[i];
+
       const userUrl: string = domainInput.current!.value;
       const noExtensionUrl = userUrl.split(".")[0];
       const withExtensionUrl = noExtensionUrl + extension;
@@ -50,14 +52,13 @@ const DomainNamePicker = ({
       if (isAvailable) {
         setAvailableDomains((prev) => [...prev, withExtensionUrl]);
       }
-
       if (extensions.indexOf(extension) === extensions.length - 1) {
         setIsLoading(false);
-        if (availableDomains.length === 0) {
+        if (extension.length === 0) {
           setFailedToFindDomain(true);
         }
       }
-    });
+    }
   };
 
   const handleDomainInput = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -9,6 +9,7 @@ import { GooglePay } from "./GooglePay";
 import PayPalInput from "./PayPalInput";
 import { Overlay } from "../../Overlay";
 import { motion } from "framer-motion";
+import { useGlobalData } from "../../../Hooks/useGlobalData";
 
 export const PaymentsModal = ({
   setShowPaymentMethodsModal,
@@ -21,9 +22,10 @@ export const PaymentsModal = ({
 }) => {
   const [selectingPaymentMethod, setSelectingPaymentMethod] = useState<
     "credit-card" | "paypal"
-  >("credit-card");
+  >("paypal");
 
   const { setDashBoardTitleInfo } = useContext(globalData);
+  const { showNotification } = useGlobalData();
 
   useEffect(() => {
     if (isSmallScreen()) {
@@ -56,17 +58,6 @@ export const PaymentsModal = ({
           <p className="text-sm font-semibold">Select payment method</p>
           <div className="flex gap-x-4 sm:gap-x-2 mt-2">
             <div
-              onClick={() => setSelectingPaymentMethod("credit-card")}
-              className={`border-primaryOne p-2 border rounded-sm flex items-center justify-center cursor-pointer w-1/2 ${
-                selectingPaymentMethod === "credit-card"
-                  ? "text-white bg-primaryOne shadow-lg"
-                  : ""
-              }`}
-            >
-              <img src={assets.google} alt="Google" className="h-4 w-4" />
-              <p className="text-xs ml-2 font-medium">G Pay</p>
-            </div>
-            <div
               className={`border-primaryOne p-2 border rounded-sm flex items-center justify-center cursor-pointer w-1/2 ${
                 selectingPaymentMethod === "paypal"
                   ? "text-white bg-primaryOne shadow-lg"
@@ -79,6 +70,17 @@ export const PaymentsModal = ({
                 className="transition-all duration-300"
               />
               <p className="text-xs ml-2 font-medium">Paypal</p>
+            </div>
+            <div
+              onClick={() => showNotification("G-PAY coming soon", "error")}
+              className={`border-primaryOne p-2 border rounded-sm flex items-center justify-center cursor-not-allowed w-1/2 ${
+                selectingPaymentMethod === "credit-card"
+                  ? "text-white bg-primaryOne shadow-lg"
+                  : ""
+              }`}
+            >
+              <img src={assets.google} alt="Google" className="h-4 w-4" />
+              <p className="text-xs ml-2 font-medium">G Pay</p>
             </div>
           </div>
         </div>

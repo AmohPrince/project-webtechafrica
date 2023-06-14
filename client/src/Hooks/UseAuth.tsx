@@ -1,8 +1,11 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { onSnapshot } from "firebase/firestore";
 import React, { createContext, useContext } from "react";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
+import { doc } from "firebase/firestore";
+import { db } from "../Firebase/firebase";
 
 const authContext = createContext<AuthContext>(null as any);
 
@@ -51,6 +54,12 @@ export const AuthContextProvider = ({
       LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
       new Date().toISOString()
     );
+  });
+
+  const userDataRef = doc(db, "users", user!.uid);
+
+  onSnapshot(userDataRef, (doc) => {
+    setUserData(doc.data() as UserData);
   });
 
   return (

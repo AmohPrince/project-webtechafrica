@@ -6,6 +6,7 @@ import Faq from "../Components/Faq";
 import Location from "../Components/Location";
 import { pageTransition } from "../FramerMotion/PageTransitions";
 import Faqs from "../Json/Faqs.json";
+import { email } from "../App";
 
 const Contact = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -110,7 +111,7 @@ const Contact = () => {
             <div className="sm:flex mt-3 sm:mt-0">
               <p className="font-semibold sm:mr-2">Mail Us</p>
               <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
-                customercare@webtechafrica.com
+                {email}
               </p>
             </div>
           </div>

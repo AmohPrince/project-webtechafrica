@@ -19,13 +19,13 @@ export const PendingVerificationWebsite = ({
         <WebsiteStage stage={website.stage} />
         {website.stage === "Reviewed" && (
           <PrimaryButton
-            text="Pay 🚀"
+            text="Pay once 🚀"
             onClick={() => setIsShowingPaymentsModal(true)}
           />
         )}
       </div>
       <p>Website type description</p>
-      <p className="text-gray-500 text-sm my-4">
+      <p className="text-gray-500 text-sm my-4 break-words">
         {website.selections.websiteDescription}
       </p>
       <p className="my-2">Theme</p>

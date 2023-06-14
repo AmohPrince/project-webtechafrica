@@ -85,6 +85,7 @@ export const backendURL = inProduction
   ? "https://webtechafrica.herokuapp.com"
   : "http://localhost:8080";
 
+export const email = "webtechnologiesafrica@gmail.com";
 function App() {
   return (
     <div className="relative py-14 w-screen overflow-x-hidden">

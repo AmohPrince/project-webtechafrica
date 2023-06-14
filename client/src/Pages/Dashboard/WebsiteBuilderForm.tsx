@@ -10,6 +10,7 @@ import { globalData } from "./DashBoard";
 import { useNewWebsiteSelections } from "../../Hooks/useNewWebsiteSelections";
 import Confirmation from "../../Components/Dashboard/Confirmation";
 import { StageSwitch } from "../../Components/Dashboard/NewWebsiteSlides/StageSwitch";
+import { Overlay } from "../../Components/Overlay";
 
 const WebsiteBuilderForm = () => {
   const { setDashBoardTitleInfo } = useContext(globalData);
@@ -59,11 +60,13 @@ const WebsiteBuilderForm = () => {
   ];
 
   return (
-    <div className="relative w-full pt-4">
+    <div className="w-full pt-4">
       {confirmationModal && (
-        <Confirmation
-          text={`Your website at ${selections.domainName} has been submitted for approval. Expect a response within one to three business days`}
-        />
+        <Overlay>
+          <Confirmation
+            text={`Your website at ${selections.domainName} has been submitted for approval. Expect a response within one to three business days`}
+          />
+        </Overlay>
       )}
       <div className="flex justify-between bg-white py-4 px-12 my-2 items-center text-xs overflow-x-auto">
         {stages.map((stage, i) => (
