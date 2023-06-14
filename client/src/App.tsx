@@ -79,6 +79,12 @@ export const BASIC_FEATURES: {
   },
 ];
 
+export const inProduction = process.env.REACT_APP_IN_PRODUCTION === "true";
+
+export const backendURL = inProduction
+  ? "https://webtechafrica.herokuapp.com"
+  : "http://localhost:8080";
+
 function App() {
   return (
     <div className="relative py-14 w-screen overflow-x-hidden">

@@ -1,4 +1,5 @@
 import GooglePayButton from "@google-pay/button-react";
+import { inProduction } from "../../../App";
 import { useGlobalData } from "../../../Hooks/useGlobalData";
 
 export const GooglePay = () => {
@@ -13,8 +14,7 @@ export const GooglePay = () => {
         secure!
       </p>
       <GooglePayButton
-        // environment="PRODUCTION"
-        environment="TEST"
+        environment={inProduction ? "PRODUCTION" : "TEST"}
         paymentRequest={{
           apiVersion: 2,
           apiVersionMinor: 0,

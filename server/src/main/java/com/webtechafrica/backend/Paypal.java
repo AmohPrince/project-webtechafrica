@@ -1,10 +1,10 @@
 package com.webtechafrica.backend;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -18,22 +18,28 @@ import java.util.Map;
 public class Paypal {
     private Environment environment;
     private RestTemplate restTemplate;
-    String baseURL;
+    private String baseURL;
+    private PayPalAccessToken payPalAccessToken;
+
+    public PayPalAccessToken getPayPalAccessToken() {
+        return payPalAccessToken;
+    }
+
+    public void setPayPalAccessToken(PayPalAccessToken payPalAccessToken) {
+        this.payPalAccessToken = payPalAccessToken;
+    }
 
     @Autowired
     public Paypal(Environment environment, RestTemplate restTemplate) {
         this.environment = environment;
         this.restTemplate = restTemplate;
-    }
-
-    @PostConstruct
-    private void initialize() {
         baseURL = environment.getProperty("paypalAPIUrl");
+        this.payPalAccessToken = getAccessToken();
     }
-
 
     public PayPalAccessToken getAccessToken() {
         String paypalApiUrl = baseURL + "/v1/oauth2/token";
+
         String clientId = environment.getProperty("PAYPAL_CLIENT_ID");
         String secret = environment.getProperty("PAYPAL_SECRET");
 
@@ -56,7 +62,6 @@ public class Paypal {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             var responseBody = response.getBody();
-            System.out.println(responseBody);
             return new PayPalAccessToken((String) responseBody.get("access_token"), (Integer) responseBody.get("expires_in"));
         } else {
             System.err.println("Error retrieving access token: " + response.getStatusCode());
@@ -64,27 +69,16 @@ public class Paypal {
         }
     }
 
-
-//    public ClientToken getClientToken() {
-//        String paypalApiUrl = baseURL + "/v1/identity/generate-token";
-//
-//        String accessToken = getAccessToken();
-//        System.out.println(accessToken);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.setBearerAuth(accessToken);
-//
-//        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-//
-//        ResponseEntity<ClientToken> response = restTemplate.exchange(
-//                paypalApiUrl,
-//                HttpMethod.POST,
-//                entity,
-//                ClientToken.class
-//        );
-//        System.out.println(response.getBody());
-//        return response.getBody();
-//    }
+    @Scheduled(fixedDelay = 3600000)
+    public void handleAccessTokenExpiration() {
+        if (payPalAccessToken.getExpiresIn() <= 0) {
+            System.out.println("Access token is expired. Requesting a new one...");
+            PayPalAccessToken newToken = getAccessToken();
+            setPayPalAccessToken(newToken);
+        } else {
+            System.out.println("Not expired yet");
+            payPalAccessToken.setExpiresIn(payPalAccessToken.getExpiresIn() - 600000);
+        }
+    }
 }
 

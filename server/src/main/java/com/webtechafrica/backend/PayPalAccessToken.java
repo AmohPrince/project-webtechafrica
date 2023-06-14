@@ -1,8 +1,8 @@
 package com.webtechafrica.backend;
 
 public class PayPalAccessToken {
-    String accessToken;
-    Integer expiresIn;
+    private String accessToken;
+    private Integer expiresIn;
 
     public PayPalAccessToken(String accessToken, Integer expiresIn) {
         this.accessToken = accessToken;
@@ -11,5 +11,13 @@ public class PayPalAccessToken {
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public Integer getExpiresIn() {
+        return expiresIn;
+    }
+
+    public void setExpiresIn(Integer expiresIn) {
+        this.expiresIn = expiresIn;
     }
 }

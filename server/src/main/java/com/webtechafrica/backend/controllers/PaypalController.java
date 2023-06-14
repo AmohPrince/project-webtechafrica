@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://webtechafrica.com"})
 public class PaypalController {
     private final RestTemplate restTemplate;
     private final Paypal paypal;
     private final Environment environment;
-    private final PayPalAccessToken payPalAccessToken;
     Gson gson = new Gson();
 
     @Autowired
@@ -26,7 +25,6 @@ public class PaypalController {
         this.paypal = paypal;
         this.environment = environment;
         this.restTemplate = restTemplate;
-        this.payPalAccessToken = paypal.getAccessToken();
     }
 
     @PostMapping("/create-order")
@@ -36,7 +34,7 @@ public class PaypalController {
         // headers
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.set("Authorization", "Bearer " + payPalAccessToken.getAccessToken());
+        httpHeaders.set("Authorization", "Bearer " + paypal.getPayPalAccessToken().getAccessToken());
         httpHeaders.set("Prefer", "return=representation");
 
         // creating the order
@@ -55,6 +53,10 @@ public class PaypalController {
             var responseBody = response.getBody();
             JsonObject responseAsJSON = gson.fromJson(responseBody, JsonObject.class);
             return responseAsJSON.get("id").getAsString();
+        } else if (response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+            System.out.println("Access token has expired. Refreshing access token...");
+            paypal.setPayPalAccessToken(paypal.getAccessToken());
+            return createOrder(price);
         } else {
             System.out.println("API call failed with status code: " + response.getStatusCode());
             return null;

@@ -1,5 +1,6 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
+import { backendURL } from "../../../App";
 import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
 import { useAuth } from "../../../Hooks/UseAuth";
 import { DEFAULT_PRICE, useGlobalData } from "../../../Hooks/useGlobalData";
@@ -11,18 +12,15 @@ const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
 
   const createOrder = async (data: any, actions: any): Promise<string> => {
     try {
-      const response = await fetch(
-        "https://webtechafrica.herokuapp.com/create-order",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({
-            price: DEFAULT_PRICE.basic,
-          }),
-        }
-      );
+      const response = await fetch(`${backendURL}/create-order`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          price: DEFAULT_PRICE.basic,
+        }),
+      });
       return await response.text();
     } catch (err) {
       console.error(err);

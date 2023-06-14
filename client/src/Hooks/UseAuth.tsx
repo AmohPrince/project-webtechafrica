@@ -1,7 +1,6 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React, { createContext, useContext } from "react";
 import { UserData } from "../Types/Global";
-import { testUserData } from "../Util/testdata";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
 

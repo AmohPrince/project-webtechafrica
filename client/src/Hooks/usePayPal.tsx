@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { inProduction } from "../App";
 
 type ClientTokenResponse = {
   client_token: string;
@@ -12,7 +13,7 @@ const urls = {
 
 let baseURL = urls.sandbox;
 
-if (process.env.REACT_APP_IN_PRODUCTION === "true") {
+if (inProduction) {
   baseURL = urls.production;
 }
 
