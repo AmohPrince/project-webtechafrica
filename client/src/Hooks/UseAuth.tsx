@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { UserData } from "../Types/Global";
 import { LOCAL_STORAGE_KEYS } from "../Util/Utilities";
 import { useLocalStorage } from "./UseLocalStorage";
@@ -56,11 +56,16 @@ export const AuthContextProvider = ({
     );
   });
 
-  const userDataRef = doc(db, "users", user!.uid);
+  useEffect(() => {
+    const userDataRef = user?.uid ? doc(db, "users", user.uid) : null;
 
-  onSnapshot(userDataRef, (doc) => {
-    setUserData(doc.data() as UserData);
-  });
+    if (userDataRef) {
+      onSnapshot(userDataRef, (doc) => {
+        setUserData(doc.data() as UserData);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <authContext.Provider
