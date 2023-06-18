@@ -47,6 +47,10 @@ export const PREMIUM_FEATURES: {
     category: "Online business",
     text: "Payments covered!",
   },
+  {
+    category: "Online business",
+    text: "Free, <sp>one, month <sp>ad, designs",
+  },
 ];
 
 export const BASIC_FEATURES: {
@@ -76,6 +80,10 @@ export const BASIC_FEATURES: {
   {
     category: "Online business",
     text: "Fully, <sp>designed, and, <sp>deployed, web shop",
+  },
+  {
+    category: "Online business",
+    text: "Free, <sp>one, month <sp>ad, designs",
   },
 ];
 
