@@ -52,9 +52,10 @@ import mastercard from "./MasterCard.svg";
 import remote_design from "./remote_design.svg";
 import profile from "./profile.png";
 import forgot_password from "./Forgot password-bro.svg";
-// import forgot_password from "./forgot-password-not-css.svg";
+import contactBlob from "./ContactBlob.svg";
 
 export const assets = {
+  contactBlob,
   forgot_password,
   remote_design,
   mastercard,
