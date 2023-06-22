@@ -15,7 +15,7 @@ export const NextHead = ({
 }) => {
   return (
     <Head>
-      <title>{title ?? "WebTech Africa"}</title>
+      <title>{title ? title : "WebTech Africa"}</title>
       <meta charSet="UTF-8" />
       <meta name="robots" content="index, follow" />
       <meta name="author" content="Amos Machora" />
