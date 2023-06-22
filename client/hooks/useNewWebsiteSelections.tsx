@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
-import { NewWebsiteSelections } from "../Types/Global";
 import themes from "../Util/themes.json";
 import website_types from "../Json/WebsiteTypes.json";
+import { NewWebsiteSelections } from "@/types/Global";
 
 type SelectionsContext = {
   selections: NewWebsiteSelections;

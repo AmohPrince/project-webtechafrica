@@ -1,10 +1,10 @@
+import { addOrUpdateUserDataInDB } from "@/firebase/firestore";
+import { useAuth } from "@/hooks/useAuth";
+import { useNewWebsiteSelections } from "@/hooks/useNewWebsiteSelections";
+import { UserData } from "@/types/Global";
+import { getTimestampForThreeDaysFromNow } from "@/util/utilities";
 import React, { useState } from "react";
 import { uid } from "uid";
-import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
-import { useAuth } from "../../../Hooks/UseAuth";
-import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
-import { UserData } from "../../../Types/Global";
-import { getTimestampForThreeDaysFromNow } from "../../../Util/Utilities";
 import { SecondaryButton } from "../../SecondaryButton";
 import Confirmation from "../Confirmation";
 import { ThemeBox } from "../ThemeBox";

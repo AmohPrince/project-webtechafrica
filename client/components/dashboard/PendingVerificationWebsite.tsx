@@ -1,6 +1,6 @@
+import { PendingVerificationWebsite as PendingVerificationWebsiteType } from "@/types/Global";
+import { formatDate } from "@/util/utilities";
 import React, { useState } from "react";
-import { PendingVerificationWebsite as PendingVerificationWebsiteType } from "../../Types/Global";
-import { formatDate } from "../../Util/Utilities";
 import PrimaryButton from "../PrimaryButton";
 import { PaymentsModal } from "./payments/PaymentsModal";
 import { ThemeBox } from "./ThemeBox";
