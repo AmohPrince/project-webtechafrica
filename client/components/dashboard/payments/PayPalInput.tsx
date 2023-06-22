@@ -3,16 +3,8 @@ import { Transaction } from "@/types/Global";
 import { backendURL } from "@/util/utilities";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
-<<<<<<< HEAD:client/src/Components/Dashboard/Payments/PayPalInput.tsx
-import { backendURL } from "../../../App";
-import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
-import { useAuth } from "../../../Hooks/UseAuth";
-import { DEFAULT_PRICE, useGlobalData } from "../../../Hooks/useGlobalData";
-import { Transaction } from "../../../Types/Global";
-=======
 import { addOrUpdateUserDataInDB } from "../../../firebase/firestore";
 import { DEFAULT_PRICE, useGlobalData } from "../../../hooks/useGlobalData";
->>>>>>> work-branch:client/components/dashboard/payments/PayPalInput.tsx
 
 export const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
   const { showNotification } = useGlobalData();

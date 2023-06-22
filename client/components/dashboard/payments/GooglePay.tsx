@@ -1,11 +1,6 @@
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { inProduction } from "@/util/utilities";
 import GooglePayButton from "@google-pay/button-react";
-<<<<<<< HEAD:client/src/Components/Dashboard/Payments/GooglePay.tsx
-import { inProduction } from "../../../App";
-import { useGlobalData } from "../../../Hooks/useGlobalData";
-=======
->>>>>>> work-branch:client/components/dashboard/payments/GooglePay.tsx
 
 export const GooglePay = () => {
   const { showNotification } = useGlobalData();

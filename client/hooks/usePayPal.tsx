@@ -1,6 +1,5 @@
 import { inProduction } from "@/util/utilities";
 import { useEffect, useState } from "react";
-import { inProduction } from "../App";
 
 type ClientTokenResponse = {
   client_token: string;

@@ -5,17 +5,11 @@ import { LogoColor, assets } from "@/public/assets";
 import {
   faFacebook,
   faLinkedin,
-<<<<<<< HEAD:client/src/Components/Footer.tsx
-} from "@fortawesome/free-brands-svg-icons";
-import { scrollToTop } from "../Util/Utilities";
-import { email } from "../App";
-=======
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
->>>>>>> work-branch:client/components/Footer.tsx
 
 const Footer = () => {
   return (
