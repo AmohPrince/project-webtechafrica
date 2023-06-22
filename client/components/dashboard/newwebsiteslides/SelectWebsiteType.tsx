@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { WebsiteType } from "../../../Types/Global";
-import website_types from "../../../Json/WebsiteTypes.json";
+import { WebsiteType } from "../../../types/Global";
+import website_types from "../../../json/WebsiteTypes.json";
 import { SecondaryButton } from "../../SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
-import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { useNewWebsiteSelections } from "../../../hooks/useNewWebsiteSelections";
 
 const SelectWebsiteType = ({
   setActiveStageId,

@@ -5,7 +5,7 @@ import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import React, { useRef, useState } from "react";
-import { getLighterColor } from "../../../Util/Utilities";
+import { getLighterColor } from "../../../util/utilities";
 import { SecondaryButton } from "../../SecondaryButton";
 import { FoundDomain } from "./FoundDomain";
 
