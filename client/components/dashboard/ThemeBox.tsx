@@ -1,5 +1,5 @@
 import React from "react";
-import { NewWebsiteSelections, Theme } from "../../Types/Global";
+import { NewWebsiteSelections, Theme } from "../../types/Global";
 
 export const ThemeBox = ({
   activeThemeId,

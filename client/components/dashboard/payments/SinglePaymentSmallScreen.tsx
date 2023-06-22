@@ -1,4 +1,4 @@
-import { Transaction } from "@/Types/Global";
+import { Transaction } from "@/types/Global";
 import { getCardTypeIcon, formatDate, formatTime } from "@/util/utilities";
 import Image from "next/image";
 import React from "react";

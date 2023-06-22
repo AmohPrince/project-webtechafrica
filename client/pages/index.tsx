@@ -2,7 +2,7 @@ import { faCcPaypal, faCcVisa } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import blogs from "../Json/Blogs.json";
+import blogs from "../json/Blogs.json";
 import { useAuth } from "../hooks/useAuth";
 import Layout from "@/components/Layout";
 import { BasicPricing } from "@/components/prices/BasicPricing";
@@ -91,6 +91,7 @@ niche."
               alt="graph"
               className="w-3/4 sm:w-[50%] mx-auto mt-10 sm:mt-0 sm:ml-11 object-cover sm:absolute -right-12 -top-12"
               {...fadeAnimation}
+              priority
             />
           </motion.section>
           {/* features  */}

@@ -1,7 +1,7 @@
 import { PopUpInfo, PopUpInfoType } from "@/components/PopUp";
 import { Country } from "@/util/FetchCountries";
 
-export type BlogArticleType = {
+export type Blog = {
   title: string;
   date: string;
   preText: string;
@@ -12,7 +12,7 @@ export type BlogArticleType = {
   writerImage: string;
   introduction?: string;
   points?: string[];
-  blogBodyImage?: string;
+  blogBodyImage: string;
   conclusions?: string[];
 };
 

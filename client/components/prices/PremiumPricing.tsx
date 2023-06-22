@@ -29,10 +29,10 @@ export const PremiumPricing = ({ className }: { className: string }) => {
         />
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
-        {PREMIUM_FEATURES.map((feature) => feature.text).map((feature) => {
+        {PREMIUM_FEATURES.map((feature) => feature.text).map((feature, i) => {
           const str = feature.split(" ");
           return (
-            <p key={feature}>
+            <p key={i}>
               {str.map((str) => (
                 <FeatureSpan text={str} source="Premium" key={str} />
               ))}

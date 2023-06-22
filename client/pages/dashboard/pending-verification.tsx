@@ -2,7 +2,7 @@ import NoWebsite from "@/components/dashboard/NoWebsite";
 import { PendingVerificationWebsite } from "@/components/dashboard/PendingVerificationWebsite";
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Layout from "./Layout";
 
 const PendingVerificationsPage = () => {

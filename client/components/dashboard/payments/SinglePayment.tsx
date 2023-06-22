@@ -1,6 +1,6 @@
+import { Transaction } from "@/types/Global";
+import { formatDate, formatTime } from "@/util/utilities";
 import React from "react";
-import { Transaction } from "../../../Types/Global";
-import { formatDate, formatTime } from "../../../Util/Utilities";
 
 const SinglePayment = ({ transaction }: { transaction: Transaction }) => {
   return (

@@ -1,4 +1,4 @@
-import { UserData } from "../Types/Global";
+import { UserData } from "../types/Global";
 
 export const testUserData: UserData = {
   plan: "Basic",

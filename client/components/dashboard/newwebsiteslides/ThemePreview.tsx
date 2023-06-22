@@ -1,7 +1,7 @@
 import { faBurger } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Theme } from "../../../Types/Global";
+import { Theme } from "../../../types/Global";
 import LVLogo from "./LVLogo";
 
 const ThemePreview = ({ theme }: { theme: Theme }) => {

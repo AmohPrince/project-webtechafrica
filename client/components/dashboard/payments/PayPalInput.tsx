@@ -1,10 +1,10 @@
 import { useAuth } from "@/hooks/useAuth";
+import { Transaction } from "@/types/Global";
 import { backendURL } from "@/util/utilities";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 import { addOrUpdateUserDataInDB } from "../../../firebase/firestore";
 import { DEFAULT_PRICE, useGlobalData } from "../../../hooks/useGlobalData";
-import { Transaction } from "../../../Types/Global";
 
 export const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
   const { showNotification } = useGlobalData();

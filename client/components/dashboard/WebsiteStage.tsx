@@ -1,5 +1,5 @@
 import React from "react";
-import { WebsiteStage as WebsiteStageType } from "../../Types/Global";
+import { WebsiteStage as WebsiteStageType } from "../../types/Global";
 
 export const WebsiteStage = ({ stage }: { stage: WebsiteStageType }) => {
   return (

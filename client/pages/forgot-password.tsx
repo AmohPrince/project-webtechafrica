@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
   const resetEmailInput = useRef<HTMLInputElement>(null);
   const { showNotification } = useGlobalData();
 
@@ -81,3 +81,5 @@ export const ForgotPassword = () => {
     </div>
   );
 };
+
+export default ForgotPassword;

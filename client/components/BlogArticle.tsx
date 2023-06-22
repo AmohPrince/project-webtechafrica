@@ -1,10 +1,10 @@
-import { BlogArticleType } from "@/types/Global";
+import { Blog } from "@/types/Global";
 import { scrollToTop } from "@/util/utilities";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const BlogArticle = ({ article }: { article: BlogArticleType }) => {
+const BlogArticle = ({ article }: { article: Blog }) => {
   return (
     <div className="rounded-3xl bg-gray-100 p-6 w-full mb-10 sm:mb-0 sm:w-1/2 relative">
       <Image

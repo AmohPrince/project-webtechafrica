@@ -2,7 +2,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import React from "react";
-import { NewWebsiteSelections } from "../../../Types/Global";
+import { NewWebsiteSelections } from "../../../types/Global";
 import PrimaryButton from "../../PrimaryButton";
 
 export const FoundDomain = ({

@@ -4,8 +4,7 @@ import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
 import { motion } from "framer-motion";
 import React from "react";
-
-import blogs from "../../Json/Blogs.json";
+import blogs from "../../json/Blogs.json";
 
 const Blog = () => {
   return (
