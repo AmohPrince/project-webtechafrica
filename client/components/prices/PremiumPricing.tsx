@@ -2,8 +2,8 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import { getYearly, PREMIUM_FEATURES, scrollToTop } from "@/util/utilities";
 import Link from "next/link";
 import React from "react";
-import Billed from "./Billed";
-import { FeatureString } from "./FeatureString";
+import Billed from "../Billed";
+import { FeatureSpan } from "./FeatureSpan";
 
 export const PremiumPricing = ({ className }: { className: string }) => {
   const { price } = useGlobalData();
@@ -30,13 +30,13 @@ export const PremiumPricing = ({ className }: { className: string }) => {
       </div>
       <div className="text-secondaryFour flex flex-col items-center">
         {PREMIUM_FEATURES.map((feature) => feature.text).map((feature) => {
-          const str = feature.split(",");
+          const str = feature.split(" ");
           return (
-            <div className="flex" key={feature}>
+            <p key={feature}>
               {str.map((str) => (
-                <FeatureString feature={str} source="Premium" key={str} />
+                <FeatureSpan text={str} source="Premium" key={str} />
               ))}
-            </div>
+            </p>
           );
         })}
       </div>

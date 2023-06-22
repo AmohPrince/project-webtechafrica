@@ -5,7 +5,7 @@ import { useState } from "react";
 import blogs from "../Json/Blogs.json";
 import { useAuth } from "../hooks/useAuth";
 import Layout from "@/components/Layout";
-import { BasicPricing } from "@/components/BasicPricing";
+import { BasicPricing } from "@/components/prices/BasicPricing";
 import BlackIshButton from "@/components/BlackIshButton";
 import BlogArticle from "@/components/BlogArticle";
 import { FeaturesComponent } from "@/components/FeaturesComponent";
@@ -21,7 +21,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { assets } from "@/public/assets";
-import { PremiumPricing } from "@/components/PremiumPricing";
+import { PremiumPricing } from "@/components/prices/PremiumPricing";
 import { NextHead } from "@/components/NextHead";
 
 export default function Home() {

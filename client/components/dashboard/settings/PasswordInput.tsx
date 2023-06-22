@@ -6,6 +6,7 @@ interface PasswordInputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const PasswordInput = forwardRef(
   ({ onChange }: PasswordInputProps, ref: ForwardedRef<HTMLInputElement>) => {
     const [showPassword, setShowPassword] = useState(false);

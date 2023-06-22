@@ -1,53 +1,3 @@
-export const PREMIUM_FEATURES: {
-  category: "Web Development" | "Social Media and Ads" | "Online business";
-  text: string;
-}[] = [
-  {
-    category: "Web Development",
-    text: "<sp>Unlimited customer support",
-  },
-  {
-    category: "Web Development",
-    text: "Custom domain name",
-  },
-  {
-    category: "Web Development",
-    text: "Hosting",
-  },
-  {
-    category: "Web Development",
-    text: "<sp>Free SSL certificate",
-  },
-  {
-    category: "Web Development",
-    text: "<sp>Completed website <sp>design and development",
-  },
-  {
-    category: "Social Media and Ads",
-    text: "Social media management",
-  },
-  {
-    category: "Social Media and Ads",
-    text: "Custom Ads management",
-  },
-  {
-    category: "Online business",
-    text: "<sp>Sell products online",
-  },
-  {
-    category: "Online business",
-    text: "Fully <sp>designed and <sp>deployed web shop",
-  },
-  {
-    category: "Online business",
-    text: "Payments covered!",
-  },
-  {
-    category: "Online business",
-    text: "Free <sp>one month <sp>ad designs",
-  },
-];
-
 export const BASIC_FEATURES: {
   category: "Web Development" | "Social Media and Ads" | "Online business";
   text: string;
@@ -78,7 +28,30 @@ export const BASIC_FEATURES: {
   },
   {
     category: "Online business",
-    text: "Free, <sp>one month <sp>ad designs",
+    text: "Free <sp>one month <sp>ad designs",
+  },
+];
+
+export const PREMIUM_FEATURES: {
+  category: "Web Development" | "Social Media and Ads" | "Online business";
+  text: string;
+}[] = [
+  ...BASIC_FEATURES,
+  {
+    category: "Social Media and Ads",
+    text: "Social media management",
+  },
+  {
+    category: "Online business",
+    text: "<sp>Sell products online",
+  },
+  {
+    category: "Online business",
+    text: "Fully <sp>designed and <sp>deployed web shop",
+  },
+  {
+    category: "Online business",
+    text: "Payments covered!",
   },
 ];
 

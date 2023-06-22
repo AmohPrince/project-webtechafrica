@@ -1,6 +1,6 @@
-import { inProduction } from "@/Util/Utilities";
+import { useGlobalData } from "@/hooks/useGlobalData";
+import { inProduction } from "@/util/utilities";
 import GooglePayButton from "@google-pay/button-react";
-import { useGlobalData } from "../../../Hooks/useGlobalData";
 
 export const GooglePay = () => {
   const { showNotification } = useGlobalData();

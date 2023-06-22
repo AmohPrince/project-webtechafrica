@@ -1,11 +1,11 @@
+import { addOrUpdateUserDataInDB } from "@/firebase/firestore";
 import { useAuth } from "@/hooks/useAuth";
+import { Card, UserData } from "@/types/Global";
+import { getCardTypeIcon } from "@/util/utilities";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useState } from "react";
-import { addOrUpdateUserDataInDB } from "../../../Firebase/firestore";
-import { Card, UserData } from "../../../Types/Global";
-import { getCardTypeIcon } from "../../../Util/Utilities";
 
 export const CardInfo = ({ card }: { card: Card }) => {
   const { user, userData } = useAuth();

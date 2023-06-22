@@ -1,9 +1,9 @@
-import { BasicPricing } from "@/components/BasicPricing";
+import { BasicPricing } from "@/components/prices/BasicPricing";
 import { BlankTableRow } from "@/components/BlankTableRow";
 import { CircleBackGround } from "@/components/CircleBackGround";
 import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
-import { PremiumPricing } from "@/components/PremiumPricing";
+import { PremiumPricing } from "@/components/prices/PremiumPricing";
 import { SecondaryButton } from "@/components/SecondaryButton";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import {

@@ -1,9 +1,9 @@
 import { useGlobalData } from "@/hooks/useGlobalData";
 import Link from "next/link";
 import React from "react";
-import { BASIC_FEATURES, getYearly, scrollToTop } from "../util/utilities";
-import Billed from "./Billed";
-import { FeatureString } from "./FeatureString";
+import { BASIC_FEATURES, getYearly, scrollToTop } from "../../util/utilities";
+import Billed from "../Billed";
+import { FeatureSpan } from "./FeatureSpan";
 
 export const BasicPricing = ({ className }: { className: string }) => {
   const { price } = useGlobalData();
@@ -15,7 +15,10 @@ export const BasicPricing = ({ className }: { className: string }) => {
       <div className="flex justify-between items-center">
         <h3 className="text-2xl sm:text-4xl font-extrabold">Basic</h3>
         <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
-          Save 30%
+          Save{" "}
+          {(((price.advanced - price.basic) / price.advanced) * 100).toFixed(
+            0
+          ) + "%"}
         </p>
       </div>
       <div className="text-center py-6 border-t border-b mt-8 mb-8 border-border">
@@ -29,15 +32,15 @@ export const BasicPricing = ({ className }: { className: string }) => {
           } per year`}
         />
       </div>
-      <div className="text-secondaryFour flex flex-col items-center">
+      <div className="flex flex-col items-center text-secondaryFour">
         {BASIC_FEATURES.map((feature) => feature.text).map((feature) => {
-          const str = feature.split(",");
+          const str = feature.split(" ");
           return (
-            <div className="flex whitespace-nowrap" key={feature}>
+            <p key={feature}>
               {str.map((str) => (
-                <FeatureString feature={str} source="Basic" key={str} />
+                <FeatureSpan text={str} source="Basic" key={str} />
               ))}
-            </div>
+            </p>
           );
         })}
       </div>

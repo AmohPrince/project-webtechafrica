@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNewWebsiteSelections } from "../../../Hooks/useNewWebsiteSelections";
+import { useNewWebsiteSelections } from "../../../hooks/useNewWebsiteSelections";
 import { SecondaryButton } from "../../SecondaryButton";
 
 export const UserWebsiteDescription = ({

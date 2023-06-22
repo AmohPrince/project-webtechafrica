@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeBox } from "../ThemeBox";
-import themes from "../../../Util/themes.json";
+import themes from "../../../util/themes.json";
 import { SecondaryButton } from "../../SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
