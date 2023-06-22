@@ -15,7 +15,7 @@ import Rocket from "./Rocket.svg";
 import Wallets from "./Wallets.svg";
 import BackGround from "./TopRightBackground.svg";
 import PlayButton from "./PlayButton.svg";
-import GraphScreen from "./GraphScreen.svg";
+import GraphScreen from "./GraphScreen.png";
 import CircleOne from "./Circle1.svg";
 import CircleTwo from "./Circle2.svg";
 import CircleThree from "./Circle3.svg";
