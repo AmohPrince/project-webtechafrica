@@ -44,7 +44,6 @@ import womanWritingCode from "./womanwritingcode.svg";
 import manSlidingImages from "./manslidingimages.svg";
 import MailLarge from "./MailLarge.svg";
 import google from "./Google.svg";
-import GraphScreenPng from "./GraphScreenPNG.png";
 import Calendar from "./Calendar.svg";
 import creditCard from "./CreditCard.svg";
 import payPalSm from "./paypalsm.svg";
@@ -62,7 +61,6 @@ export const assets = {
   payPalSm,
   creditCard,
   Calendar,
-  GraphScreenPng,
   google,
   MailLarge,
   manSlidingImages,
