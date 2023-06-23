@@ -9,10 +9,10 @@ const Sitemap = () => {
 
 export const getServerSideProps = async ({ res }: { res: any }) => {
   const BASE_URL = "https://www.webtechafrica.com";
-  const staticPaths = await globby([
-    "pages/**/*.{ts,tsx}",
-    "!pages/dashboard/**",
-  ])
+
+  const staticPaths = await globby(["**/*.{ts,tsx}", "!dashboard/**"], {
+    cwd: "pages", // Set the current working directory to "pages"
+  })
     .then((files) =>
       files
         .filter(
