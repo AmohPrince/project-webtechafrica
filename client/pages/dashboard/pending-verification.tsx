@@ -3,7 +3,7 @@ import { PendingVerificationWebsite } from "@/components/dashboard/PendingVerifi
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import React, { useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 const PendingVerificationsPage = () => {
   const { userData } = useAuth();

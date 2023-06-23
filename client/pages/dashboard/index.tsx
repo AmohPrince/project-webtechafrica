@@ -4,7 +4,7 @@ import { NextHead } from "@/components/NextHead";
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import React, { useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 const ActiveWebsitesPage = () => {
   const { userData } = useAuth();

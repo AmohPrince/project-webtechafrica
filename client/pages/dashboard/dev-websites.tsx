@@ -4,7 +4,7 @@ import { Website } from "@/components/dashboard/Website";
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import React, { useContext, useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 const DevWebsitesPage = () => {
   const { setDashBoardTitleInfo } = useGlobalData();

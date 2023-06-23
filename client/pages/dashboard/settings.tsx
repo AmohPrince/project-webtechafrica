@@ -16,7 +16,7 @@ import { getAuth, updateCurrentUser } from "firebase/auth";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 export type Inputs = {
   email: string;

@@ -11,7 +11,7 @@ import { Overlay } from "@/components/Overlay";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { useNewWebsiteSelections } from "@/hooks/useNewWebsiteSelections";
 import React, { useContext, useEffect, useState } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 const NewWebsite = () => {
   const { setDashBoardTitleInfo } = useGlobalData();

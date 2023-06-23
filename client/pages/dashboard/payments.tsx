@@ -2,7 +2,7 @@ import { Cards } from "@/components/dashboard/payments/Cards";
 import Transactions from "@/components/dashboard/payments/Transactions";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import React, { useContext, useEffect, useState } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/dashboard/Layout";
 
 const Payments = () => {
   const { setDashBoardTitleInfo } = useGlobalData();
