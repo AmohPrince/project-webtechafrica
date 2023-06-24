@@ -58,7 +58,9 @@ export const AuthContextProvider = ({
 
   onAuthStateChanged(auth, (user) => {
     setUser(user);
-    axios.post("/api/sign-in", user);
+    if (user) {
+      axios.post("/api/sign-in", { user });
+    }
     if (typeof localStorage !== "undefined") {
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,
