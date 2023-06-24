@@ -14,9 +14,9 @@ export const Website = ({
   const isDevWebsite = "expectedCompletionDate" in website;
 
   return (
-    <div className="border w-full sm:w-[49%] bg-white p-4 sm:p-6 rounded-2xl">
-      <div className="block sm:flex justify-between items-center">
-        <div className="w-full mb-5 sm:mb-0 font-semibold text-sm">
+    <div className="border w-full md:w-[49%] bg-white p-4 md:p-6 rounded-2xl">
+      <div className="block md:flex justify-between items-center">
+        <div className="w-full mb-5 md:mb-0 font-semibold text-sm">
           <div className="flex justify-between items-end mb-5">
             <div className="flex items-start">
               <p className="font-semibold">{extractHostname(website.url)}</p>

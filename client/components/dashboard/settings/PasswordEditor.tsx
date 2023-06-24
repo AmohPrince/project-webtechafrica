@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/PrimaryButton";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { ToolTip } from "@/components/ToolTip";
 import { updateUserPassword } from "@/firebase/firebase";
 import { useAuth } from "@/hooks/useAuth";

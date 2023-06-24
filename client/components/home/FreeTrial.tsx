@@ -7,9 +7,9 @@ const FreeTrial = ({ className }: { className?: string }) => {
   const [email, setEmail] = useState<string>("");
   return (
     <section
-      className={`py-4 sm:py-11 px-6 sm:px-16 sm:flex justify-between mt-[10%] text-white free-trial rounded-2xl ${className}`}
+      className={`py-4 md:py-11 px-6 md:px-16 md:flex justify-between mt-[10%] text-white free-trial rounded-2xl ${className}`}
     >
-      <div className="w-full sm:w-1/2">
+      <div className="w-full md:w-1/2">
         <h2 className="h2">
           Start your free trial <br />
           today
@@ -22,7 +22,7 @@ const FreeTrial = ({ className }: { className?: string }) => {
         <div className="flex gap-x-2 mt-8 justify-between items-center">
           <input
             type="email"
-            className="bg-emailInput py-3 px-8 focus:outline-none rounded-full placeholder:text-white w-3/4 sm:w-auto"
+            className="bg-emailInput py-3 px-8 focus:outline-none rounded-full placeholder:text-white w-3/4 md:w-auto"
             placeholder="your email here..."
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -37,7 +37,7 @@ const FreeTrial = ({ className }: { className?: string }) => {
       <Image
         src={assets.Departments}
         alt="Departments"
-        className="w-1/2 mt-7 sm:mt-0 ml-auto sm:ml-0"
+        className="w-1/2 mt-7 md:mt-0 ml-auto md:ml-0"
       />
     </section>
   );

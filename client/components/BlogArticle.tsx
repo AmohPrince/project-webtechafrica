@@ -6,7 +6,7 @@ import React from "react";
 
 const BlogArticle = ({ article }: { article: Blog }) => {
   return (
-    <div className="rounded-3xl bg-gray-100 p-6 w-full mb-10 sm:mb-0 sm:w-1/2 relative">
+    <div className="rounded-3xl bg-gray-100 p-6 w-full mb-10 md:mb-0 md:w-1/2 relative">
       <Image
         src={article.img}
         alt="keyboard and earphones"

@@ -1,5 +1,5 @@
 import { CircleBackGround } from "@/components/CircleBackGround";
-import { GreyButton } from "@/components/GreyButton";
+import { GreyButton } from "@/components/buttons/GreyButton";
 import { NextHead } from "@/components/NextHead";
 import Layout from "@/components/Layout";
 import { assets } from "@/public/assets";
@@ -22,11 +22,11 @@ const About = () => {
         development solutions for businesses of all sizes."
       />
       <Layout>
-        <motion.section className="px-[5%] sm:px-[12%]">
+        <motion.section className="px-[5%] md:px-[12%]">
           <CircleBackGround />
           <div className="z-10 relative">
             <section className="text-center mt-[8%]">
-              <h1 className="h3 sm:h2 mb-8 mt-8 sm:mb-4">About our company</h1>
+              <h1 className="h3 md:h2 mb-8 mt-8 md:mb-4">About our company</h1>
               <p className="default-paragraph bg-white">
                 At our company, we specialize in providing comprehensive web
                 development solutions for businesses of all sizes. From custom
@@ -55,11 +55,11 @@ const About = () => {
                 />
               </div>
               <div className="flex justify-between">
-                <h3 className="h3 whitespace-nowrap mr-9 hidden sm:block">
+                <h3 className="h3 whitespace-nowrap mr-9 hidden md:block">
                   What we do
                 </h3>
                 <div className="text-left">
-                  <h3 className="h4 my-3 whitespace-nowrap mr-9 block sm:hidden text-center">
+                  <h3 className="h4 my-3 whitespace-nowrap mr-9 block md:hidden text-center">
                     What we do
                   </h3>
                   <p className="default-paragraph">
@@ -85,27 +85,27 @@ const About = () => {
                 </div>
               </div>
             </section>
-            <section className="bg-gray-50 rounded-md sm:rounded-[40px] py-7 sm:py-14 px-6 sm:px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:sm:w-auto gap-y-5">
+            <section className="bg-gray-50 rounded-md md:rounded-[40px] py-7 md:py-14 px-6 md:px-12 flex justify-between mt-[10%] flex-wrap [&>*]:w-1/2 [&>*]:md:w-auto gap-y-5">
               <div className="w-1/4">
-                <p className="text-2xl sm:text-5xl font-extrabold">
+                <p className="text-2xl md:text-5xl font-extrabold">
                   100<span className="text-primaryOne"> M</span>
                 </p>
                 <p className="font-semibold text-xl">Client Satisfaction</p>
               </div>
               <div className="w-1/4">
-                <p className="text-2xl sm:text-5xl font-extrabold">
+                <p className="text-2xl md:text-5xl font-extrabold">
                   24<span className="text-primaryOne"> h</span>
                 </p>
                 <p className="font-semibold text-xl">Expert Support Team</p>
               </div>
               <div className="w-1/4">
-                <p className="text-2xl sm:text-5xl font-extrabold">
+                <p className="text-2xl md:text-5xl font-extrabold">
                   72<span className="text-primaryOne"> k+</span>
                 </p>
                 <p className="font-semibold text-xl">Sales Count</p>
               </div>
               <div className="w-1/4">
-                <p className="text-2xl sm:text-5xl font-extrabold">
+                <p className="text-2xl md:text-5xl font-extrabold">
                   335<span className="text-primaryOne"> +</span>
                 </p>
                 <p className="font-semibold text-xl">Client Worldwide</p>
@@ -135,7 +135,7 @@ const About = () => {
               <Image
                 src="https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="yellow tie"
-                className="w-1/5 sm:w-2/5 object-cover rounded-2xl"
+                className="w-1/5 md:w-2/5 object-cover rounded-2xl"
                 width={1260}
                 height={750}
               />
@@ -147,7 +147,7 @@ const About = () => {
                 our company
               </h2>
               <div className="flex flex-wrap mt-[1%] gap-4 text-xs">
-                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
+                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full md:w-[49%]">
                   <Image
                     src={assets.Bulb}
                     alt="Bulb"
@@ -162,7 +162,7 @@ const About = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
+                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full md:w-[49%]">
                   <Image
                     src={assets.teamwork}
                     alt="Bulb"
@@ -177,7 +177,7 @@ const About = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
+                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full md:w-[49%]">
                   <Image
                     src={assets.Award}
                     alt="Bulb"
@@ -193,7 +193,7 @@ const About = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full sm:w-[49%]">
+                <div className="bg-gray-50 py-6 px-4 flex items-start rounded-3xl w-full md:w-[49%]">
                   <Image
                     src={assets.Paper}
                     alt="Bulb"

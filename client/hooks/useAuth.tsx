@@ -6,6 +6,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { UserData } from "@/types/Global";
+import axios from "axios";
 
 const authContext = createContext<AuthContext>({
   user: null,
@@ -57,6 +58,7 @@ export const AuthContextProvider = ({
 
   onAuthStateChanged(auth, (user) => {
     setUser(user);
+    axios.post("/api/sign-in", user);
     if (typeof localStorage !== "undefined") {
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE,

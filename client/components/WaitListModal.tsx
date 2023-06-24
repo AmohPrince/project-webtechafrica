@@ -37,7 +37,7 @@ export const WaitListModal = ({
   return (
     <Overlay>
       <motion.div
-        className="bg-white rounded-lg p-5 sm:w-1/3 w-11/12"
+        className="bg-white rounded-lg p-5 md:w-1/3 w-11/12"
         initial={{ y: -1000 }}
         animate={{ y: 0 }}
         exit={{ y: -1000 }}

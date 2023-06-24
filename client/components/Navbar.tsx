@@ -12,34 +12,27 @@ import { SmallScreenMenu } from "./SmallScreenMenu";
 const Navbar = () => {
   const { pathname } = useRouter();
   const basePath = getBaseUrl(pathname);
-  const { user } = useAuth() || {};
+  const { user } = useAuth();
   const [showingMenu, setShowingMenu] = useState(false);
 
   return (
     <nav
-      className={`flex justify-between items-center fixed right-0 left-0 py-6 sm:py-0 top-0 sm:relative bg-white sm:bg-transparent z-40 px-[5%] sm:px-[12%]`}
+      className={`flex justify-between items-center fixed right-0 left-0 py-6 md:py-0 top-0 md:relative bg-white md:bg-transparent z-40 px-[5%] md:px-[12%]`}
     >
       <div className="flex items-center">
         <Logo
           color={LogoColor.primary}
           className="w-[60px] h-[40px] object-cover"
         />
-        <h3 className="h4 sm:h3">WebTech Africa</h3>
+        <h3 className="h4 md:h3">WebTech Africa</h3>
       </div>
-      <div className="hidden sm:flex text-sm">
+      <div className="hidden md:flex text-sm">
         <div
           className={`flex transition-all rounded-full px-9 py-3 ${
             basePath !== "/" ? "navbar-gray" : "text-white"
           } navbar gap-x-11`}
         >
-          <Link
-            href="/"
-            className={`active:text-primaryOne ${
-              basePath === "/" && "text-primaryOne font-bold"
-            }`}
-          >
-            Home
-          </Link>
+          <Link href="/">Home</Link>
           <Link
             href="/about"
             className={`active:text-primaryOne ${

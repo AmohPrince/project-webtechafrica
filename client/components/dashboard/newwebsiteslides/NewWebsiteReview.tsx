@@ -5,7 +5,7 @@ import { UserData } from "@/types/Global";
 import { getTimestampForThreeDaysFromNow } from "@/util/utilities";
 import React, { useState } from "react";
 import { uid } from "uid";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 import Confirmation from "../Confirmation";
 import { ThemeBox } from "../ThemeBox";
 
@@ -74,12 +74,12 @@ const NewWebsiteReview = ({
         <p className="font-semibold mt-5">Description</p>
         <p className="break-words">{selections.websiteDescription}</p>
       </div>
-      <div className="flex justify-between flex-wrap w-full sm:w-2/3">
-        <div className="w-1/2 sm:w-auto">
+      <div className="flex justify-between flex-wrap w-full md:w-2/3">
+        <div className="w-1/2 md:w-auto">
           <p className="mt-5 text-sm text-gray-400">Plan</p>
           <p className="font-semibold">{selections.plan}</p>
         </div>
-        <div className="w-1/2 sm:w-auto">
+        <div className="w-1/2 md:w-auto">
           <p className="mt-5 text-sm text-gray-400">Content Style</p>
           {selections.userHasOwnContent ? (
             <p className="font-semibold">User generated</p>
@@ -87,11 +87,11 @@ const NewWebsiteReview = ({
             <p className="font-semibold">AI generated</p>
           )}
         </div>
-        <div className="w-1/2 sm:w-auto">
+        <div className="w-1/2 md:w-auto">
           <p className="mt-5 text-sm text-gray-400">Website Type</p>
           <p className="font-semibold">{selections.websiteType.type}</p>
         </div>
-        <div className="w-1/2 sm:w-auto">
+        <div className="w-1/2 md:w-auto">
           <p className="mt-5 text-sm text-gray-400">Website Domain</p>
           <p className="font-semibold">{selections.domainName}</p>
         </div>

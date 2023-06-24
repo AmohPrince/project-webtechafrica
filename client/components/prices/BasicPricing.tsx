@@ -2,7 +2,7 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import Link from "next/link";
 import React from "react";
 import { BASIC_FEATURES, getYearly, scrollToTop } from "../../util/utilities";
-import Billed from "../Billed";
+import Billed from "./Billed";
 import { FeatureSpan } from "./FeatureSpan";
 
 export const BasicPricing = ({ className }: { className: string }) => {
@@ -10,10 +10,10 @@ export const BasicPricing = ({ className }: { className: string }) => {
 
   return (
     <div
-      className={`py-12 px-4 sm:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
+      className={`py-12 px-4 md:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
     >
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl sm:text-4xl font-extrabold">Basic</h3>
+        <h3 className="text-2xl md:text-4xl font-extrabold">Basic</h3>
         <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
           Save{" "}
           {(((price.advanced - price.basic) / price.advanced) * 100).toFixed(

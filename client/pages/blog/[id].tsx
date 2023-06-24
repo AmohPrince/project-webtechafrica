@@ -31,7 +31,7 @@ const SingleBlog = () => {
         twitterDescription={article.preText}
       />
       <Layout>
-        <section className="mt-12 mx-[5%] sm:mx-[12%]">
+        <section className="mt-12 mx-[5%] md:mx-[12%]">
           <Image
             src={article.img}
             alt={id as string}
@@ -65,7 +65,7 @@ const SingleBlog = () => {
               <div className="flex flex-wrap gap-1 justify-end">
                 {article.categories.map((category, i) => (
                   <p
-                    className="text-white px-3 sm:px-6 py-3 rounded-full text-xs bg-primaryOne w-full sm:w-auto"
+                    className="text-white px-3 md:px-6 py-3 rounded-full text-xs bg-primaryOne w-full md:w-auto"
                     key={i}
                   >
                     {category}

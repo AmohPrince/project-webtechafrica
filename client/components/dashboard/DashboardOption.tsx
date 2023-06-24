@@ -33,7 +33,7 @@ const DashboardOption = ({
       className={`flex items-center py-3 px-4 ${
         isPurpleBg && "bg-primaryOne rounded-l-lg"
       } transition-all cursor-pointer ${className}`}
-      href={`/dashboard/${name}`}
+      href={`/dashboard/${name === "active-websites" ? "" : name}`}
       onClick={onClick}
     >
       <DashboardOptionLogo

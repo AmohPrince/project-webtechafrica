@@ -1,6 +1,6 @@
 import LogoTab from "@/components/LogoTab";
 import { PopUpInfoType } from "@/components/PopUp";
-import { SubmitButton } from "@/components/SubmitButton";
+import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
 import {
@@ -127,11 +127,11 @@ export const SignUp = () => {
           "https://images.pexels.com/photos/4322027/pexels-photo-4322027.jpeg?auto=compress&cs=tinysrgb&w=600"
         }
         alt="hand holding with icon"
-        className="hidden sm:block h-full object-cover w-1/2"
+        className="hidden md:block h-full object-cover w-1/2"
         width={600}
         height={600}
       />
-      <div className="w-full sm:w-1/2 py-[10%] sm:py-[2%] px-[5%] h-full dark:bg-magloBlack relative">
+      <div className="w-full md:w-1/2 py-[10%] md:py-[2%] px-[5%] h-full dark:bg-magloBlack relative">
         <div className="flex justify-between items-center">
           <LogoTab logoColor={LogoColor.primary} />
           <p className="text-sm text-gray-400 text-center">

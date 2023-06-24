@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNewWebsiteSelections } from "../../../hooks/useNewWebsiteSelections";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 
 export const UserWebsiteDescription = ({
   setActiveStageId,
@@ -41,7 +41,7 @@ export const UserWebsiteDescription = ({
           backgroundColor: selections.theme.colors.primary,
           color: selections.theme.colors.text,
         }}
-        className="outline-none hover:scale-100 transition-all ml-auto w-full sm:w-auto"
+        className="outline-none hover:scale-100 transition-all ml-auto w-full md:w-auto"
         onClick={() => setActiveStageId((prev) => prev + 1)}
         disabled={selections.websiteDescription === null}
       />
