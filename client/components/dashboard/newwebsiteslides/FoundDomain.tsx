@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import React from "react";
 import { NewWebsiteSelections } from "../../../types/Global";
-import PrimaryButton from "../../PrimaryButton";
+import PrimaryButton from "../../buttons/PrimaryButton";
 
 export const FoundDomain = ({
   domainName,
@@ -19,7 +19,7 @@ export const FoundDomain = ({
   const isSelected = domainName === selections.domainName;
   return (
     <motion.div
-      className="border rounded-md p-4 w-1/2 sm:w-1/4"
+      className="border rounded-md p-4 w-1/2 md:w-1/4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, type: "tween" }}

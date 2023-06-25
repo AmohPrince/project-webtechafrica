@@ -5,7 +5,7 @@ export const Wave = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1440 320"
-      className="absolute bottom-0 left-0 right-0 sm:hidden"
+      className="absolute bottom-0 left-0 right-0 md:hidden"
     >
       <path
         fill="#5236FF"

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import React, { useRef, useState } from "react";
 import { getLighterColor } from "../../../util/utilities";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 import { FoundDomain } from "./FoundDomain";
 
 const DomainNamePicker = ({
@@ -87,7 +87,7 @@ const DomainNamePicker = ({
   return (
     <div className="bg-white p-6">
       {/* only appears on large screens */}
-      <div className="items-center justify-center hidden sm:flex">
+      <div className="items-center justify-center hidden md:flex">
         <div>
           <p className="font-bold text-xl">Find your domain</p>
           <p className="mt-3">
@@ -107,7 +107,7 @@ const DomainNamePicker = ({
         />
       </div>
       {/* only appears on small screens */}
-      <div className="sm:hidden">
+      <div className="md:hidden">
         <div className="flex justify-between items-center">
           <p className="font-bold text-xl">Find your domain</p>
           <SecondaryButton
@@ -132,7 +132,7 @@ const DomainNamePicker = ({
             {showToolTip && (
               <ToolTip
                 text="A valid domain name includes a valid extension e.g .com"
-                className="right-0 w-1/2 sm:w-max"
+                className="right-0 w-1/2 md:w-max"
                 style={{
                   backgroundColor: selections.theme.colors.primary,
                 }}

@@ -13,7 +13,7 @@ const HamburgerMenu = ({
     <div
       className={`bg-primaryOne py-1 px-2 text-white ${
         location === "menu" ? "rounded-l-md" : "rounded-r-md"
-      } block sm:hidden`}
+      } block md:hidden`}
       onClick={() => setShowingSmallScreenMenu((prev) => !prev)}
     >
       <FontAwesomeIcon icon={faBars} className="w-5" />

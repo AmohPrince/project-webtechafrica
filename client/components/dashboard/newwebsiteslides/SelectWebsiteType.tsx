@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { WebsiteType } from "../../../types/Global";
 import website_types from "../../../json/WebsiteTypes.json";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 import { useNewWebsiteSelections } from "../../../hooks/useNewWebsiteSelections";
@@ -29,7 +29,7 @@ const SelectWebsiteType = ({
             backgroundColor: selections.theme.colors.primary,
             color: selections.theme.colors.text,
           }}
-          className="outline-none hover:scale-100 transition-all duration-300 hidden sm:block"
+          className="outline-none hover:scale-100 transition-all duration-300 hidden md:block"
           onClick={() => setActiveStageId((prev) => prev + 1)}
         />
       </div>
@@ -67,7 +67,7 @@ const SelectWebsiteType = ({
           backgroundColor: selections.theme.colors.primary,
           color: selections.theme.colors.text,
         }}
-        className="outline-none hover:scale-100 transition-all duration-300 block sm:hidden mt-5 mx-auto w-full"
+        className="outline-none hover:scale-100 transition-all duration-300 block md:hidden mt-5 mx-auto w-full"
         onClick={() => setActiveStageId((prev) => prev + 1)}
       />
     </div>

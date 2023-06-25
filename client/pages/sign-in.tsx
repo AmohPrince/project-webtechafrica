@@ -1,5 +1,5 @@
 import LogoTab from "@/components/LogoTab";
-import { SubmitButton } from "@/components/SubmitButton";
+import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
 import {
@@ -127,11 +127,11 @@ const SignIn = () => {
           "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }
         alt="hand holding with icon"
-        className="h-full object-cover hidden sm:block w-1/2"
+        className="h-full object-cover hidden md:block w-1/2"
         width={1260}
         height={750}
       />
-      <div className="w-full sm:w-1/2 py-[10%] sm:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
+      <div className="w-full md:w-1/2 py-[10%] md:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
         <LogoTab logoColor={LogoColor.primary} />
         <p className="font-semibold text-3xl mt-[4%] dark:text-white">
           {sourceParam === "get-started" ? "Welcome!" : "Welcome back"}

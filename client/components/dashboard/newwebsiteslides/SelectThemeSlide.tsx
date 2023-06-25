@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeBox } from "../ThemeBox";
 import themes from "../../../util/themes.json";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 import ThemePreview from "./ThemePreview";
@@ -30,7 +30,7 @@ const SelectThemeSlide = ({
             onClick={() => setActiveStageId((prev) => prev + 1)}
           />
         </div>
-        <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+        <div className="flex flex-wrap gap-3 justify-center md:justify-start">
           {themes.map((theme) => (
             <ThemeBox
               theme={theme}

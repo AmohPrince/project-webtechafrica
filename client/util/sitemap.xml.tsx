@@ -10,9 +10,10 @@ const Sitemap = () => {
 export const getServerSideProps = async ({ res }: { res: any }) => {
   const BASE_URL = "https://www.webtechafrica.com";
 
-  const staticPaths = await globby(["**/*.{ts,tsx}", "!dashboard/**"], {
-    cwd: "pages", // Set the current working directory to "pages"
-  })
+  const staticPaths = await globby([
+    "pages/**/*.{ts,tsx}",
+    "!pages/dashboard/**",
+  ])
     .then((files) =>
       files
         .filter(
@@ -24,15 +25,17 @@ export const getServerSideProps = async ({ res }: { res: any }) => {
               "pages/404.tsx",
               "pages/sitemap.xml.tsx",
               "pages/blog/[id].tsx",
-              "pages/dashboard/*",
-            ].includes(file)
+              "pages/dashboard",
+            ].some((excludedPath) => file.includes(excludedPath))
         )
         .map((file) => {
           let filename = file;
           if (filename.includes("index")) {
-            const directory =
-              path.dirname(file).replace("pages", "").replace(/^\//, "") ||
-              "home";
+            const directory = path
+              .dirname(file)
+              .replace("pages", "")
+              .replace(/^\//, "");
+
             filename = directory;
           }
           return `${BASE_URL}/${filename.replace(/^pages\/|\.tsx?$/g, "")}`;

@@ -15,7 +15,7 @@ export const Cards = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="w-full sm:w-1/4 bg-white rounded-xl border pb-4 flex flex-col">
+    <div className="w-full md:w-1/4 bg-white rounded-xl border pb-4 flex flex-col">
       <p className="font-semibold border-b text-center py-4 px-3">Cards</p>
       {userData?.cards ? (
         userData.cards.map((card, i) => <CardInfo card={card} key={i} />)

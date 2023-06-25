@@ -38,7 +38,7 @@ const Contact = () => {
         title="contact"
       />
       <Layout>
-        <motion.section className="px-[5%] sm:px-[12%]">
+        <motion.section className="px-[5%] md:px-[12%]">
           <CircleBackGround />
           <Image
             src={assets.contactBlob}
@@ -46,28 +46,28 @@ const Contact = () => {
             className="absolute right-0 z-0 w-1/3 overflow-hidden"
           />
           <div className="mt-[10%] relative z-10">
-            <h1 className="h2 sm:h1 text-center">Get in touch today!</h1>
-            <div className="flex justify-between mt-10 items-stretch sm:items-center w-11/12 sm:w-3/4 mx-auto text-sm gap-x-4">
-              <div className="sm:flex rounded-[28px] justify-between items-center p-4 sm:p-6 w-1/2 shadow-xl border bg-white">
+            <h1 className="h2 md:h1 text-center">Get in touch today!</h1>
+            <div className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
+              <div className="md:flex rounded-[28px] justify-between items-center p-4 md:p-6 w-1/2 shadow-xl border bg-white">
                 <Image
                   src={assets.MailLarge}
                   alt="Mail"
                   className="w-12 h-12 mr-2"
                 />
-                <div className="sm:flex mt-3 sm:mt-0">
-                  <p className="font-semibold sm:mr-2">Mail Us</p>
+                <div className="md:flex mt-3 md:mt-0">
+                  <p className="font-semibold md:mr-2">Mail Us</p>
                   <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
                     {email}
                   </p>
                 </div>
               </div>
-              <div className="sm:flex rounded-[28px] items-center p-4 sm:p-6 bg-white w-1/2 shadow-xl border">
+              <div className="md:flex rounded-[28px] items-center p-4 md:p-6 bg-white w-1/2 shadow-xl border">
                 <Image
                   src={assets.Phone}
                   alt="Mail"
                   className="w-12 h-12 mr-2"
                 />
-                <div className="sm:flex mt-3 sm:mt-0">
+                <div className="md:flex mt-3 md:mt-0">
                   <p className="font-semibold mr-2">Call Us</p>
                   <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
                     +254 7194 280 19
@@ -76,7 +76,7 @@ const Contact = () => {
               </div>
             </div>
             <form
-              className="rounded-3xl bg-white px-10 sm:px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
+              className="rounded-3xl bg-white px-10 md:px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
               onSubmit={handleSubmit}
             >
               <div className="w-[48%]">
@@ -140,11 +140,11 @@ const Contact = () => {
               </button>
             </form>
             <section className="mt-[10%]">
-              <h3 className="h3 sm:w-3/4 text-center mx-auto">
+              <h3 className="h3 md:w-3/4 text-center mx-auto">
                 We help small businesses with big hearts find clients they
                 didn't even know they had.
               </h3>
-              <div className="w-2/3 sm:w-1/4 flex flex-col items-center border rounded-3xl py-9 mx-auto mt-10 shadow-xl">
+              <div className="w-2/3 md:w-1/4 flex flex-col items-center border rounded-3xl py-9 mx-auto mt-10 shadow-xl">
                 <Location color="#FAD5E9" />
                 <h4 className="font-bold h4 text-base mt-3">Nairobi</h4>
                 <p className="default-paragraph text-center text-sm">
@@ -156,11 +156,14 @@ const Contact = () => {
                 </p>
               </div>
             </section>
-            <section className="bg-primaryOne mt-[10%] faqs py-[10%]">
-              <h3 className="h2 sm:h3 text-white text-center mb-10">
+            <section
+              className="bg-primaryOne mt-[10%] faqs py-[10%]"
+              id="#faqs"
+            >
+              <h3 className="h2 md:h3 text-white text-center mb-10">
                 Frequently Asked Questions
               </h3>
-              <div className="w-2/3 sm:w-1/2 mx-auto">
+              <div className="w-2/3 md:w-1/2 mx-auto">
                 {Faqs.map((faq, i) => (
                   <Faq answer={faq.answer} question={faq.Question} key={i} />
                 ))}

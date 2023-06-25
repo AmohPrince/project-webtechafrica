@@ -50,19 +50,19 @@ const AdvancedPricingPage = () => {
       <NextHead
         canonical="www.webtechafrica.com/pricing/premium"
         description="premium pricing plan. All features in the basic plan plus more"
-        title="premium pricing"
+        title="premium"
         twitterDescription="premium pricing plan. All features in the basic plan plus more"
       />
       <Layout>
-        <section className="mx-[5%] sm:mx-[12%]">
+        <section className="mx-[5%] md:mx-[12%]">
           <AnimatePresence>
             {isShowingEmailModal && (
               <WaitListModal setIsShowingEmailModal={setIsShowingEmailModal} />
             )}
           </AnimatePresence>
           <CircleBackGround />
-          <section className="z-10 mt-[8%] relative flex flex-col sm:flex-row justify-between w-full">
-            <div className="border-b pb-5 w-full sm:w-1/2">
+          <section className="z-10 mt-[8%] relative flex flex-col md:flex-row justify-between w-full">
+            <div className="border-b pb-5 w-full md:w-1/2">
               <h1 className="h2">Premium Plan</h1>
               <p className="default-paragraph mb-7 bg-white">
                 Unleash your online potential with the advanced package! This
@@ -88,7 +88,7 @@ const AdvancedPricingPage = () => {
                 )
               )}
             </div>
-            <div className="rounded-[30px] bg-secondaryOne px-10 py-9 w-full sm:w-[45%] mt-5 sm:mt-0">
+            <div className="rounded-[30px] bg-secondaryOne px-10 py-9 w-full md:w-[45%] mt-5 md:mt-0">
               <h2 className="h3">So how much will it cost me?</h2>
               <p className="default-paragraph mb-8">
                 The advanced plan currently goes for as little as{" "}
@@ -112,8 +112,8 @@ const AdvancedPricingPage = () => {
               </button>
             </div>
           </section>
-          <section className="mt-[8%] flex justify-between flex-col sm:flex-row">
-            <div className="w-full sm:w-3/5">
+          <section className="mt-[8%] flex justify-between flex-col md:flex-row">
+            <div className="w-full md:w-3/5">
               <h2 className="h3">Is the basic plan a good choice for me ?</h2>
               <p className="default-paragraph my-5">
                 Whilst it is always temptation to go for the advanced plan, it
@@ -141,7 +141,7 @@ const AdvancedPricingPage = () => {
             <Image
               src={assets.manSlidingImages}
               alt="man sliding images"
-              className="ml-auto w-1/2 sm:w-1/4 mt-5 sm:mt-0"
+              className="ml-auto w-1/2 md:w-1/4 mt-5 md:mt-0"
             />
           </section>
         </section>

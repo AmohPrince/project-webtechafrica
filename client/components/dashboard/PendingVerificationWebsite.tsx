@@ -1,7 +1,7 @@
 import { PendingVerificationWebsite as PendingVerificationWebsiteType } from "@/types/Global";
 import { formatDate } from "@/util/utilities";
 import React, { useState } from "react";
-import PrimaryButton from "../PrimaryButton";
+import PrimaryButton from "../buttons/PrimaryButton";
 import { PaymentsModal } from "./payments/PaymentsModal";
 import { ThemeBox } from "./ThemeBox";
 import { WebsiteStage } from "./WebsiteStage";
@@ -14,7 +14,7 @@ export const PendingVerificationWebsite = ({
   const [isShowingPaymentsModal, setIsShowingPaymentsModal] = useState(false);
 
   return (
-    <div className="border w-full bg-white p-4 sm:p-6 rounded-2xl font-semibold">
+    <div className="border w-full bg-white p-4 md:p-6 rounded-2xl font-semibold">
       <div className="flex items-center justify-between">
         <WebsiteStage stage={website.stage} />
         {website.stage === "Reviewed" && (
@@ -33,7 +33,7 @@ export const PendingVerificationWebsite = ({
         theme={website.selections.theme}
         activeThemeId={website.selections.theme.id}
       />
-      <div className="flex justify-between mt-5 text-sm sm:w-4/5">
+      <div className="flex justify-between mt-5 text-sm md:w-4/5">
         <div>
           <p className="text-black3">Submission date</p>
           <p>{formatDate(website.createdAt)}</p>{" "}

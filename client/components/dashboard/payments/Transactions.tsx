@@ -20,7 +20,7 @@ const Transactions = ({ type }: { type: "Upcoming" | "Past" }) => {
 
   return (
     <>
-      <div className="flex-grow border p-2 mb-2 rounded-md hidden sm:block">
+      <div className="flex-grow border p-2 mb-2 rounded-md hidden md:block">
         <div className="flex justify-between text-sm mt-2 text-gray-500">
           <p className="w-1/4">Website url</p>
           <p className="w-1/5">Payment Date</p>
@@ -36,7 +36,7 @@ const Transactions = ({ type }: { type: "Upcoming" | "Past" }) => {
               <SinglePayment transaction={transaction} key={i} />
             ))}
       </div>
-      <div className="sm:hidden">
+      <div className="md:hidden">
         {type === "Upcoming"
           ? userData?.upcomingTransactions?.map((transaction, i) => (
               <SinglePaymentSmallScreen transaction={transaction} key={i} />

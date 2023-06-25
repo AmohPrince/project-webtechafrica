@@ -39,7 +39,7 @@ export const PaymentsModal = ({
   return (
     <Overlay>
       <motion.div
-        className={`flex flex-col flex-grow bg-white rounded-xl absolute center-absolutely border-primaryOne border-2 z-10 transition-all px-5 pb-2 w-4/5 sm:w-1/2 ${className}`}
+        className={`flex flex-col flex-grow bg-white rounded-xl absolute center-absolutely border-primaryOne border-2 z-10 transition-all px-5 pb-2 w-4/5 md:w-1/2 ${className}`}
         // initial={{ y: -1000 }}
         // animate={{ y: 0 }}
         // exit={{ y: -1000 }}
@@ -56,7 +56,7 @@ export const PaymentsModal = ({
         </div>
         <div className="py-2">
           <p className="text-sm font-semibold">Select payment method</p>
-          <div className="flex gap-x-4 sm:gap-x-2 mt-2">
+          <div className="flex gap-x-4 md:gap-x-2 mt-2">
             <div
               className={`border-primaryOne p-2 border rounded-sm flex items-center justify-center cursor-pointer w-1/2 ${
                 selectingPaymentMethod === "paypal"

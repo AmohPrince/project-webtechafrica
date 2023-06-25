@@ -3,22 +3,22 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { GreyButton } from "./GreyButton";
+import { GreyButton } from "../buttons/GreyButton";
 
 export const FeaturesComponent = ({ className }: { className?: string }) => {
   return (
     <motion.section className={`mt-[12%] ${className}`}>
       <GreyButton text="Features" />
       <motion.h1
-        className="h3 sm:h2 text-center my-5"
+        className="h3 md:h2 text-center my-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
         Powerful features to boost <br /> your productivity
       </motion.h1>
-      <motion.div className="sm:flex justify-between">
-        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
+      <motion.div className="md:flex justify-between">
+        <motion.div className="text-center w-full md:w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <Image
             src={assets.SecurePlatform}
             alt="secure platform"
@@ -43,7 +43,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
             Learn More
           </Link>
         </motion.div>
-        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
+        <motion.div className="text-center w-full md:w-1/3 pb-12 pt-16 px-4 rounded-[40px] hover:bg-gray-50 transition-all">
           <Image
             src={assets.AdvancedAnalytics}
             alt="secure platform"
@@ -66,11 +66,11 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
             Learn More
           </Link>
         </motion.div>
-        <motion.div className="text-center w-full sm:w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
+        <motion.div className="text-center w-full md:w-1/3 pb-12 pt-16 pl-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <Image
             src={assets.PowerfulAutomation}
             alt="secure platform"
-            className="w-4/5 mx-auto sm:ml-auto h-1/3"
+            className="w-4/5 mx-auto md:ml-auto h-1/3"
           />
           <h3 className="h4 mt-3">Powerful automation</h3>
           <p className="default-paragraph my-6">

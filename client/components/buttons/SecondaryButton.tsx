@@ -1,7 +1,7 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { getLighterColor } from "../util/utilities";
+import { getLighterColor } from "../../util/utilities";
 
 export const SecondaryButton = ({
   text,

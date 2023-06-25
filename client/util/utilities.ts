@@ -20,7 +20,7 @@ export const BASIC_FEATURES: {
   },
   {
     category: "Web Development",
-    text: "<sp>Free SSL certificate",
+    text: "Free <sp>SSL certificate",
   },
   {
     category: "Online business",
@@ -39,19 +39,15 @@ export const PREMIUM_FEATURES: {
   ...BASIC_FEATURES,
   {
     category: "Social Media and Ads",
-    text: "Social media management",
+    text: "Social <sp>media management",
   },
   {
     category: "Online business",
-    text: "<sp>Sell products online",
+    text: "Fully <sp>managed online sales and <sp>delivery",
   },
   {
     category: "Online business",
-    text: "Fully <sp>designed and <sp>deployed web shop",
-  },
-  {
-    category: "Online business",
-    text: "Payments covered!",
+    text: "<sp>Payments covered!",
   },
 ];
 

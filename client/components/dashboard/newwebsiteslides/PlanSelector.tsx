@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { SecondaryButton } from "../../SecondaryButton";
+import { SecondaryButton } from "../../buttons/SecondaryButton";
 import { PurpleButton } from "./PurpleButton";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { useNewWebsiteSelections } from "@/hooks/useNewWebsiteSelections";
@@ -31,7 +31,7 @@ const PlanSelector = ({
     <div className="bg-white p-6">
       <div className="flex items-center justify-center">
         {/* {selections.websiteType.type === "E-commerce websites" && (
-          <p className="hidden sm:block">
+          <p className="hidden md:block">
             The basic plan is not available for {selections.websiteType.type}
           </p>
         )} */}
@@ -46,8 +46,8 @@ const PlanSelector = ({
           disabled={selections.plan === null}
         />
       </div>
-      <div className="sm:flex py-4">
-        <div className="shadow-md py-6 px-6 w-full sm:w-1/3 rounded-xl">
+      <div className="md:flex py-4">
+        <div className="shadow-md py-6 px-6 w-full md:w-1/3 rounded-xl">
           <p className="font-bold text-lg">Basic</p>
           <p className="font-medium text-sm">Perfect for beginners</p>
           <p className="text-xl font-semibold mt-3 mb-4">
@@ -84,11 +84,11 @@ const PlanSelector = ({
         </div>
         {/* {selections.websiteType.type !== "E-commerce websites" ? (
         ) : (
-          <p className="block sm:hidden">
+          <p className="block md:hidden">
             The basic plan is not available for {selections.websiteType.type}
           </p>
         )} */}
-        <div className="shadow-md py-6 px-6 w-full sm:w-1/3 sm:ml-5 mt-5 sm:mt-0 border border-primaryOne rounded-xl">
+        <div className="shadow-md py-6 px-6 w-full md:w-1/3 md:ml-5 mt-5 md:mt-0 border border-primaryOne rounded-xl">
           <p className="font-bold text-lg">Advanced</p>
           <p className="font-medium text-sm">
             Perfect for professionals and business

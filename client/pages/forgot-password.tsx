@@ -1,5 +1,5 @@
 import LogoTab from "@/components/LogoTab";
-import PrimaryButton from "@/components/PrimaryButton";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
 import { resetPassword } from "@/firebase/firebase";
@@ -46,7 +46,7 @@ const ForgotPassword = () => {
         textColor="text-primaryOne"
         className="absolute top-5 left-5"
       />
-      <div className="w-3/4 sm:w-1/2 px-[4%] py-[5%] mx-auto my-auto">
+      <div className="w-3/4 md:w-1/2 px-[4%] py-[5%] mx-auto my-auto">
         <Link className="flex items-center text-sm" href="/sign-in">
           <FontAwesomeIcon icon={faArrowLeft} className="mr-3" />
           <p>Back to login</p>

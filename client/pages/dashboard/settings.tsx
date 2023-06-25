@@ -1,6 +1,6 @@
 import { PasswordEditor } from "@/components/dashboard/settings/PasswordEditor";
 import { SettingsInput } from "@/components/dashboard/settings/SettingsInput";
-import { SubmitButton } from "@/components/SubmitButton";
+import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { ToolTip } from "@/components/ToolTip";
 import {
   updateUserDisplayName,

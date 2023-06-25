@@ -65,7 +65,7 @@ export const StageSwitch = ({
         <p className="cursor-pointer">{stage.text}</p>
       </div>
       {i !== numberOfStages - 1 && (
-        <div className="h-[1px] bg-gray-300 flex-1 min-w-[30px] mx-2 sm:mx-0" />
+        <div className="h-[1px] bg-gray-300 flex-1 min-w-[30px] mx-2 md:mx-0" />
       )}
     </>
   );
