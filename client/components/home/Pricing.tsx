@@ -24,29 +24,29 @@ export const Pricing = () => {
           <Image
             src="/visa.png"
             alt="visa"
-            height={95}
-            width={55}
+            height={200}
+            width={100}
             className="w-1/4 object-cover"
           />
           <Image
             src="/mastercard.png"
             alt="mastercard"
-            height={95}
-            width={55}
+            height={200}
+            width={100}
             className="w-1/4 object-cover"
           />
           <Image
             src="/paypal.png"
             alt="paypal"
-            height={95}
-            width={55}
+            height={200}
+            width={100}
             className="w-1/4 object-cover"
           />
           <Image
             src="/mpesa.png"
             alt="paypal"
-            height={95}
-            width={55}
+            height={200}
+            width={100}
             className="w-1/4 object-cover"
           />
         </div>

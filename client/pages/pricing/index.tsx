@@ -38,7 +38,7 @@ const Pricing = () => {
               regardless of their budget or requirements. We work closely with
               our clients to understand their specific needs and provide them
               with the best plan that will meet their budget and deliver optimal
-              results.
+              results. Get 50% off your first month of the basic subscription.
             </p>
           </section>
           <div className="mt-10 md:flex justify-between md:w-2/3 mx-auto gap-x-4">

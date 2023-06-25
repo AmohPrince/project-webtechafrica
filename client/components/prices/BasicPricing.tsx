@@ -4,14 +4,22 @@ import React from "react";
 import { BASIC_FEATURES, getYearly, scrollToTop } from "../../util/utilities";
 import Billed from "./Billed";
 import { FeatureSpan } from "./FeatureSpan";
+import Image from "next/image";
 
 export const BasicPricing = ({ className }: { className: string }) => {
   const { price } = useGlobalData();
 
   return (
     <div
-      className={`py-12 px-4 md:px-8 bg-gray-100 rounded-2xl text-center ${className}`}
+      className={`py-12 px-4 md:px-8 bg-gray-100 rounded-2xl text-center relative ${className}`}
     >
+      <Image
+        src="/fiftypercent.png"
+        width={100}
+        height={100}
+        alt="50% off"
+        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2"
+      />
       <div className="flex justify-between items-center">
         <h3 className="text-2xl md:text-4xl font-extrabold">Basic</h3>
         <p className="text-xs px-3 py-2 rounded-full bg-white font-semibold text-secondaryFour">
