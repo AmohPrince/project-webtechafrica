@@ -19,11 +19,9 @@ export const Main = () => {
       {...slideAnimation("left")}
     >
       <motion.div className="md:w-[50%]" {...headContainerAnimation}>
-        <motion.div {...headTextAnimation}>
-          <h1 className="h2 md:h1">
-            Build your <br /> audience and grow <br /> your brand online
-          </h1>
-        </motion.div>
+        <motion.h1 className="h2 md:h1" {...headTextAnimation}>
+          Build your <br /> audience and grow <br /> your brand online
+        </motion.h1>
         <motion.p className="text-gray-500 mt-4 mb-7">
           Leverage the power of AI to create insanely beautiful websites that
           will spear head your business to the top of its specific

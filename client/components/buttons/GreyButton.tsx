@@ -9,7 +9,7 @@ export function GreyButton({
   className?: string;
 }) {
   return (
-    <motion.h1
+    <motion.h2
       className={`text-xs bg-gray-200 text-primaryOne py-4 px-11 rounded-full w-max font-bold ${
         className ? className : "mx-auto"
       }`}
@@ -19,6 +19,6 @@ export function GreyButton({
       viewport={{ once: true }}
     >
       {text}
-    </motion.h1>
+    </motion.h2>
   );
 }

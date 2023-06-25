@@ -13,7 +13,7 @@ export const HowWeWork = () => {
   return (
     <section className="text-center mt-[10%] px-[5%] md:px-[12%]">
       <GreyButton text="How we work" />
-      <h2 className="h2 mt-8 mb-12">Work smarter, work faster..</h2>
+      <h3 className="h2 mt-8 mb-12">Work smarter, work faster..</h3>
       <div className="flex justify-between gap-x-2">
         <button
           className={`bg-gray-200 py-5 md:px-16 rounded-md ${
