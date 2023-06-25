@@ -87,7 +87,7 @@ const BasicPricingPage = () => {
                       <span className="text-black font-semibold">
                         {(i + 1).toString().padStart(2, "0")}
                       </span>
-                      .{feature.replace(/<\/?sp>|,/g, "")}
+                      . {feature.replace(/<\/?sp>|,/g, "")}
                     </p>
                   </div>
                 )

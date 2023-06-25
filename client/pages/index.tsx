@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useAuth } from "../hooks/useAuth";
 import Layout from "@/components/Layout";
 import { FeaturesComponent } from "@/components/home/FeaturesComponent";
 import FreeTrial from "@/components/home/FreeTrial";

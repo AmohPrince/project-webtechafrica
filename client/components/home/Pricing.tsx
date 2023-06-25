@@ -4,6 +4,7 @@ import React from "react";
 import { GreyButton } from "../buttons/GreyButton";
 import { BasicPricing } from "../prices/BasicPricing";
 import { PremiumPricing } from "../prices/PremiumPricing";
+import Image from "next/image";
 
 export const Pricing = () => {
   return (
@@ -20,13 +21,33 @@ export const Pricing = () => {
         </p>
         <h4 className="h4 my-4">Accepted Payment Methods</h4>
         <div className="bg-gray-50 flex py-2 px-2 rounded-md">
-          <FontAwesomeIcon
-            icon={faCcPaypal}
-            className="w-1/3 h-[55px] text-primaryOne"
+          <Image
+            src="/visa.png"
+            alt="visa"
+            height={95}
+            width={55}
+            className="w-1/4 object-cover"
           />
-          <FontAwesomeIcon
-            icon={faCcVisa}
-            className="w-1/3 h-[55px] text-primaryOne"
+          <Image
+            src="/mastercard.png"
+            alt="mastercard"
+            height={95}
+            width={55}
+            className="w-1/4 object-cover"
+          />
+          <Image
+            src="/paypal.png"
+            alt="paypal"
+            height={95}
+            width={55}
+            className="w-1/4 object-cover"
+          />
+          <Image
+            src="/mpesa.png"
+            alt="paypal"
+            height={95}
+            width={55}
+            className="w-1/4 object-cover"
           />
         </div>
       </div>

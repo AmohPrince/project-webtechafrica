@@ -15,9 +15,8 @@ const FreeTrial = ({ className }: { className?: string }) => {
           today
         </h2>
         <p>
-          Unleash the true potential of your business with our one month free
-          trial, get the second month of your basic subscription for free! start
-          today and see the difference!
+          Unleash the true potential of your business with 50% off your first
+          month on all packages! start today and see the difference!
         </p>
         <div className="flex gap-x-2 mt-8 justify-between items-center">
           <input
