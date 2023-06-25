@@ -18,7 +18,7 @@ export const BasicPricing = ({ className }: { className: string }) => {
         width={100}
         height={100}
         alt="50% off"
-        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2"
+        className="absolute top-0 left-0 -translate-x-1/4 sm:-translate-x-1/2 -translate-y-1/2"
       />
       <div className="flex justify-between items-center">
         <h3 className="text-2xl md:text-4xl font-extrabold">Basic</h3>
