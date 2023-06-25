@@ -1,0 +1,8 @@
+# Block all crawlers for /accounts
+User-agent: *
+Disallow: /404
+Disallow: /dashboard/
+
+# Allow all crawlers
+User-agent: *
+Allow: /
