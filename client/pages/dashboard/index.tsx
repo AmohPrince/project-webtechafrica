@@ -7,8 +7,7 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import React, { useEffect } from "react";
 import Layout from "../../components/dashboard/Layout";
 
-const ActiveWebsitesPage = () => {
-  const { userData } = useAuth();
+const Dashboard = () => {
   const { setDashBoardTitleInfo } = useGlobalData();
 
   useEffect(() => {
@@ -33,4 +32,4 @@ const ActiveWebsitesPage = () => {
   );
 };
 
-export default ActiveWebsitesPage;
+export default Dashboard;

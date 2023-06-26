@@ -14,9 +14,10 @@ import { faUser, faSpinner, faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth, updateCurrentUser } from "firebase/auth";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../../components/dashboard/Layout";
+import { useGlobalData } from "@/hooks/useGlobalData";
 
 export type Inputs = {
   email: string;
@@ -85,6 +86,15 @@ const Settings = () => {
     }
   };
 
+  const { setDashBoardTitleInfo } = useGlobalData();
+
+  useEffect(() => {
+    setDashBoardTitleInfo({
+      h1: "Settings",
+      sub: "Update your profile information",
+    });
+  }, [setDashBoardTitleInfo]);
+
   return (
     <Layout>
       <div className="w-11/12 md:w-2/3 mx-auto mt-5 bg-white">
@@ -150,10 +160,7 @@ const Settings = () => {
                   onChange={handleChangingUserProfilePicture}
                   ref={fileInput}
                 />
-                <FontAwesomeIcon
-                  icon={faCamera}
-                  className="text-primaryOne h-4 w-4"
-                />
+                <FontAwesomeIcon icon={faCamera} className="text-primaryOne" />
               </div>
             </div>
             <form
