@@ -81,16 +81,9 @@ export const DashboardNavbar = ({
               <p>Log out</p>
 
               {loading ? (
-                <FontAwesomeIcon
-                  icon={faCircleNotch}
-                  spin
-                  className="h-4 w-4 spin"
-                />
+                <FontAwesomeIcon icon={faCircleNotch} spin />
               ) : (
-                <FontAwesomeIcon
-                  icon={faArrowRightFromBracket}
-                  className="h-5"
-                />
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
               )}
             </div>
           )}
