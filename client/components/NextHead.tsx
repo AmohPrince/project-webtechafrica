@@ -13,7 +13,7 @@ export const NextHead = ({
   description: string;
   canonical: string;
   twitterDescription: string;
-  schemaJSON: object;
+  schemaJSON?: object;
 }) => {
   let upperCaseTitle = title.charAt(0).toUpperCase() + title.substring(1);
   return (
@@ -32,7 +32,9 @@ export const NextHead = ({
       <meta name="twitter:image" content="/logowithdescription.png" />
       <link rel="canonical" href={canonical} />
       <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-      <script type="application/ld+json">{JSON.stringify(schemaJSON)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(schemaJSON ?? {})}
+      </script>
     </Head>
   );
 };
