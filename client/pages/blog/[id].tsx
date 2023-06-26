@@ -22,6 +22,39 @@ const SingleBlog = () => {
     return <div>Article not found.</div>;
   }
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.webtechafrica.com/blog",
+    },
+    headline: article.title,
+    description: article.preText,
+    image: {
+      "@type": "ImageObject",
+      url: article.img,
+      width: 800,
+      height: 600,
+    },
+    datePublished: "2023-06-25T09:00:00Z",
+    dateModified: "2023-06-25T10:30:00Z",
+    author: {
+      "@type": "Person",
+      name: "Amos Machora",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "WebTech Africa",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.webtechafrica.com/logo.jpg",
+        width: 200,
+        height: 100,
+      },
+    },
+  };
+
   return (
     <>
       <NextHead
@@ -29,6 +62,7 @@ const SingleBlog = () => {
         description={article.preText}
         title={article.title}
         twitterDescription={article.preText}
+        schemaJSON={schema}
       />
       <Layout>
         <section className="mt-12 mx-[5%] md:mx-[12%]">

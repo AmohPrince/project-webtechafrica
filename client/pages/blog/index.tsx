@@ -7,6 +7,13 @@ import React from "react";
 import blogs from "../../json/Blogs.json";
 
 const Blog = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Blog",
+    description:
+      "Read our blog! Stay up to date with hiring cycles and company updates",
+  };
   return (
     <>
       <NextHead
@@ -14,6 +21,7 @@ const Blog = () => {
         description="Read our blog! Stay up to date with hiring cycles and company updates"
         title="blog"
         twitterDescription="Read our blog! Stay up to date with hiring cycles and company updates"
+        schemaJSON={schema}
       />
       <Layout>
         <motion.section className="px-[5%] md:px-[12%]">
