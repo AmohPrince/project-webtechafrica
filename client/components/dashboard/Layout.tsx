@@ -3,6 +3,7 @@ import DashBoardSideBar from "@/components/dashboard/DashBoardSideBar";
 import DashBoardTitle from "@/components/dashboard/DashBoardTitle";
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
+import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 
@@ -23,13 +24,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <DashBoardSideBar
         setShowingSmallScreenMenu={setShowingSmallScreenMenu}
         className="hidden md:block relative"
+        isSmallScreen={false}
       />
-      {showingSmallScreenMenu && (
-        <DashBoardSideBar
-          setShowingSmallScreenMenu={setShowingSmallScreenMenu}
-          className="w-5/6 fixed top-0 left-0 bottom-0"
-        />
-      )}
+      <AnimatePresence>
+        {showingSmallScreenMenu && (
+          <DashBoardSideBar
+            setShowingSmallScreenMenu={setShowingSmallScreenMenu}
+            className="w-5/6 fixed top-0 left-0 bottom-0"
+            isSmallScreen
+          />
+        )}
+      </AnimatePresence>
       <div className="flex-grow bg-gray-100 w-full md:w-5/6 z-0 h-screen overflow-y-auto">
         <DashboardNavbar
           setShowingSmallScreenMenu={setShowingSmallScreenMenu}

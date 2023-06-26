@@ -26,7 +26,7 @@ export const SettingsInput = ({
       />
       <FontAwesomeIcon
         icon={faPen}
-        className="text-primaryOne absolute top-1/2 -translate-y-1/2 right-2 h-3"
+        className="text-primaryOne absolute top-1/2 -translate-y-1/2 right-2"
       />
     </div>
   );

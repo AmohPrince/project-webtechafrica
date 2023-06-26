@@ -9,13 +9,28 @@ import Link from "next/link";
 const DashBoardSideBar = ({
   setShowingSmallScreenMenu,
   className,
+  isSmallScreen,
 }: {
   setShowingSmallScreenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   className: string;
+  isSmallScreen: boolean;
 }) => {
   return (
     <motion.div
       className={`bg-menu text-white w-1/6 h-screen z-10 overflow-x-hidden transition-all pt-6 pl-6 ${className}`}
+      initial={
+        isSmallScreen
+          ? {
+              x: -1000,
+            }
+          : undefined
+      }
+      animate={{
+        x: 0,
+      }}
+      exit={{
+        x: -1000,
+      }}
     >
       <div className="flex justify-between items-center mb-5">
         <Link href="/">
@@ -27,6 +42,10 @@ const DashBoardSideBar = ({
         />
       </div>
       <div className="mt-12">
+        <DashboardOption
+          name="new-website"
+          onClick={() => setShowingSmallScreenMenu(false)}
+        />
         <DashboardOption
           name="active-websites"
           onClick={() => setShowingSmallScreenMenu(false)}
@@ -41,10 +60,6 @@ const DashBoardSideBar = ({
         />
         <DashboardOption
           name="payments"
-          onClick={() => setShowingSmallScreenMenu(false)}
-        />
-        <DashboardOption
-          name="new-website"
           onClick={() => setShowingSmallScreenMenu(false)}
         />
         <DashboardOption

@@ -52,7 +52,7 @@ export const PopUp = ({
         icon={
           popUpInfo.type === "success" ? faCircleCheck : faCircleExclamation
         }
-        className={`cursor-pointer mr-3 h-5 ${
+        className={`cursor-pointer mr-3 ${
           popUpInfo.type === "success" ? "text-green-500" : "text-red-500"
         }`}
         onClick={() =>
