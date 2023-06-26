@@ -23,7 +23,10 @@ export const SubmitButton = ({
       type="submit"
     >
       {isLoading ? (
-        <FontAwesomeIcon icon={icon ?? faCircleNotch} className="spin" />
+        <FontAwesomeIcon
+          icon={icon ?? faCircleNotch}
+          className="spin h-5 w-5 mx-auto"
+        />
       ) : (
         text
       )}

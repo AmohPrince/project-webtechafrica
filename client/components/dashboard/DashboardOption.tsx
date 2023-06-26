@@ -71,49 +71,49 @@ const DashboardOptionLogo = ({
     return (
       <FontAwesomeIcon
         icon={faGears}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "active-websites") {
     return (
       <FontAwesomeIcon
         icon={faWandMagicSparkles}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "payment") {
     return (
       <FontAwesomeIcon
         icon={faCreditCard}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "new-website") {
     return (
       <FontAwesomeIcon
         icon={faLaptop}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "pending-verification") {
     return (
       <FontAwesomeIcon
         icon={faHourglassHalf}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else if (name === "settings") {
     return (
       <FontAwesomeIcon
         icon={faGear}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   } else {
     return (
       <FontAwesomeIcon
         icon={faWallet}
-        className={`w-5 mr-2 ${isActive ? "text-white" : ""}`}
+        className={`w-5 h-5 mr-2 ${isActive ? "text-white" : ""}`}
       />
     );
   }

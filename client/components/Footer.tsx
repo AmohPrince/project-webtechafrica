@@ -88,12 +88,6 @@ const Footer = () => {
             <h4 className="h4 border-b pb-8 w-full mb-3">Utility Pages</h4>
             <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
               <Link
-                href="/blog/learn"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-              >
-                Learn
-              </Link>
-              <Link
                 href="/contact"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
               >

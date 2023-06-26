@@ -177,7 +177,7 @@ const DomainNamePicker = ({
           </div>
           <FontAwesomeIcon
             icon={faSearch}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 h-5"
           />
         </div>
         <button
@@ -187,7 +187,7 @@ const DomainNamePicker = ({
           disabled={isSearchButtonDisabled}
         >
           {isLoading ? (
-            <FontAwesomeIcon icon={faSpinner} className="spin" />
+            <FontAwesomeIcon icon={faSpinner} className="spin h-5" />
           ) : (
             "Search"
           )}

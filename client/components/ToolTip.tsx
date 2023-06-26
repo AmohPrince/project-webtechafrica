@@ -20,7 +20,9 @@ export const ToolTip = ({
       <p>{text}</p>
       <FontAwesomeIcon
         icon={faCaretDown}
-        className={`absolute -translate-x-1/2 ${!style && "text-primaryOne"}`}
+        className={`absolute -translate-x-1/2 ${
+          !style && "text-primaryOne"
+        } h-4`}
         style={{
           color: style?.backgroundColor,
         }}

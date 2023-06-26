@@ -80,7 +80,7 @@ const DashboardButtonText = ({ text }: { text: string }) => {
   return (
     <div className="flex items-center w-max mx-auto">
       <p className="mr-2">{text}</p>
-      <FontAwesomeIcon icon={faRocket} />
+      <FontAwesomeIcon icon={faRocket} className="h-5" />
     </div>
   );
 };

@@ -87,7 +87,7 @@ const Settings = () => {
 
   return (
     <Layout>
-      <div className="w-2/3 mx-auto mt-5 bg-white">
+      <div className="w-11/12 md:w-2/3 mx-auto mt-5 bg-white">
         <div className="flex font-semibold text-sm cursor-pointer">
           <p
             className={`py-4 w-1/2 text-center transition-colors ${
@@ -150,7 +150,10 @@ const Settings = () => {
                   onChange={handleChangingUserProfilePicture}
                   ref={fileInput}
                 />
-                <FontAwesomeIcon icon={faCamera} className="text-primaryOne" />
+                <FontAwesomeIcon
+                  icon={faCamera}
+                  className="text-primaryOne h-4 w-4"
+                />
               </div>
             </div>
             <form

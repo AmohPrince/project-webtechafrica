@@ -25,7 +25,13 @@ export const CardInfo = ({ card }: { card: Card }) => {
   return (
     <div className="py-4 px-2 mx-2 shadow-md my-4 flex flex-col rounded-md">
       <div className="flex items-start">
-        <Image src={getCardTypeIcon(card.type)} alt={`${card.type}'s logo `} />
+        <Image
+          src={getCardTypeIcon(card.type)}
+          alt={`${card.type}'s logo `}
+          width={100}
+          height={100}
+          className="h-10"
+        />
         <div className="ml-3 text-sm">
           <p>
             {card.type} ending in {card.endsIn}

@@ -51,7 +51,7 @@ export const DashboardNavbar = ({
         />
         <div
           className="flex items-center bg-gray-50 dark:bg-magloSemiBlack dark:text-white rounded-full py-1 px-2 cursor-pointer w-1/2 md:w-auto relative"
-          onClick={() => setIsShowingLogOutButton((prev) => !prev)}
+          onClick={() => setIsShowingLogOutButton(true)}
         >
           {user?.photoURL ? (
             <Image
@@ -81,9 +81,12 @@ export const DashboardNavbar = ({
               <p>Log out</p>
 
               {loading ? (
-                <FontAwesomeIcon icon={faCircleNotch} spin />
+                <FontAwesomeIcon icon={faCircleNotch} spin className="h-5" />
               ) : (
-                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  className="h-5"
+                />
               )}
             </div>
           )}

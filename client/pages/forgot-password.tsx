@@ -41,14 +41,16 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex h-screen bg-pageBgGrey">
-      <LogoTab
-        logoColor={LogoColor.primary}
-        textColor="text-primaryOne"
-        className="absolute top-5 left-5"
-      />
+      <Link href="/">
+        <LogoTab
+          logoColor={LogoColor.primary}
+          textColor="text-primaryOne"
+          className="absolute top-5 left-5"
+        />
+      </Link>
       <div className="w-3/4 md:w-1/2 px-[4%] py-[5%] mx-auto my-auto">
         <Link className="flex items-center text-sm" href="/sign-in">
-          <FontAwesomeIcon icon={faArrowLeft} className="mr-3" />
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-3 h-5 w-5" />
           <p>Back to login</p>
         </Link>
         <h1 className="h3 my-[4%]">Forgot Password?</h1>

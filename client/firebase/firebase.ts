@@ -28,7 +28,7 @@ import { getChatGPTmessage } from "@/openai/openai";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "webtechafrica.com",
+  authDomain: "projectwebtechafrica.firebaseapp.com",
   projectId: "projectwebtechafrica",
   storageBucket: "projectwebtechafrica.appspot.com",
   messagingSenderId: "503691559074",
