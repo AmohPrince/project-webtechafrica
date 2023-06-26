@@ -11,6 +11,15 @@ import { Blogs } from "@/components/home/Blogs";
 import { CheapAndPowerful } from "@/components/home/CheapAndPowerful";
 import Background from "@/components/home/Background";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "WebTech Africa",
+  url: "https://www.webtechafrica.com/",
+  description:
+    "Leverage the power of AI to create insanely beautiful websites that will spear head your business to the top of its specific niche.",
+};
+
 export default function Home() {
   return (
     <>
@@ -20,6 +29,7 @@ niche."
         title="WebTech Africa"
         canonical="www.webtechafrica.com"
         twitterDescription="Let the world best software engineers re-brand your online presence"
+        schemaJSON={schema}
       />
       <Layout>
         <motion.main>

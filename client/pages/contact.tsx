@@ -14,6 +14,14 @@ import Location from "../components/Location";
 import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Us",
+  description:
+    "Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019",
+};
+
 const Contact = () => {
   const [state, handleSubmit, ResetFunction] = useForm("xrgvnyrk");
   const { showNotification } = useGlobalData();
@@ -26,7 +34,6 @@ const Contact = () => {
     if (state.errors.length > 0) {
       showNotification("an error occurred", "error");
     }
-    console.log(state);
   }, [ResetFunction, showNotification, state]);
 
   return (
@@ -35,7 +42,8 @@ const Contact = () => {
         canonical="www.webtechafrica.com/contact"
         description="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
         twitterDescription="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
-        title="contact"
+        title="Contact us"
+        schemaJSON={schema}
       />
       <Layout>
         <motion.section className="px-[5%] md:px-[12%]">

@@ -23,10 +23,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { NextHead } from "@/components/NextHead";
 
 type Inputs = {
   email: string;
   password: string;
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Sign In",
+  description:
+    "Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account",
 };
 
 const SignIn = () => {
@@ -121,106 +130,119 @@ const SignIn = () => {
   }, []);
 
   return (
-    <div className="h-screen flex relative">
-      <Image
-        src={
-          "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        }
-        alt="hand holding with icon"
-        className="h-full object-cover hidden md:block w-1/2"
-        width={1260}
-        height={750}
+    <>
+      <NextHead
+        canonical="https://www.webtechafrica.com/sign-in"
+        description="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
+        schemaJSON={schema}
+        title="Sign In"
+        twitterDescription="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
       />
-      <div className="w-full md:w-1/2 py-[10%] md:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
-        <LogoTab logoColor={LogoColor.primary} />
-        <p className="font-semibold text-3xl mt-[4%] dark:text-white">
-          {sourceParam === "get-started" ? "Welcome!" : "Welcome back"}
-        </p>
-        <p className="font-normal text-base text-gray-400">
-          {sourceParam === "get-started"
-            ? "How about we sign you in first."
-            : "Welcome back please enter your details"}
-        </p>
-        <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
-          <p className="text-sm font-medium mt-6 mb-2 dark:text-white">Email</p>
-          <div className="relative">
-            {errors.email?.type === "required" && (
-              <ToolTip text="Email is required" />
-            )}
-            {errors.email?.type === "pattern" && (
-              <ToolTip text="Email is not valid" />
-            )}
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="py-3 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-              {...register("email", {
-                required: true,
-                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-              })}
-            />
-          </div>
-          <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
-            Password
+      <main className="h-screen flex relative">
+        <Image
+          src={
+            "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          }
+          alt="hand holding with icon"
+          className="h-full object-cover hidden md:block w-1/2"
+          width={1260}
+          height={750}
+        />
+        <div className="w-full md:w-1/2 py-[10%] md:py-[4%] px-[5%] h-full dark:bg-magloBlack relative">
+          <LogoTab logoColor={LogoColor.primary} />
+          <p className="font-semibold text-3xl mt-[4%] dark:text-white">
+            {sourceParam === "get-started" ? "Welcome!" : "Welcome back"}
           </p>
-          <div className="relative">
-            {errors.password && <ToolTip text="Password is required" />}
-            <input
-              type="password"
-              className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
-              placeholder="Password"
-              {...register("password", {
-                required: true,
-              })}
-            />
-          </div>
-          <div className="flex items-center mt-5 mb-6">
-            <input
-              type="checkbox"
-              className="w-4 h-4 mr-2 dark:bg-transparent"
-              ref={rememberFor30DaysCheckBox}
-            />
-            <p className="text-sm font-medium dark:text-white">
-              Remember for 30 days
+          <p className="font-normal text-base text-gray-400">
+            {sourceParam === "get-started"
+              ? "How about we sign you in first."
+              : "Welcome back please enter your details"}
+          </p>
+          <form onSubmit={handleSubmit(signInWithEmailAndPasswordWrapper)}>
+            <p className="text-sm font-medium mt-6 mb-2 dark:text-white">
+              Email
             </p>
-            <Link
-              href="/forgot-password"
-              className="font-medium text-sm ml-auto dark:text-white cursor-pointer"
-            >
-              Forgot password
-            </Link>
-          </div>
-          <SubmitButton
-            disabled={Object.keys(errors).length !== 0}
-            icon={faCircleNotch}
-            isLoading={signingInWithEmail}
-            text="Sign In"
-            className="w-full"
-          />
-        </form>
-        <div
-          className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
-          onClick={googleSignIn}
-        >
-          <Image
-            src={assets.google}
-            alt="google icon"
-            className={`w-5 h-5 ${signingInWithGoogle ? "spin" : ""}`}
-          />
-          <p className="font-medium ml-2 text-gray-600">Sign in with google</p>
-        </div>
-        <p className="text-sm text-gray-400 text-center">
-          Don’t have an account?{" "}
-          <Link
-            className="cursor-pointer dark:text-white text-bgSignupPage font-semibold"
-            href="/sign-up"
+            <div className="relative">
+              {errors.email?.type === "required" && (
+                <ToolTip text="Email is required" />
+              )}
+              {errors.email?.type === "pattern" && (
+                <ToolTip text="Email is not valid" />
+              )}
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="py-3 px-4 text-sm border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+                {...register("email", {
+                  required: true,
+                  pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                })}
+              />
+            </div>
+            <p className="text-sm font-medium mt-4 mb-2 dark:text-white">
+              Password
+            </p>
+            <div className="relative">
+              {errors.password && <ToolTip text="Password is required" />}
+              <input
+                type="password"
+                className="py-3 px-4 border w-full rounded-sm dark:bg-transparent dark:text-white focus:outline-none"
+                placeholder="Password"
+                {...register("password", {
+                  required: true,
+                })}
+              />
+            </div>
+            <div className="flex items-center mt-5 mb-6">
+              <input
+                type="checkbox"
+                className="w-4 h-4 mr-2 dark:bg-transparent"
+                ref={rememberFor30DaysCheckBox}
+              />
+              <p className="text-sm font-medium dark:text-white">
+                Remember for 30 days
+              </p>
+              <Link
+                href="/forgot-password"
+                className="font-medium text-sm ml-auto dark:text-white cursor-pointer"
+              >
+                Forgot password
+              </Link>
+            </div>
+            <SubmitButton
+              disabled={Object.keys(errors).length !== 0}
+              icon={faCircleNotch}
+              isLoading={signingInWithEmail}
+              text="Sign In"
+              className="w-full"
+            />
+          </form>
+          <div
+            className="flex justify-center mt-4 mb-6 cursor-pointer items-center"
+            onClick={googleSignIn}
           >
-            Sign up its free!
-          </Link>
-        </p>
-      </div>
-      <Wave />
-    </div>
+            <Image
+              src={assets.google}
+              alt="google icon"
+              className={`w-5 h-5 ${signingInWithGoogle ? "spin" : ""}`}
+            />
+            <p className="font-medium ml-2 text-gray-600">
+              Sign in with google
+            </p>
+          </div>
+          <p className="text-sm text-gray-400 text-center">
+            Don’t have an account?{" "}
+            <Link
+              className="cursor-pointer dark:text-white text-bgSignupPage font-semibold"
+              href="/sign-up"
+            >
+              Sign up its free!
+            </Link>
+          </p>
+        </div>
+        <Wave />
+      </main>
+    </>
   );
 };
 

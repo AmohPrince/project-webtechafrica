@@ -7,19 +7,26 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 
+const description =
+  "WebTech Africa is a startup that provides comprehensive web development solutions to businesses of all sizes in africa and beyond. From custom website design and development to hosting and domain name registration, we have everything you need to establish a professional online presence.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Us",
+  description: description,
+};
+
 const About = () => {
   return (
     <>
       <NextHead
         title="about us"
         canonical="www.webtechafrica.com/about"
-        description="At our company, we specialize in providing comprehensive web
-    development solutions for businesses of all sizes. From custom
-    website design and development to hosting and domain name
-    registration, we have everything you need to establish a
-    professional online presence."
+        description={description}
         twitterDescription="At our company, we specialize in providing comprehensive web
         development solutions for businesses of all sizes."
+        schemaJSON={schema}
       />
       <Layout>
         <motion.section className="px-[5%] md:px-[12%]">

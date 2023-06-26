@@ -4,7 +4,7 @@ import { NextHead } from "@/components/NextHead";
 import { WaitListModal } from "@/components/WaitListModal";
 import { addEmailToWaitList } from "@/firebase/firestore";
 import { useAuth } from "@/hooks/useAuth";
-import { useGlobalData } from "@/hooks/useGlobalData";
+import { DEFAULT_PRICE, useGlobalData } from "@/hooks/useGlobalData";
 import { assets } from "@/public/assets";
 import {
   PREMIUM_FEATURES,
@@ -20,6 +20,31 @@ import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+const description = `All features in the basic plan plus more ${PREMIUM_FEATURES.map(
+  (feature) => {
+    const isLastItem =
+      PREMIUM_FEATURES.indexOf(feature) === PREMIUM_FEATURES.length - 1;
+    return feature.text.replace(/<\/?sp>/g, "") + (isLastItem ? "" : ", ");
+  }
+).join("")}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Premium Package",
+  description: description,
+  offers: {
+    "@type": "Offer",
+    price: `${DEFAULT_PRICE.advanced}`, // Set the price for the premium package
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    seller: {
+      "@type": "Organization",
+      name: "Your Company Name",
+    },
+  },
+};
 
 const AdvancedPricingPage = () => {
   const { user } = useAuth();
@@ -45,13 +70,15 @@ const AdvancedPricingPage = () => {
       setIsShowingEmailModal(true);
     }
   };
+
   return (
     <>
       <NextHead
         canonical="www.webtechafrica.com/pricing/premium"
-        description="premium pricing plan. All features in the basic plan plus more"
+        description={description}
         title="premium"
-        twitterDescription="premium pricing plan. All features in the basic plan plus more"
+        twitterDescription="All features in the basic plan plus more"
+        schemaJSON={schema}
       />
       <Layout>
         <section className="mx-[5%] md:mx-[12%]">

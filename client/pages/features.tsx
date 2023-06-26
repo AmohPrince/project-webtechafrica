@@ -9,16 +9,24 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Features",
+  description: "Advertisement , web development and social media management",
+};
+
 const Features = () => {
   return (
     <>
       <NextHead
         canonical="www.webtechafrica.com/features"
-        description=" We offer advanced analytics capabilities to monitor website
+        description="We offer advanced analytics capabilities to monitor website
     engagement and manage ads effectively, ensuring the growth of your
     brand"
         title="features"
         twitterDescription="Advertisement , web development and social media management"
+        schemaJSON={schema}
       />
       <Layout>
         <motion.div className="px-[5%] md:px-[12%]">

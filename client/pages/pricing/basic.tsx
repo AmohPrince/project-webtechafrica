@@ -2,7 +2,7 @@ import { CircleBackGround } from "@/components/CircleBackGround";
 import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
 import { useAuth } from "@/hooks/useAuth";
-import { useGlobalData } from "@/hooks/useGlobalData";
+import { DEFAULT_PRICE, useGlobalData } from "@/hooks/useGlobalData";
 import { assets } from "@/public/assets";
 import {
   BASIC_FEATURES,
@@ -15,6 +15,30 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+const description = `The basic plan offers features for most of your web development needs. Some of the features include ${BASIC_FEATURES.map(
+  (feature, index) => {
+    const isLastItem = index === BASIC_FEATURES.length - 1;
+    return feature.text.replace(/<\/?sp>/g, "") + (isLastItem ? "" : ", ");
+  }
+).join("")}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Basic Package",
+  description: description,
+  offers: {
+    "@type": "Offer",
+    price: `${DEFAULT_PRICE.basic}`,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    seller: {
+      "@type": "Organization",
+      name: "WebTech Africa",
+    },
+  },
+};
+
 const BasicPricingPage = () => {
   const { user } = useAuth();
   const { price } = useGlobalData();
@@ -22,10 +46,11 @@ const BasicPricingPage = () => {
     <>
       <NextHead
         canonical="www.webtechafrica.com/pricing/basic"
-        description="The basic plan offers features for most of your web development needs"
+        description={description}
         title="pricing"
         twitterDescription="The basic plan offers the basic but powerful services that
         ensures you get yourself a website online."
+        schemaJSON={schema}
       />
       <Layout>
         <section className="mx-[5%] md:mx-[12%]">

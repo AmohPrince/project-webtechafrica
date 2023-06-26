@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
 import { PremiumPricing } from "@/components/prices/PremiumPricing";
 import { SecondaryButton } from "@/components/buttons/SecondaryButton";
-import { useGlobalData } from "@/hooks/useGlobalData";
+import { DEFAULT_PRICE, useGlobalData } from "@/hooks/useGlobalData";
 import {
   BASIC_FEATURES,
   PREMIUM_FEATURES,
@@ -15,8 +15,44 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Row from "../../components/Row";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Pricing",
+  description: `We offer a basic and premium package. The Basic price starts from ${DEFAULT_PRICE.basic} with features like web shops and free one month ads. The premium price starts from ${DEFAULT_PRICE.advanced} with much much more features`,
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: `${DEFAULT_PRICE.basic}`,
+    highPrice: `${DEFAULT_PRICE.advanced}`,
+    offerCount: "2",
+    offers: [
+      {
+        "@type": "Offer",
+        price: `${DEFAULT_PRICE.basic}`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        seller: {
+          "@type": "Organization",
+          name: "WebTech Africa",
+        },
+      },
+      {
+        "@type": "Offer",
+        price: `${DEFAULT_PRICE.advanced}`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        seller: {
+          "@type": "Organization",
+          name: "Web Tech Africa",
+        },
+      },
+    ],
+  },
+};
+
 const Pricing = () => {
   const { price } = useGlobalData();
+
   return (
     <>
       <NextHead
@@ -26,6 +62,7 @@ const Pricing = () => {
     regardless of their budget or requirements."
         title="pricing"
         twitterDescription="Affordable pricing plans for both basic and premium clients."
+        schemaJSON={schema}
       />
       <Layout>
         <motion.main className="px-[5%] md:px-[12%]">
