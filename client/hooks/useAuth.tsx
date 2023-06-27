@@ -34,26 +34,6 @@ export const AuthContextProvider = ({
     LOCAL_STORAGE_KEYS.USER
   );
 
-  let lastSavedDate: string | null;
-
-  if (typeof localStorage !== "undefined") {
-    lastSavedDate = localStorage.getItem(LOCAL_STORAGE_KEYS.LAST_SIGN_IN_DATE);
-
-    if (lastSavedDate) {
-      const lastSignInDateInMilliSeconds: number = new Date(
-        lastSavedDate
-      ).getTime();
-      const todaysDateInMilliSeconds: number = new Date().getTime();
-      const differenceInMilliSeconds: number =
-        todaysDateInMilliSeconds - lastSignInDateInMilliSeconds;
-      const differenceInDays: number =
-        differenceInMilliSeconds / (1000 * 60 * 60 * 24);
-      if (differenceInDays >= 30) {
-        setUserData(null);
-      }
-    }
-  }
-
   const auth = getAuth();
 
   onAuthStateChanged(auth, (user) => {

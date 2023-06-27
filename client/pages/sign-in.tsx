@@ -2,12 +2,7 @@ import LogoTab from "@/components/LogoTab";
 import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
-import {
-  getSignInErrorMessage,
-  signInWithGoogle,
-  redirectResult,
-  signInWithEmailAndPassword,
-} from "@/firebase/firebase";
+import { getSignInErrorMessage, redirectResult } from "@/firebase/firebase";
 import {
   fetchUserDataFromDB,
   addOrUpdateUserDataInDB,
@@ -17,7 +12,13 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import { LogoColor, assets } from "@/public/assets";
 import { UserData } from "@/types/Global";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { UserCredential } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  UserCredential,
+} from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -39,20 +40,29 @@ const schema = {
 };
 
 const SignIn = () => {
+  //local hooks
   const { setUserData } = useAuth();
+  const { showNotification } = useGlobalData();
+
+  //next js hooks
   const router = useRouter();
   const { query } = router;
+  const sourceParam = query.source;
+
+  // react-hook-form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const sourceParam = query.source;
+
+  //react hooks
   const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
   const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
 
-  const { showNotification } = useGlobalData();
+  const auth = getAuth();
+  const googleAuthProvider = new GoogleAuthProvider();
 
   //sign-in with email and password
   const signInWithEmailAndPasswordWrapper: SubmitHandler<Inputs> = async (
@@ -61,6 +71,7 @@ const SignIn = () => {
     setSigningInWithEmail(true);
     try {
       const userCredential: UserCredential = await signInWithEmailAndPassword(
+        auth,
         inputs.email,
         inputs.password
       );
@@ -70,64 +81,73 @@ const SignIn = () => {
         `Hello ${userCredential.user.displayName ?? "user"}!`,
         "success"
       );
-      router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
     } catch (error) {
       const signInErrorMessage = await getSignInErrorMessage(error);
       showNotification(signInErrorMessage, "error");
+      setSigningInWithEmail(false);
     }
-    setSigningInWithEmail(false);
   };
 
   //sign-in with google
   const googleSignIn = async () => {
     setSigningInWithGoogle(true);
+
+    let userCredential: UserCredential | null;
+
     try {
-      const userCredential = await signInWithGoogle();
-      try {
-        const userData = await fetchUserDataFromDB(userCredential.user.uid);
-        setUserData(userData);
-      } catch (error) {
-        // if this fetchUserDataFromDB fails it implies no user so we create one
-        const newUserData: UserData = {
-          paymentMethodSelected: false,
-          plan: "basic",
-        };
-        await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
-      }
+      userCredential = await signInWithPopup(auth, googleAuthProvider);
       showNotification(
         `Hello ${userCredential.user.displayName ?? "user"}!`,
         "success"
       );
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 2000);
     } catch (err: any) {
       const signInErrorMessage = await getSignInErrorMessage(err);
       showNotification(signInErrorMessage, "error");
+      setSigningInWithGoogle(false);
+      return;
     }
+
+    try {
+      const userData = await fetchUserDataFromDB(userCredential!.user.uid);
+      setUserData(userData);
+    } catch (error) {
+      const newUserData: UserData = {
+        paymentMethodSelected: false,
+        plan: "basic",
+      };
+      await addOrUpdateUserDataInDB(newUserData, userCredential!.user.uid);
+    }
+
+    setTimeout(() => {
+      setSigningInWithGoogle(false);
+      router.push("/dashboard");
+    }, 2000);
   };
 
-  useEffect(() => {
-    const getRedirectResult = async () => {
-      setSigningInWithGoogle(true);
-      try {
-        const userCredential: UserCredential | null = await redirectResult();
-        if (userCredential) {
-          showNotification(
-            `Hello ${userCredential.user.displayName ?? "user"}!`,
-            "success"
-          );
-          router.push("/dashboard");
-        }
-      } catch (error) {
-        const signInErrorMessage = await getSignInErrorMessage(error);
-        showNotification(signInErrorMessage, "error");
-      }
-      setSigningInWithGoogle(false);
-    };
-    getRedirectResult();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const getRedirectResult = async () => {
+  //     setSigningInWithGoogle(true);
+  //     try {
+  //       const userCredential: UserCredential | null = await redirectResult();
+  //       if (userCredential) {
+  //         showNotification(
+  //           `Hello ${userCredential.user.displayName ?? "user"}!`,
+  //           "success"
+  //         );
+  //         router.push("/dashboard");
+  //       }
+  //     } catch (error) {
+  //       const signInErrorMessage = await getSignInErrorMessage(error);
+  //       showNotification(signInErrorMessage, "error");
+  //     }
+  //     setSigningInWithGoogle(false);
+  //   };
+  //   getRedirectResult();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>

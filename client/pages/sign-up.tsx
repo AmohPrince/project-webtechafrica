@@ -5,16 +5,20 @@ import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
 import {
   getSignUpErrorMessage,
-  signInWithGoogle,
   redirectResult,
   createUserWithEmailAndPassword,
+  auth,
 } from "@/firebase/firebase";
 import { addOrUpdateUserDataInDB } from "@/firebase/firestore";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { LogoColor, assets } from "@/public/assets";
 import { UserData } from "@/types/Global";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { UserCredential } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  UserCredential,
+} from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -42,32 +46,26 @@ const schema = {
 };
 
 export const SignUp = () => {
+  //local hooks
+  const { countries, showNotification } = useGlobalData();
+
+  //react hooks
   const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
   const [creatingUserWithGoogle, setCreatingUserWithGoogle] = useState(false);
-  const { countries } = useGlobalData();
 
+  //react-hook-form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { showNotification } = useGlobalData();
+  const googleAuthProvider = new GoogleAuthProvider();
+
+  //next-js
   const router = useRouter();
   const emailParam = router.query.email;
 
-  const showPopUp = (type: PopUpInfoType, text: string) => {
-    setCreatingUserWithEmail(false);
-    setCreatingUserWithGoogle(false);
-    showNotification(text, type);
-    setTimeout(() => {
-      if (type === "success") {
-        router.push("/dashboard");
-      }
-    }, 3000);
-  };
-
-  //sign up with email and password
   const signUpWithEmailAndPassword: SubmitHandler<Inputs> = async (
     data: Inputs
   ) => {
@@ -87,18 +85,18 @@ export const SignUp = () => {
       };
 
       await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
-      showPopUp("success", userCredential.user.displayName ?? "user");
     } catch (error) {
       const errorMessage = await getSignUpErrorMessage(error);
-      showPopUp("error", errorMessage);
+      showNotification(errorMessage, "error");
+    } finally {
+      setCreatingUserWithEmail(false);
     }
   };
 
-  //sign up with google
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
     try {
-      const userCredential = await signInWithGoogle();
+      const userCredential = await signInWithPopup(auth, googleAuthProvider);
 
       const newUserData: UserData = {
         paymentMethodSelected: false,
@@ -106,30 +104,35 @@ export const SignUp = () => {
       };
 
       await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
-      showPopUp("success", userCredential.user.displayName ?? "user");
+      showNotification(
+        `Hello ${userCredential.user.displayName ?? "user"}!`,
+        "success"
+      );
     } catch (err: any) {
       const errorMessage = await getSignUpErrorMessage(err);
-      showPopUp("error", errorMessage);
+      showNotification(errorMessage, "error");
+    } finally {
+      setCreatingUserWithGoogle(false);
     }
   };
 
-  useEffect(() => {
-    const getRedirectResult = async () => {
-      setCreatingUserWithGoogle(true);
-      try {
-        const userCredential: UserCredential | null = await redirectResult();
-        if (userCredential) {
-          showPopUp("success", userCredential.user.displayName ?? "user");
-        }
-      } catch (error) {
-        const errorMessage = await getSignUpErrorMessage(error);
-        showPopUp("error", errorMessage);
-      }
-      setCreatingUserWithGoogle(false);
-    };
-    getRedirectResult();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const getRedirectResult = async () => {
+  //     setCreatingUserWithGoogle(true);
+  //     try {
+  //       const userCredential: UserCredential | null = await redirectResult();
+  //       if (userCredential) {
+  //         showPopUp("success", userCredential.user.displayName ?? "user");
+  //       }
+  //     } catch (error) {
+  //       const errorMessage = await getSignUpErrorMessage(error);
+  //       showPopUp("error", errorMessage);
+  //     }
+  //     setCreatingUserWithGoogle(false);
+  //   };
+  //   getRedirectResult();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>

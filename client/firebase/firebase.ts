@@ -41,49 +41,36 @@ export const auth = getAuth(firebaseApp);
 // const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 export const storage = getStorage();
-const googleAuthProvider = new GoogleAuthProvider();
 // const storageRef = ref(storage);
 // const profilePicturesRef = ref(storage, "profile-pictures");
 
-export const signInWithGoogle = async (): Promise<UserCredential> => {
-  if (window.innerWidth < 768) {
-    try {
-      const userCredential: UserCredential = await signInWithRedirect(
-        auth,
-        googleAuthProvider
-      );
-      return userCredential;
-    } catch (err) {
-      throw err;
-    }
-  } else {
-    try {
-      const userCredential: UserCredential = await signInWithPopup(
-        auth,
-        googleAuthProvider
-      );
-      return userCredential;
-    } catch (error) {
-      throw error;
-    }
-  }
-};
+// export const signInWithGoogle = async (): Promise<UserCredential> => {
+//   try {
+//     const userCredential: UserCredential = await signInWithPopup(
+//       auth,
+//       googleAuthProvider
+//     );
+//     return userCredential;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
-export const signInWithEmailAndPassword = async (
-  email: string,
-  password: string
-): Promise<UserCredential> => {
-  try {
-    const userCredential: UserCredential = await signInUserFnFromFirebase(
-      auth,
-      email,
-      password
-    );
-    return userCredential;
-  } catch (err) {
-    throw err;
-  }
-};
+// export const signInWithEmailAndPassword = async (
+//   email: string,
+//   password: string
+// ): Promise<UserCredential> => {
+//   try {
+//     const userCredential: UserCredential = await signInUserFnFromFirebase(
+//       auth,
+//       email,
+//       password
+//     );
+//     return userCredential;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
 
 /**
  * a function to create a user with email and password
