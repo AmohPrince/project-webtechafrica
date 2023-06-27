@@ -31,13 +31,13 @@ export const SmallScreenMenu = ({
     >
       <FontAwesomeIcon
         icon={faSquareXmark}
-        className="absolute top-4 right-4 h-10 w-10"
+        className="absolute top-7 right-6 h-10 w-10"
         onClick={() => setShowingMenu(false)}
       />
       {pages.map((page, i) => (
         <Link
           href={page === "home" ? "/" : page}
-          className="playfair"
+          className="playfair font-semibold"
           onClick={() => {
             setShowingMenu(false);
             window.scroll({
@@ -71,9 +71,9 @@ export const SmallScreenMenu = ({
           <FontAwesomeIcon icon={faInstagram} />
         </a>
         {/* TODO get a twitter account */}
-        <a href="https://twitter.com/">
+        {/* <a href="https://twitter.com/">
           <FontAwesomeIcon icon={faTwitter} />
-        </a>
+        </a> */}
       </div>
       <Wave />
     </motion.div>

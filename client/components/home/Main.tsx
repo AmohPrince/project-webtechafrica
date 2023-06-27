@@ -33,9 +33,7 @@ export const Main = () => {
         <div className="flex text-sm justify-center md:justify-start gap-x-3 items-center">
           <Suspense>
             <Link
-              href={`${
-                user ? "/dashboard/new-website" : "/sign-in/?source=get-started"
-              }`}
+              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
             >
               <button className="bg-primaryOne text-white py-3 px-6 rounded-full hover:bg-primaryOneLight transition-all">
                 Get Started
