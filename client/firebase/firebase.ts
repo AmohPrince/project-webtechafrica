@@ -28,7 +28,7 @@ import { getChatGPTmessage } from "@/openai/openai";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "webtechafrica.com",
+  authDomain: "projectwebtechafrica.firebaseapp.com",
   projectId: "projectwebtechafrica",
   storageBucket: "projectwebtechafrica.appspot.com",
   messagingSenderId: "503691559074",
@@ -38,9 +38,12 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
+// const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 export const storage = getStorage();
 const googleAuthProvider = new GoogleAuthProvider();
+// const storageRef = ref(storage);
+// const profilePicturesRef = ref(storage, "profile-pictures");
 
 export const signInWithGoogle = async (): Promise<UserCredential> => {
   if (window.innerWidth < 768) {
