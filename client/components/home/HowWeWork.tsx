@@ -101,11 +101,7 @@ export const HowWeWork = () => {
             </p>
             <Suspense>
               <Link
-                href={`${
-                  user
-                    ? "/dashboard/new-website"
-                    : "/sign-in/?source=get-started"
-                }`}
+                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
                 className="ml-auto"
               >
                 <BlackIshButton text="Create a website now !" />
@@ -141,11 +137,7 @@ export const HowWeWork = () => {
             </div>
             <Suspense>
               <Link
-                href={`${
-                  user
-                    ? "/dashboard/new-website"
-                    : "/sign-in/?source=get-started"
-                }`}
+                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
                 className="ml-auto"
               >
                 <BlackIshButton text="Get me a website  🚀" />

@@ -88,7 +88,7 @@ const BasicPricingPage = () => {
                 {price.currency} {price.basic}{" "}
                 <span className="text-base">/ month</span>
               </p>
-              <Link href={user ? "/dashboard/new-website" : "/sign-in"}>
+              <Link href={user ? "/dashboard" : "/sign-in"}>
                 <button className="rounded-full w-full text-xs text-white bg-primaryOne py-4 mt-5 hover:bg-orangeText transition-all hover:scale-110">
                   Get Website
                 </button>
