@@ -8,8 +8,12 @@ import {
   redirectResult,
   createUserWithEmailAndPassword,
   auth,
+  getSignInErrorMessage,
 } from "@/firebase/firebase";
-import { addOrUpdateUserDataInDB } from "@/firebase/firestore";
+import {
+  addOrUpdateUserDataInDB,
+  fetchUserDataFromDB,
+} from "@/firebase/firestore";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { LogoColor, assets } from "@/public/assets";
 import { UserData } from "@/types/Global";
@@ -25,6 +29,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NextHead } from "@/components/NextHead";
+import { useAuth } from "@/hooks/useAuth";
 
 type Inputs = {
   firstName: string;
@@ -48,6 +53,7 @@ const schema = {
 export const SignUp = () => {
   //local hooks
   const { countries, showNotification } = useGlobalData();
+  const { setUserData } = useAuth();
 
   //react hooks
   const [creatingUserWithEmail, setCreatingUserWithEmail] = useState(false);
@@ -85,6 +91,13 @@ export const SignUp = () => {
       };
 
       await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
+      showNotification(
+        `Hello ${userCredential.user.displayName ?? "user"}!`,
+        "success"
+      );
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
     } catch (error) {
       const errorMessage = await getSignUpErrorMessage(error);
       showNotification(errorMessage, "error");
@@ -95,25 +108,36 @@ export const SignUp = () => {
 
   const signUpWithGoogle = async () => {
     setCreatingUserWithGoogle(true);
+    let userCredential: UserCredential | null;
+
     try {
-      const userCredential = await signInWithPopup(auth, googleAuthProvider);
-
-      const newUserData: UserData = {
-        paymentMethodSelected: false,
-        plan: "basic",
-      };
-
-      await addOrUpdateUserDataInDB(newUserData, userCredential.user.uid);
+      userCredential = await signInWithPopup(auth, googleAuthProvider);
       showNotification(
         `Hello ${userCredential.user.displayName ?? "user"}!`,
         "success"
       );
     } catch (err: any) {
-      const errorMessage = await getSignUpErrorMessage(err);
-      showNotification(errorMessage, "error");
-    } finally {
+      const signInErrorMessage = await getSignInErrorMessage(err);
+      showNotification(signInErrorMessage, "error");
       setCreatingUserWithGoogle(false);
+      return;
     }
+
+    try {
+      const userData = await fetchUserDataFromDB(userCredential!.user.uid);
+      setUserData(userData);
+    } catch (error) {
+      const newUserData: UserData = {
+        paymentMethodSelected: false,
+        plan: "basic",
+      };
+      await addOrUpdateUserDataInDB(newUserData, userCredential!.user.uid);
+    }
+
+    setTimeout(() => {
+      setCreatingUserWithGoogle(false);
+      router.push("/dashboard");
+    }, 2000);
   };
 
   // useEffect(() => {
