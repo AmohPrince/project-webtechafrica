@@ -65,7 +65,7 @@ const SingleBlog = () => {
         schemaJSON={schema}
       />
       <Layout>
-        <section className="mt-12 mx-[5%] md:mx-[12%]">
+        <article className="mt-[17%] md:mt-12 mx-[5%] md:mx-[12%]">
           <Image
             src={article.img}
             alt={id as string}
@@ -132,7 +132,7 @@ const SingleBlog = () => {
               </p>
             ))}
           </section>
-        </section>
+        </article>
       </Layout>
     </>
   );

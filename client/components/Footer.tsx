@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="px-[5%] md:px-[12%]">
+    <footer className="px-[5%] md:px-[12%] mb-14">
       <section className="mt-[10%] border-y py-[9%] flex-col-reverse md:flex-row flex justify-between">
         <div className="md:w-1/3 mt-5 md:mt-0">
           <LogoTab logoColor={LogoColor.primary} />

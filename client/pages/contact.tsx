@@ -46,16 +46,16 @@ const Contact = () => {
         schemaJSON={schema}
       />
       <Layout>
-        <motion.section className="px-[5%] md:px-[12%]">
+        <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
           <Image
             src={assets.contactBlob}
             alt="blob"
             className="absolute right-0 z-0 w-1/3 overflow-hidden"
           />
-          <div className="mt-[10%] relative z-10">
+          <div className="mt-[17%] md:mt-[10%] relative z-10">
             <h1 className="h2 md:h1 text-center">Get in touch today!</h1>
-            <div className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
+            <section className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
               <div className="md:flex rounded-[28px] justify-between items-center p-4 md:p-6 w-1/2 shadow-xl border bg-white">
                 <Image
                   src={assets.MailLarge}
@@ -82,7 +82,7 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </section>
             <form
               className="rounded-3xl bg-white px-10 md:px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
               onSubmit={handleSubmit}
@@ -178,7 +178,7 @@ const Contact = () => {
               </div>
             </section>
           </div>
-        </motion.section>
+        </motion.main>
       </Layout>
     </>
   );

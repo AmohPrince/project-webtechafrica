@@ -6,10 +6,10 @@ import { NextHead } from "@/components/NextHead";
 import { HowWeWork } from "@/components/home/HowWeWork";
 import Testimonial from "@/components/home/Testimonial";
 import { Pricing } from "@/components/home/Pricing";
-import { Main } from "@/components/home/Main";
 import { Blogs } from "@/components/home/Blogs";
 import { CheapAndPowerful } from "@/components/home/CheapAndPowerful";
 import Background from "@/components/home/Background";
+import { HomeMain } from "@/components/home/HomeMain";
 
 const schema = {
   "@context": "https://schema.org",
@@ -32,9 +32,9 @@ niche."
         schemaJSON={schema}
       />
       <Layout>
-        <motion.main>
-          <Background />
-          <Main />
+        <Background />
+        <main>
+          <HomeMain />
           <FeaturesComponent className="px-[5%] md:px-[12%]" />
           <CheapAndPowerful />
           <HowWeWork />
@@ -42,7 +42,7 @@ niche."
           <Pricing />
           <FreeTrial className="mx-[5%] md:mx-[12%]" />
           <Blogs />
-        </motion.main>
+        </main>
       </Layout>
     </>
   );

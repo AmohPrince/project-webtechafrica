@@ -36,10 +36,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       reliable and safe environment for you to conduct online
       transactions and exchange important information with us. */}
           </p>
-          <Link
-            href="/features#secure-platform"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>
@@ -59,10 +56,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       more informed business decisions based on data trends, user
       behavior and many more. */}
           </p>
-          <Link
-            href="/features#advanced-analytics"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>
@@ -84,10 +78,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       with the ability to scale operations, and to focus on more
       strategic and creative activities. */}
           </p>
-          <Link
-            href="/features#powerful-automation"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>

@@ -67,7 +67,7 @@ const Pricing = () => {
       <Layout>
         <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
-          <section className="mt-[8%]">
+          <section className="mt-[17%] md:mt-[10%]">
             <h1 className="h2 md:h1 text-center">Pricing</h1>
             <p className="default-paragraph text-center mt-3 w-5/6 mx-auto bg-white">
               Our pricing plans are designed to be flexible and affordable, with

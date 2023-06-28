@@ -40,7 +40,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex h-screen bg-pageBgGrey">
+    <main className="flex h-screen bg-pageBgGrey">
       <Link href="/">
         <LogoTab
           logoColor={LogoColor.primary}
@@ -80,7 +80,7 @@ const ForgotPassword = () => {
         />
       </div>
       <Wave />
-    </div>
+    </main>
   );
 };
 

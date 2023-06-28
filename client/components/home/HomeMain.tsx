@@ -11,11 +11,11 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 
-export const Main = () => {
+export const HomeMain = () => {
   const { user } = useAuth();
   return (
     <motion.section
-      className="flex flex-col md:flex-row mt-[9%] justify-between item-start relative mx-[5%] md:mx-[12%]"
+      className="flex flex-col md:flex-row mt-[12%] md:mt-[9%] justify-between item-start relative mx-[5%] md:mx-[12%]"
       {...slideAnimation("left")}
     >
       <motion.div className="md:w-[50%]" {...headContainerAnimation}>

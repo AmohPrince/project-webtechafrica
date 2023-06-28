@@ -18,7 +18,7 @@ export const SmallScreenMenu = ({
 }: {
   setShowingMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const pages = ["home", "about-us", "features", "pricing", "blog", "contact"];
+  const pages = ["home", "about", "features", "pricing", "blog", "contact"];
   const { user } = useAuth();
 
   return (
@@ -36,7 +36,7 @@ export const SmallScreenMenu = ({
       />
       {pages.map((page, i) => (
         <Link
-          href={page === "home" ? "/" : page}
+          href={page === "home" ? "/" : "/" + page}
           className="playfair font-semibold"
           onClick={() => {
             setShowingMenu(false);

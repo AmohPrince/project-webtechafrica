@@ -5,9 +5,9 @@ import { assets } from "@/public/assets";
 function Testimonial() {
   return (
     <section className="mt-[10%] bg-primaryOne text-white text-center py-[8%] overflow-hidden relative">
-      <p className="text-xs px-6 py-2 w-max mx-auto testimonial-title rounded-full">
+      <h2 className="text-xs testimonial-title py-4 px-6 rounded-full w-max mx-auto font-bold mb-4">
         Testimonial
-      </p>
+      </h2>
       <h3 className="h3">Trusted by thousands of businesses.</h3>
       <p className="text-7xl">“</p>
       <p className="w-3/4 mx-auto">
