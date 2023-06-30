@@ -55,7 +55,7 @@ const BasicPricingPage = () => {
       <Layout>
         <main className="mx-[5%] md:mx-[12%]">
           <CircleBackGround />
-          <section className="z-10 mt-[8%] relative flex justify-between flex-col md:flex-row">
+          <section className="z-10 relative flex justify-between flex-col md:flex-row">
             <div className="border-b pb-5 w-full md:w-1/2">
               <h1 className="h2">Basic Plan</h1>
               <p className="default-paragraph mb-7">

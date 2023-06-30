@@ -21,9 +21,7 @@ const Navbar = () => {
   const screenSize = useScreenSize();
 
   return (
-    <nav
-      className={`flex justify-between items-center fixed right-0 left-0 py-3 md:py-0 top-0 md:relative bg-primaryOne md:bg-transparent z-40 px-[3%] md:px-[12%] md:mt-14`}
-    >
+    <nav className="flex justify-between items-center sticky top-0 md:relative bg-primaryOne md:bg-transparent z-40 md:mt-14 mb-12 py-3 md:py-0 px-[3%] md:px-[12%]">
       <div className="flex items-center">
         <Logo
           color={

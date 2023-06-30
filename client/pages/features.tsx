@@ -31,7 +31,7 @@ const Features = () => {
       <Layout>
         <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
-          <section className="mt-[17%] md:mt-[10%]">
+          <section>
             <h1 className="h2 md:h1 text-center">Features</h1>
             <p className="default-paragraph text-center w-3/4 md:w-1/2 mx-auto mt-5">
               We offer advanced analytics capabilities to monitor website

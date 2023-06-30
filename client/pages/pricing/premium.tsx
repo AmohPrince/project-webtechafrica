@@ -88,7 +88,7 @@ const AdvancedPricingPage = () => {
             )}
           </AnimatePresence>
           <CircleBackGround />
-          <section className="z-10 mt-[8%] relative flex flex-col md:flex-row justify-between w-full">
+          <section className="z-10 relative flex flex-col md:flex-row justify-between w-full">
             <div className="border-b pb-5 w-full md:w-1/2">
               <h1 className="h2">Premium Plan</h1>
               <p className="default-paragraph mb-7 bg-white">

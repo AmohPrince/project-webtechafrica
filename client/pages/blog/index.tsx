@@ -27,7 +27,7 @@ const Blog = () => {
         <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
           <div className="z-10 relative">
-            <section className="mt-[17%] md:mt-[10%] text-center">
+            <section className="text-center">
               <h1 className="h2 md:h1">News & Articles</h1>
               <p className="default-paragraph">
                 Stay informed and up-to-date with our collection of informative

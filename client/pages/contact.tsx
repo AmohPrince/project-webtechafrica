@@ -53,7 +53,7 @@ const Contact = () => {
             alt="blob"
             className="absolute right-0 z-0 w-1/3 overflow-hidden"
           />
-          <div className="mt-[17%] md:mt-[10%] relative z-10">
+          <div className="relative z-10">
             <h1 className="h2 md:h1 text-center">Get in touch today!</h1>
             <section className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
               <div className="md:flex rounded-[28px] justify-between items-center p-4 md:p-6 w-1/2 shadow-xl border bg-white">

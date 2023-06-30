@@ -31,8 +31,8 @@ const About = () => {
       <Layout>
         <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
-          <section className="text-center mt-[17%] md:mt-[8%]">
-            <h1 className="h3 md:h2 mb-8 mt-8 md:mb-4">About our company</h1>
+          <section className="text-center">
+            <h1 className="h3 md:h2 mb-8 md:mb-4">About our company</h1>
             <p className="default-paragraph bg-white">
               At our company, we specialize in providing comprehensive web
               development solutions for businesses of all sizes. From custom
