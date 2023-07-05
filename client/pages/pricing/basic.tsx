@@ -45,7 +45,7 @@ const BasicPricingPage = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/pricing/basic"
+        canonical="/pricing/basic"
         description={description}
         title="pricing"
         twitterDescription="The basic plan offers the basic but powerful services that

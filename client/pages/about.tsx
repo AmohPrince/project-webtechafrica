@@ -22,7 +22,7 @@ const About = () => {
     <>
       <NextHead
         title="about us"
-        canonical="www.webtechafrica.com/about"
+        canonical="/about"
         description={description}
         twitterDescription="At our company, we specialize in providing comprehensive web
         development solutions for businesses of all sizes."

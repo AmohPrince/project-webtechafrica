@@ -17,7 +17,7 @@ const Blog = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/blog"
+        canonical="/blog"
         description="Read our blog! Stay up to date with hiring cycles and company updates"
         title="blog"
         twitterDescription="Read our blog! Stay up to date with hiring cycles and company updates"

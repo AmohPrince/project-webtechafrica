@@ -152,7 +152,7 @@ const SignIn = () => {
   return (
     <>
       <NextHead
-        canonical="https://www.webtechafrica.com/sign-in"
+        canonical="/sign-in"
         description="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
         schemaJSON={schema}
         title="Sign In"

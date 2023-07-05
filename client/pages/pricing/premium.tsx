@@ -74,7 +74,7 @@ const AdvancedPricingPage = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/pricing/premium"
+        canonical="/pricing/premium"
         description={description}
         title="premium"
         twitterDescription="All features in the basic plan plus more"

@@ -39,7 +39,7 @@ const Contact = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/contact"
+        canonical="/contact"
         description="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
         twitterDescription="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
         title="Contact us"

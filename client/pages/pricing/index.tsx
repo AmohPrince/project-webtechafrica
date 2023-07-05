@@ -56,7 +56,7 @@ const Pricing = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/pricing"
+        canonical="/pricing"
         description="Our pricing plans are designed to be flexible and affordable, with
     options that can accommodate the needs of businesses of all sizes,
     regardless of their budget or requirements."

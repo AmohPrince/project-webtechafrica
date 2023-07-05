@@ -20,7 +20,7 @@ const Features = () => {
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/features"
+        canonical="/features"
         description="We offer advanced analytics capabilities to monitor website
     engagement and manage ads effectively, ensuring the growth of your
     brand"

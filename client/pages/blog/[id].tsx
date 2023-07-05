@@ -58,7 +58,7 @@ const SingleBlog = () => {
   return (
     <>
       <NextHead
-        canonical={`www.webtechafrica.com/blog/${id}`}
+        canonical={`/blog/${id}`}
         description={article.preText}
         title={article.title}
         twitterDescription={article.preText}

@@ -161,7 +161,7 @@ export const SignUp = () => {
   return (
     <>
       <NextHead
-        canonical="https://www.webtechafrica.com/sign-up"
+        canonical="/sign-up"
         description={description}
         schemaJSON={schema}
         title="Sign Up"
