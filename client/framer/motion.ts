@@ -81,6 +81,13 @@ export const headContainerAnimation = {
   exit: { x: -100, opacity: 0, transition: { ...transition, delay: 0 } },
 };
 
+export const modalTransition = {
+  initial: { y: -1000 },
+  animate: { y: 0 },
+  exit: { y: -1000 },
+  transition: { duration: 0.5, type: "spring" },
+};
+
 // export const pageTransition = {
 //   initial: { opacity: 0 },
 //   animate: { opacity: 1 },

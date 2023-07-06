@@ -25,6 +25,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { NextHead } from "@/components/NextHead";
+import ForgotPassword from "../components/home/ForgotPassword";
+import { AnimatePresence } from "framer-motion";
 
 type Inputs = {
   email: string;
@@ -60,7 +62,10 @@ const SignIn = () => {
   const rememberFor30DaysCheckBox = useRef<HTMLInputElement>(null);
   const [signingInWithEmail, setSigningInWithEmail] = useState(false);
   const [signingInWithGoogle, setSigningInWithGoogle] = useState(false);
+  const [isShowingForgotPasswordModal, setIsShowingForgotPasswordModal] =
+    useState(false);
 
+  //firebase
   const auth = getAuth();
   const googleAuthProvider = new GoogleAuthProvider();
 
@@ -127,28 +132,6 @@ const SignIn = () => {
     }, 2000);
   };
 
-  // useEffect(() => {
-  //   const getRedirectResult = async () => {
-  //     setSigningInWithGoogle(true);
-  //     try {
-  //       const userCredential: UserCredential | null = await redirectResult();
-  //       if (userCredential) {
-  //         showNotification(
-  //           `Hello ${userCredential.user.displayName ?? "user"}!`,
-  //           "success"
-  //         );
-  //         router.push("/dashboard");
-  //       }
-  //     } catch (error) {
-  //       const signInErrorMessage = await getSignInErrorMessage(error);
-  //       showNotification(signInErrorMessage, "error");
-  //     }
-  //     setSigningInWithGoogle(false);
-  //   };
-  //   getRedirectResult();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   return (
     <>
       <NextHead
@@ -159,6 +142,13 @@ const SignIn = () => {
         twitterDescription="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
       />
       <main className="h-screen flex relative">
+        <AnimatePresence>
+          {isShowingForgotPasswordModal && (
+            <ForgotPassword
+              close={() => setIsShowingForgotPasswordModal(false)}
+            />
+          )}
+        </AnimatePresence>
         <Image
           src={
             "https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -222,12 +212,12 @@ const SignIn = () => {
               <p className="text-sm font-medium dark:text-white">
                 Remember for 30 days
               </p>
-              <Link
-                href="/forgot-password"
+              <p
                 className="font-medium text-sm ml-auto dark:text-white cursor-pointer"
+                onClick={() => setIsShowingForgotPasswordModal(true)}
               >
                 Forgot password
-              </Link>
+              </p>
             </div>
             <SubmitButton
               disabled={Object.keys(errors).length !== 0}
