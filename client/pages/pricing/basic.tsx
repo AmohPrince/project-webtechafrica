@@ -47,7 +47,7 @@ const BasicPricingPage = () => {
       <NextHead
         canonical="/pricing/basic"
         description={description}
-        title="pricing"
+        title="Basic plan"
         twitterDescription="The basic plan offers the basic but powerful services that
         ensures you get yourself a website online."
         schemaJSON={schema}

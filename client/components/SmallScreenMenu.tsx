@@ -70,10 +70,9 @@ export const SmallScreenMenu = ({
         <a href="https://www.instagram.com/webtechafrica/">
           <FontAwesomeIcon icon={faInstagram} />
         </a>
-        {/* TODO get a twitter account */}
-        {/* <a href="https://twitter.com/">
+        <a href="https://twitter.com/webtech_africa">
           <FontAwesomeIcon icon={faTwitter} />
-        </a> */}
+        </a>
       </div>
       <Wave />
     </motion.div>

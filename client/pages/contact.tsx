@@ -55,21 +55,24 @@ const Contact = () => {
           />
           <div className="relative z-10">
             <h1 className="h2 md:h1 text-center">Get in touch today!</h1>
-            <section className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
-              <div className="md:flex rounded-[28px] justify-between items-center p-4 md:p-6 w-1/2 shadow-xl border bg-white">
+            <section className="flex flex-wrap md:flex-nowrap justify-between mt-10 items-stretch md:items-center w-full mx-auto text-sm gap-4 text-center">
+              <div className="flex flex-col md:flex-row rounded-[28px] justify-between items-center p-4 md:p-6 shadow-xl border bg-white w-full">
                 <Image
                   src={assets.MailLarge}
                   alt="Mail"
                   className="w-12 h-12 mr-2"
                 />
-                <div className="md:flex mt-3 md:mt-0">
+                <div className="md:flex mt-3 md:mt-0 items-center">
                   <p className="font-semibold md:mr-2">Mail Us</p>
-                  <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
+                  <a
+                    className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden"
+                    href={`mailto:${email}`}
+                  >
                     {email}
-                  </p>
+                  </a>
                 </div>
               </div>
-              <div className="md:flex rounded-[28px] items-center p-4 md:p-6 bg-white w-1/2 shadow-xl border">
+              <div className="flex flex-col md:flex-row rounded-[28px] items-center p-4 md:p-6 bg-white shadow-xl border w-[48%] md:w-full">
                 <Image
                   src={assets.Phone}
                   alt="Mail"
@@ -79,6 +82,21 @@ const Contact = () => {
                   <p className="font-semibold mr-2">Call Us</p>
                   <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
                     +254 7194 280 19
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row rounded-[28px] items-center p-4 md:p-6 bg-white shadow-xl border w-[48%] md:w-full">
+                <Image
+                  src="/icons8-whatsapp.svg"
+                  alt="Mail"
+                  className="w-12 h-12 mr-2"
+                  width={144}
+                  height={144}
+                />
+                <div className="md:flex mt-3 md:mt-0">
+                  <p className="font-semibold mr-2">Text Us</p>
+                  <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
+                    +254 9789 03 55
                   </p>
                 </div>
               </div>
@@ -168,7 +186,7 @@ const Contact = () => {
               className="bg-primaryOne mt-[10%] faqs py-[10%]"
               id="#faqs"
             >
-              <h3 className="h2 md:h3 text-white text-center mb-10">
+              <h3 className="h3 text-white text-center mb-10">
                 Frequently Asked Questions
               </h3>
               <div className="w-2/3 md:w-1/2 mx-auto">

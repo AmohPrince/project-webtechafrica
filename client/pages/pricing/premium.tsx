@@ -76,7 +76,7 @@ const AdvancedPricingPage = () => {
       <NextHead
         canonical="/pricing/premium"
         description={description}
-        title="premium"
+        title="Premium plan"
         twitterDescription="All features in the basic plan plus more"
         schemaJSON={schema}
       />
@@ -92,7 +92,7 @@ const AdvancedPricingPage = () => {
             <div className="border-b pb-5 w-full md:w-1/2">
               <h1 className="h2">Premium Plan</h1>
               <p className="default-paragraph mb-7 bg-white">
-                Unleash your online potential with the advanced package! This
+                Unleash your online potential with the premium package! This
                 comprehensive plan goes above and beyond the basic option by
                 delivering a fully customized e-commerce platform for you to
                 sell all your goods. Your personal clients can easily access

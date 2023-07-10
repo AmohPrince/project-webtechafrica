@@ -6,6 +6,7 @@ import {
   faFacebook,
   faLinkedin,
   faInstagram,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -109,23 +110,6 @@ const Footer = () => {
           Vercel
         </p>
         <div className="flex items-center gap-x-6">
-          {/* TODO twitter account */}
-          {/* <a href="fix-me" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="hover:text-primaryOne"
-            />
-          </a> */}
-          <a
-            href="https://www.facebook.com/profile.php?id=100092227747488"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="hover:text-primaryOne"
-            />
-          </a>
           <a
             href="https://www.linkedin.com/company/webtech-africa/"
             target="_blank"
@@ -133,6 +117,26 @@ const Footer = () => {
           >
             <FontAwesomeIcon
               icon={faLinkedin}
+              className="hover:text-primaryOne"
+            />
+          </a>
+          <a
+            href="https://twitter.com/webtech_africa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="hover:text-primaryOne"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=100092227747488"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faFacebook}
               className="hover:text-primaryOne"
             />
           </a>
