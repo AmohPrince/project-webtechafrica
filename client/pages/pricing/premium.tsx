@@ -31,17 +31,17 @@ const description = `All features in the basic plan plus more ${PREMIUM_FEATURES
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  name: "Premium Package",
+  "@type": "Offer",
+  name: "Premium",
   description: description,
   offers: {
     "@type": "Offer",
-    price: `${DEFAULT_PRICE.advanced}`, // Set the price for the premium package
+    price: `${DEFAULT_PRICE.advanced}`,
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
     seller: {
       "@type": "Organization",
-      name: "Your Company Name",
+      name: "WebTech Africa",
     },
   },
 };

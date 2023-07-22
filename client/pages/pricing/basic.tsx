@@ -24,8 +24,8 @@ const description = `The basic plan offers features for most of your web develop
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  name: "Basic Package",
+  "@type": "Offer",
+  name: "Basic",
   description: description,
   offers: {
     "@type": "Offer",

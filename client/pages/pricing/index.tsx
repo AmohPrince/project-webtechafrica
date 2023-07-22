@@ -25,6 +25,7 @@ const schema = {
     lowPrice: `${DEFAULT_PRICE.basic}`,
     highPrice: `${DEFAULT_PRICE.advanced}`,
     offerCount: "2",
+    priceCurrency: "USD",
     offers: [
       {
         "@type": "Offer",
