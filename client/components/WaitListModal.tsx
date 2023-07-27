@@ -1,4 +1,5 @@
 import { addEmailToWaitList } from "@/firebase/firestore";
+import { modalTransition } from "@/framer/motion";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import {
   faCircleNotch,
@@ -38,10 +39,7 @@ export const WaitListModal = ({
     <Overlay>
       <motion.div
         className="bg-white rounded-lg p-5 md:w-1/3 w-11/12"
-        initial={{ y: -1000 }}
-        animate={{ y: 0 }}
-        exit={{ y: -1000 }}
-        transition={{ duration: 0.5, type: "spring" }}
+        {...modalTransition}
       >
         <div className="flex justify-between items-center mb-5">
           <h2 className="font-semibold text-lg">Joining the waitlist!</h2>

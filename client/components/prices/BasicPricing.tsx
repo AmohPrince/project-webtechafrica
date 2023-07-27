@@ -11,7 +11,7 @@ export const BasicPricing = ({ className }: { className: string }) => {
 
   return (
     <div
-      className={`py-12 px-4 md:px-8 bg-gray-100 rounded-2xl text-center relative ${className}`}
+      className={`py-12 px-4 mt-9 md:mt-0 md:px-8 bg-gray-100 rounded-2xl text-center relative ${className}`}
     >
       <Image
         src="/fiftypercent.png"

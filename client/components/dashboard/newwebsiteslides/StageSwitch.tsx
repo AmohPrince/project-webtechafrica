@@ -23,12 +23,12 @@ export const StageSwitch = ({
 
   const isCurrentStage = stageIndex === i;
 
-  useEffect(() => {
-    stageRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-  }, [isCurrentStage]);
+  // useEffect(() => {
+  //   stageRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "nearest",
+  //   });
+  // }, [isCurrentStage]);
 
   // @ts-ignore
   const previousStageValue = selections[stage.selectionsProp];

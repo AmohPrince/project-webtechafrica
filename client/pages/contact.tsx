@@ -14,6 +14,14 @@ import Location from "../components/Location";
 import Layout from "@/components/Layout";
 import { NextHead } from "@/components/NextHead";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Us",
+  description:
+    "Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019",
+};
+
 const Contact = () => {
   const [state, handleSubmit, ResetFunction] = useForm("xrgvnyrk");
   const { showNotification } = useGlobalData();
@@ -26,42 +34,45 @@ const Contact = () => {
     if (state.errors.length > 0) {
       showNotification("an error occurred", "error");
     }
-    console.log(state);
   }, [ResetFunction, showNotification, state]);
 
   return (
     <>
       <NextHead
-        canonical="www.webtechafrica.com/contact"
+        canonical="/contact"
         description="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
         twitterDescription="Get in touch! Email us at webtechnologiesafrica@gmail.com or call us +254719428019"
-        title="contact"
+        title="Contact us"
+        schemaJSON={schema}
       />
       <Layout>
-        <motion.section className="px-[5%] md:px-[12%]">
+        <motion.main className="px-[5%] md:px-[12%]">
           <CircleBackGround />
           <Image
             src={assets.contactBlob}
             alt="blob"
             className="absolute right-0 z-0 w-1/3 overflow-hidden"
           />
-          <div className="mt-[10%] relative z-10">
+          <div className="relative z-10">
             <h1 className="h2 md:h1 text-center">Get in touch today!</h1>
-            <div className="flex justify-between mt-10 items-stretch md:items-center w-11/12 md:w-3/4 mx-auto text-sm gap-x-4">
-              <div className="md:flex rounded-[28px] justify-between items-center p-4 md:p-6 w-1/2 shadow-xl border bg-white">
+            <section className="flex flex-wrap md:flex-nowrap justify-between mt-10 items-stretch md:items-center w-full mx-auto text-sm gap-4 text-center">
+              <div className="flex flex-col md:flex-row rounded-[28px] justify-between items-center p-4 md:p-6 shadow-xl border bg-white w-full">
                 <Image
                   src={assets.MailLarge}
                   alt="Mail"
                   className="w-12 h-12 mr-2"
                 />
-                <div className="md:flex mt-3 md:mt-0">
+                <div className="md:flex mt-3 md:mt-0 items-center">
                   <p className="font-semibold md:mr-2">Mail Us</p>
-                  <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
+                  <a
+                    className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden"
+                    href={`mailto:${email}`}
+                  >
                     {email}
-                  </p>
+                  </a>
                 </div>
               </div>
-              <div className="md:flex rounded-[28px] items-center p-4 md:p-6 bg-white w-1/2 shadow-xl border">
+              <div className="flex flex-col md:flex-row rounded-[28px] items-center p-4 md:p-6 bg-white shadow-xl border w-[48%] md:w-full">
                 <Image
                   src={assets.Phone}
                   alt="Mail"
@@ -74,7 +85,22 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-            </div>
+              <div className="flex flex-col md:flex-row rounded-[28px] items-center p-4 md:p-6 bg-white shadow-xl border w-[48%] md:w-full">
+                <Image
+                  src="/icons8-whatsapp.svg"
+                  alt="Mail"
+                  className="w-12 h-12 mr-2"
+                  width={144}
+                  height={144}
+                />
+                <div className="md:flex mt-3 md:mt-0">
+                  <p className="font-semibold mr-2">Text Us</p>
+                  <p className="text-secondaryFour ml-auto text-ellipsis whitespace-nowrap overflow-hidden">
+                    +254 9789 03 55
+                  </p>
+                </div>
+              </div>
+            </section>
             <form
               className="rounded-3xl bg-white px-10 md:px-14 py-[4%] mt-10 shadow-lg text-sm flex flex-wrap justify-between gap-y-7"
               onSubmit={handleSubmit}
@@ -160,7 +186,7 @@ const Contact = () => {
               className="bg-primaryOne mt-[10%] faqs py-[10%]"
               id="#faqs"
             >
-              <h3 className="h2 md:h3 text-white text-center mb-10">
+              <h3 className="h3 text-white text-center mb-10">
                 Frequently Asked Questions
               </h3>
               <div className="w-2/3 md:w-1/2 mx-auto">
@@ -170,7 +196,7 @@ const Contact = () => {
               </div>
             </section>
           </div>
-        </motion.section>
+        </motion.main>
       </Layout>
     </>
   );

@@ -25,7 +25,10 @@ export const FoundDomain = ({
       transition={{ duration: 0.5, type: "tween" }}
     >
       <div className="flex items-center">
-        <FontAwesomeIcon icon={faCircleCheck} className="mr-3 text-green-600" />
+        <FontAwesomeIcon
+          icon={faCircleCheck}
+          className="mr-3 text-green-600 h-5"
+        />
         <p className="font-bold text-sm">{domainName}</p>
       </div>
       <PrimaryButton

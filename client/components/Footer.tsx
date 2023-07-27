@@ -6,6 +6,7 @@ import {
   faFacebook,
   faLinkedin,
   faInstagram,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -13,7 +14,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="px-[5%] md:px-[12%]">
+    <footer className="px-[5%] md:px-[12%] mb-14">
       <section className="mt-[10%] border-y py-[9%] flex-col-reverse md:flex-row flex justify-between">
         <div className="md:w-1/3 mt-5 md:mt-0">
           <LogoTab logoColor={LogoColor.primary} />
@@ -88,12 +89,6 @@ const Footer = () => {
             <h4 className="h4 border-b pb-8 w-full mb-3">Utility Pages</h4>
             <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
               <Link
-                href="/blog/learn"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-              >
-                Learn
-              </Link>
-              <Link
                 href="/contact"
                 className="hover:text-primaryOne transition-all hover:font-semibold"
               >
@@ -115,23 +110,6 @@ const Footer = () => {
           Vercel
         </p>
         <div className="flex items-center gap-x-6">
-          {/* TODO twitter account */}
-          {/* <a href="fix-me" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="hover:text-primaryOne"
-            />
-          </a> */}
-          <a
-            href="https://www.facebook.com/profile.php?id=100092227747488"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="hover:text-primaryOne"
-            />
-          </a>
           <a
             href="https://www.linkedin.com/company/webtech-africa/"
             target="_blank"
@@ -139,6 +117,26 @@ const Footer = () => {
           >
             <FontAwesomeIcon
               icon={faLinkedin}
+              className="hover:text-primaryOne"
+            />
+          </a>
+          <a
+            href="https://twitter.com/webtech_africa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="hover:text-primaryOne"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=100092227747488"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon
+              icon={faFacebook}
               className="hover:text-primaryOne"
             />
           </a>

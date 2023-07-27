@@ -26,14 +26,14 @@ const DashboardOption = ({
 
   const isPurpleBg =
     lastPathNameSegment === name ||
-    (pathname === "/dashboard" && name === "active-websites");
+    (pathname === "/dashboard" && name === "new-website");
 
   return (
     <Link
       className={`flex items-center py-3 px-4 ${
         isPurpleBg && "bg-primaryOne rounded-l-lg"
       } transition-all cursor-pointer ${className}`}
-      href={`/dashboard/${name === "active-websites" ? "" : name}`}
+      href={`/dashboard/${name === "new-website" ? "" : name}`}
       onClick={onClick}
     >
       <DashboardOptionLogo

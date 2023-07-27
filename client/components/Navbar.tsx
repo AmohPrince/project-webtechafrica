@@ -1,6 +1,9 @@
 import { useAuth } from "@/hooks/useAuth";
+import useScreenSize from "@/hooks/useScreenSize";
 import { LogoColor } from "@/public/assets";
 import { getBaseUrl } from "@/util/utilities";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,19 +18,25 @@ const Navbar = () => {
   const { user } = useAuth();
   const [showingMenu, setShowingMenu] = useState(false);
 
+  const screenSize = useScreenSize();
+
   return (
-    <nav
-      className={`flex justify-between items-center fixed right-0 left-0 py-6 md:py-0 top-0 md:relative bg-white md:bg-transparent z-40 px-[5%] md:px-[12%]`}
-    >
+    <nav className="flex justify-between items-center sticky top-0 md:relative bg-primaryOne md:bg-transparent z-40 md:mt-14 mb-12 py-3 md:py-0 px-[3%] md:px-[12%]">
       <div className="flex items-center">
         <Logo
-          color={LogoColor.primary}
+          color={
+            screenSize === "sm"
+              ? LogoColor.menu
+              : screenSize === "md"
+              ? LogoColor.menu
+              : LogoColor.primary
+          }
           className="w-[60px] h-[40px] object-cover"
         />
-        <h3 className="h4 md:h3">WebTech Africa</h3>
+        <p className="text-white md:text-black h4 md:h3">WebTech Africa</p>
       </div>
       <div className="hidden md:flex text-sm">
-        <div
+        <ul
           className={`flex transition-all rounded-full px-9 py-3 ${
             basePath !== "/" ? "navbar-gray" : "text-white"
           } navbar gap-x-11`}
@@ -73,7 +82,7 @@ const Navbar = () => {
           >
             Contact
           </Link>
-        </div>
+        </ul>
         <Suspense>
           <Link
             className={`px-4 rounded-full ml-10 font-semibold flex items-center ${
@@ -85,12 +94,11 @@ const Navbar = () => {
           </Link>
         </Suspense>
       </div>
-      <div className="absolute right-0">
-        <HamburgerMenu
-          location="menu"
-          setShowingSmallScreenMenu={setShowingMenu}
-        />
-      </div>
+      <FontAwesomeIcon
+        icon={faBars}
+        className="text-white h-7 w-7 block md:hidden"
+        onClick={() => setShowingMenu((prev) => !prev)}
+      />
       <AnimatePresence>
         {showingMenu && <SmallScreenMenu setShowingMenu={setShowingMenu} />}
       </AnimatePresence>

@@ -40,7 +40,7 @@ export const PremiumPricing = ({ className }: { className: string }) => {
           );
         })}
       </div>
-      <Link href="/pricing/advanced" onClick={scrollToTop}>
+      <Link href="/pricing/premium" onClick={scrollToTop}>
         <button className="py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white hover:bg-primaryTwoLight">
           Learn more
         </button>

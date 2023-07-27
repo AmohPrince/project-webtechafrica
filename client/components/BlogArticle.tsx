@@ -15,7 +15,7 @@ const BlogArticle = ({ article }: { article: Blog }) => {
         height={750}
       />
       <p className="text-secondaryFour mt-11 mb-4">{article.date}</p>
-      <h4 className="h4">{article.title}</h4>
+      <h2 className="h4">{article.title}</h2>
       <p className="default-paragraph my-4">{article.preText}</p>
       <Link
         href={`/blog/${article.title}`}

@@ -9,14 +9,14 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
   return (
     <motion.section className={`mt-[12%] ${className}`}>
       <GreyButton text="Features" />
-      <motion.h1
+      <motion.h3
         className="h3 md:h2 text-center my-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
         Powerful features to boost <br /> your productivity
-      </motion.h1>
+      </motion.h3>
       <motion.div className="md:flex justify-between">
         <motion.div className="text-center w-full md:w-1/3 pb-12 pt-16 pr-6 rounded-[40px] hover:bg-gray-50 transition-all">
           <Image
@@ -24,7 +24,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
             alt="secure platform"
             className="w-4/5 h-1/3 mx-auto"
           />
-          <h3 className="h4 mt-3">Secure platform</h3>
+          <h4 className="h4 mt-3">Secure platform</h4>
           <p className="default-paragraph my-6">
             We offer a secure platform online that ensures the protection of
             sensitive information and data transmitted through the platform.
@@ -36,10 +36,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       reliable and safe environment for you to conduct online
       transactions and exchange important information with us. */}
           </p>
-          <Link
-            href="/features#secure-platform"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>
@@ -49,7 +46,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
             alt="secure platform"
             className="w-4/5 mx-auto h-1/3"
           />
-          <h3 className="h4 mt-3">Advanced Analytics</h3>
+          <h4 className="h4 mt-3">Advanced Analytics</h4>
           <p className="default-paragraph my-6">
             We offers advanced analytics to our customers, providing them with
             insights and data-driven decision making capabilities.
@@ -59,10 +56,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       more informed business decisions based on data trends, user
       behavior and many more. */}
           </p>
-          <Link
-            href="/features#advanced-analytics"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>
@@ -72,7 +66,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
             alt="secure platform"
             className="w-4/5 mx-auto md:ml-auto h-1/3"
           />
-          <h3 className="h4 mt-3">Powerful automation</h3>
+          <h4 className="h4 mt-3">Powerful automation</h4>
           <p className="default-paragraph my-6">
             We provide powerful automation capabilities to streamline processes,
             increase efficiency and improve productivity.
@@ -84,10 +78,7 @@ export const FeaturesComponent = ({ className }: { className?: string }) => {
       with the ability to scale operations, and to focus on more
       strategic and creative activities. */}
           </p>
-          <Link
-            href="/features#powerful-automation"
-            className="underline font-semibold"
-          >
+          <Link href="/features" className="underline font-semibold">
             Learn More
           </Link>
         </motion.div>

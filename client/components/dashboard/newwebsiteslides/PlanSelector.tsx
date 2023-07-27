@@ -76,7 +76,7 @@ const PlanSelector = ({
           <div className="mt-5">
             {BASIC_FEATURES.map((feature) => feature.text).map((feature, i) => (
               <p className="text-sm flex items-center" key={i}>
-                <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                <FontAwesomeIcon icon={faCheck} className="mr-2 h-5" />
                 {feature.replace(/<\/?sp>/g, "")}
               </p>
             ))}
@@ -122,7 +122,7 @@ const PlanSelector = ({
             {PREMIUM_FEATURES.map((feature) => feature.text).map(
               (feature, i) => (
                 <p className="text-sm flex items-center" key={i}>
-                  <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                  <FontAwesomeIcon icon={faCheck} className="mr-2 h-5" />
                   {feature.replace(/<\/?sp>/g, "")}
                 </p>
               )

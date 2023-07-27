@@ -27,6 +27,8 @@ export const SinglePaymentSmallScreen = ({
                 <Image
                   src={getCardTypeIcon(transaction.card.type)}
                   alt="Card icon"
+                  width={100}
+                  height={100}
                 />
                 <p>{transaction.card.type}</p>
               </div>

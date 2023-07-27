@@ -13,7 +13,7 @@ export const HowWeWork = () => {
   return (
     <section className="text-center mt-[10%] px-[5%] md:px-[12%]">
       <GreyButton text="How we work" />
-      <h2 className="h2 mt-8 mb-12">Work smarter, work faster..</h2>
+      <h3 className="h2 mt-8 mb-12">Work smarter, work faster..</h3>
       <div className="flex justify-between gap-x-2">
         <button
           className={`bg-gray-200 py-5 md:px-16 rounded-md ${
@@ -49,9 +49,9 @@ export const HowWeWork = () => {
                 alt="person"
                 className="w-16 h-16 mr-5"
               />
-              <h3 className="h4 md:h3">
+              <h4 className="h4 md:h3">
                 Create your account <br />& start your work
-              </h3>
+              </h4>
             </div>
             <p className="default-paragraph w-[95%] my-5">
               Creating user accounts allows us to track your web development
@@ -85,10 +85,10 @@ export const HowWeWork = () => {
                 alt="Phone"
                 className="mr-3 w-16 h-16"
               />
-              <h3 className="h4 md:h3">
+              <h4 className="h4 md:h3">
                 Call in or fill out our simple web info form and let us know
                 more!
-              </h3>
+              </h4>
             </div>
             <p className="default-paragraph my-5">
               We strongly encourage clients to reach out to us either by phone
@@ -101,11 +101,7 @@ export const HowWeWork = () => {
             </p>
             <Suspense>
               <Link
-                href={`${
-                  user
-                    ? "/dashboard/new-website"
-                    : "/sign-in/?source=get-started"
-                }`}
+                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
                 className="ml-auto"
               >
                 <BlackIshButton text="Create a website now !" />
@@ -123,7 +119,7 @@ export const HowWeWork = () => {
                 alt="Phone"
                 className="mr-3 w-16 h-16"
               />
-              <h3 className="h4 md:h3">Sit back and watch the magic happen</h3>
+              <h4 className="h4 md:h3">Sit back and watch the magic happen</h4>
             </div>
             <div className="flex my-5 gap-x-2">
               <p className="default-paragraph ">
@@ -141,11 +137,7 @@ export const HowWeWork = () => {
             </div>
             <Suspense>
               <Link
-                href={`${
-                  user
-                    ? "/dashboard/new-website"
-                    : "/sign-in/?source=get-started"
-                }`}
+                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
                 className="ml-auto"
               >
                 <BlackIshButton text="Get me a website  🚀" />

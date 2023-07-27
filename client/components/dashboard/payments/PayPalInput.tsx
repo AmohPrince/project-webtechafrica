@@ -18,7 +18,7 @@ export const PayPalInput = ({ websiteURL }: { websiteURL: string }) => {
         },
         method: "POST",
         body: JSON.stringify({
-          price: DEFAULT_PRICE.basic,
+          price: DEFAULT_PRICE.basic / 2,
         }),
       });
       return await response.text();

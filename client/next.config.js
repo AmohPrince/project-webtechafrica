@@ -8,6 +8,7 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
       "www.hostinger.com",
       "assets-global.website-files.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };
