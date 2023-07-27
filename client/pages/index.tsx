@@ -27,7 +27,7 @@ export default function Home() {
         description="Leverage the power of AI to create insanely beautiful websites that will spear head your business to the top of its specific
 niche."
         title="WebTech Africa"
-        canonical="/"
+        canonical="https://www.webtechafrica.com/"
         twitterDescription="Let the world best software engineers re-brand your online presence"
         schemaJSON={schema}
       />
