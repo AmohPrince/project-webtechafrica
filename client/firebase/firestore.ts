@@ -1,7 +1,9 @@
-import { UserData } from "../types/Global";
+"use client";
+
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
 import { uid } from "uid";
+import { UserData } from "../types/Global";
+import { db } from "./firebase";
 
 export const addOrUpdateUserDataInDB = async (
   userData: UserData | null | any,

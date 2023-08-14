@@ -1,11 +1,9 @@
 import { CircleBackGround } from "@/components/CircleBackGround";
-import Layout from "@/components/Layout";
 import Link from "next/link";
-import React from "react";
 
 const FourZeroFour = () => {
   return (
-    <Layout>
+    <>
       <CircleBackGround />
       <main className="flex flex-col items-center mt-[10%] relative z-10">
         <p className="text-primaryOne text-6xl md:text-9xl font-bold">404</p>
@@ -23,7 +21,7 @@ const FourZeroFour = () => {
           Homepage
         </Link>
       </main>
-    </Layout>
+    </>
   );
 };
 

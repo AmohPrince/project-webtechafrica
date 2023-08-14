@@ -1,6 +1,6 @@
-import { assets } from "@/public/assets";
+"use client";
+
 import { motion } from "framer-motion";
-import React from "react";
 
 const Background = () => {
   return (
@@ -8,7 +8,7 @@ const Background = () => {
       viewBox="0 0 1386 705"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-[73vw] absolute top-0 right-0 z-0 hidden md:block"
+      className="w-[70vw] absolute top-0 right-0 z-0 hidden md:block"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}

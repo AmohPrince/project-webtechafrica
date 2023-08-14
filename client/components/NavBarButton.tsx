@@ -1,11 +1,10 @@
 import { useAuth } from "@/hooks/useAuth";
 import { getBaseUrl } from "@/util/utilities";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
+import { usePathname } from "next/navigation";
 
 export const NavBarButton = () => {
-  const { pathname } = useRouter();
+  const pathname = usePathname();
   const basePath = getBaseUrl(pathname);
   const { user } = useAuth();
   return (

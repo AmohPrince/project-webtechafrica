@@ -1,7 +1,8 @@
+"use client";
+
 import { useGlobalData } from "@/hooks/useGlobalData";
 import { getYearly, PREMIUM_FEATURES, scrollToTop } from "@/util/utilities";
 import Link from "next/link";
-import React from "react";
 import Billed from "./Billed";
 import { FeatureSpan } from "./FeatureSpan";
 
@@ -40,8 +41,11 @@ export const PremiumPricing = ({ className }: { className: string }) => {
           );
         })}
       </div>
-      <Link href="/pricing/premium" onClick={scrollToTop}>
-        <button className="py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white hover:bg-primaryTwoLight">
+      <Link href="/pricing/premium">
+        <button
+          className="py-3 px-7 rounded-full border mt-8 transition-all text-sm font-bold hover:scale-105 bg-primaryTwo text-white hover:bg-primaryTwoLight"
+          onClick={scrollToTop}
+        >
           Learn more
         </button>
       </Link>

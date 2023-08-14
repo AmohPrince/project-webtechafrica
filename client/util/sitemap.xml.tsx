@@ -1,7 +1,7 @@
-import blogs from "../json/Blogs.json";
+import { writeFile } from "fs/promises";
 import { globby } from "globby";
-import { writeFile, unlink } from "fs/promises";
 import path from "path";
+import blogs from "../json/Blogs.json";
 
 const Sitemap = () => {
   return null;

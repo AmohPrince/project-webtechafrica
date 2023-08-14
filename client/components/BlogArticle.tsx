@@ -1,8 +1,9 @@
+"use client";
+
 import { Blog } from "@/types/Global";
 import { scrollToTop } from "@/util/utilities";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 const BlogArticle = ({ article }: { article: Blog }) => {
   return (
@@ -20,9 +21,8 @@ const BlogArticle = ({ article }: { article: Blog }) => {
       <Link
         href={`/blog/${article.title}`}
         className="absolute bottom-4 text-primaryOne text-sm underline font-semibold"
-        onClick={scrollToTop}
       >
-        Read More
+        <p onClick={scrollToTop}>Read More</p>
       </Link>
     </div>
   );

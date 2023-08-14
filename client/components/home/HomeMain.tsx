@@ -1,15 +1,16 @@
+"use client";
+
 import {
-  slideAnimation,
+  fadeAnimation,
   headContainerAnimation,
   headTextAnimation,
-  fadeAnimation,
+  slideAnimation,
 } from "@/framer/motion";
+import { useAuth } from "@/hooks/useAuth";
 import { assets } from "@/public/assets";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import React, { Suspense } from "react";
 import Image from "next/image";
-import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 
 export const HomeMain = () => {
   const { user } = useAuth();
@@ -18,28 +19,26 @@ export const HomeMain = () => {
       className="flex flex-col md:flex-row justify-between item-start relative mx-[5%] md:mx-[12%]"
       {...slideAnimation("left")}
     >
-      <motion.div className="md:w-[50%]" {...headContainerAnimation}>
+      <motion.div className="md:w-[45%]" {...headContainerAnimation}>
         <motion.h1 className="h2 md:h1" {...headTextAnimation}>
           Build your <br /> audience and grow <br /> your brand online
         </motion.h1>
         <motion.p className="text-gray-500 mt-4 mb-7">
-          Leverage the power of AI to create insanely beautiful websites that
-          will spear head your business to the top of its specific
+          Create insanely beautiful websites that will spear head your business
+          to the top of its specific
           <br />
           niche. Let the worlds best developers and UI/UX designers rebrand your
           online presence for the maximization of profits with africa's fastest
           growing tech corporation.{" "}
         </motion.p>
         <div className="flex text-sm justify-center md:justify-start gap-x-3 items-center">
-          <Suspense>
-            <Link
-              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
-            >
-              <button className="bg-primaryOne text-white py-3 px-6 rounded-full hover:bg-primaryOneLight transition-all">
-                Get Started
-              </button>
-            </Link>
-          </Suspense>
+          <Link
+            href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
+          >
+            <button className="bg-primaryOne text-white py-3 px-6 rounded-full hover:bg-primaryOneLight transition-all">
+              Get Started
+            </button>
+          </Link>
           {/* TODO Create Video! Not now but it would be really cool */}
           <Link
             href="/blog"

@@ -1,8 +1,9 @@
+"use client";
+
 import { assets } from "@/public/assets";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 const FreeTrial = ({ className }: { className?: string }) => {
   const emailRef = useRef<HTMLInputElement | null>(null);

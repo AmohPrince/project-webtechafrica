@@ -1,10 +1,11 @@
+"use client";
+
 import { useGlobalData } from "@/hooks/useGlobalData";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { BASIC_FEATURES, getYearly, scrollToTop } from "../../util/utilities";
 import Billed from "./Billed";
 import { FeatureSpan } from "./FeatureSpan";
-import Image from "next/image";
 
 export const BasicPricing = ({ className }: { className: string }) => {
   const { price } = useGlobalData();
@@ -52,8 +53,11 @@ export const BasicPricing = ({ className }: { className: string }) => {
           );
         })}
       </div>
-      <Link href="/pricing/basic" onClick={scrollToTop}>
-        <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange">
+      <Link href="/pricing/basic">
+        <button
+          className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange"
+          onClick={scrollToTop}
+        >
           Learn more
         </button>
       </Link>

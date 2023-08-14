@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@/hooks/useAuth";
 import useScreenSize from "@/hooks/useScreenSize";
 import { LogoColor } from "@/public/assets";
@@ -6,14 +8,13 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
-import HamburgerMenu from "./HamburgerMenu";
 import { Logo } from "./Logo";
 import { SmallScreenMenu } from "./SmallScreenMenu";
 
 const Navbar = () => {
-  const { pathname } = useRouter();
+  const pathname = usePathname();
   const basePath = getBaseUrl(pathname);
   const { user } = useAuth();
   const [showingMenu, setShowingMenu] = useState(false);

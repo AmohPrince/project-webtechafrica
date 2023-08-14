@@ -1,3 +1,5 @@
+"use client";
+
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage, updateUserProfilePicture } from "./firebase";
 

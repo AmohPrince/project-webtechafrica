@@ -1,8 +1,10 @@
+"use client";
+
 import { useAuth } from "@/hooks/useAuth";
 import {
   faFacebook,
-  faLinkedin,
   faInstagram,
+  faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
@@ -38,17 +40,20 @@ export const SmallScreenMenu = ({
         <Link
           href={page === "home" ? "/" : "/" + page}
           className="playfair font-semibold"
-          onClick={() => {
-            setShowingMenu(false);
-            window.scroll({
-              behavior: "smooth",
-              left: 0,
-              top: 0,
-            });
-          }}
           key={i}
         >
-          {page.split("-").map((t) => t.toLowerCase() + " ")}
+          <span
+            onClick={() => {
+              setShowingMenu(false);
+              window.scroll({
+                behavior: "smooth",
+                left: 0,
+                top: 0,
+              });
+            }}
+          >
+            {page.split("-").map((t) => t.toLowerCase() + " ")}
+          </span>
         </Link>
       ))}
       {user ? (

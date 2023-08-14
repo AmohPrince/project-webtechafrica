@@ -1,15 +1,15 @@
-import LogoTab from "@/components/LogoTab";
 import { SubmitButton } from "@/components/buttons/SubmitButton";
+import LogoTab from "@/components/LogoTab";
 import { ToolTip } from "@/components/ToolTip";
 import { Wave } from "@/components/Wave";
-import { getSignInErrorMessage, redirectResult } from "@/firebase/firebase";
+import { getSignInErrorMessage } from "@/firebase/firebase";
 import {
-  fetchUserDataFromDB,
   addOrUpdateUserDataInDB,
+  fetchUserDataFromDB,
 } from "@/firebase/firestore";
 import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
-import { LogoColor, assets } from "@/public/assets";
+import { assets, LogoColor } from "@/public/assets";
 import { UserData } from "@/types/Global";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -19,26 +19,29 @@ import {
   signInWithPopup,
   UserCredential,
 } from "firebase/auth";
+import { AnimatePresence } from "framer-motion";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { NextHead } from "@/components/NextHead";
-import ForgotPassword from "../components/home/ForgotPassword";
-import { AnimatePresence } from "framer-motion";
+import ForgotPassword from "../../components/home/ForgotPassword";
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Sign In",
-  description:
-    "Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account",
+const description =
+  "Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+  description,
+  twitter: {
+    description,
+  },
 };
 
 const SignIn = () => {
@@ -48,8 +51,8 @@ const SignIn = () => {
 
   //next js hooks
   const router = useRouter();
-  const { query } = router;
-  const sourceParam = query.source;
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source");
 
   // react-hook-form
   const {
@@ -134,13 +137,6 @@ const SignIn = () => {
 
   return (
     <>
-      <NextHead
-        canonical="/sign-in"
-        description="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
-        schemaJSON={schema}
-        title="Sign In"
-        twitterDescription="Sign in to your WebTech Africa account. Your can then access your dashboard and create websites! You can sign in either by email or your google account"
-      />
       <main className="h-screen flex relative">
         <AnimatePresence>
           {isShowingForgotPasswordModal && (

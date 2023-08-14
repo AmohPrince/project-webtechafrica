@@ -2,7 +2,7 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import { useNewWebsiteSelections } from "@/hooks/useNewWebsiteSelections";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 export const StageSwitch = ({
   stageIndex,

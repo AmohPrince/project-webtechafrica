@@ -1,9 +1,11 @@
-import { assets } from "@/public/assets";
-import Link from "next/link";
-import React, { Suspense, useState } from "react";
-import BlackIshButton from "../buttons/BlackIshButton";
-import Image from "next/image";
+"use client";
+
 import { useAuth } from "@/hooks/useAuth";
+import { assets } from "@/public/assets";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import BlackIshButton from "../buttons/BlackIshButton";
 import { GreyButton } from "../buttons/GreyButton";
 
 export const HowWeWork = () => {
@@ -99,14 +101,12 @@ export const HowWeWork = () => {
               expectations. So please don't hesitate to contact us, we are here
               to help and guide you through the process.
             </p>
-            <Suspense>
-              <Link
-                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
-                className="ml-auto"
-              >
-                <BlackIshButton text="Create a website now !" />
-              </Link>
-            </Suspense>
+            <Link
+              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
+              className="ml-auto"
+            >
+              <BlackIshButton text="Create a website now !" />
+            </Link>
           </div>
         </div>
       )}
@@ -135,14 +135,12 @@ export const HowWeWork = () => {
                 className="md:hidden w-2/5 object-cover"
               />
             </div>
-            <Suspense>
-              <Link
-                href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
-                className="ml-auto"
-              >
-                <BlackIshButton text="Get me a website  🚀" />
-              </Link>
-            </Suspense>
+            <Link
+              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
+              className="ml-auto"
+            >
+              <BlackIshButton text="Get me a website  🚀" />
+            </Link>
           </div>
           <Image
             src={assets.Magic}

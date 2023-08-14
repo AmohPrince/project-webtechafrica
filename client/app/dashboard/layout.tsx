@@ -2,15 +2,13 @@ import { DashboardNavbar } from "@/components/dashboard/DashboardNavbar";
 import DashBoardSideBar from "@/components/dashboard/DashBoardSideBar";
 import DashBoardTitle from "@/components/dashboard/DashBoardTitle";
 import { useAuth } from "@/hooks/useAuth";
-import { useGlobalData } from "@/hooks/useGlobalData";
 import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
   const router = useRouter();
-  const { dashBoardTitleInfo } = useGlobalData();
   const [showingSmallScreenMenu, setShowingSmallScreenMenu] = useState(false);
 
   useEffect(() => {
@@ -47,4 +45,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default DashboardLayout;

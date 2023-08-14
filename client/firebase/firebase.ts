@@ -1,30 +1,23 @@
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
+"use client";
 
+import { initializeApp } from "firebase/app";
+
+import { getChatGPTmessage } from "@/openai/openai";
 import {
+  createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
   deleteUser,
   getAuth,
   getRedirectResult,
-  GoogleAuthProvider,
   sendEmailVerification,
   sendPasswordResetEmail,
-  signInWithPopup,
-  signInWithRedirect,
+  signOut as signOutFnFromFirebase,
   updateEmail,
   updatePassword,
   updateProfile,
-  // updatePhoneNumber,
   UserCredential,
 } from "firebase/auth";
-import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
-import {
-  createUserWithEmailAndPassword as createUserWithEmailFnFromFirebase,
-  signInWithEmailAndPassword as signInUserFnFromFirebase,
-  signOut as signOutFnFromFirebase,
-} from "firebase/auth";
-import { LOCAL_STORAGE_KEYS } from "../util/utilities";
-import { getChatGPTmessage } from "@/openai/openai";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -38,39 +31,8 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
-// const analytics = getAnalytics(firebaseApp);
 export const db = getFirestore(firebaseApp);
 export const storage = getStorage();
-// const storageRef = ref(storage);
-// const profilePicturesRef = ref(storage, "profile-pictures");
-
-// export const signInWithGoogle = async (): Promise<UserCredential> => {
-//   try {
-//     const userCredential: UserCredential = await signInWithPopup(
-//       auth,
-//       googleAuthProvider
-//     );
-//     return userCredential;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// export const signInWithEmailAndPassword = async (
-//   email: string,
-//   password: string
-// ): Promise<UserCredential> => {
-//   try {
-//     const userCredential: UserCredential = await signInUserFnFromFirebase(
-//       auth,
-//       email,
-//       password
-//     );
-//     return userCredential;
-//   } catch (err) {
-//     throw err;
-//   }
-// };
 
 /**
  * a function to create a user with email and password
@@ -107,12 +69,8 @@ export const redirectResult = async (): Promise<UserCredential | null> => {
 
 export const signOut = async () => {
   await signOutFnFromFirebase(auth)
-    .then((res) => {
-      Object.keys(LOCAL_STORAGE_KEYS).map((key) =>
-        localStorage.removeItem(key)
-      );
-    })
-    .catch((err) => {
+    .then(() => localStorage.clear())
+    .catch((err: any) => {
       console.log(err);
     });
 };
@@ -125,7 +83,7 @@ export const resetPassword = async (email: string): Promise<boolean> => {
       // ..
       return true;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       console.log(error);
       return false;
     });
@@ -141,7 +99,7 @@ export const updateUserEmailAddress = async (
       // ...
       return true;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       // An error occurred
       // ...
       console.log(error);
@@ -158,9 +116,7 @@ export const updateUserPassword = async (
       // Update successful.
       return true;
     })
-    .catch((error) => {
-      // An error ocurred
-      // ...
+    .catch((error: any) => {
       console.log(error);
       return false;
     });
@@ -176,9 +132,8 @@ export const deleteAccount = async (): Promise<boolean> => {
       // User deleted.
       return true;
     })
-    .catch((error) => {
-      // An error ocurred
-      // ...
+    .catch((error: any) => {
+      console.error(error);
       return false;
     });
 };
@@ -186,11 +141,9 @@ export const deleteAccount = async (): Promise<boolean> => {
 export const sendVerificationEmail = async (): Promise<boolean> => {
   await sendEmailVerification(auth.currentUser!)
     .then(() => {
-      // Email verification sent!
-      // ...
       return true;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       console.log(error);
       return false;
     });
@@ -210,9 +163,7 @@ export const updateUserDisplayName = async (
       // ...
       return true;
     })
-    .catch((error) => {
-      // An error occurred
-      // ...
+    .catch((error: any) => {
       console.log(error);
       return false;
     });
@@ -228,7 +179,7 @@ export const updateUserProfilePicture = async (url: string) => {
       // ...
       return true;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       // An error occurred
       // ...
       console.log(error);

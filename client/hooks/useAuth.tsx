@@ -1,12 +1,13 @@
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { onSnapshot } from "firebase/firestore";
-import React, { createContext, useContext, useEffect } from "react";
-import { LOCAL_STORAGE_KEYS } from "../util/utilities";
-import { useLocalStorage } from "./useLocalStorage";
-import { doc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+"use client";
+
 import { UserData } from "@/types/Global";
 import axios from "axios";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
+import React, { createContext, useContext, useEffect } from "react";
+import { db } from "../firebase/firebase";
+import { LOCAL_STORAGE_KEYS } from "../util/utilities";
+import { useLocalStorage } from "./useLocalStorage";
 
 const authContext = createContext<AuthContext>({
   user: null,

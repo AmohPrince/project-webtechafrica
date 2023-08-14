@@ -1,16 +1,17 @@
-import React from "react";
-import LogoTab from "./LogoTab";
-import { email, scrollToTop } from "../util/utilities";
-import { LogoColor, assets } from "@/public/assets";
+"use client";
+
+import { assets, LogoColor } from "@/public/assets";
 import {
   faFacebook,
-  faLinkedin,
   faInstagram,
+  faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { email, scrollToTop } from "../util/utilities";
+import LogoTab from "./LogoTab";
 
 const Footer = () => {
   return (
@@ -48,41 +49,46 @@ const Footer = () => {
           <div className="w-1/2">
             <h4 className="h4 border-b pb-8 w-full mb-3">Pages</h4>
             <div className="text-secondaryFour flex flex-col [&>*]:mb-3">
-              <Link
-                href="/"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-                onClick={scrollToTop}
-              >
-                Home
-              </Link>
-              <Link
-                href="/about"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-                onClick={scrollToTop}
-              >
-                About
-              </Link>
-              <Link
-                href="/features"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-                onClick={scrollToTop}
-              >
-                Features
-              </Link>
-              <Link
-                href="/pricing"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-                onClick={scrollToTop}
-              >
-                Pricing
-              </Link>
-              <Link
-                href="/blog"
-                className="hover:text-primaryOne transition-all hover:font-semibold"
-                onClick={scrollToTop}
-              >
-                Blog
-              </Link>
+              <div onClick={scrollToTop}>
+                <Link
+                  href="/"
+                  className="hover:text-primaryOne transition-all hover:font-semibold"
+                >
+                  Home
+                </Link>
+              </div>
+              <div onClick={scrollToTop}>
+                <Link
+                  href="/about"
+                  className="hover:text-primaryOne transition-all hover:font-semibold"
+                >
+                  About
+                </Link>
+              </div>
+              <div onClick={scrollToTop}>
+                <Link
+                  href="/features"
+                  className="hover:text-primaryOne transition-all hover:font-semibold"
+                >
+                  Features
+                </Link>
+              </div>
+              <div onClick={scrollToTop}>
+                <Link
+                  href="/pricing"
+                  className="hover:text-primaryOne transition-all hover:font-semibold"
+                >
+                  Pricing
+                </Link>
+              </div>
+              <div onClick={scrollToTop}>
+                <Link
+                  href="/blog"
+                  className="hover:text-primaryOne transition-all hover:font-semibold"
+                >
+                  Blog
+                </Link>
+              </div>
             </div>
           </div>
           <div className="w-1/2">

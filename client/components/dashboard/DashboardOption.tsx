@@ -1,4 +1,3 @@
-import React from "react";
 import {
   faCreditCard,
   faGear,
@@ -10,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const DashboardOption = ({
   name,
@@ -21,7 +20,7 @@ const DashboardOption = ({
   className?: string;
   onClick: () => void;
 }) => {
-  const { pathname } = useRouter();
+  const pathname = usePathname();
   const lastPathNameSegment = getLastPathSegment(pathname);
 
   const isPurpleBg =
@@ -34,19 +33,20 @@ const DashboardOption = ({
         isPurpleBg && "bg-primaryOne rounded-l-lg"
       } transition-all cursor-pointer ${className}`}
       href={`/dashboard/${name === "new-website" ? "" : name}`}
-      onClick={onClick}
     >
-      <DashboardOptionLogo
-        isActive={lastPathNameSegment === name}
-        name={name}
-      />
-      <p
-        className={`ml-2 font-semibold text-sm ${
-          lastPathNameSegment === name && "text-white"
-        }`}
-      >
-        {capitalizeName(name)}
-      </p>
+      <div onClick={onClick}>
+        <DashboardOptionLogo
+          isActive={lastPathNameSegment === name}
+          name={name}
+        />
+        <p
+          className={`ml-2 font-semibold text-sm ${
+            lastPathNameSegment === name && "text-white"
+          }`}
+        >
+          {capitalizeName(name)}
+        </p>
+      </div>
     </Link>
   );
 };

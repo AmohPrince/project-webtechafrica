@@ -1,4 +1,6 @@
-import { PopUpInfo, PopUpInfoType, PopUp } from "@/components/PopUp";
+"use client";
+
+import { PopUp, PopUpInfo, PopUpInfoType } from "@/components/PopUp";
 import { GlobalData, Price, UserCoordinates } from "@/types/Global";
 import { Country, fetchCountries } from "@/util/FetchCountries";
 import { LOCAL_STORAGE_KEYS, toTheNearestHundredth } from "@/util/utilities";
