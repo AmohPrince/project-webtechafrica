@@ -3,7 +3,6 @@
 import NoWebsite from "@/components/dashboard/NoWebsite";
 import { Website } from "@/components/dashboard/Website";
 import { useAuth } from "@/hooks/useAuth";
-import React from "react";
 
 const ActiveWebsites = () => {
   const { userData } = useAuth();

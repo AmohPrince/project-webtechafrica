@@ -1,7 +1,6 @@
 import { GreyButton } from "@/components/buttons/GreyButton";
 import { CircleBackGround } from "@/components/CircleBackGround";
 import { assets } from "@/public/assets";
-import { motion } from "framer-motion";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
 
 const About = () => {
   return (
-    <motion.main className="px-[5%] md:px-[12%]">
+    <main className="px-[5%] md:px-[12%]">
       <CircleBackGround />
       <section className="text-center">
         <h1 className="h3 md:h2 mb-8 md:mb-4">About our company</h1>
@@ -207,7 +206,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </motion.main>
+    </main>
   );
 };
 

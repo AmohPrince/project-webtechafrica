@@ -1,6 +1,8 @@
+"use client";
+
 import { Blog } from "@/types/Global";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import blogs from "../../../json/Blogs.json";
 
 // <>
@@ -16,12 +18,15 @@ import blogs from "../../../json/Blogs.json";
 // </>
 
 const SingleBlog = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("query");
+  const path = usePathname();
+  const splitPathName = path.split("/");
+  const articleTitleUndecoded = splitPathName[splitPathName.length - 1];
+  const id = decodeUrlString(articleTitleUndecoded);
 
   const article: Blog | undefined = blogs.find(
     (article) => article.title === id
   );
+  console.log(id);
 
   if (!id) {
     return <div>Article not found.</div>;
@@ -104,3 +109,8 @@ const SingleBlog = () => {
 };
 
 export default SingleBlog;
+
+function decodeUrlString(input: string): string {
+  const decodedString = decodeURIComponent(input.replace(/\+/g, " "));
+  return decodedString;
+}

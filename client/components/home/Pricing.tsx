@@ -1,10 +1,7 @@
-import { faCcPaypal, faCcVisa } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import Image from "next/image";
 import { GreyButton } from "../buttons/GreyButton";
 import { BasicPricing } from "../prices/BasicPricing";
 import { PremiumPricing } from "../prices/PremiumPricing";
-import Image from "next/image";
 
 export const Pricing = () => {
   return (

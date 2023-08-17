@@ -1,3 +1,5 @@
+"use client";
+
 import { DashboardNavbar } from "@/components/dashboard/DashboardNavbar";
 import DashBoardSideBar from "@/components/dashboard/DashBoardSideBar";
 import DashBoardTitle from "@/components/dashboard/DashBoardTitle";

@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
 import useScreenSize from "@/hooks/useScreenSize";
 import { LogoColor } from "@/public/assets";
 import { getBaseUrl } from "@/util/utilities";
@@ -9,14 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState } from "react";
+import { DashboardButton } from "./buttons/DashboardButton";
 import { Logo } from "./Logo";
 import { SmallScreenMenu } from "./SmallScreenMenu";
 
 const Navbar = () => {
   const pathname = usePathname();
   const basePath = getBaseUrl(pathname);
-  const { user } = useAuth();
   const [showingMenu, setShowingMenu] = useState(false);
 
   const screenSize = useScreenSize();
@@ -84,16 +83,7 @@ const Navbar = () => {
             Contact
           </Link>
         </ul>
-        <Suspense>
-          <Link
-            className={`px-4 rounded-full ml-10 font-semibold flex items-center ${
-              basePath === "/" ? "bg-white" : "bg-primaryOne text-white"
-            }`}
-            href={user ? "/dashboard" : "/sign-in"}
-          >
-            {user ? "My Dashboard 🚀" : "sign in"}
-          </Link>
-        </Suspense>
+        <DashboardButton />
       </div>
       <FontAwesomeIcon
         icon={faBars}

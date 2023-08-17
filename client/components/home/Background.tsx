@@ -8,7 +8,7 @@ const Background = () => {
       viewBox="0 0 1386 705"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-[70vw] absolute top-0 right-0 z-0 hidden md:block"
+      className="w-[65vw] absolute top-0 right-0 z-0 hidden md:block"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}

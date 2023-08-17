@@ -1,6 +1,5 @@
 import BlogArticle from "@/components/BlogArticle";
 import { CircleBackGround } from "@/components/CircleBackGround";
-import { motion } from "framer-motion";
 import { Metadata } from "next";
 import blogs from "../../json/Blogs.json";
 
@@ -23,7 +22,7 @@ const page = () => {
   //     "Read our blog! Stay up to date with hiring cycles and company updates",
   // };
   return (
-    <motion.main className="px-[5%] md:px-[12%]">
+    <main className="px-[5%] md:px-[12%]">
       <CircleBackGround />
       <div className="z-10 relative">
         <section className="text-center">
@@ -39,7 +38,7 @@ const page = () => {
           ))}
         </section>
       </div>
-    </motion.main>
+    </main>
   );
 };
 

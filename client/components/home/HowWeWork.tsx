@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import BlackIshButton from "../buttons/BlackIshButton";
 import { GreyButton } from "../buttons/GreyButton";
+import { HowWeWorkLink } from "../HowWeWorkLink";
 
 export const HowWeWork = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
@@ -135,12 +136,7 @@ export const HowWeWork = () => {
                 className="md:hidden w-2/5 object-cover"
               />
             </div>
-            <Link
-              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
-              className="ml-auto"
-            >
-              <BlackIshButton text="Get me a website  🚀" />
-            </Link>
+            <HowWeWorkLink />
           </div>
           <Image
             src={assets.Magic}

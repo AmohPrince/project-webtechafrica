@@ -1,16 +1,10 @@
-"use client";
-
 import { BlankTableRow } from "@/components/BlankTableRow";
 import { SecondaryButton } from "@/components/buttons/SecondaryButton";
 import { CircleBackGround } from "@/components/CircleBackGround";
 import { BasicPricing } from "@/components/prices/BasicPricing";
 import { PremiumPricing } from "@/components/prices/PremiumPricing";
-import {
-  BASIC_FEATURES,
-  PREMIUM_FEATURES,
-  scrollToTop,
-} from "@/util/utilities";
-import { motion } from "framer-motion";
+import { PricingPackagesHeader } from "@/components/PricingPackagesHeader";
+import { BASIC_FEATURES, PREMIUM_FEATURES } from "@/util/utilities";
 import { Metadata } from "next";
 import Link from "next/link";
 import Row from "../../components/Row";
@@ -59,11 +53,10 @@ export const metadata: Metadata = {
     description: "Affordable pricing plans for both basic and premium clients.",
   },
 };
-const page = () => {
-  const { price } = useGlobalData();
 
+const page = () => {
   return (
-    <motion.main className="px-[5%] md:px-[12%]">
+    <main className="px-[5%] md:px-[12%]">
       <CircleBackGround />
       <section>
         <h1 className="h2 md:h1 text-center">Pricing</h1>
@@ -83,21 +76,7 @@ const page = () => {
       <section className="mt-[8%]">
         <h4 className="h4 mb-12 text-center">Compare pricing packages</h4>
         <div className="rounded-[30px] bg-secondaryOne pb-6">
-          <div className="flex border-b px-14 py-7 justify-between">
-            <h3 className="h4 md:h3 w-1/3">Features</h3>
-            <div className="text-center w-1/4">
-              <h3 className="h4 md:h3">Basic</h3>
-              <p className="font-semibold text-base">
-                {price.basic} {price.currency} / month
-              </p>
-            </div>
-            <div className="text-center w-1/4">
-              <h3 className="h4 md:h3">Advanced</h3>
-              <p className="font-semibold text-base">
-                {price.advanced} {price.currency} / month
-              </p>
-            </div>
-          </div>
+          <PricingPackagesHeader />
           <BlankTableRow name="Web Development" />
           {BASIC_FEATURES.filter(
             (feature) => feature.category === "Web Development"
@@ -146,7 +125,7 @@ const page = () => {
             <Link className="w-1/4 flex justify-center" href="/pricing/basic">
               <SecondaryButton
                 text="Get Started"
-                onClick={() => scrollToTop()}
+                // onClick={() => scrollToTop()}
               />
             </Link>
             <Link
@@ -155,13 +134,13 @@ const page = () => {
             >
               <SecondaryButton
                 text="Get Started"
-                onClick={() => scrollToTop()}
+                // onClick={() => scrollToTop()}
               />
             </Link>
           </div>
         </div>
       </section>
-    </motion.main>
+    </main>
   );
 };
 

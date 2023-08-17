@@ -3,7 +3,6 @@ import { CircleBackGround } from "@/components/CircleBackGround";
 import { FeaturesComponent } from "@/components/home/FeaturesComponent";
 import FreeTrial from "@/components/home/FreeTrial";
 import { assets } from "@/public/assets";
-import { motion } from "framer-motion";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
 
 const Features = () => {
   return (
-    <motion.main className="px-[5%] md:px-[12%]">
+    <main className="px-[5%] md:px-[12%]">
       <CircleBackGround />
       <section>
         <h1 className="h2 md:h1 text-center">Features</h1>
@@ -91,7 +90,7 @@ const Features = () => {
         </div>
       </section>
       <FreeTrial />
-    </motion.main>
+    </main>
   );
 };
 

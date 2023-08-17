@@ -3,7 +3,7 @@
 import { useGlobalData } from "@/hooks/useGlobalData";
 import Image from "next/image";
 import Link from "next/link";
-import { BASIC_FEATURES, getYearly, scrollToTop } from "../../util/utilities";
+import { BASIC_FEATURES, getYearly } from "../../util/utilities";
 import Billed from "./Billed";
 import { FeatureSpan } from "./FeatureSpan";
 
@@ -53,11 +53,9 @@ export const BasicPricing = ({ className }: { className: string }) => {
           );
         })}
       </div>
+
       <Link href="/pricing/basic">
-        <button
-          className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange"
-          onClick={scrollToTop}
-        >
+        <button className="py-3 px-7 rounded-full border mt-8 hover:bg-orange transition-all text-sm font-bold hover:border-orange">
           Learn more
         </button>
       </Link>

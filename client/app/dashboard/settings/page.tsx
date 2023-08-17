@@ -1,6 +1,6 @@
+import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { PasswordEditor } from "@/components/dashboard/settings/PasswordEditor";
 import { SettingsInput } from "@/components/dashboard/settings/SettingsInput";
-import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { ToolTip } from "@/components/ToolTip";
 import {
   updateUserDisplayName,
@@ -9,13 +9,13 @@ import {
 import { addOrUpdateUserDataInDB } from "@/firebase/firestore";
 import { uploadUserProfilePicture } from "@/firebase/storage";
 import { useAuth } from "@/hooks/useAuth";
-import { faUser, faSpinner, faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth, updateCurrentUser } from "firebase/auth";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import Layout from "./layout";
+import Layout from "../layout";
 
 export type Inputs = {
   email: string;

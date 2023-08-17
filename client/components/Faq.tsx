@@ -1,5 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Faq = ({ question, answer }: { question: string; answer: string }) => {
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
