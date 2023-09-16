@@ -4,11 +4,13 @@ import { useGlobalData } from "@/hooks/useGlobalData";
 import { useForm } from "@formspree/react";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export const ContactForm = () => {
   const [state, handleSubmit, ResetFunction] = useForm("xrgvnyrk");
   const { showNotification } = useGlobalData();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (state.succeeded) {
@@ -43,6 +45,7 @@ export const ContactForm = () => {
           className="border p-3 w-full rounded-xl mt-3"
           placeholder="youremail@somedomain.com"
           required
+          defaultValue={searchParams.get("email") ?? ""}
         />
       </div>
       <div className="w-[48%]">

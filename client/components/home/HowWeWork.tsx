@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
 import { assets } from "@/public/assets";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +10,6 @@ import { HowWeWorkLink } from "../HowWeWorkLink";
 
 export const HowWeWork = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
-  const { user } = useAuth();
 
   return (
     <section className="text-center mt-[10%] px-[5%] md:px-[12%]">
@@ -24,7 +22,7 @@ export const HowWeWork = () => {
           }`}
           onClick={() => setActiveButton(1)}
         >
-          01. Create account
+          01. Make a site request
         </button>
         <button
           className={`bg-gray-200 py-5 md:px-10 rounded-md ${
@@ -32,7 +30,7 @@ export const HowWeWork = () => {
           }`}
           onClick={() => setActiveButton(2)}
         >
-          02. Call in or fill website application form
+          02. Negotiate your pricing
         </button>
         <button
           className={`bg-gray-200 py-5 md:px-16 rounded-md ${
@@ -44,7 +42,7 @@ export const HowWeWork = () => {
         </button>
       </div>
       {activeButton === 1 && (
-        <div className="px-[4%] pt-[5%] text-left md:flex items-start">
+        <div className="pt-[5%] text-left md:flex items-start">
           <div className="w-full md:w-3/5">
             <div className="flex items-start md:items-center">
               <Image
@@ -53,18 +51,20 @@ export const HowWeWork = () => {
                 className="w-16 h-16 mr-5"
               />
               <h4 className="h4 md:h3">
-                Create your account <br />& start your work
+                Make a site request <br /> today!
               </h4>
             </div>
             <p className="default-paragraph w-[95%] my-5">
-              Creating user accounts allows us to track your web development
-              process , payment information of individual users, making it
-              easier to identify and resolve any issues that may arise. This
-              also allows us better understand how users interact with their
-              sites, which can be used to improve the overall user experience.
+              We strongly encourage clients to reach out to us either by phone
+              or by filling out the form on our website. This will allow us to
+              gather all the necessary information to build the perfect website
+              tailored to your needs and preferences. Your input is crucial in
+              creating a website that meets your goals and exceeds your
+              expectations. So please don't hesitate to contact us, we are here
+              to help and guide you through the process.
             </p>
-            <Link href="/sign-up">
-              <BlackIshButton text="Create account" />
+            <Link href="/contact">
+              <BlackIshButton text="Request site" />
             </Link>
           </div>
           <Image
@@ -75,7 +75,7 @@ export const HowWeWork = () => {
         </div>
       )}
       {activeButton === 2 && (
-        <div className="px-[4%] pt-[5%] text-left flex items-start">
+        <div className="pt-[5%] text-left flex items-start">
           <Image
             src={assets.BlueCard}
             alt="account"
@@ -88,31 +88,21 @@ export const HowWeWork = () => {
                 alt="Phone"
                 className="mr-3 w-16 h-16"
               />
-              <h4 className="h4 md:h3">
-                Call in or fill out our simple web info form and let us know
-                more!
-              </h4>
+              <h4 className="h4 md:h3">50% upfront, 50% on Job completion</h4>
             </div>
             <p className="default-paragraph my-5">
-              We strongly encourage clients to reach out to us either by phone
-              or by filling out the form on our website. This will allow us to
-              gather all the necessary information to build the perfect website
-              tailored to your needs and preferences. Your input is crucial in
-              creating a website that meets your goals and exceeds your
-              expectations. So please don't hesitate to contact us, we are here
-              to help and guide you through the process.
+              The easiest way to reduce risk and ensure fast site development.
+              Immediately after making your initial deposit your site will begin
+              being developed by our team of highly talented developers.
             </p>
-            <Link
-              href={`${user ? "/dashboard" : "/sign-in/?source=get-started"}`}
-              className="ml-auto"
-            >
+            <Link href={"/contact"} className="ml-auto">
               <BlackIshButton text="Create a website now !" />
             </Link>
           </div>
         </div>
       )}
       {activeButton === 3 && (
-        <div className="px-[4%] pt-[5%] text-left flex items-start justify-between">
+        <div className="pt-[5%] text-left flex items-start justify-between">
           <div className="md:w-1/2">
             <div className="flex items-start md:items-center">
               <Image

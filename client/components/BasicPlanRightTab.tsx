@@ -1,12 +1,10 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
 import { useGlobalData } from "@/hooks/useGlobalData";
 import Link from "next/link";
 
 export const BasicPlanRightTab = () => {
   const { price } = useGlobalData();
-  const { user } = useAuth();
 
   return (
     <div className="rounded-[30px] bg-secondaryOne px-10 py-9 w-full mt-5 md:mt-0 md:w-[45%]">
@@ -20,7 +18,7 @@ export const BasicPlanRightTab = () => {
         {price.currency} {price.basic}{" "}
         <span className="text-base">/ month</span>
       </p>
-      <Link href={user ? "/dashboard" : "/sign-in"}>
+      <Link href={"/contact"}>
         <button className="rounded-full w-full text-xs text-white bg-primaryOne py-4 mt-5 hover:bg-orangeText transition-all">
           Get Website
         </button>

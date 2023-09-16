@@ -15,23 +15,6 @@ const description = `The basic plan offers features for most of your web develop
   }
 ).join("")}`;
 
-// const schema = {
-//   "@context": "https://schema.org",
-//   "@type": "Offer",
-//   name: "Basic",
-//   description: description,
-//   offers: {
-//     "@type": "Offer",
-//     price: `${DEFAULT_PRICE.basic}`,
-//     priceCurrency: "USD",
-//     availability: "https://schema.org/InStock",
-//     seller: {
-//       "@type": "Organization",
-//       name: "WebTech Africa",
-//     },
-//   },
-// };
-
 export const metadata: Metadata = {
   title: "Basic pricing",
   description,

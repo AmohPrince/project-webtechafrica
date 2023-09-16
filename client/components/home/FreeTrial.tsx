@@ -14,19 +14,20 @@ const FreeTrial = ({ className }: { className?: string }) => {
     >
       <div className="w-full md:w-1/2">
         <h2 className="h2">
-          Start your free trial <br />
+          Make your website request
+          <br />
           today
         </h2>
         <p>
-          Unleash the true potential of your business with 50% off your first
-          month on all packages! start today and see the difference!
+          Unleash the true potential of your business by getting a site! Give us
+          a call or text us on whatsapp and lets work together!
         </p>
         <form
           className="flex gap-x-2 mt-8 justify-between items-center"
           onSubmit={(e) => {
             e.preventDefault();
             const userEmail = emailRef.current?.value;
-            router.push(`/sign-up/?email=${userEmail}`);
+            router.push(`/contact/?email=${userEmail}`);
           }}
         >
           <input
@@ -37,10 +38,10 @@ const FreeTrial = ({ className }: { className?: string }) => {
             required
           />
           <button
-            type="submit"
             className="text-xs bg-white px-7 py-4 text-primaryOne rounded-full font-bold"
+            type="submit"
           >
-            Create account
+            Contact Us
           </button>
         </form>
       </div>
